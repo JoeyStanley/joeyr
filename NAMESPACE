@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+export("%ni%")
+export("%wi%")
+export("%expanded_by%")
