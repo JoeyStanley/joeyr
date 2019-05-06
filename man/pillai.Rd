@@ -6,10 +6,25 @@
 \usage{
 pillai(...)
 }
+\arguments{
+\item{...}{Arguments that may also be passed to `manova()`. Typically a formula and a dataframe.}
+}
+\value{
+The pillai score from the MANOVA test.
+}
 \description{
 This is just a shortcut to run an MANOVA and return just the pillai score.
 }
 \examples{
-pillai(cbind(F1, F2) ~ vowel + fol_seg, data = df)
+# Create some artificial vowel data
+vowel_A <- data.frame(F1 = rnorm(50,  0, 1),
+                      F2 = rnorm(50, -2, 1),
+                      vowel = "A")
+vowel_B <- data.frame(F1 = rnorm(50,  0, 1),
+                      F2 = rnorm(50,  2, 1),
+                      vowel = "B")
+vowels <- rbind(vowel_A, vowel_B)
 
+# Get the pillai score.
+pillai(cbind(F1, F2) ~ vowel, data = vowels)
 }

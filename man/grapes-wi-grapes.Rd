@@ -15,7 +15,9 @@ x \%wi\% range
 A logical vector.
 }
 \description{
-Here's a very handy "within" range. Checks whether a number is within a range. Capable of handling lists so that it can apply to a whole column. Requires no additional packages.
+Here's a very handy "within" range. Checks whether a number is within a range. Capable of handling 
+lists so that it can apply to a whole column. Basically I got tired of running a two-part conditional
+when I wanted something that was within a range: \code{if (x > 2 & x < 5)}.
 }
 \examples{
 c(1:5) \%wi\% c(2,3)

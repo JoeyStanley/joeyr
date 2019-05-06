@@ -15,7 +15,7 @@ range \%expanded_by\% expansion
 A list of length 2
 }
 \description{
-This function expands ranges by some value. Used in dissertation code for axis ranges. Requires no additional packages.
+This function expands ranges by some value. Used in my dissertation code for axis ranges.
 }
 \examples{
 c(1,5) \%expanded_by\% 1

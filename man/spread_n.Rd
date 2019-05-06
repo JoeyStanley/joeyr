@@ -4,27 +4,48 @@
 \alias{spread_n}
 \title{spread() on multiple values.}
 \usage{
-spread_n(df, key, value)
+spread_n(df, key, ...)
+}
+\arguments{
+\item{df}{The dataframe you want to modify.}
+
+\item{key}{The column you want to have spread across multiple columns. For tall vowel data, this is usually the "formant" column.}
+
+\item{...}{The data you want to have fill those new columns.}
 }
 \description{
-Use tidyr::spread but on multiple columns. I haven't been able to get this function to work well when there are two numeric columns I need to work with. All credit goes to "danr" on the RStudio Forums who answered my quesiton [here](https://community.rstudio.com/t/spread-with-multiple-value-columns/5378/2).
+A modification of tidyr::spread that allows you to use it with multiple `value` columns.
+}
+\details{
+All credit for this function goes to Dan Sullivan on the RStudio Forums who answered my quesiton \href{https://community.rstudio.com/t/spread-with-multiple-value-columns/5378/2}{here}. 
+Apparently Kieran Healey seemed to like it and wrote a blog post about the function \href{https://kieranhealy.org/blog/archives/2018/11/06/spreading-multiple-values/}{here}
+and does a really good job at explaning when you might need to use a function like this.
+A while later, when Hadley Wickham asked for \href{https://community.rstudio.com/t/interesting-tidy-eval-use-cases/21121/5}{interesting cases where tidy eval is used},
+I commented with this function. He replied with a shorter version, which is what is implemented now.
+
+I still don't fully understand the code, but it works exactly how I want it to so I keep using it.
 }
 \examples{
-# Create a data frame with some sample formants. Crucially there are two numeric values for each row.
+require(tidyr)
+
+# Example 1
 df1 <- data.frame(word = rep(c("dog", "cat", "fish"), 2),
-formant = rep(c("F1", "F2"), each = 3),
-hz = c(490, 500, 510, 1590, 1600, 1610),
-hz_bark = bark(c(490, 500, 510, 1590, 1600, 1610)))
+                  formant = rep(c("F1", "F2"), each = 3),
+                  hz = c(490, 500, 510, 1590, 1600, 1610),
+                  bark = bark(c(490, 500, 510, 1590, 1600, 1610)))
 # Now spread them with each formant and type of measurement in its own column.
 df1 \%>\%
-   spread_n(formant, c(hz, hz_bark))
+  spread_n(formant, c(hz, bark))
 
+# Example 2
 df2 <- data.frame(speaker = rep(c("Amy", "Bob"), each = 3),
                   word = rep(c("dog", "cat", "fish"), 2),
                   F1 = c(490, 500, 510, 390, 400, 410),
-                  F2 = bark(c(1590, 1600, 1610, 1390, 1400, 1410)))
+                  F2 = c(1590, 1600, 1610, 1390, 1400, 1410))
+# Change it to one row per speaker
 df2 \%>\%
-    spread_n(word, c(F1, F2))
-df \%>\%
-   spread_n(speaker, c(F1, F2))
+  spread_n(word, c(F1, F2))
+# Change it to one row per word
+df2 \%>\%
+  spread_n(speaker, c(F1, F2))
 }

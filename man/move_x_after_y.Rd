@@ -2,22 +2,30 @@
 % Please edit documentation in R/joeyr_tidy.R
 \name{move_x_after_y}
 \alias{move_x_after_y}
+\alias{move_x_before_y}
 \title{Move one column after another}
 \usage{
-move_x_after_y(df, colx, coly)
+move_x_after_y(df, x, y)
+
+move_x_before_y(df, x, y)
 }
 \arguments{
 \item{df}{A data frame.}
 
-\item{colx}{A column in that dataframe.}
+\item{x}{A column in that dataframe.}
 
-\item{coly}{Another column in that dataframe.}
+\item{y}{Another column in that dataframe.}
 }
 \value{
-A dataframe, with colx immediately after coly.
+A dataframe, with `x` immediately after/before `y`.
 }
 \description{
-This quite simply moves one column after another in a data frame. Just a simple way to rearrange a couple columns without having to use select. It saves a bit of typing and makes it more clear what it is that's happening.
+This quite simply moves one column after another in a data frame. Just a simple 
+way to rearrange a couple columns without having to use `select`. It saves a bit 
+of typing and makes it more clear what it is that's happening.
+}
+\details{
+There is a known bug when one of the columns is the first column in the dataset.
 }
 \examples{
 sample_df <- data.frame(first = 1:3, middle = 4:6, last = 7:9)
