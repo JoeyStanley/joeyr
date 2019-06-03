@@ -48,3 +48,6 @@ theme_whitesmoke <- function() {
               legend.position=c(1,0),
               plot.title = element_text(hjust = 0.5)) # center the title for R 2.0
 }
+
+# An arrow I happen to like for vowel plots.
+joey_arrow <- arrow(type = "closed", length = unit(0.1, "inches"), angle = 20)
