@@ -1,5 +1,112 @@
 # The filter functions --------------------------------------------------------------
 
+#' Detect outliers
+#'
+#' This is an implementation of the Mahalanobis Distance that is less sensitive
+#' to outliers. Instead of a blanket filter applying all at once, it t iteratively 
+#' removes points one at a time until a predetermined proportion of data has been
+#' removed.
+#'
+#' The Mahalanobis distance function is somewhat sensitive to outliers, so if
+#' there are extreme values in your data, the mean value will be off-center from
+#' the centroid of your observations. Consequently, the Mahalanobis Distances
+#' will be thrown off. This function alleviates this sensitivity to outliers by
+#' implementing a one-at-a-time method.
+#'
+#' When you run this function, it will first calcualte Mahalanobis distance from
+#' the mean of all values. It detects the point furthest from the mean and
+#' removes it. Then, it recalculates the Mahalanobis distance with the remaining
+#' values and again removes the furthest value. It continues this
+#' recalculation-and-removal method until a predetermined proportion of values
+#' has been removed.
+#' @param ... A list of columns in your data that should be included when
+#'   calculating the Mahalanobis distance. The column names should not be in
+#'   quotes. For vowel data, you typically include F1 and F2. You may also 
+#'   want to include F3, duration, and any other continuous variable.
+#' @param keep A number indicating the proportion of data (per group) to keep.
+#'   By default, it's 0.95 so it keeps 95\% of the data and filters out 5\%.
+#' @return A vector of TRUE/FALSE values. They are in the same order as the original
+#'   dataset. Observations that are considered outliers have the value TRUE. It is 
+#'   easiest to work with this by appending this vector to your dataframe.  
+#' @note While not required, you should typically "group" your data before applying
+#'   this function. For example, you can group your data by speaker and vowel so 
+#'   that the function applies independently for each vowel for each speaker. I 
+#'   normally do this with \code{dplyr::group_by(speaker, word)}
+#'   
+#'   Note also that in American English, allophonic variation of some vowels is so 
+#'   great that grouping by vowel may not be enough. If you're working with /u/ for
+#'   example, it's a good idea to split it into three groups: post-coronal, pre-lateral,
+#'   and elsewhere. For /æ/, it's a good idea to group prenasal tokens separatly. 
+#'   If you're using FAVE/DARLA/MFA output, the NORTH and FORCE classes of words
+#'   are transcribed with AO, so it's a good idea to treat those separately. The point 
+#'   is to be mindful of allophonic variation in your data and that it's a good 
+#'   idea to group the data by vowel \emph{class} rather than by vowel. You may have to 
+#'   do some processing before the filter happens to get this to happen.
+#'   
+#' @examples
+#' # Load some data and group it by vowel.
+#' require(dplyr)
+#' joey_vowels <- read.csv("http://joeystanley.com/data/joey.csv") %>%
+#'    group_by(vowel)
+#'
+#' # You can output the data to a column called something like 
+#' # "is_outlier" and then filter values that are false.
+#' joey_vowels %>%
+#'    mutate(is_outlier = find_outliers(F1, F2, dur, keep = 0.95)) %>%
+#'    filter(!is_outlier)
+#'
+#' # Alternatively, you can skip a step and just keep the 
+#' # data that are not outliers.
+#' joey_vowels %>%
+#'    filter(!find_outliers(F1, F2, dur, keep = 0.95))
+find_outliers <- function(..., keep = 0.95) {
+  
+  # Capture that arbitrary list of variables.
+  vars <- list(...)
+  # Turn it into a dataframe
+  df <- as.data.frame(vars, col.names = letters[1:length(vars)])
+  # Figure out how many variables will be used.
+  n_vars <- length(df)
+  # Add a new column
+  df$is_outlier <- FALSE
+  df$id <- 1:nrow(df)
+  
+  # Get the length of the first (or any) of them
+  total_n <- length(vars[[1]])
+  # Figure out how many to remove
+  n_to_remove <- floor(total_n * (1-keep))
+  
+  # Loop through and remove the points one at a time.
+  for (i in 1:n_to_remove) {
+    
+    # A new df with just the tokens not marked as outliers
+    this_loop_df <- df[df$is_outlier == FALSE,]
+    # A subset of that with just the columns that'll go into the mahalanobis() function
+    data_for_mahal <- this_loop_df[,1:n_vars]
+    
+    # *Tips hat to Joe Fruehwald via Renwick for this line of code.*
+    t_params <- MASS::cov.trob(data_for_mahal)
+    this_loop_df$mahal_dist <- mahalanobis(data_for_mahal,
+                                           center = t_params$center,
+                                           cov    = t_params$cov)
+    
+    # # Add the mahalanobis distance to this iteration's dataframe. Sort so that the largest distance is first.
+    this_loop_df <- this_loop_df[order(this_loop_df$mahal_dist, decreasing = TRUE),]
+    
+    # Extract the id of the largest distance.
+    id_of_furthest_token <- this_loop_df$id[[1]]
+    
+    # Mark that one token as an outlier.
+    df[df$id == id_of_furthest_token, "is_outlier"] <- TRUE
+  }
+  
+  # Return the vector that determines which points are outliers.
+  df$is_outlier
+}
+
+
+
+
 
 #'Filter vowel measurements.
 #'
@@ -92,6 +199,8 @@
 
 joey_filter <- function(df, F1 = "F1", F2 = "F2", vowel = "vowel",
                         method = "pca", filter = "cooksd", cutoff = 0, boost = 3, keep = FALSE) {
+  
+    warning("This function is unstable and unfinished and will be removed in a future version of the package. Please use the new-and-improved, `joeyr::find_outliers``, instead.")
     
     # End now if the data isn't a grouped dataframe.
     if (!"grouped_df" %in% class(df)) {
