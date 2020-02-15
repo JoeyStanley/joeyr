@@ -4,9 +4,17 @@
 \alias{joey_filter}
 \title{Filter vowel measurements.}
 \usage{
-joey_filter(df, F1 = "F1", F2 = "F2", vowel = "vowel",
-  method = "pca", filter = "cooksd", cutoff = 0, boost = 3,
-  keep = FALSE)
+joey_filter(
+  df,
+  F1 = "F1",
+  F2 = "F2",
+  vowel = "vowel",
+  method = "pca",
+  filter = "cooksd",
+  cutoff = 0,
+  boost = 3,
+  keep = FALSE
+)
 }
 \arguments{
 \item{df}{A grouped dataframe including F1, F2, and vowel columns.}
