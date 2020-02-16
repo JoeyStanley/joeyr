@@ -9,6 +9,3 @@
 }
 
 
-# TODO: If a custom column name is supplied to F1 or F2, remove the temp F1 and F2 columns.
-
-
