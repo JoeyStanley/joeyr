@@ -50,4 +50,6 @@ theme_whitesmoke <- function() {
 }
 
 # An arrow I happen to like for vowel plots.
-joey_arrow <- arrow(type = "closed", length = unit(0.1, "inches"), angle = 20)
+joey_arrow <- function() {
+  arrow(type = "closed", length = unit(0.1, "inches"), angle = 20)
+}
