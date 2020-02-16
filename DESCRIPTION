@@ -3,8 +3,8 @@ Type: Package
 Title: Functions for Vowel Data
 Version: 0.3.1
 Date: 2020-02-15
-Author: Joey Stanley
-Maintainer: Joey Stanley <joeystan@uga.edu>
+Author: Joseph A. Stanley
+Maintainer: Joseph A. Stanley <joeystan@uga.edu>
 Description: A hodge-podge of useful functions.
 License: License: MIT + file LICENSE
 Encoding: UTF-8
