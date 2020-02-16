@@ -2,6 +2,7 @@
 *.Rhistory
 *.RData
 *.Ruserdata
+*.Rbuildignore
 joeyr_TODO.R
 joeyr.Rproj
 sandbox*
