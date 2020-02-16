@@ -26,7 +26,8 @@ documented well but lots are not. This should probably be split into
 different, more thematic, packages, but I’ll do that later. In the
 future I’ll also add some vignettes or something to better explain how
 to use them. For questions, feel free to contact me at
-<joeystan@uga.edu> or on Twitter at @joey\_stan.
+<joeystan@uga.edu> or on Twitter at
+[@joey\_stan](https://twitter.com/joey_stan).
 
 ## Installation
 
