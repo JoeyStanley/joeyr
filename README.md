@@ -13,21 +13,23 @@ package several years ago but then didn’t touch it for a while. I’m
 hoping to revive it, flesh it out a little bit, and add some new
 functions I’ve made.
 
-The functions in `joeyr` can be grouped into about four different
+The functions in `joeyr` can be grouped into about five different
 categories: the filter, math functions, `ggplot2` themes, the “grapes”,
 and other helpful functions. This README briefly explains them all.
 Because I am a linguist (particularly a sociophonetician), many of these
 functions are helpful for working with sociophonetic data.
 
 Some of these functions I’ve generalized into something that others may
-find useful. Others are very specific to my own code and workflow that
-I’m not sure if they’ll be useful to you. Some functions are
-documented well but lots are not. This should probably be split into
-different, more thematic, packages, but I’ll do that later. In the
-future I’ll also add some vignettes or something to better explain how
-to use them. For questions, feel free to contact me at
-<joeystan@uga.edu> or on Twitter at
-[@joey\_stan](https://twitter.com/joey_stan).
+find useful. Others are very specific to my own code and workflow so I’m
+not sure if they’ll be useful to you. Some functions are documented well
+but lots are not. This package should probably be split into different,
+more thematic, packages, but I’ll do that later once I’ve done proper
+testing and finalized the functons. In the future I’ll also add some
+sample data as well as vignettes to better explain how to use the
+functions.
+
+For questions, feel free to contact me at <joeystan@uga.edu> or on
+Twitter at [@joey\_stan](https://twitter.com/joey_stan).
 
 ## Installation
 
@@ -153,7 +155,10 @@ to save myself some typing.
     to take a column that you’ve just created and move it before or
     after some existing column. It’s a little buggy when you work with
     columns on the edges of your dataframe, but it worked well for me
-    and my dissertation code.
+    and my dissertation code. Note that once `dplyr` 1.0.0 is released,
+    these functions will be phased out since the new
+    [`dplyr::relocate`](https://dplyr.tidyverse.org/dev/reference/relocate.html)
+    function does what I intended these do to.
 
   - `color_gradienter` was needed in my Shiny app, [*The Gazetteer of
     Southern Vowels*](http://lap3.libs.uga.edu/u/jstanley/vowelcharts/).
@@ -164,6 +169,12 @@ to save myself some typing.
     them for a continuous scale? `color_gradienter` can do that. I don’t
     know everything about how color is encoded, but it seems to work
     well enough for me, though there may be some weird bugs.
+
+  - `ucfirst` was a function I copied over from Perl code. It just
+    capitalizes the first character of a string. Unlike some other
+    functions that are more sophisticaed and transform the text into
+    title case, sometimes I just need the very first character only,
+    rather than the first character of each word.
 
 ## Conclusion
 
