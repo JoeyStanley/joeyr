@@ -5,20 +5,14 @@
 \alias{hz}
 \title{Barks and Hertz}
 \usage{
-bark(f)
+bark()
 
-hz(z)
-}
-\arguments{
-\item{x}{A number}
-}
-\value{
-The converted number.
+hz()
 }
 \description{
-Convert Hz into Barks and vice versa. The formula and inverse are taken from Traunmüller (1990).
-}
-\examples{
-bark(1000) # 8.527432
-hz(8.527432) # 1000
+\code{bark()} and \code{hz()} have been removed from \code{joeyr}. Please use the new package, \code{barktools},
+
+\code{remotes::install_github("joeystanley/barktools")}
+
+to access these functions. These will be phased out in future versions of \code{joeyr}.
 }

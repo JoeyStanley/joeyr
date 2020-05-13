@@ -1,28 +1,23 @@
 
 #' Barks and Hertz
-#'
-#' Convert Hz into Barks and vice versa. The formula and inverse are taken from Traunmüller (1990).
-#'
-#' @param x A number
-#' @return The converted number.
-#' @examples
-#' bark(1000) # 8.527432
-#' hz(8.527432) # 1000
-
-# Convert Hz to Barks (more common)
-bark <- function(f) {
-    
-    # Formula give in NORM
-    # 26.81 / (1 + 1960 / f) - 0.53
-    
-    # Formula found in the actual reference
-    (26.81 * f / (1960 + f)) - 0.53
+#' 
+#' @description
+#' \code{bark()} and \code{hz()} have been removed from \code{joeyr}. Please use the new package, \code{barktools},
+#' 
+#' \code{remotes::install_github("joeystanley/barktools")}
+#' 
+#' to access these functions. These will be phased out in future versions of \code{joeyr}.
+#' 
+bark <- function() {
+  stop('`bark()` and `hz()` have been removed from joeyr. Please use the new package, barktools,
+       
+  > remotes::install_github("joeystanley/barktools")
+       
+  to access these functions. These will be phased out in future versions of joeyr.')
 }
 
 #' @rdname bark
-hz <- function(z) {
-    1960 * (z + 0.53) / (26.28 - z)
-}
+hz <- bark
 
 
 
