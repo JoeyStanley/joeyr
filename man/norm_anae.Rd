@@ -33,8 +33,7 @@ results.
 }
 \examples{
 library(tidyverse)
-# Not the best example because there's only one speaker.
-data(joey_formants)
+data(joey_formants) # Not the best example because there's only one speaker.
 joey_formants \%>\%
    rowid_to_column("token_id") \%>\%
    norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = name)
