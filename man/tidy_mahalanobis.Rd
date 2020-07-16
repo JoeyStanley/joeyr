@@ -7,10 +7,10 @@
 tidy_mahalanobis(...)
 }
 \arguments{
-\item{...}{Names of columns that should be included in the Mahalnobis distance. For vowel data, this is typically your F1 and F2 columns.}
+\item{...}{Names of columns that should be included in the Mahalanobis distance. For vowel data, this is typically your F1 and F2 columns.}
 }
 \value{
-A vector that contains the Mahalabis distances for each observation.
+A vector that contains the Mahalanobis distances for each observation.
 }
 \description{
 This is a tidyverse-tidyverse-compatible version of the `mahalanobis` function. It just 
