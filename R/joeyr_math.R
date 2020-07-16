@@ -103,6 +103,11 @@ pillai <- function(...) {
 tidy_mahalanobis <- function(...) {
   variables <- cbind(...)
   
+  if (sum(is.na(variables)) != 0)
+  {
+    stop("Your data has some NAs, which will cause `tidy_mahalnobis` to crash. Try removing NAs before running `tidy_mahalanobis`.")
+  }
+  
   # Return 0 if there are too few points.
   if(nrow(variables) < 5) {
     return(rep(0, nrow(variables)))
