@@ -190,6 +190,5 @@ norm_anae <- function(df, hz_cols, vowel_id, speaker) {
     left_join(scaling_factors, by = as_label(speaker_var)) %>%
     mutate(across(c(!!hz_cols_var), ~.*expansion, .names = "{col}_anae")) %>%
     select(-expansion) %>%
-    relocate(ends_with("anae"), .after = c(!!hz_cols_var)) %>%
-    print()
+    relocate(ends_with("anae"), .after = c(!!hz_cols_var))
 }
