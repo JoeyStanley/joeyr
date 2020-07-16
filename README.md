@@ -108,6 +108,9 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     one line of code within a tidyverse pipeline. This is my current favorite
     normalization procedure and I was sick of writing large blocks of code in
     all my scripts, so I wrapped it up as a package.
+    
+  - 'lbms_index' allows you to quickly calculate the Low-Back-Merger Shift 
+    Index in your data (see Becker 2019; Boberg 2019).
 
 ## Group 3: `ggplot2` themes
 
