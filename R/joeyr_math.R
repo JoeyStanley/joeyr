@@ -205,24 +205,33 @@ norm_anae <- function(df, hz_cols, vowel_id, speaker) {
 #' A function to quickly calculate the Low-Back-Merger Shift Index, per Becker (2019).
 #' 
 #' If you would like to calculate the LBMS Index for each speaker, be sure to 
-#' the data beforehand with `group_by()` (see the examples). Also, per Becker's
+#' the data beforehand with \code{group_by()} (see the examples). Also, per Becker's
 #' (2019) recommendation, it is recommended that you exclude tokens before nasals, 
 #' laterals, rhotics, and /g/ before the calculation.
 #' 
-#' @param df The dataframe containing the formant measurements you want to base the calculation off of. 
-#' @param vowel_col The name of the column containing the name of the vowel (e.g. `vowel`)
-#' @param F1_col The name of the column containing the F1 measurements (e.g. `F1_norm`)
-#' @param F2_col The name of the column containing the F2 measurements (e.g. `F2_norm`)
-#' @param beet A string that indicates which vowels belong to the BEET class of words (e.g. `"IY"`)
-#' @param bit A string that indicates which vowels belong to the BIT class of words (e.g. `"IH"`)
-#' @param bet A string that indicates which vowels belong to the BET class of words (e.g. `"EH"`)
-#' @param bat A string that indicates which vowels belong to the BAT class of words (e.g. `"AE"`)
+#' Note that this is a new function and has not been tested robustly yet.
 #' 
-#' @return A `summarize`d dataframe with the LBMS Index.
+#' @param df The dataframe containing the formant measurements you want to base the calculation off of. 
+#' @param vowel_col The name of the column containing the name of the vowel (e.g. \code{vowel})
+#' @param F1_col The name of the column containing the F1 measurements (e.g. \code{F1_norm})
+#' @param F2_col The name of the column containing the F2 measurements (e.g. \code{F2_norm})
+#' @param beet A string that indicates which vowels belong to the BEET class of words (e.g. \code{"IY"})
+#' @param bit A string that indicates which vowels belong to the BIT class of words (e.g. \code{"IH"})
+#' @param bet A string that indicates which vowels belong to the BET class of words (e.g. \code{"EH"})
+#' @param bat A string that indicates which vowels belong to the BAT class of words (e.g. \code{"AE"})
+#' 
+#' @references 
+#' Becker, Kara, ed. The Low-Back-Merger Shift: Uniting the Canadian Vowel Shift, 
+#' the California Vowel Shift, and Short Front Vowel Shifts across North America. 
+#' Publication of the American Dialect Society 104. Durham, NC: Duke University 
+#' Press, 2019.
+#' 
+#' @return A \code{summarize}d dataframe with the LBMS Index.
+#' @examples 
 #' library(tidyverse)
 #' data(joey_formants) # Not the best example because there's only one speaker.
 #' joey_formants %>%
-#'    filter(fol_seg %ni% c("L", "R", "N", "M", "NG")) %>%
+#'    filter(!fol_seg %in% c("L", "R", "N", "M", "NG")) %>%
 #'    group_by(name) %>%
 #'    lbms_index(vowel, F1_LobanovNormed_unscaled, F2_LobanovNormed_unscaled, 
 #'               "IY", "IH", "EH", "AE")
