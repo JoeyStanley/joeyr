@@ -102,6 +102,12 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     distance, only it’s meant to work within a `tidyverse` pipeline of
     commands. Like the `pillai` function, it’s designed so that you can
     get the values you want without interrupting your flow.
+    
+  - `tidy_anae` makes it easy to do vowel formant normalization using the
+    method described in the *Atlas of North American English* using just 
+    one line of code within a tidyverse pipeline. This is my current favorite
+    normalization procedure and I was sick of writing large blocks of code in
+    all my scripts, so I wrapped it up as a package.
 
 ## Group 3: `ggplot2` themes
 
