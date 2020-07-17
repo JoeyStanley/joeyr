@@ -58,7 +58,7 @@ The main function, and the reason I created the package in the first
 place, is `find_outliers`. It implements a version of the Mahalanobis
 Distance, except it does so iteratively. After finding the distances for
 each point, it marks the furthest token as an outlier, and then
-recalculates the distsance based on the remaining points. It continues
+recalculates the distance based on the remaining points. It continues
 this one-at-a-time procedure until a proportion of your data (that
 you’ve specified) has been removed.
 

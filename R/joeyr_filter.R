@@ -3,17 +3,18 @@
 #' Detect outliers
 #'
 #' This is an implementation of the Mahalanobis Distance that is less sensitive
-#' to outliers. Instead of a blanket filter applying all at once, it t iteratively 
+#' to outliers. Instead of a blanket filter applying all at once, it iteratively 
 #' removes points one at a time until a predetermined proportion of data has been
 #' removed.
 #'
 #' The Mahalanobis distance function is somewhat sensitive to outliers, so if
 #' there are extreme values in your data, the mean value will be off-center from
 #' the centroid of your observations. Consequently, the Mahalanobis Distances
-#' will be thrown off. This function alleviates this sensitivity to outliers by
-#' implementing a one-at-a-time method.
+#' will be based on this off-center points, which is probably not desirable. 
+#' This function alleviates this sensitivity to outliers by implementing a 
+#' one-at-a-time method.
 #'
-#' When you run this function, it will first calcualte Mahalanobis distance from
+#' When you run this function, it will first calculate Mahalanobis distance from
 #' the mean of all values. It detects the point furthest from the mean and
 #' removes it. Then, it recalculates the Mahalanobis distance with the remaining
 #' values and again removes the furthest value. It continues this
