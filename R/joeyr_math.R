@@ -252,3 +252,99 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
            lbms_index = mean(c(.d_bit, .d_bet, .d_bat))) %>%
     select(-starts_with(".F"), -starts_with(".d_")) 
 }
+
+
+
+
+
+
+#' ∆F Normalization
+#' 
+#' Normalize vowel formant measurements with ∆F (see Johnson 2020). This 
+#' function is intended to be used within a tidyverse pipeline. 
+#' 
+#' You will need to group the data by speaker with \code{group_by()} before 
+#' applying this function if you want to normalize the data by speaker.
+#' 
+#' The data must be numeric, and there cannot be any NAs. So, if you're using 
+#' data extracted from Praat, you may have to filter out bad F3 and F4 data
+#' and then convert the column to numeric. See the example.
+#' 
+#' Note that this is a new function and has not been tested robustly yet.
+#' 
+#' @param df The data frame containing the formant measurements you want to 
+#' normalize
+#' @param .F1,.F2,.F3,.F4 The (unquoted) name of the column containing the F1 
+#' measurements. The first three are required, but you may leave off F4.
+#' 
+#' @references 
+#' Johnson, Keith. The ΔF Method of Vocal Tract Length Normalization for Vowels. 
+#' Laboratory Phonology: Journal of the Association for Laboratory Phonology 11, 
+#' no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.
+#' 
+#' @return The original dataframe with new columns (suffixed with 
+#' \code{_deltaF}) containing the normalized measurements.
+#' @examples 
+#' library(tidyverse)
+#' # Not the best example because there's only one speaker.
+#' data(joey_formants) 
+#' 
+#' # Clean the data first
+#' joey_formants_clean <- joey_formants %>%
+#'    # Remove tokens without an F3 or F4 measurement
+#'    filter(F3 != "None") %>%
+#'    # Convert F3 to numeric
+#'    mutate(F3 = as.numeric(F3))
+#'    
+#'  # Run the function
+#'  joey_formants_clean %>%  
+#'    group_by(name) %>%
+#'    norm_deltaF(F1, F2, F3)
+#'    
+norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
+  
+  # If only three formants are supplied...
+  if (missing(.F4)) {
+    
+    deltaFs <- df %>%
+      mutate(.F1_sum = {{.F1}} / 0.5,
+             .F2_sum = {{.F2}} / 1.5,
+             .F3_sum = {{.F3}} / 2.5) %>%
+      mutate(sum_formants = .F1_sum + .F2_sum + .F3_sum) %>%
+      summarize(delta_F = sum(sum_formants)/(3 * n()), .groups = "keep")
+    
+    df %>%
+      left_join(deltaFs, by = group_vars(df)) %>%
+      mutate(across(c({{.F1}}, {{.F2}}, {{.F3}}), ~./delta_F, .names = "{col}_norm")) %>%
+      relocate(ends_with("norm"), .after = {{.F3}}) %>%
+      select(-delta_F) %>%
+      return()
+    
+    # If F4 is also supplied...
+  } else {
+    
+    numeric_cols <- df %>%
+      summarize(across(c({{.F1}}, {{.F2}}, {{.F3}}, {{.F4}}), is.numeric)) %>%
+      t() %>%
+      sum()
+    if (numeric_cols != 4) {
+      warning("F1, F2, F3, and F4 columns must all be numeric. Normalization not completed.")
+      return(df)
+    }
+    
+    deltaFs <- df %>%
+      mutate(.F1_sum = {{.F1}} / 0.5,
+             .F2_sum = {{.F2}} / 1.5,
+             .F3_sum = {{.F3}} / 2.5,
+             .F4_sum = {{.F4}} / 3.5) %>%
+      mutate(sum_formants = .F1_sum + .F2_sum + .F3_sum + .F4_sum) %>%
+      summarize(delta_F = sum(sum_formants)/(4 * n()), .groups = "keep")
+    
+    df %>%
+      left_join(deltaFs, by = group_vars(df)) %>%
+      mutate(across(c({{.F1}}, {{.F2}}, {{.F3}}, {{.F4}}), ~./delta_F, .names = "{col}_norm")) %>%
+      relocate(ends_with("norm"), .after = {{.F4}}) %>%
+      select(-delta_F) %>%
+      return()
+  }
+}
