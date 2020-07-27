@@ -1,26 +1,4 @@
 
-#' Barks and Hertz
-#' 
-#' @description
-#' \code{bark()} and \code{hz()} have been removed from \code{joeyr}. Please use the new package, \code{barktools},
-#' 
-#' \code{remotes::install_github("joeystanley/barktools")}
-#' 
-#' to access these functions. These will be phased out in future versions of \code{joeyr}.
-#' 
-bark <- function() {
-  stop('`bark()` and `hz()` have been removed from joeyr. Please use the new package, barktools,
-       
-  > remotes::install_github("joeystanley/barktools")
-       
-  to access these functions. These will be phased out in future versions of joeyr.')
-}
-
-#' @rdname bark
-hz <- bark
-
-
-
 #' Measure euclidean distance
 #'
 #' This function takes the x and y coordinates of two points and finds the euclidean 
