@@ -44,22 +44,42 @@
 #'   idea to group the data by vowel \emph{class} rather than by vowel. You may have to 
 #'   do some processing before the filter happens to get this to happen.
 #'   
+#'   Finally, be aware that no tokens will be marked as outliers if the are not 
+#'   a sufficient number of tokens. So if you want to remove 5% of the tokens, 
+#'   you'll need to have at least 20 tokens in a group for an outlier to be
+#'   found within that group. A message will let you know if this happens. 
+#'   Unfortunately, the function cannot help determine which group(s) the 
+#'   message came from, but you can find out with \code{dplyr::count()}. See the
+#'   examples.
+#'   
 #' @examples
-#' # Load some data and group it by vowel.
-#' require(dplyr)
-#' joey_vowels <- read.csv("http://joeystanley.com/data/joey.csv") %>%
-#'    group_by(vowel)
+#' library(dplyr)
+#' data(joey_coronals)
 #'
-#' # You can output the data to a column called something like 
-#' # "is_outlier" and then filter values that are false.
-#' joey_vowels %>%
-#'    mutate(is_outlier = find_outliers(F1, F2, dur, keep = 0.95)) %>%
+#' # You can output the data to a column called something like "is_outlier" and 
+#' # then filter out values that are TRUE.
+#' joey_coronals %>%
+#'    group_by(vowel) %>%
+#'    mutate(is_outlier = find_outliers(F1, F2, keep = 0.95)) %>%
 #'    filter(!is_outlier)
 #'
-#' # Alternatively, you can skip a step and just keep the 
-#' # data that are not outliers.
-#' joey_vowels %>%
-#'    filter(!find_outliers(F1, F2, dur, keep = 0.95))
+#' # Alternatively, you can skip a step and just keep the data that are not 
+#' # outliers.
+#' joey_coronals %>%
+#'    group_by(vowel) %>%
+#'    filter(!find_outliers(F1, F2))
+#'    
+#' # In some cases, you might not have enough data. In this case, a warning 
+#' # message will appear.
+#' joey_coronals %>% 
+#'     filter(percent == 50) %>%
+#'     group_by(vowel) %>%
+#'     mutate(is_outlier = find_outliers(F1, F2, keep = 0.95))
+#' # You can find out which groups is problematic with `dplyr::count()`:
+#' joey_coronals %>% 
+#'     filter(percent == 50) %>%
+#'     group_by(vowel) %>%
+#'     count()
 find_outliers <- function(..., keep = 0.95) {
   
   # Capture that arbitrary list of variables.
@@ -77,36 +97,42 @@ find_outliers <- function(..., keep = 0.95) {
   # Figure out how many to remove
   n_to_remove <- floor(total_n * (1-keep))
   
-  # Loop through and remove the points one at a time.
-  for (i in 1:n_to_remove) {
+  # Don't do anything for small groups
+  if (n_to_remove == 0) {
     
-    # A new df with just the tokens not marked as outliers
-    this_loop_df <- df[df$is_outlier == FALSE,]
-    # A subset of that with just the columns that'll go into the mahalanobis() function
-    data_for_mahal <- this_loop_df[,1:n_vars]
+    message(paste("With only", total_n, "tokens, thre are not enough tokens to determine outliers."))
     
-    # *Tips hat to Joe Fruehwald via Renwick for this line of code.*
-    t_params <- MASS::cov.trob(data_for_mahal)
-    this_loop_df$mahal_dist <- mahalanobis(data_for_mahal,
-                                           center = t_params$center,
-                                           cov    = t_params$cov)
+  } else {
     
-    # # Add the mahalanobis distance to this iteration's dataframe. Sort so that the largest distance is first.
-    this_loop_df <- this_loop_df[order(this_loop_df$mahal_dist, decreasing = TRUE),]
+    # Loop through and remove the points one at a time.
+    for (i in 1:n_to_remove) {
+      
+      # A new df with just the tokens not marked as outliers
+      this_loop_df <- df[df$is_outlier == FALSE,]
+      # A subset of that with just the columns that'll go into the mahalanobis() function
+      data_for_mahal <- this_loop_df[,1:n_vars]
+      
+      # *Tips hat to Joe Fruehwald via Renwick for this line of code.*
+      t_params <- MASS::cov.trob(data_for_mahal)
+      this_loop_df$mahal_dist <- mahalanobis(data_for_mahal,
+                                             center = t_params$center,
+                                             cov    = t_params$cov)
+      
+      # # Add the mahalanobis distance to this iteration's dataframe. Sort so that the largest distance is first.
+      this_loop_df <- this_loop_df[order(this_loop_df$mahal_dist, decreasing = TRUE),]
+      
+      # Extract the id of the largest distance.
+      id_of_furthest_token <- this_loop_df$id[[1]]
+      
+      # Mark that one token as an outlier.
+      df[df$id == id_of_furthest_token, "is_outlier"] <- TRUE
+    }
     
-    # Extract the id of the largest distance.
-    id_of_furthest_token <- this_loop_df$id[[1]]
-    
-    # Mark that one token as an outlier.
-    df[df$id == id_of_furthest_token, "is_outlier"] <- TRUE
   }
   
   # Return the vector that determines which points are outliers.
   df$is_outlier
 }
-
-
-
 
 
 #'Filter vowel measurements.

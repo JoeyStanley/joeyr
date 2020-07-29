@@ -56,21 +56,41 @@ While not required, you should typically "group" your data before applying
   is to be mindful of allophonic variation in your data and that it's a good 
   idea to group the data by vowel \emph{class} rather than by vowel. You may have to 
   do some processing before the filter happens to get this to happen.
+  
+  Finally, be aware that no tokens will be marked as outliers if the are not 
+  a sufficient number of tokens. So if you want to remove 5% of the tokens, 
+  you'll need to have at least 20 tokens in a group for an outlier to be
+  found within that group. A message will let you know if this happens. 
+  Unfortunately, the function cannot help determine which group(s) the 
+  message came from, but you can find out with \code{dplyr::count()}. See the
+  examples.
 }
 \examples{
-# Load some data and group it by vowel.
-require(dplyr)
-joey_vowels <- read.csv("http://joeystanley.com/data/joey.csv") \%>\%
-   group_by(vowel)
+library(dplyr)
+data(joey_coronals)
 
-# You can output the data to a column called something like 
-# "is_outlier" and then filter values that are false.
-joey_vowels \%>\%
-   mutate(is_outlier = find_outliers(F1, F2, dur, keep = 0.95)) \%>\%
+# You can output the data to a column called something like "is_outlier" and 
+# then filter out values that are TRUE.
+joey_coronals \%>\%
+   group_by(vowel) \%>\%
+   mutate(is_outlier = find_outliers(F1, F2, keep = 0.95)) \%>\%
    filter(!is_outlier)
 
-# Alternatively, you can skip a step and just keep the 
-# data that are not outliers.
-joey_vowels \%>\%
-   filter(!find_outliers(F1, F2, dur, keep = 0.95))
+# Alternatively, you can skip a step and just keep the data that are not 
+# outliers.
+joey_coronals \%>\%
+   group_by(vowel) \%>\%
+   filter(!find_outliers(F1, F2))
+   
+# In some cases, you might not have enough data. In this case, a warning 
+# message will appear.
+joey_coronals \%>\% 
+    filter(percent == 50) \%>\%
+    group_by(vowel) \%>\%
+    mutate(is_outlier = find_outliers(F1, F2, keep = 0.95))
+# You can find out which groups is problematic with `dplyr::count()`:
+joey_coronals \%>\% 
+    filter(percent == 50) \%>\%
+    group_by(vowel) \%>\%
+    count()
 }
