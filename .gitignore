@@ -9,3 +9,4 @@ sandbox*
 .Rproj.user
 README.Rmd
 todo.txt
+*.DS_Store
