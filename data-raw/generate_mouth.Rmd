@@ -1,0 +1,53 @@
+---
+title: "Documenting MOUTH data"
+author: "Joey Stanley"
+date: "7/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This file documents the datasets contained in this package.
+
+```{r}
+library(tidyverse)
+library(joeyr)
+data("joey_coronals")
+joey_coronals
+```
+
+Midpoints of all vowels
+
+```{r}
+midpoints <- joey_coronals %>%
+  filter(percent == 50, 
+         vowel %ni% c("PRICE", "MOUTH", "CHOICE")) %>%
+  select(-percent) %>%
+  print()
+midpoints %>%
+  pull(word) %>%
+  unique() %>%
+  length()
+
+usethis::use_data(midpoints, overwrite = TRUE)
+```
+
+
+```{r}
+mouth <- joey_coronals %>%
+  filter(vowel == "MOUTH") %>%
+  select(-vowel) %>%
+  pivot_longer(cols = F1:F4, names_to = "formant", values_to = "hz") %>%
+  filter(formant %in% c("F1", "F2")) %>%
+  unite(traj_id, vowel_id, formant, remove = FALSE) %>%
+  arrange(traj_id)
+mouth %>%
+  pull(vowel_id) %>%
+  unique() %>%
+  length()
+
+usethis::use_data(mouth, overwrite = TRUE)
+```
+
