@@ -100,7 +100,7 @@ find_outliers <- function(..., keep = 0.95) {
   # Don't do anything for small groups
   if (n_to_remove == 0) {
     
-    message(paste("With only", total_n, "tokens, thre are not enough tokens to determine outliers."))
+    message(paste("With only", total_n, "tokens, there are not enough tokens to determine outliers."))
     
   } else {
     
