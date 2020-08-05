@@ -2,7 +2,12 @@
 #'
 #' Get some number of equidistant colors between two colors.
 #'
-#' This function takes two colors and a number and returns an n-length list of colors that are all equidistant from one another. This is handy for plotting categorical, ordinal, or binned data but you want to use continuous colors.
+#' This function takes two colors and a number and returns an n-length list of 
+#' colors that are all equidistant from one another. This is handy for plotting 
+#' categorical, ordinal, or binned data but you want to use continuous colors.
+#' 
+#' Note, this is a little buggy and may not work as expected. I don't know 
+#' enough about how colors are handled to fix bugs. Please ese with caution.
 #'
 #' @param hi A string, in RGB format ("#123456")
 #' @param lo A string, in RBG format ("#ffffff"). The default is white.
@@ -12,23 +17,23 @@
 #' # By itself, it returns just a list.
 #' color_gradienter("#33458F", "#ffffff", 5)
 #'
-#' # This can be fed into ggplot::sacle_color_manual()
+#' # This can be fed into ggplot::scale_color_manual()
 #' df <- data.frame(x = rnorm(50, 0, 1),
 #'                  y = rnorm(50, 0, 1),
 #'                  color = sample(letters[1:5], 50, replace = TRUE))
-#' ggplot(df, aes(x, y, color = color)) +
-#'     geom_point(size = 5) +
-#'     scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
+#' ggplot2::ggplot(df, ggplot2::aes(x, y, color = color)) +
+#'     ggplot2::geom_point(size = 5) +
+#'     ggplot2::scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
 
-# I wrote this for th Shiny app, but I think it's a useful tool to have.
-# Currently uses tidyverse functions but it'd be easy to switch over to base R.
+# I wrote this for the GSV, but I think it's a useful tool to have.
+# Currently uses some tidyverse functions but it'd be easy to switch over to base R.
 
 color_gradienter <- function(hi, lo = "#ffffff", shades) {
   
-  if (str_detect(hi, "#[0-9a-fA-F]{6}") == FALSE) {
+  if (stringr::str_detect(hi, "#[0-9a-fA-F]{6}") == FALSE) {
     warning("`hi` must be in RGB format: #123AbC")
   }
-  if (str_detect(lo, "#[0-9a-fA-F]{6}") == FALSE) {
+  if (stringr::str_detect(lo, "#[0-9a-fA-F]{6}") == FALSE) {
     warning("`lo` must be in RGB format: #123AbC")
   }
   if (shades < 2) {
@@ -50,16 +55,17 @@ color_gradienter <- function(hi, lo = "#ffffff", shades) {
   lo_g <- strtoi(substr(lo, 4, 5), base = 16)
   lo_b <- strtoi(substr(lo, 6, 7), base = 16)
   
-  tibble(shade_num = 0:intervals) %>%
-    mutate(r = ifelse(lo_r <= hi_r, lo_r, hi_r) + abs(hi_r - lo_r) / intervals * shade_num,
-           g = ifelse(lo_g <= hi_g, lo_g, hi_g) + abs(hi_g - lo_g) / intervals * shade_num,
-           b = ifelse(lo_b <= hi_b, lo_b, hi_b) + abs(hi_b - lo_b) / intervals * shade_num) %>%
-    mutate_at(vars(r, g, b), round) %>%
-    mutate_at(vars(r, g, b), as.hexmode) %>%
-    mutate(rgb = paste0("#", r, g, b)) %>%
-    pull(rgb)
+  df <- data.frame(shade_num = 0:intervals)
+  df <- dplyr::mutate(df, 
+               r = ifelse(lo_r <= hi_r, lo_r, hi_r) + abs(hi_r - lo_r) / intervals * shade_num,
+               g = ifelse(lo_g <= hi_g, lo_g, hi_g) + abs(hi_g - lo_g) / intervals * shade_num,
+               b = ifelse(lo_b <= hi_b, lo_b, hi_b) + abs(hi_b - lo_b) / intervals * shade_num, 
+               dplyr::across(c(r, g, b), round),
+               dplyr::across(c(r, g, b), as.hexmode),
+               rgb = paste0("#", r, g, b))
+  df$rgb
 }
-
+color_gradienter("#bbbbbb", shades = 6)
 
 
 #' Capitalize the first letter
