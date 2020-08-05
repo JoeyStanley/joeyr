@@ -86,10 +86,6 @@ versions of the package. You should switch to `find_outliers` instead.
 Some functions in `joeyr` are essentially mathmatical functions in that
 they crunch some numbers. They’re all relevant to sociophonetic data.
 
-  - `bark` and its counterpart, `hz`, are just Bark-to-Hz and Hz-to-Bark
-    converters. They implement the function from Traunmuller (1990).
-    \[TODO: handle the low and high values as well as NAs.\]
-
   - `eucl_dist` calculates the Euclidean Distance, given a pair of *x*
     and *y* (or, more commonly, F1 and F2) coordinates.
 
