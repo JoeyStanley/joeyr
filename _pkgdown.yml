@@ -10,13 +10,6 @@ reference:
   - contents:
     - find_outliers
     - tidy_mahalanobis
-  - subtitle: (Depreciated outlier functions)
-    desc: Older versions of the function that I no longer use.
-  - contents: 
-    - joey_filter
-    - joey_do_pca
-    - joey_adjust_cutoff
-    - joey_rm_outliers
   - title: Math Functions
     desc: Miscelleneous functions that use some math. Generally useful for sociophonetic data.
   - contents: 
@@ -33,9 +26,7 @@ reference:
   - title: Other Helpful Functions
   - contents:
     - color_gradienter
-    - spread_n
     - ucfirst
-    - move_x_after_y
   - title: data
   - contents:
     - joey_coronals
