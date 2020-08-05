@@ -25,7 +25,7 @@ Note that what this function does can easily be accomplished with \code{!x \%in\
 but I like the "not in" aspect. Probably a holdover from my Perl days...
 
 You can also define this function as \code{`\%ni\%` <- Negate(`\%in\%`)} but when looking
-through the documentatin on \%in\%, I found that it might be better to
+through the documentation on \%in\%, I found that it might be better to
 modify the formal definition there instead.
 
 Credit to \href{https://stackoverflow.com/questions/24660864/declaring-special-infix-functions-in-r-packages}{this Stack Overflow question} for showing how to get this to work in an R package.

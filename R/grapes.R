@@ -9,7 +9,7 @@
 #' but I like the "not in" aspect. Probably a holdover from my Perl days...
 #'
 #' You can also define this function as \code{`\%ni\%` <- Negate(`\%in\%`)} but when looking
-#' through the documentatin on \%in\%, I found that it might be better to
+#' through the documentation on \%in\%, I found that it might be better to
 #' modify the formal definition there instead.
 #'
 #' Credit to \href{https://stackoverflow.com/questions/24660864/declaring-special-infix-functions-in-r-packages}{this Stack Overflow question} for showing how to get this to work in an R package.
@@ -56,7 +56,7 @@
 #' This function expands ranges by some value. Used in my dissertation code for axis ranges.
 #'
 #' @param range A numeric vector. The highest and lowest values will be used as the range.
-#' @param range A number. This number will be added to the highest and subtracted from the lowest values of the range
+#' @param expansion A number. This number will be added to the highest and subtracted from the lowest values of the range
 #' @return A list of length 2
 #' @examples
 #' c(1,5) %expanded_by% 1

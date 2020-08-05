@@ -7,7 +7,9 @@
 range \%expanded_by\% expansion
 }
 \arguments{
-\item{range}{A number. This number will be added to the highest and subtracted from the lowest values of the range}
+\item{range}{A numeric vector. The highest and lowest values will be used as the range.}
+
+\item{expansion}{A number. This number will be added to the highest and subtracted from the lowest values of the range}
 }
 \value{
 A list of length 2
