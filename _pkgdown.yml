@@ -27,11 +27,5 @@ reference:
   - contents:
     - color_gradienter
     - ucfirst
-  - title: data
-  - contents:
-    - joey_coronals
-    - joey_formants
-    - midpoints
-    - mouth
 
 
