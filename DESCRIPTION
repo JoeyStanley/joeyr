@@ -13,4 +13,5 @@ RoxygenNote: 7.1.1
 Imports:
     dplyr (>= 1.0.0),
     tidyr (>= 1.0.0),
+    stringr,
     ggplot2 (>= 3.0.0)
