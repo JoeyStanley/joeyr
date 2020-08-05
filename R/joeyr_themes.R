@@ -1,8 +1,3 @@
-
-
-
-
-
 theme_joey <- function () {
     theme_bw(base_size=12, base_family="Avenir") %+replace%
         theme(panel.background  = element_blank(),

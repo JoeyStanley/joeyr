@@ -1,4 +1,3 @@
-# The negate function -----------------------------------------------------
 #' The "Not In" function
 #'
 #' This returns \code{TRUE} if values are \emph{not} in a list. It's the opposite of \code{\%in\%}.
@@ -28,7 +27,6 @@
 
 
 
-# The within function ------------------------------------------------------------------------------------
 
 #' Within
 #'
@@ -52,7 +50,6 @@
   return_values
 }
 
-# The expand_by function ------------------------------------------------------------------------------------
 
 #' Expand a range
 #'

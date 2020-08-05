@@ -1,7 +1,3 @@
-
-
-# Color Gradienter -----------------------------------------------------------
-
 #' Color Gradienter
 #'
 #' Get some number of equidistant colors between two colors.
