@@ -1,14 +1,17 @@
+# Stuff I don't want to sync
+joeyr_TODO.R
+sandbox*
+README.Rmd
+todo.txt
+*.DS_Store
+R/depreciated.R
+
+# R stuff
 *.Rproj.user
 *.Rhistory
 *.RData
 *.Ruserdata
 *.Rbuildignore
-joeyr_TODO.R
-joeyr.Rproj
-sandbox*
-.Rproj.user
-README.Rmd
-todo.txt
-.DS_Store
+*.Rproj
+
 docs
-R/depreciated
