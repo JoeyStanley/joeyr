@@ -6,29 +6,21 @@ A hodge-podge of useful functions.
 ## Introduction
 
 This is essentially my sandbox R Package. It has a hodge-podge of
-functions that I’ve used over the past several years. Most of them were
-written by me, but a few others were either partially or entirely
-written by others—in such cases I give credit where due. I started this
-package several years ago but then didn’t touch it for a while. I’m
-hoping to revive it, flesh it out a little bit, and add some new
-functions I’ve made.
+functions that I’ve used over the past several years. As I work with 
+my sociophonetic data, I find myself running the same sorts of procedures
+over and over, so I often decide to write a generalized function to take 
+care of that stuff in one line within a tidyverse pipeline. 
 
 The functions in `joeyr` can be grouped into about five different
-categories: the filter, math functions, `ggplot2` themes, the “grapes”,
-and other helpful functions. This README briefly explains them all.
-Because I am a linguist (particularly a sociophonetician), many of these
-functions are helpful for working with sociophonetic data.
+categories: the outlier detecters, sociophonetics functions, `ggplot2` themes, 
+the “grapes”, and other helpful functions. This README briefly explains them all.
 
 Some of these functions I’ve generalized into something that others may
 find useful. Others are very specific to my own code and workflow so I’m
 not sure if they’ll be useful to you. Some functions are documented well
-but lots are not. This package should probably be split into different,
-more thematic, packages, but I’ll do that later once I’ve done proper
-testing and finalized the functons. In the future I’ll also add some
-sample data as well as vignettes to better explain how to use the
-functions.
+but lots are not. 
 
-For questions, feel free to contact me at <joeystan@uga.edu> or on
+For questions, feel free to contact me at <joey_stanley@byu.edu> or on
 Twitter at [@joey\_stan](https://twitter.com/joey_stan).
 
 ## Installation
@@ -66,22 +58,20 @@ For more details, see `?find_outliers`. In the future I’ll write a
 vignette, blog post, or (perhaps some day) an article about it. For now,
 look at the help page or email me.
 
-### Older filtering functions
-
-Note that there are some depreciated functions related to filtering in
+Note that there used to be some  functions related to outliers in
 the package: `joey_filter` and its helper functions, `joey_do_pca`,
 `joey_adjust_cutoff`, and `joey_rm_outliers`. Those did outlier
-detection using Cook’s D and I’ve since discovered that the method was
-inherently flawed. I also tried to algorithmically determine a cutoff
-for how much data should be filtered, but I could never get it to work
+detection using Cook’s D but I’ve since discovered that the method was
+inherently flawed. I also tried to algorithmically determine a 
+cutoff for how much data should be filtered, but I could never get it to work
 and it always removed too much data. Besides, the functions were buggy,
 slow, and more complicated than probably needed (they were my first
-attempt at R functions).
+attempt at R functions). Be aware that I've removed them in version 0.4 of 
+`{joeyr}`. You should switch to `find_outliers` instead. If you need to use them
+you can still find them in the `R_depreciated` folder on GitHub, but they are 
+no longer a part of the package.
 
-If you used those functions, be aware that I’ll remove them in future
-versions of the package. You should switch to `find_outliers` instead.
-
-## Group 2: Math functions
+## Group 2: Sociophonetics functions
 
 Some functions in `joeyr` are essentially mathmatical functions in that
 they crunch some numbers. They’re all relevant to sociophonetic data.
@@ -105,12 +95,15 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     normalization procedure and I was sick of writing large blocks of code in
     all my scripts, so I wrapped it up as a package.
     
+  - `norm_deltaF` is qanother way to normalize your data, based on Keith 
+    Johnson's (2020) paper.
+
   - `lbms_index` allows you to quickly calculate the Low-Back-Merger Shift 
     Index in your data (see Becker 2019; Boberg 2019).
 
 ## Group 3: `ggplot2` themes
 
-These are not documented. The main one is `theme_joey` which will
+These are currently not documented. The main one is `theme_joey` which will
 produce plots using my own flavor of `theme_bw`. There are some variants
 as well. The other helpful function is `joey_arrow` which is just a
 shortcut for a type of arrow I like when I draw lines on a plot.
@@ -122,12 +115,12 @@ side by `%`, like `%in%`. The ones here came about while writing my
 dissertation (or rather, the code used to analze the data for my
 dissertation) and were super helpful for that project.
 
-  - `%ni%` (“not in”) is super handy and is the opposite if `%in%`. I
+  - `%ni%` ("not in"") is super handy and is the opposite if `%in%`. I
     don’t use it so much anymore because I’ve figured out how to use `!`
     properly, but I still love it.
 
-  - `%wi%` (“within”) was one I wrote to see whether a number is
-    “within” a range. I think tidyverse has `%within%` somewhere in
+  - `%wi%` ("within") was one I wrote to see whether a number is
+    within a range. I think tidyverse has `%within%` somewhere in
     its suite of packages, but I wrote this before I knew about it.
     Plus, it’s a little shorter.
 
@@ -141,6 +134,28 @@ dissertation) and were super helpful for that project.
 While writing my dissertation, I found myself doing the same sort of
 pipeline over and over so I just made a couple little shortcut functions
 to save myself some typing.
+
+  - `color_gradienter` was needed in my Shiny app, [*The Gazetteer of
+    Southern Vowels*](http://lap3.libs.uga.edu/u/jstanley/vowelcharts/).
+    I needed a way to take two arbitrary colors and produce an arbitrary
+    number of colors at fixed intervals between them. This is helpful
+    for plots: do you want to use your favorite color of green and your
+    favorite color of blue, but also get three more colors in between
+    them for a continuous scale? `color_gradienter` can do that. I don’t
+    know everything about how color is encoded, but it seems to work
+    well enough for me, though there may be some weird bugs.
+
+  - `ucfirst` was a function I copied over from Perl code. It just
+    capitalizes the first character of a string. Unlike some other
+    functions that are more sophisticaed and transform the text into
+    title case, sometimes I just need the very first character only,
+    rather than the first character of each word.
+    
+## Depreciated functions
+Previous versions of `{{joey`}} had a couple other tools, but recent versions
+of `{tidyr}` and `{dplyr}` have rendered them unnecessary. The following are
+no longer part of `{joeyr}`, though you can find the code on GitHub in the 
+`R_depreciated` folder.
 
   - `spread_n` was perhaps my favorite function. I had a need for using
     the (old) `tidyr::spread` with multiple `value` columns while
@@ -164,22 +179,6 @@ to save myself some typing.
     these functions will be phased out since the new
     [`dplyr::relocate`](https://dplyr.tidyverse.org/dev/reference/relocate.html)
     function does what I intended these do to.
-
-  - `color_gradienter` was needed in my Shiny app, [*The Gazetteer of
-    Southern Vowels*](http://lap3.libs.uga.edu/u/jstanley/vowelcharts/).
-    I needed a way to take two arbitrary colors and produce an arbitrary
-    number of colors at fixed intervals between them. This is helpful
-    for plots: do you want to use your favorite color of green and your
-    favorite color of blue, but also get three more colors in between
-    them for a continuous scale? `color_gradienter` can do that. I don’t
-    know everything about how color is encoded, but it seems to work
-    well enough for me, though there may be some weird bugs.
-
-  - `ucfirst` was a function I copied over from Perl code. It just
-    capitalizes the first character of a string. Unlike some other
-    functions that are more sophisticaed and transform the text into
-    title case, sometimes I just need the very first character only,
-    rather than the first character of each word.
 
 ## Conclusion
 
