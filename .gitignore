@@ -9,4 +9,6 @@ sandbox*
 .Rproj.user
 README.Rmd
 todo.txt
-*.DS_Store
+.DS_Store
+docs
+R/depreciated
