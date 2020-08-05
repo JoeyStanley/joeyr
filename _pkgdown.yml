@@ -10,8 +10,8 @@ reference:
   - contents:
     - find_outliers
     - tidy_mahalanobis
-  - title: Math Functions
-    desc: Miscelleneous functions that use some math. Generally useful for sociophonetic data.
+  - title: Sociophonetics Functions
+    desc: Miscelleneous functions useful when working in sociophonetics.
   - contents: 
     - eucl_dist
     - pillai
