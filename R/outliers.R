@@ -1,5 +1,3 @@
-# The filter functions --------------------------------------------------------------
-
 #' Detect outliers
 #'
 #' This is an implementation of the Mahalanobis Distance that is less sensitive
