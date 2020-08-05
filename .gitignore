@@ -13,5 +13,3 @@ R/depreciated.R
 *.Ruserdata
 *.Rbuildignore
 *.Rproj
-
-docs
