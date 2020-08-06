@@ -7,7 +7,7 @@
 ucfirst(str)
 }
 \arguments{
-\item{str}{A string.}
+\item{str}{a string.}
 }
 \value{
 The same string with the first letter capitalized.
@@ -16,5 +16,5 @@ The same string with the first letter capitalized.
 Capitalizes the first character is a string. Not particularly robust. Copied over from Perl code.
 }
 \examples{
-ucfirst("foo bar") # "Foo bar"
+ucfirst("foo bar")
 }

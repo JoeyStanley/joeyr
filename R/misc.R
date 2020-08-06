@@ -72,10 +72,10 @@ color_gradienter("#bbbbbb", shades = 6)
 #'
 #' Capitalizes the first character is a string. Not particularly robust. Copied over from Perl code.
 #'
-#' @param str A string.
+#' @param str a string.
 #' @return The same string with the first letter capitalized.
 #' @examples
-#' ucfirst("foo bar") # "Foo bar"
+#' ucfirst("foo bar")
 
 # Convert Hz to Barks (more common)
 ucfirst <- function(str) {
