@@ -20,5 +20,7 @@ lists so that it can apply to a whole column. Basically I got tired of running a
 when I wanted something that was within a range: \code{if (x > 2 & x < 5)}.
 }
 \examples{
-c(1:5) \%wi\% c(2,3)
+4 \%wi\% c(1,5)
+c(2, 3) \%wi\% c(1,5)
+c(1:5) \%wi\% c(4,6)
 }

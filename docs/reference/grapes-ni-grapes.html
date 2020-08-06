@@ -40,10 +40,10 @@
 
 
 <meta property="og:title" content="The "Not In" function — %ni%" />
-<meta property="og:description" content="This returns TRUE if values are not in a list. It's the opposite of %in%.
-This is particularly good when subsetting and you only want to remove a
-few things (like diphthongs). You can remove those rather than specifying
-all monophthongs you want to keep." />
+<meta property="og:description" content="This returns TRUE if values are not in a list. It's the opposite 
+of %in%. This is particularly good when subsetting and you only want
+to remove a few things (like diphthongs). You can remove those rather than 
+specifying all monophthongs you want to keep." />
 
 
 
@@ -125,10 +125,10 @@ all monophthongs you want to keep." />
     </div>
 
     <div class="ref-description">
-    <p>This returns <code>TRUE</code> if values are <em>not</em> in a list. It's the opposite of <code>%in%</code>.
-This is particularly good when subsetting and you only want to remove a
-few things (like diphthongs). You can remove those rather than specifying
-all monophthongs you want to keep.</p>
+    <p>This returns <code>TRUE</code> if values are <em>not</em> in a list. It's the opposite 
+of <code>%in%</code>. This is particularly good when subsetting and you only want
+to remove a few things (like diphthongs). You can remove those rather than 
+specifying all monophthongs you want to keep.</p>
     </div>
 
     <pre class="usage"><span class='no'>x</span> <span class='kw'>%ni%</span> <span class='no'>y</span></pre>
@@ -148,14 +148,15 @@ all monophthongs you want to keep.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of logicals indicating whether the objects in `x` are not contained in `y`.`</p>
+    <p>A list of logicals indicating whether the objects in <code>x</code> are not
+contained in <code>y</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that what this function does can easily be accomplished with <code>!x %in% y</code>,
 but I like the "not in" aspect. Probably a holdover from my Perl days...</p>
-<p>You can also define this function as <code>`%ni%` &lt;- Negate(`%in%`)</code> but when looking
-through the documentation on %in%, I found that it might be better to
-modify the formal definition there instead.</p>
+<p>You can also define this function as <code>`%ni%` &lt;- Negate(`%in%`)</code> but 
+when looking through the documentation on %in%, I found that it might be 
+better to modify the formal definition there instead.</p>
 <p>Credit to <a href='https://stackoverflow.com/questions/24660864/declaring-special-infix-functions-in-r-packages'>this Stack Overflow question</a> for showing how to get this to work in an R package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
