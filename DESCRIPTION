@@ -15,3 +15,5 @@ Imports:
     tidyr (>= 1.0.0),
     stringr,
     ggplot2 (>= 3.0.0)
+Remotes:
+  joeystanley/joeysvowels
