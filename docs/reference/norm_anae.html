@@ -129,7 +129,7 @@ your data using the method described in the Atlas of North American English.
 NOTE: This is brand new and has not been tested robustly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_anae</span>(<span class='no'>df</span>, <span class='no'>hz_cols</span>, <span class='no'>vowel_id</span>, <span class='no'>speaker</span>)</pre>
+    <pre class="usage"><span class='fu'>norm_anae</span>(<span class='no'>df</span>, <span class='no'>hz_cols</span>, <span class='no'>vowel_id</span>, <span class='no'>speaker_id</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,9 +166,26 @@ results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>joey_formants</span>) <span class='co'># Not the best example because there's only one speaker.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘joey_formants’ not found</span></div><div class='input'><span class='no'>joey_formants</span> <span class='kw'>%&gt;%</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/idahoans.html'>idahoans</a></span>
+
+<span class='co'># Run the function. Since this data doesn't have a column for token ids, I'll create one here.</span>
+<span class='no'>df</span> <span class='kw'>%&gt;%</span>
    <span class='fu'>rowid_to_column</span>(<span class='st'>"token_id"</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>norm_anae</span>(<span class='kw'>hz_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>), <span class='kw'>vowel_id</span> <span class='kw'>=</span> <span class='no'>token_id</span>, <span class='kw'>speaker</span> <span class='kw'>=</span> <span class='no'>name</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_formants' not found</span></div></pre>
+   <span class='fu'>norm_anae</span>(<span class='kw'>hz_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>), <span class='kw'>vowel_id</span> <span class='kw'>=</span> <span class='no'>token_id</span>, <span class='kw'>speaker</span> <span class='kw'>=</span> <span class='no'>speaker</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'>select</span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='no'>F1_anae</span>, <span class='no'>F2_anae</span>) <span class='co'># &lt;- just the relevant columns</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,100 x 4</span><span>
+#&gt;       F1    F2 F1_anae F2_anae
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  699. </span><span style='text-decoration: underline;'>1</span><span>655.    660.   </span><span style='text-decoration: underline;'>1</span><span>562.
+#&gt; </span><span style='color: #555555;'> 2</span><span>  685. </span><span style='text-decoration: underline;'>1</span><span>360.    646.   </span><span style='text-decoration: underline;'>1</span><span>283.
+#&gt; </span><span style='color: #555555;'> 3</span><span>  713. </span><span style='text-decoration: underline;'>1</span><span>507.    673.   </span><span style='text-decoration: underline;'>1</span><span>422.
+#&gt; </span><span style='color: #555555;'> 4</span><span>  801. </span><span style='text-decoration: underline;'>1</span><span>143.    756.   </span><span style='text-decoration: underline;'>1</span><span>078.
+#&gt; </span><span style='color: #555555;'> 5</span><span>  757. </span><span style='text-decoration: underline;'>1</span><span>258.    714.   </span><span style='text-decoration: underline;'>1</span><span>187.
+#&gt; </span><span style='color: #555555;'> 6</span><span>  804. </span><span style='text-decoration: underline;'>1</span><span>403.    759.   </span><span style='text-decoration: underline;'>1</span><span>323.
+#&gt; </span><span style='color: #555555;'> 7</span><span>  664. </span><span style='text-decoration: underline;'>1</span><span>279.    626.   </span><span style='text-decoration: underline;'>1</span><span>207.
+#&gt; </span><span style='color: #555555;'> 8</span><span>  757. </span><span style='text-decoration: underline;'>1</span><span>325.    715.   </span><span style='text-decoration: underline;'>1</span><span>250.
+#&gt; </span><span style='color: #555555;'> 9</span><span>  730. </span><span style='text-decoration: underline;'>1</span><span>578.    689.   </span><span style='text-decoration: underline;'>1</span><span>489.
+#&gt; </span><span style='color: #555555;'>10</span><span>  700. </span><span style='text-decoration: underline;'>1</span><span>546.    660.   </span><span style='text-decoration: underline;'>1</span><span>459.
+#&gt; </span><span style='color: #555555;'># … with 1,090 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

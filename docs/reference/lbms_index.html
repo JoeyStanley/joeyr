@@ -172,7 +172,8 @@
     <p>If you would like to calculate the LBMS Index for each speaker, be sure to 
 the data beforehand with <code>group_by()</code> (see the examples). Also, per Becker's
 (2019) recommendation, it is recommended that you exclude tokens before nasals, 
-laterals, rhotics, and /g/ before the calculation.</p>
+laterals, rhotics, and /g/ before the calculation. It is also recommended to
+run the function on Lobanov-normalized data.</p>
 <p>Note that this is a new function and has not been tested robustly yet.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -182,17 +183,36 @@ Publication of the American Dialect Society 104. Durham, NC: Duke University
 Press, 2019.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span></div><div class='output co'>#&gt; <span class='message'>✓ ggplot2 3.3.2          ✓ purrr   0.3.4     </span>
-#&gt; <span class='message'>✓ tibble  3.0.3.9000     ✓ stringr 1.4.0     </span>
-#&gt; <span class='message'>✓ tidyr   1.1.0          ✓ forcats 0.5.0     </span>
-#&gt; <span class='message'>✓ readr   1.3.1          </span></div><div class='output co'>#&gt; <span class='message'>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
-#&gt; <span class='message'>x dplyr::filter() masks stats::filter()</span>
-#&gt; <span class='message'>x dplyr::lag()    masks stats::lag()</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>joey_formants</span>) <span class='co'># Not the best example because there's only one speaker.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘joey_formants’ not found</span></div><div class='input'><span class='no'>joey_formants</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(!<span class='no'>fol_seg</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"N"</span>, <span class='st'>"M"</span>, <span class='st'>"NG"</span>)) <span class='kw'>%&gt;%</span>
-   <span class='fu'>group_by</span>(<span class='no'>name</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>lbms_index</span>(<span class='no'>vowel</span>, <span class='no'>F1_LobanovNormed_unscaled</span>, <span class='no'>F2_LobanovNormed_unscaled</span>,
-              <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_formants' not found</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>))
+<span class='co'># This dataset has following segment and normalized data already</span>
+<span class='no'>darla</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/darla.html'>darla</a></span>
+<span class='no'>darla</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(!<span class='no'>fol_seg</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>lbms_index</span>(<span class='no'>vowel</span>, <span class='no'>F1_LobanovNormed_unscaled</span>, <span class='no'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt; </span><span style='color: #555555;'># Rowwise: </span><span>
+#&gt;   lbms_index
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       1.50</div><div class='input'>
+<span class='co'># This dataset has multiple speakers and needs to be normalized</span>
+<span class='no'>idahoans</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/idahoans.html'>idahoans</a></span>
+<span class='no'>idahoans</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>speaker</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>F1_lob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>F1</span>),
+         <span class='kw'>F2_lob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>F2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>lbms_index</span>(<span class='no'>vowel</span>, <span class='no'>F1_lob</span>, <span class='no'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
+#&gt; </span><span style='color: #555555;'># Rowwise:  speaker</span><span>
+#&gt;    speaker lbms_index
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 01            2.33
+#&gt; </span><span style='color: #555555;'> 2</span><span> 02            1.92
+#&gt; </span><span style='color: #555555;'> 3</span><span> 03            1.85
+#&gt; </span><span style='color: #555555;'> 4</span><span> 04            2.04
+#&gt; </span><span style='color: #555555;'> 5</span><span> 05            2.05
+#&gt; </span><span style='color: #555555;'> 6</span><span> 06            1.64
+#&gt; </span><span style='color: #555555;'> 7</span><span> 07            2.17
+#&gt; </span><span style='color: #555555;'> 8</span><span> 08            2.21
+#&gt; </span><span style='color: #555555;'> 9</span><span> 09            2.07
+#&gt; </span><span style='color: #555555;'>10</span><span> 10            2.00</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

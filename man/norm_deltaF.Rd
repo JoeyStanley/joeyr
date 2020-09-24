@@ -33,19 +33,11 @@ Note that this is a new function and has not been tested robustly yet.
 }
 \examples{
 library(tidyverse)
-# Not the best example because there's only one speaker.
-data(joey_formants) 
-
-# Clean the data first
-joey_formants_clean <- joey_formants \%>\%
-   # Remove tokens without an F3 or F4 measurement
-   filter(F3 != "None") \%>\%
-   # Convert F3 to numeric
-   mutate(F3 = as.numeric(F3))
+df <- joeysvowels::idahoans
    
  # Run the function
- joey_formants_clean \%>\%  
-   group_by(name) \%>\%
+ df \%>\%  
+   group_by(speaker) \%>\%
    norm_deltaF(F1, F2, F3)
    
 }

@@ -124,10 +124,13 @@ tidy_mahalanobis <- function(...) {
 #' @return The same dataframe, but with new column(s), suffixed with "_anae" that have the normalized data.
 #' @examples 
 #' library(tidyverse)
-#' data(joey_formants) # Not the best example because there's only one speaker.
-#' joey_formants %>%
+#' df <- joeysvowels::idahoans
+#' 
+#' # Run the function. Since this data doesn't have a column for token ids, I'll create one here.
+#' df %>%
 #'    rowid_to_column("token_id") %>%
-#'    norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = name)
+#'    norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = speaker) %>%
+#'    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 norm_anae <- function(df, hz_cols, vowel_id, speaker_id) {
   # Get the sum of log of the hz
   sum_log_hz <- df %>%
@@ -182,7 +185,8 @@ norm_anae <- function(df, hz_cols, vowel_id, speaker_id) {
 #' If you would like to calculate the LBMS Index for each speaker, be sure to 
 #' the data beforehand with \code{group_by()} (see the examples). Also, per Becker's
 #' (2019) recommendation, it is recommended that you exclude tokens before nasals, 
-#' laterals, rhotics, and /g/ before the calculation.
+#' laterals, rhotics, and /g/ before the calculation. It is also recommended to
+#' run the function on Lobanov-normalized data.
 #' 
 #' Note that this is a new function and has not been tested robustly yet.
 #' 
@@ -203,14 +207,20 @@ norm_anae <- function(df, hz_cols, vowel_id, speaker_id) {
 #' 
 #' @return A \code{summarize}d dataframe with the LBMS Index.
 #' @examples 
-#' library(tidyverse)
-#' data(joey_formants) # Not the best example because there's only one speaker.
-#' joey_formants %>%
-#'    filter(!fol_seg %in% c("L", "R", "N", "M", "NG")) %>%
-#'    group_by(name) %>%
-#'    lbms_index(vowel, F1_LobanovNormed_unscaled, F2_LobanovNormed_unscaled, 
-#'               "IY", "IH", "EH", "AE")
+#' suppressPackageStartupMessages(library(tidyverse))
+#' # This dataset has following segment and normalized data already
+#' darla <- joeysvowels::darla 
+#' darla %>%
+#'   filter(!fol_seg %in% c("L", "R", "M", "N", "NG", "G")) %>%
+#'   lbms_index(vowel, F1_LobanovNormed_unscaled, F2_LobanovNormed_unscaled, "IY", "IH", "EH", "AE")
 #' 
+#' # This dataset has multiple speakers and needs to be normalized
+#' idahoans <- joeysvowels::idahoans
+#' idahoans %>%
+#'   group_by(speaker) %>%
+#'   mutate(F1_lob = scale(F1), 
+#'          F2_lob = scale(F2)) %>%
+#'   lbms_index(vowel, F1_lob, F2_lob, "IY", "IH", "EH", "AE")
 lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
   df %>%
     filter({{vowel_col}} %in% c(beet, bit, bet, bat)) %>%
@@ -261,19 +271,11 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
 #' \code{_deltaF}) containing the normalized measurements.
 #' @examples 
 #' library(tidyverse)
-#' # Not the best example because there's only one speaker.
-#' data(joey_formants) 
-#' 
-#' # Clean the data first
-#' joey_formants_clean <- joey_formants %>%
-#'    # Remove tokens without an F3 or F4 measurement
-#'    filter(F3 != "None") %>%
-#'    # Convert F3 to numeric
-#'    mutate(F3 = as.numeric(F3))
+#' df <- joeysvowels::idahoans
 #'    
 #'  # Run the function
-#'  joey_formants_clean %>%  
-#'    group_by(name) %>%
+#'  df %>%  
+#'    group_by(speaker) %>%
 #'    norm_deltaF(F1, F2, F3)
 #'    
 norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {

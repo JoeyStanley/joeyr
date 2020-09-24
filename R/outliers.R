@@ -51,30 +51,30 @@
 #'   examples.
 #'   
 #' @examples
-#' library(dplyr)
-#' data(joey_coronals)
+#' suppressPackageStartupMessages(library(dplyr))
+#' df <- joeysvowels::coronals
 #'
 #' # You can output the data to a column called something like "is_outlier" and 
 #' # then filter out values that are TRUE.
-#' joey_coronals %>%
+#' df %>%
 #'    group_by(vowel) %>%
 #'    mutate(is_outlier = find_outliers(F1, F2, keep = 0.95)) %>%
 #'    filter(!is_outlier)
 #'
 #' # Alternatively, you can skip a step and just keep the data that are not 
 #' # outliers.
-#' joey_coronals %>%
+#' df %>%
 #'    group_by(vowel) %>%
 #'    filter(!find_outliers(F1, F2))
 #'    
 #' # In some cases, you might not have enough data. In this case, a warning 
 #' # message will appear.
-#' joey_coronals %>% 
+#' df %>% 
 #'     filter(percent == 50) %>%
 #'     group_by(vowel) %>%
 #'     mutate(is_outlier = find_outliers(F1, F2, keep = 0.95))
-#' # You can find out which groups is problematic with `dplyr::count()`:
-#' joey_coronals %>% 
+#' # You can find out which groups have less than 20 tokens with `dplyr::count()`:
+#' df %>% 
 #'     filter(percent == 50) %>%
 #'     group_by(vowel) %>%
 #'     count()

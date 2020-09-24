@@ -4,7 +4,7 @@
 \alias{norm_anae}
 \title{ANAE Vowel Normalization}
 \usage{
-norm_anae(df, hz_cols, vowel_id, speaker)
+norm_anae(df, hz_cols, vowel_id, speaker_id)
 }
 \arguments{
 \item{df}{The dataframe containing the formant measurements you want to normalize.}
@@ -33,8 +33,11 @@ results.
 }
 \examples{
 library(tidyverse)
-data(joey_formants) # Not the best example because there's only one speaker.
-joey_formants \%>\%
+df <- joeysvowels::idahoans
+
+# Run the function. Since this data doesn't have a column for token ids, I'll create one here.
+df \%>\%
    rowid_to_column("token_id") \%>\%
-   norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = name)
+   norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = speaker) \%>\%
+   select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 }
