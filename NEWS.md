@@ -1,3 +1,8 @@
+# joeyr 0.5
+
+* Example code now uses the the `joeysvowels` package, a remote dependency.
+* `norm_anae()` is now more robust (thanks, Thomas!)
+
 # joeyr 0.4
 
 * Switching to pkgdown, which involved some overdue tidying of the package
