@@ -1,10 +1,10 @@
 # Stuff I don't want to sync
 joeyr_TODO.R
-sandbox*
 README.Rmd
 todo.txt
 *.DS_Store
-R/depreciated.R
+R_depreciated*
+other_scripts*
 
 # R stuff
 *.Rproj.user
@@ -13,3 +13,5 @@ R/depreciated.R
 *.Ruserdata
 *.Rbuildignore
 *.Rproj
+.Rproj.user
+docs
