@@ -129,7 +129,7 @@ your data using the method described in the Atlas of North American English.
 NOTE: This is brand new and has not been tested robustly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_anae</span>(<span class='no'>df</span>, <span class='no'>hz_cols</span>, <span class='no'>vowel_id</span>, <span class='no'>speaker</span>)</pre>
+    <pre class="usage"><span class='fu'>norm_anae</span>(<span class='kw'>df</span>, <span class='kw'>hz_cols</span>, <span class='kw'>vowel_id</span>, <span class='kw'>speaker_id</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,9 +165,15 @@ if that's how it should be done, but it makes sense to me and returns sensible
 results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>joey_formants</span>) <span class='co'># Not the best example because there's only one speaker.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘joey_formants’ not found</span></div><div class='input'><span class='no'>joey_formants</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'>rowid_to_column</span>(<span class='st'>"token_id"</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>norm_anae</span>(<span class='kw'>hz_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>), <span class='kw'>vowel_id</span> <span class='kw'>=</span> <span class='no'>token_id</span>, <span class='kw'>speaker</span> <span class='kw'>=</span> <span class='no'>name</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_formants' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>idahoans</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>
+<span class='co'># Run the function. Since this data doesn't have a column for token ids, I'll create one here.</span>
+<span class='kw'>df</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>rowid_to_column</span>(<span class='st'>"token_id"</span>) <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_anae</span>(hz_cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>), vowel_id = <span class='kw'>token_id</span>, speaker = <span class='kw'>speaker</span>) <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, <span class='kw'>F1_anae</span>, <span class='kw'>F2_anae</span>) <span class='co'># &lt;- just the relevant columns</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in rowid_to_column(., "token_id"): could not find function "rowid_to_column"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +189,7 @@ results.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

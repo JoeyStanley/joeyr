@@ -127,7 +127,7 @@ function is intended to be used within a tidyverse pipeline." />
 function is intended to be used within a tidyverse pipeline.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_deltaF</span>(<span class='no'>df</span>, <span class='no'>.F1</span>, <span class='no'>.F2</span>, <span class='no'>.F3</span>, <span class='no'>.F4</span>)</pre>
+    <pre class="usage"><span class='fu'>norm_deltaF</span>(<span class='kw'>df</span>, <span class='kw'>.F1</span>, <span class='kw'>.F2</span>, <span class='kw'>.F3</span>, <span class='kw'>.F4</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,7 +150,7 @@ measurements. The first three are required, but you may leave off F4.</p></td>
 <code>_deltaF</code>) containing the normalized measurements.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You will need to group the data by speaker with <code>group_by()</code> before 
+    <p>You will need to group the data by speaker with <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by()</a></code> before 
 applying this function if you want to normalize the data by speaker.</p>
 <p>The data must be numeric, and there cannot be any NAs. So, if you're using 
 data extracted from Praat, you may have to filter out bad F3 and F4 data
@@ -163,18 +163,14 @@ Laboratory Phonology: Journal of the Association for Laboratory Phonology 11,
 no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='co'># Not the best example because there's only one speaker.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>joey_formants</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘joey_formants’ not found</span></div><div class='input'>
-<span class='co'># Clean the data first</span>
-<span class='no'>joey_formants_clean</span> <span class='kw'>&lt;-</span> <span class='no'>joey_formants</span> <span class='kw'>%&gt;%</span>
-   <span class='co'># Remove tokens without an F3 or F4 measurement</span>
-   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>F3</span> <span class='kw'>!=</span> <span class='st'>"None"</span>) <span class='kw'>%&gt;%</span>
-   <span class='co'># Convert F3 to numeric</span>
-   <span class='fu'>mutate</span>(<span class='kw'>F3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>F3</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_formants' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>idahoans</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>   
  <span class='co'># Run the function</span>
- <span class='no'>joey_formants_clean</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'>group_by</span>(<span class='no'>name</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>norm_deltaF</span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='no'>F3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_formants_clean' not found</span></div><div class='input'>   
+ <span class='kw'>df</span> <span class='op'>%&gt;%</span>  
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>speaker</span>) <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_deltaF</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, <span class='kw'>F3</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>   
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -191,7 +187,7 @@ no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

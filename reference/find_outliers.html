@@ -131,7 +131,7 @@ removes points one at a time until a predetermined proportion of data has been
 removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_outliers</span>(<span class='no'>...</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>find_outliers</span>(<span class='kw'>...</span>, keep = <span class='fl'>0.95</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,33 +193,47 @@ has been removed.</p>
   examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: dplyr</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>joey_coronals</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘joey_coronals’ not found</span></div><div class='input'>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>coronals</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>
 <span class='co'># You can output the data to a column called something like "is_outlier" and </span>
 <span class='co'># then filter out values that are TRUE.</span>
-<span class='no'>joey_coronals</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>is_outlier</span> <span class='kw'>=</span> <span class='fu'>find_outliers</span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)) <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='no'>is_outlier</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_coronals' not found</span></div><div class='input'>
+<span class='kw'>df</span> <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>vowel</span>) <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(is_outlier = <span class='fu'>find_outliers</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, keep = <span class='fl'>0.95</span>)) <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='op'>!</span><span class='kw'>is_outlier</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `group_by_()` is deprecated as of dplyr 0.7.0.</span>
+#&gt; <span class='warning'>Please use `group_by()` instead.</span>
+#&gt; <span class='warning'>See vignette('programming') for more help</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>
 <span class='co'># Alternatively, you can skip a step and just keep the data that are not </span>
 <span class='co'># outliers.</span>
-<span class='no'>joey_coronals</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(!<span class='fu'>find_outliers</span>(<span class='no'>F1</span>, <span class='no'>F2</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_coronals' not found</span></div><div class='input'>
+<span class='kw'>df</span> <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>vowel</span>) <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='op'>!</span><span class='fu'>find_outliers</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>))
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>   
 <span class='co'># In some cases, you might not have enough data. In this case, a warning </span>
 <span class='co'># message will appear.</span>
-<span class='no'>joey_coronals</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>percent</span> <span class='kw'>==</span> <span class='fl'>50</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>is_outlier</span> <span class='kw'>=</span> <span class='fu'>find_outliers</span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>0.95</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_coronals' not found</span></div><div class='input'><span class='co'># You can find out which groups is problematic with `dplyr::count()`:</span>
-<span class='no'>joey_coronals</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>percent</span> <span class='kw'>==</span> <span class='fl'>50</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'joey_coronals' not found</span></div></pre>
+<span class='kw'>df</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>percent</span> <span class='op'>==</span> <span class='fl'>50</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>vowel</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(is_outlier = <span class='fu'>find_outliers</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, keep = <span class='fl'>0.95</span>))
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `filter_()` is deprecated as of dplyr 0.7.0.</span>
+#&gt; <span class='warning'>Please use `filter()` instead.</span>
+#&gt; <span class='warning'>See vignette('programming') for more help</span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): no applicable method for 'filter_' applied to an object of class "function"</span></div><div class='input'><span class='co'># You can find out which groups have less than 20 tokens with `dplyr::count()`:</span>
+<span class='kw'>df</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>percent</span> <span class='op'>==</span> <span class='fl'>50</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>vowel</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span>()
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): no applicable method for 'filter_' applied to an object of class "function"</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -235,7 +249,7 @@ has been removed.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
