@@ -126,7 +126,7 @@ dissertation) and were super helpful for that project.
 
   - `%expanded_by%` takes a number and a range and expands the range by
     that much (applied to both sides). So `c(1, 3) %expanded_by% 3`
-    produces `-2` and `6`. It was helpul when I was automating the plots
+    produces `c(-2, 6)`. It was helpul when I was automating the plots
     in my dissertation.
 
 ## Group 5: Other helpful functions
@@ -152,7 +152,7 @@ to save myself some typing.
     rather than the first character of each word.
     
 ## Depreciated functions
-Previous versions of `{{joey`}} had a couple other tools, but recent versions
+Previous versions of `{{joeyr}}` had a couple other tools, but recent versions
 of `{tidyr}` and `{dplyr}` have rendered them unnecessary. The following are
 no longer part of `{joeyr}`, though you can find the code on GitHub in the 
 `R_depreciated` folder.
