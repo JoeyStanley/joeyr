@@ -28,6 +28,7 @@ Note, this is a little buggy and may not work as expected. I don't know
 enough about how colors are handled to fix bugs. Please ese with caution.
 }
 \examples{
+library(ggplot2)
 # By itself, it returns just a list.
 color_gradienter("#33458F", "#ffffff", 5)
 
@@ -35,7 +36,7 @@ color_gradienter("#33458F", "#ffffff", 5)
 df <- data.frame(x = rnorm(50, 0, 1),
                  y = rnorm(50, 0, 1),
                  color = sample(letters[1:5], 50, replace = TRUE))
-ggplot2::ggplot(df, ggplot2::aes(x, y, color = color)) +
-    ggplot2::geom_point(size = 5) +
-    ggplot2::scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
+ggplot(df, aes(x, y, color = color)) +
+    geom_point(size = 5) +
+    scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
 }

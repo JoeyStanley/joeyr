@@ -14,6 +14,7 @@
 #' @param shades An integer
 #' @return A list of strings, in RGB format, the length of `shades` and that are equidistant from each other from `hi` to `lo`.
 #' @examples
+#' library(ggplot2)
 #' # By itself, it returns just a list.
 #' color_gradienter("#33458F", "#ffffff", 5)
 #'
@@ -21,9 +22,9 @@
 #' df <- data.frame(x = rnorm(50, 0, 1),
 #'                  y = rnorm(50, 0, 1),
 #'                  color = sample(letters[1:5], 50, replace = TRUE))
-#' ggplot2::ggplot(df, ggplot2::aes(x, y, color = color)) +
-#'     ggplot2::geom_point(size = 5) +
-#'     ggplot2::scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
+#' ggplot(df, aes(x, y, color = color)) +
+#'     geom_point(size = 5) +
+#'     scale_color_manual(values = color_gradienter(hi = "#33458F", lo = "#ffffff", 5))
 
 # I wrote this for the GSV, but I think it's a useful tool to have.
 # Currently uses some tidyverse functions but it'd be easy to switch over to base R.
