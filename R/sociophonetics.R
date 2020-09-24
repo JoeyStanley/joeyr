@@ -128,52 +128,49 @@ tidy_mahalanobis <- function(...) {
 #' joey_formants %>%
 #'    rowid_to_column("token_id") %>%
 #'    norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = name)
-norm_anae <- function(df, hz_cols, vowel_id, speaker) {
-  hz_cols_var  <- enquo(hz_cols)
-  vowel_id_var <- enquo(vowel_id)
-  speaker_var  <- enquo(speaker)
-  
+norm_anae <- function(df, hz_cols, vowel_id, speaker_id) {
   # Get the sum of log of the hz
   sum_log_hz <- df %>%
-    select(!!hz_cols_var) %>%
+    select({{hz_cols}}) %>%
     log() %>%
     sum(na.rm = TRUE)
   
   # Get the number of tokens
   n_tokens <- df %>%
-    select(!!vowel_id_var) %>%
+    select({{vowel_id}}) %>%
     distinct() %>%
     nrow()
   
   # Get the number of formants (may be 1 if in a tall format)
-  n_formants <- length(hz_cols_var)
+  n_formants <- df %>%
+    select({{hz_cols}}) %>%
+    length()
   
-  # Trajectory info is not in the ANAE formula, but I need to add it to the denominator. 
+  # Trajectory info is not in the ANAE formula, but I need to add it to the denominator.
   # I can calculate it by dividing the number of measurements by the number of tokens.
   n_timepoints <- nrow(df)/n_tokens
   
   # Now use those to get G
   g <- sum_log_hz / (n_tokens * n_formants * n_timepoints)
   
-  
   # Now use G to get the scaling factors for each speaker
   scaling_factors <- df %>%
-    group_by(!!speaker_var) %>%
-    summarize(individual_sum_log_hz = sum(log(!!hz_cols_var), na.rm = TRUE),
+    group_by({{speaker_id}}) %>%
+    summarize(individual_sum_log_hz = sum(log({{hz_cols}}), na.rm = TRUE),
               individual_n_tokens = n(),
               .groups = "keep") %>% # <- suppresses a warning
     mutate(s = individual_sum_log_hz / (individual_n_tokens * n_formants), # <- I guess I don't need to add n_timepoints here?
            expansion = exp(g - s)) %>%
     ungroup() %>%
     arrange(expansion) %>%
-    select(name, expansion)
+    select({{speaker_id}}, expansion)
   
   # Now join the expansions to the df, multiply the hz values, and clean up (remove the expansion and rearrange columns)
   df %>%
-    left_join(scaling_factors, by = as_label(speaker_var)) %>%
-    mutate(across(c(!!hz_cols_var), ~.*expansion, .names = "{col}_anae")) %>%
+    left_join(scaling_factors, by = as_label(enquo(speaker_id))) %>%
+    mutate(across(c({{hz_cols}}), ~.*expansion, .names = "{col}_anae")) %>%
     select(-expansion) %>%
-    relocate(ends_with("anae"), .after = c(!!hz_cols_var))
+    relocate(ends_with("anae"), .after = c({{hz_cols}}))
 }
 
 
