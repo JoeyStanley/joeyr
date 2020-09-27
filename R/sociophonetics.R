@@ -325,3 +325,112 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
       return()
   }
 }
+
+
+
+#' Convert ARPABET to Lexical Sets
+#' 
+#' A function to convert ARPABET symbols to lexical set keywords.  
+#' 
+#' Linguists use different ways to code English vowels in a computer-friendly
+#' way. FAVE-Align and MFA use ARPABET, which assigns a two-letter code to each
+#' vowel phoneme (IY, IH, EY, EH, etc.). An alternative approach is to use a 
+#' keyword denoting a lexical set, whether it be the original Wells keywords 
+#' or an alternative using the "B_T" frame. See 
+#' \href{https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap}{this blog post} 
+#' for more background.
+#' 
+#' The original Wells' lexical keywords in this function are FLEECE, KIT, FACE,
+#' DRESS, TRAP, LOT, THOUGHT, STRUT, GOAT, FOOT, GOOSE, PRICE, MOUTH, CHOICE,
+#' and NURSE.
+#' 
+#' The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
+#' BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
+#'  
+#' @param x The vector containing the vowel labels you want to convert.
+#' @param style a string. By default, \code{"Wells"}, which will produce the original 
+#' Wells labels. If set to \code{"b_t"}, it will use the "B_T" frame. 
+#' @param ordered a logical. by default, \code{TRUE}, which will return the factor in an 
+#' order that goes approximately counter clockwise in the vowel space, with 
+#' diphthongs last. If \code{FALSE}, it will retain the original order (which, 
+#' unless already specified, will be alphabetical or the order in which R sees
+#' the individial levels).
+#' @param as_character a logical. \code{FALSE} by default, meaning it will return
+#' the vector as a factor in the order specified by \code{ordered}. If \code{TRUE}, 
+#' it will return the vector as a character vector (and will silently ignore
+#' the \code{ordered} argument).
+#' 
+#' @return A vector with the factors recoded. Any string that is not one of the 
+#' following will be silently ignored: IY, IH, EY, EH, AE, AA, AO, AH, OW, UH, 
+#' UW, AY, AW, OY, ER.
+#' 
+#' @examples 
+#' suppressPackageStartupMessages(library(tidyverse))
+#' 
+#' darla <- joeysvowels::darla 
+#' darla %>%
+#'   mutate(vowel = arpa_to_keywords(vowel)) %>%
+#'   count(vowel)
+#'   
+#' darla %>%
+#'   mutate(vowel = arpa_to_keywords(vowel, ordered = FALSE)) %>%
+#'   count(vowel)
+#'
+#' darla %>%
+#'   mutate(vowel = arpa_to_keywords(vowel, style = "b_t", as_character = TRUE)) %>%
+#'   count(vowel)
+#'   
+#' # Here's a non-tidyverse version (though `stringr` is still used under the hood)
+#' darla$vowel <- arpa_to_keywords(darla$vowel)
+arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = FALSE) {
+  style <- tolower(style)
+  
+  if (ordered) {
+    x <- fct_relevel(x, "IY", "IH", "EY", "EH", "AE", "AA", "AO", 
+                     "AH", "OW", "UH", "UW", "AY", "AW", "OY", "ER")
+  }
+  
+  if (style == "wells") {
+    x <- fct_recode(x,
+               "FLEECE"  = "IY",
+               "KIT"     = "IH",
+               "FACE"    = "EY",
+               "DRESS"   = "EH",
+               "TRAP"    = "AE",
+               "LOT"     = "AA",
+               "THOUGHT" = "AO",
+               "STRUT"   = "AH",
+               "GOAT"    = "OW",
+               "FOOT"    = "UH",
+               "GOOSE"   = "UW",
+               "PRICE"   = "AY",
+               "MOUTH"   = "AW",
+               "CHOICE"  = "OY",
+               "NURSE"   = "ER")
+    
+  } else if (style == "b_t") {
+    x <- fct_recode(x,
+               "BEET"   = "IY",
+               "BIT"    = "IH",
+               "BAIT"   = "EY",
+               "BET"    = "EH",
+               "BAT"    = "AE",
+               "BOT"    = "AA",
+               "BOUGHT" = "AO",
+               "BUT"    = "AH",
+               "BOAT"   = "OW",
+               "BOOK"   = "UH",
+               "BOOT"   = "UW",
+               "BITE"   = "AY",
+               "BOUT"   = "AW",
+               "BOY"    = "OY",
+               "BIRD"   = "ER")
+  } else {
+    message("Unknown style. Returning original strings.")
+  }
+  
+  if (as_character) {
+    x <- as.character(x)
+  }
+  x
+}

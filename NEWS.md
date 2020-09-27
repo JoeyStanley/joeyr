@@ -1,3 +1,7 @@
+# joeyr 0.6
+
+* `arpa_to_keywords()` added.
+
 # joeyr 0.5
 
 * Example code now uses the the `joeysvowels` package, a remote dependency.
