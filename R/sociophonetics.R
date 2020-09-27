@@ -328,6 +328,8 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 
 
 
+
+
 #' Convert ARPABET to Lexical Sets
 #' 
 #' A function to convert ARPABET symbols to lexical set keywords.  
@@ -346,6 +348,9 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 #' 
 #' The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
 #' BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
+#' 
+#' Note that \code{arpa_to_wells} is shorthand for \code{arpa_to_keywords(style="wells")}, 
+#' and only exports to the Wells lexical sets.
 #'  
 #' @param x The vector containing the vowel labels you want to convert.
 #' @param style a string. By default, \code{"Wells"}, which will produce the original 
@@ -364,7 +369,7 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 #' following will be silently ignored: IY, IH, EY, EH, AE, AA, AO, AH, OW, UH, 
 #' UW, AY, AW, OY, ER.
 #' 
-#' @examples 
+#' @examples
 #' suppressPackageStartupMessages(library(tidyverse))
 #' 
 #' darla <- joeysvowels::darla 
@@ -382,6 +387,7 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 #'   
 #' # Here's a non-tidyverse version (though `stringr` is still used under the hood)
 #' darla$vowel <- arpa_to_keywords(darla$vowel)
+#' 
 arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = FALSE) {
   style <- tolower(style)
   
@@ -433,4 +439,10 @@ arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = 
     x <- as.character(x)
   }
   x
+}
+
+#' @rdname arpa_to_keywords
+#' @export
+arpa_to_wells <- function(x, ...) {
+  joeyr::arpa_to_keywords(x, style = "wells", ...)
 }

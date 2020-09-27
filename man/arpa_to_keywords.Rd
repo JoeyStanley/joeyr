@@ -2,9 +2,12 @@
 % Please edit documentation in R/sociophonetics.R
 \name{arpa_to_keywords}
 \alias{arpa_to_keywords}
+\alias{arpa_to_wells}
 \title{Convert ARPABET to Lexical Sets}
 \usage{
 arpa_to_keywords(x, style = "wells", ordered = TRUE, as_character = FALSE)
+
+arpa_to_wells(x, ...)
 }
 \arguments{
 \item{x}{The vector containing the vowel labels you want to convert.}
@@ -45,7 +48,10 @@ DRESS, TRAP, LOT, THOUGHT, STRUT, GOAT, FOOT, GOOSE, PRICE, MOUTH, CHOICE,
 and NURSE.
 
 The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
-BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD.
+BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
+
+Note that \code{arpa_to_wells} is shorthand for \code{arpa_to_keywords(style="wells")}, 
+and only exports to the Wells lexical sets.
 }
 \examples{
 suppressPackageStartupMessages(library(tidyverse))
@@ -65,4 +71,5 @@ darla \%>\%
   
 # Here's a non-tidyverse version (though `stringr` is still used under the hood)
 darla$vowel <- arpa_to_keywords(darla$vowel)
+
 }

@@ -1,6 +1,6 @@
 # joeyr 0.6
 
-* `arpa_to_keywords()` added.
+* `arpa_to_keywords()` and `arpa_to_wells()` added.
 
 # joeyr 0.5
 
