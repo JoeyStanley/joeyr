@@ -102,7 +102,7 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     Index in your data (see Becker 2019; Boberg 2019).
     
   - `arpa_to_keywords()` (and its shortcut, `arpa_to_wells()`), quickly converts 
-    ARPABET labels to Wells(-inspired) keywords. 
+    ARPABET labels to Wells (or Wells-inspired) keywords. 
 
 ## Group 3: `ggplot2` themes
 
