@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>∆F Normalization — norm_deltaF • joeyr</title>
+<title>Convert ARPABET to Lexical Sets — arpa_to_keywords • joeyr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="∆F Normalization — norm_deltaF" />
-<meta property="og:description" content="Normalize vowel formant measurements with ∆F (see Johnson 2020). This 
-function is intended to be used within a tidyverse pipeline." />
+<meta property="og:title" content="Convert ARPABET to Lexical Sets — arpa_to_keywords" />
+<meta property="og:description" content="A function to convert ARPABET symbols to lexical set keywords." />
 
 
 
@@ -122,61 +121,85 @@ function is intended to be used within a tidyverse pipeline." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>∆F Normalization</h1>
+    <h1>Convert ARPABET to Lexical Sets</h1>
     <small class="dont-index">Source: <a href='https://github.com/JoeyStanley/joeyr/blob/master/R/sociophonetics.R'><code>R/sociophonetics.R</code></a></small>
-    <div class="hidden name"><code>norm_deltaF.Rd</code></div>
+    <div class="hidden name"><code>arpa_to_keywords.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Normalize vowel formant measurements with ∆F (see Johnson 2020). This 
-function is intended to be used within a tidyverse pipeline.</p>
+    <p>A function to convert ARPABET symbols to lexical set keywords.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_deltaF</span>(<span class='kw'>df</span>, <span class='kw'>.F1</span>, <span class='kw'>.F2</span>, <span class='kw'>.F3</span>, <span class='kw'>.F4</span>)</pre>
+    <pre class="usage"><span class='fu'>arpa_to_keywords</span>(<span class='kw'>x</span>, style = <span class='st'>"wells"</span>, ordered = <span class='fl'>TRUE</span>, as_character = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>The data frame containing the formant measurements you want to 
-normalize</p></td>
+      <th>x</th>
+      <td><p>The vector containing the vowel labels you want to convert.</p></td>
     </tr>
     <tr>
-      <th>.F1, .F2, .F3, .F4</th>
-      <td><p>The (unquoted) name of the column containing the F1 
-measurements. The first three are required, but you may leave off F4.</p></td>
+      <th>style</th>
+      <td><p>a string. By default, <code>"Wells"</code>, which will produce the original 
+Wells labels. If set to <code>"b_t"</code>, it will use the "B_T" frame.</p></td>
+    </tr>
+    <tr>
+      <th>ordered</th>
+      <td><p>a logical. by default, <code>TRUE</code>, which will return the factor in an 
+order that goes approximately counter clockwise in the vowel space, with 
+diphthongs last. If <code>FALSE</code>, it will retain the original order (which, 
+unless already specified, will be alphabetical or the order in which R sees
+the individial levels).</p></td>
+    </tr>
+    <tr>
+      <th>as_character</th>
+      <td><p>a logical. <code>FALSE</code> by default, meaning it will return
+the vector as a factor in the order specified by <code>ordered</code>. If <code>TRUE</code>, 
+it will return the vector as a character vector (and will silently ignore
+the <code>ordered</code> argument).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The original dataframe with new columns (suffixed with 
-<code>_deltaF</code>) containing the normalized measurements.</p>
+    <p>A vector with the factors recoded. Any string that is not one of the 
+following will be silently ignored: IY, IH, EY, EH, AE, AA, AO, AH, OW, UH, 
+UW, AY, AW, OY, ER.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You will need to group the data by speaker with <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by()</a></code> before 
-applying this function if you want to normalize the data by speaker.</p>
-<p>The data must be numeric, and there cannot be any NAs. So, if you're using 
-data extracted from Praat, you may have to filter out bad F3 and F4 data
-and then convert the column to numeric. See the example.</p>
-<p>Note that this is a new function and has not been tested robustly yet.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Johnson, Keith. The ΔF Method of Vocal Tract Length Normalization for Vowels. 
-Laboratory Phonology: Journal of the Association for Laboratory Phonology 11, 
-no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.</p>
+    <p>Linguists use different ways to code English vowels in a computer-friendly
+way. FAVE-Align and MFA use ARPABET, which assigns a two-letter code to each
+vowel phoneme (IY, IH, EY, EH, etc.). An alternative approach is to use a 
+keyword denoting a lexical set, whether it be the original Wells keywords 
+or an alternative using the "B_T" frame. See 
+<a href='https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap'>this blog post</a> 
+for more background.</p>
+<p>The original Wells' lexical keywords in this function are FLEECE, KIT, FACE,
+DRESS, TRAP, LOT, THOUGHT, STRUT, GOAT, FOOT, GOOSE, PRICE, MOUTH, CHOICE,
+and NURSE.</p>
+<p>The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
+BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>idahoans</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>   
- <span class='co'># Run the function</span>
- <span class='kw'>df</span> <span class='op'>%&gt;%</span>  
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>speaker</span>) <span class='op'>%&gt;%</span>
-   <span class='fu'>norm_deltaF</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, <span class='kw'>F3</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>   
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>))
+</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'>
+<span class='kw'>darla</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>darla</span> 
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='kw'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span>(vowel = <span class='fu'>arpa_to_keywords</span>(<span class='kw'>vowel</span>)) <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span>(<span class='kw'>vowel</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in darla %&gt;% mutate(vowel = arpa_to_keywords(vowel)) %&gt;% count(vowel): could not find function "%&gt;%"</span></div><div class='input'>  
+<span class='kw'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span>(vowel = <span class='fu'>arpa_to_keywords</span>(<span class='kw'>vowel</span>, ordered = <span class='fl'>FALSE</span>)) <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span>(<span class='kw'>vowel</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in darla %&gt;% mutate(vowel = arpa_to_keywords(vowel, ordered = FALSE)) %&gt;%     count(vowel): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='kw'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span>(vowel = <span class='fu'>arpa_to_keywords</span>(<span class='kw'>vowel</span>, style = <span class='st'>"b_t"</span>, as_character = <span class='fl'>TRUE</span>)) <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span>(<span class='kw'>vowel</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in darla %&gt;% mutate(vowel = arpa_to_keywords(vowel, style = "b_t",     as_character = TRUE)) %&gt;% count(vowel): could not find function "%&gt;%"</span></div><div class='input'>  
+<span class='co'># Here's a non-tidyverse version (though `stringr` is still used under the hood)</span>
+<span class='kw'>darla</span><span class='op'>$</span><span class='kw'>vowel</span> <span class='op'>&lt;-</span> <span class='fu'>arpa_to_keywords</span>(<span class='kw'>darla</span><span class='op'>$</span><span class='kw'>vowel</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in fct_relevel(x, "IY", "IH", "EY", "EH", "AE", "AA", "AO", "AH",     "OW", "UH", "UW", "AY", "AW", "OY", "ER"): could not find function "fct_relevel"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
