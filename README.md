@@ -47,7 +47,7 @@ message saying `This is the "joeyr" package.`.
 ## Group 1: The Filter
 
 The main function, and the reason I created the package in the first
-place, is `find_outliers`. It implements a version of the Mahalanobis
+place, is `find_outliers()`. It implements a version of the Mahalanobis
 Distance, except it does so iteratively. After finding the distances for
 each point, it marks the furthest token as an outlier, and then
 recalculates the distance based on the remaining points. It continues
@@ -59,15 +59,15 @@ vignette, blog post, or (perhaps some day) an article about it. For now,
 look at the help page or email me.
 
 Note that there used to be some  functions related to outliers in
-the package: `joey_filter` and its helper functions, `joey_do_pca`,
-`joey_adjust_cutoff`, and `joey_rm_outliers`. Those did outlier
+the package: `joey_filter()` and its helper functions, `joey_do_pca()`,
+`joey_adjust_cutoff()`, and `joey_rm_outliers()`. Those did outlier
 detection using Cook’s D but I’ve since discovered that the method was
 inherently flawed. I also tried to algorithmically determine a 
 cutoff for how much data should be filtered, but I could never get it to work
 and it always removed too much data. Besides, the functions were buggy,
 slow, and more complicated than probably needed (they were my first
 attempt at R functions). Be aware that I've removed them in version 0.4 of 
-`{joeyr}`. You should switch to `find_outliers` instead. If you need to use them
+`{joeyr}`. You should switch to `find_outliers()` instead. If you need to use them
 you can still find them in the `R_depreciated` folder on GitHub, but they are 
 no longer a part of the package.
 
@@ -76,39 +76,39 @@ no longer a part of the package.
 Some functions in `joeyr` are essentially mathmatical functions in that
 they crunch some numbers. They’re all relevant to sociophonetic data.
 
-  - `eucl_dist` calculates the Euclidean Distance, given a pair of *x*
+  - `eucl_dist()` calculates the Euclidean Distance, given a pair of *x*
     and *y* (or, more commonly, F1 and F2) coordinates.
 
-  - `pillai` calculates the Pillai score. It’s not a complicated process
+  - `pillai()` calculates the Pillai score. It’s not a complicated process
     in general, but this function simplifies it down quite a bit so it
     doesn’t interrupt your workflow.
 
-  - `tidy_mahalanobis` is probably my favorite. It’s an implementation
-    of the `mahalanobis` function, which calculates the Mahalanobis
+  - `tidy_mahalanobis()` is probably my favorite. It’s an implementation
+    of the `mahalanobis()` function, which calculates the Mahalanobis
     distance, only it’s meant to work within a `tidyverse` pipeline of
-    commands. Like the `pillai` function, it’s designed so that you can
+    commands. Like the `pillai()` function, it’s designed so that you can
     get the values you want without interrupting your flow.
     
-  - `norm_anae` makes it easy to do vowel formant normalization using the
+  - `norm_anae()` makes it easy to do vowel formant normalization using the
     method described in the *Atlas of North American English* using just 
     one line of code within a tidyverse pipeline. This is my current favorite
     normalization procedure and I was sick of writing large blocks of code in
     all my scripts, so I wrapped it up as a package.
     
-  - `norm_deltaF` is qanother way to normalize your data, based on Keith 
+  - `norm_deltaF()` is qanother way to normalize your data, based on Keith 
     Johnson's (2020) paper.
 
-  - `lbms_index` allows you to quickly calculate the Low-Back-Merger Shift 
+  - `lbms_index()` allows you to quickly calculate the Low-Back-Merger Shift 
     Index in your data (see Becker 2019; Boberg 2019).
     
-  - `arpa_to_keywords` quickly converts ARPABET labels to Wells(-inspired) 
-    keywords.
+  - `arpa_to_keywords()` (and its shortcut, `arpa_to_wells()`), quickly converts 
+    ARPABET labels to Wells(-inspired) keywords. 
 
 ## Group 3: `ggplot2` themes
 
-These are currently not documented. The main one is `theme_joey` which will
-produce plots using my own flavor of `theme_bw`. There are some variants
-as well. The other helpful function is `joey_arrow` which is just a
+These are currently not documented. The main one is `theme_joey()` which will
+produce plots using my own flavor of `theme_bw()`. There are some variants
+as well. The other helpful function is `joey_arrow()` which is just a
 shortcut for a type of arrow I like when I draw lines on a plot.
 
 ## Group 4: The grapes
@@ -138,17 +138,17 @@ While writing my dissertation, I found myself doing the same sort of
 pipeline over and over so I just made a couple little shortcut functions
 to save myself some typing.
 
-  - `color_gradienter` was needed in my Shiny app, [*The Gazetteer of
+  - `color_gradienter()` was needed in my Shiny app, [*The Gazetteer of
     Southern Vowels*](http://lap3.libs.uga.edu/u/jstanley/vowelcharts/).
     I needed a way to take two arbitrary colors and produce an arbitrary
     number of colors at fixed intervals between them. This is helpful
     for plots: do you want to use your favorite color of green and your
     favorite color of blue, but also get three more colors in between
-    them for a continuous scale? `color_gradienter` can do that. I don’t
+    them for a continuous scale? `color_gradienter()` can do that. I don’t
     know everything about how color is encoded, but it seems to work
     well enough for me, though there may be some weird bugs.
 
-  - `ucfirst` was a function I copied over from Perl code. It just
+  - `ucfirst()` was a function I copied over from Perl code. It just
     capitalizes the first character of a string. Unlike some other
     functions that are more sophisticaed and transform the text into
     title case, sometimes I just need the very first character only,
@@ -160,21 +160,21 @@ of `{tidyr}` and `{dplyr}` have rendered them unnecessary. The following are
 no longer part of `{joeyr}`, though you can find the code on GitHub in the 
 `R_depreciated` folder.
 
-  - `spread_n` was perhaps my favorite function. I had a need for using
-    the (old) `tidyr::spread` with multiple `value` columns while
+  - `spread_n()` was perhaps my favorite function. I had a need for using
+    the (old) `tidyr::spread()` with multiple `value` columns while
     reshaping formant data. I went to the RStudio forums and someone
-    wrote a slick little function for me that I dubbed `spread_n`.
+    wrote a slick little function for me that I dubbed `spread_n()`.
     (Kieran Healey saw that post and wrote a [blog
     post](https://kieranhealy.org/blog/archives/2018/11/06/spreading-multiple-values/)
     on it\!). The function has since been rendered obsolete with the new
-    `tidyr::pivot_wider` (Kieran Healey
+    `tidyr::pivot_wider()` (Kieran Healey
     [wrote](https://kieranhealy.org/blog/archives/2019/10/21/widening-multiple-columns-redux/)
-    about that too), so I don’t use `spread_n` anymore. Perhaps it’ll
+    about that too), so I don’t use `spread_n()` anymore. Perhaps it’ll
     eventually be removed from the package. But I can’t help but think
-    that my asking that question had some role in the `pivot_wider`
+    that my asking that question had some role in the `pivot_wider()`
     function.
 
-  - `move_x_after_y` and `move_x_before_y` are helpful for when you want
+  - `move_x_after_y()` and `move_x_before_y()` are helpful for when you want
     to take a column that you’ve just created and move it before or
     after some existing column. It’s a little buggy when you work with
     columns on the edges of your dataframe, but it worked well for me
@@ -185,4 +185,4 @@ no longer part of `{joeyr}`, though you can find the code on GitHub in the
 
 ## Conclusion
 
-That’s `joeyr`. I hope you like it.
+That’s `joeyr`. I hope you find it useful!
