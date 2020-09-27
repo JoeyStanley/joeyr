@@ -66,7 +66,7 @@ While not required, you should typically "group" your data before applying
   examples.
 }
 \examples{
-require(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 df <- joeysvowels::coronals
 
 # You can output the data to a column called something like "is_outlier" and 

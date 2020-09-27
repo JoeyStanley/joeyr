@@ -198,12 +198,8 @@ has been removed.</p>
   examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: dplyr</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/coronals.html'>coronals</a></span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>))
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/coronals.html'>coronals</a></span>
 
 <span class='co'># You can output the data to a column called something like "is_outlier" and </span>
 <span class='co'># then filter out values that are TRUE.</span>
