@@ -155,7 +155,7 @@ to save myself some typing.
     rather than the first character of each word.
     
 ## Depreciated functions
-Previous versions of `{{joeyr}}` had a couple other tools, but recent versions
+Previous versions of `{joeyr}` had a couple other tools, but recent versions
 of `{tidyr}` and `{dplyr}` have rendered them unnecessary. The following are
 no longer part of `{joeyr}`, though you can find the code on GitHub in the 
 `R_depreciated` folder.
