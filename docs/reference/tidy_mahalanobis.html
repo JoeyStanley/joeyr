@@ -40,11 +40,8 @@
 
 
 <meta property="og:title" content="Calculate Mahalanobis Distance — tidy_mahalanobis" />
-<meta property="og:description" content="This is a tidyverse-tidyverse-compatible version of the `mahalanobis` function. It just 
-makes it easier to include it as part of a `dplyr::mutate`. One small modification that 
-`mahalnobis` function does not do is that if there are fewer than 5 measurements in the
-dataset, , it returns them all as having a distance of zero. Prevents some errors that 
-way. Requires the MASS package to be installed, but this this not necessarily loaded." />
+<meta property="og:description" content="This is a tidyverse-tidyverse-compatible version of the stats::mahalanobis function. It just 
+makes it easier to include it as part of a dplyr::mutate." />
 
 
 
@@ -131,11 +128,8 @@ way. Requires the MASS package to be installed, but this this not necessarily lo
     </div>
 
     <div class="ref-description">
-    <p>This is a tidyverse-tidyverse-compatible version of the `mahalanobis` function. It just 
-makes it easier to include it as part of a `dplyr::mutate`. One small modification that 
-`mahalnobis` function does not do is that if there are fewer than 5 measurements in the
-dataset, , it returns them all as having a distance of zero. Prevents some errors that 
-way. Requires the MASS package to be installed, but this this not necessarily loaded.</p>
+    <p>This is a tidyverse-tidyverse-compatible version of the <code><a href='https://rdrr.io/r/stats/mahalanobis.html'>stats::mahalanobis</a></code> function. It just 
+makes it easier to include it as part of a <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tidy_mahalanobis</span>(<span class='no'>...</span>)</pre>
@@ -152,39 +146,79 @@ way. Requires the MASS package to be installed, but this this not necessarily lo
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A vector that contains the Mahalanobis distances for each observation.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Typically you'll want to group your data (using <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by</a></code>) by speaker and vowel 
+class so that you get the distance from vowel centroids.</p>
+<p>I won't tell you what to do with those distances, but if you might consider looking at tokens
+where the square root of the Mahalanobis distance is greater than around 2. However, to be clear, 
+the exact cutoff will vary depending on the size and variability of your data. You can see how 
+you might isolate these points visually in the example code below.</p>
+<p>One small modification that this function does that <code><a href='https://rdrr.io/r/stats/mahalanobis.html'>stats::mahalanobis</a></code> does not do is that 
+if there are fewer than 5 measurements in a group, <code>tidy_mahalanobis</code> returns them all 
+as having a distance of zero. I found that this prevents some fatal errors from crashing the script
+when running this function on smaller datasets.</p>
+<p>Note that this function requires the <code>MASS</code> package to be installed to work, but you 
+don't need to load it.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>dplyr</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>))
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/midpoints.html'>midpoints</a></span>
 
-<span class='co'># Create some artificial vowel data</span>
-<span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>tibble</a></span>(<span class='kw'>F1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='fl'>0</span>, <span class='fl'>1</span>),
-       <span class='kw'>F2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
- <span class='co'># Calculate the Mahalanobis distance</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>mahal_dist</span> <span class='kw'>=</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>F1</span>, <span class='no'>F2</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 50 x 3</span><span>
-#&gt;         F1       F2 mahal_dist
-#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>  0.110  -</span><span style='color: #BB0000;'>0.685</span><span>        0.366
-#&gt; </span><span style='color: #555555;'> 2</span><span>  0.853   0.337        0.825
-#&gt; </span><span style='color: #555555;'> 3</span><span> -</span><span style='color: #BB0000;'>0.234</span><span>  -</span><span style='color: #BB0000;'>0.412</span><span>        0.284
-#&gt; </span><span style='color: #555555;'> 4</span><span>  2.09    0.934        6.08 
-#&gt; </span><span style='color: #555555;'> 5</span><span> -</span><span style='color: #BB0000;'>0.111</span><span>   1.84         4.94 
-#&gt; </span><span style='color: #555555;'> 6</span><span> -</span><span style='color: #BB0000;'>1.39</span><span>   -</span><span style='color: #BB0000;'>0.705</span><span>        3.78 
-#&gt; </span><span style='color: #555555;'> 7</span><span> -</span><span style='color: #BB0000;'>1.14</span><span>    0.008</span><span style='text-decoration: underline;'>51</span><span>      2.90 
-#&gt; </span><span style='color: #555555;'> 8</span><span>  1.70    2.03         7.20 
-#&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;'>0.080</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>1.34</span><span>         1.67 
-#&gt; </span><span style='color: #555555;'>10</span><span> -</span><span style='color: #BB0000;'>0.437</span><span>   1.16         2.97 
-#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span></div><div class='input'>
-<span class='co'># Same thing, but using base R: </span>
-<span class='no'>vowel_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>F1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='fl'>0</span>, <span class='fl'>1</span>),
-                         <span class='kw'>F2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='fl'>0</span>, <span class='fl'>1</span>))
-<span class='no'>vowel_data</span>$<span class='no'>mahal_dist</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>vowel_data</span>$<span class='no'>F1</span>, <span class='no'>vowel_data</span>$<span class='no'>F2</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>vowel_data</span>)</div><div class='output co'>#&gt;           F1          F2 mahal_dist
-#&gt; 1  0.1153482  1.89631708   5.664362
-#&gt; 2 -1.7680484 -2.06007072   8.848384
-#&gt; 3 -1.4076389  0.06454387   1.825010
-#&gt; 4  0.7091785 -0.26514740   1.084924
-#&gt; 5 -1.2408429 -0.44734453   1.552218
-#&gt; 6 -0.3683273 -1.41070093   2.783126</div></span></pre>
+<span class='co'># Calculate the distances</span>
+<span class='no'>m_dists</span> <span class='kw'>&lt;-</span> <span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>mahal_dist</span> <span class='kw'>=</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>F1</span>, <span class='no'>F2</span>))
+
+<span class='co'># Take a peek at the resulting dataset</span>
+<span class='no'>m_dists</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>select</span>(<span class='no'>vowel</span>, <span class='no'>F1</span>, <span class='no'>F2</span>, <span class='no'>mahal_dist</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   vowel [4]</span><span>
+#&gt;   vowel    F1    F2 mahal_dist
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> GOAT   368. </span><span style='text-decoration: underline;'>1</span><span>018.      5.66 
+#&gt; </span><span style='color: #555555;'>2</span><span> FACE   377. </span><span style='text-decoration: underline;'>2</span><span>032.      6.52 
+#&gt; </span><span style='color: #555555;'>3</span><span> FACE   314. </span><span style='text-decoration: underline;'>2</span><span>179.      2.16 
+#&gt; </span><span style='color: #555555;'>4</span><span> GOOSE  274. </span><span style='text-decoration: underline;'>1</span><span>378.      0.755
+#&gt; </span><span style='color: #555555;'>5</span><span> FOOT   350. </span><span style='text-decoration: underline;'>1</span><span>624.      4.95 
+#&gt; </span><span style='color: #555555;'>6</span><span> FACE   313. </span><span style='text-decoration: underline;'>2</span><span>181.      2.28 </div><div class='input'>
+<span class='co'># Plot potential outliers</span>
+<span class='fu'>ggplot</span>(<span class='no'>m_dists</span>, <span class='fu'>aes</span>(<span class='no'>F2</span>, <span class='no'>F1</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>mahal_dist</span>) <span class='kw'>&gt;</span> <span class='fl'>2</span>)) +
+   <span class='fu'>geom_point</span>() +
+   <span class='fu'>scale_x_reverse</span>() +
+   <span class='fu'>scale_y_reverse</span>()</div><div class='img'><img src='tidy_mahalanobis-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># You can include whatever numeric variables you want, like duration</span>
+<span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>dur</span> <span class='kw'>=</span> <span class='no'>end</span> - <span class='no'>start</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>mahal_dist</span> <span class='kw'>=</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='no'>dur</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='no'>F2</span>, <span class='no'>F1</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>mahal_dist</span>) <span class='kw'>&gt;</span> <span class='fl'>2.5</span>)) +
+  <span class='fu'>geom_point</span>() +
+  <span class='fu'>scale_x_reverse</span>() +
+  <span class='fu'>scale_y_reverse</span>()</div><div class='img'><img src='tidy_mahalanobis-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Data cannot contain NAs. Remove them before running.</span>
+<span class='no'>df</span>[<span class='fl'>1</span>,]$<span class='no'>F1</span> <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>mahal_dist</span> <span class='kw'>=</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>F1</span>, <span class='no'>F2</span>))</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` input `mahal_dist`.</span>
+#&gt; <span class='error'></span><span style='color: #BB0000;'>x</span><span> Your data has some NAs, which will cause `tidy_mahalnobis` to crash. Try removing NAs before running `tidy_mahalanobis`.</span>
+#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> Input `mahal_dist` is `tidy_mahalanobis(F1, F2)`.</span>
+#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> The error occurred in group 7: vowel = "GOAT".</span></div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>vowel</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>F1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>mahal_dist</span> <span class='kw'>=</span> <span class='fu'>tidy_mahalanobis</span>(<span class='no'>F1</span>, <span class='no'>F2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>select</span>(<span class='no'>vowel_id</span>, <span class='no'>vowel</span>, <span class='no'>mahal_dist</span>, <span class='no'>F1</span>, <span class='no'>F2</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 5</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   vowel [3]</span><span>
+#&gt;   vowel_id vowel mahal_dist    F1    F2
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>        2 FACE       6.52   377. </span><span style='text-decoration: underline;'>2</span><span>032.
+#&gt; </span><span style='color: #555555;'>2</span><span>        4 FACE       2.16   314. </span><span style='text-decoration: underline;'>2</span><span>179.
+#&gt; </span><span style='color: #555555;'>3</span><span>        5 GOOSE      0.755  274. </span><span style='text-decoration: underline;'>1</span><span>378.
+#&gt; </span><span style='color: #555555;'>4</span><span>        7 FOOT       4.95   350. </span><span style='text-decoration: underline;'>1</span><span>624.
+#&gt; </span><span style='color: #555555;'>5</span><span>        8 FACE       2.28   313. </span><span style='text-decoration: underline;'>2</span><span>181.
+#&gt; </span><span style='color: #555555;'>6</span><span>        9 GOOSE      1.63   255. </span><span style='text-decoration: underline;'>1</span><span>333.</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

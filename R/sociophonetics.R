@@ -56,28 +56,68 @@ pillai <- function(...) {
 # This function is a tidyverse-compatible version of the `mahalanobis` function. It just makes it easier to include it as part of a `dplyr::mutate`. One small quirk, if there are fewer than 5 measurements, it returns them all as having a distance of zero. Prevents some errors that way. Requires the MASS package to be install, but does not load it.
 #' Calculate Mahalanobis Distance
 #'
-#' This is a tidyverse-tidyverse-compatible version of the `mahalanobis` function. It just 
-#' makes it easier to include it as part of a `dplyr::mutate`. One small modification that 
-#' `mahalnobis` function does not do is that if there are fewer than 5 measurements in the
-#' dataset, , it returns them all as having a distance of zero. Prevents some errors that 
-#' way. Requires the MASS package to be installed, but this this not necessarily loaded. 
+#' This is a tidyverse-tidyverse-compatible version of the \code{stats::mahalanobis} function. It just 
+#' makes it easier to include it as part of a \code{dplyr::mutate}. 
+#' 
+#' Typically you'll want to group your data (using \code{dplyr::group_by}) by speaker and vowel 
+#' class so that you get the distance from vowel centroids.
+#' 
+#' I won't tell you what to do with those distances, but if you might consider looking at tokens
+#' where the square root of the Mahalanobis distance is greater than around 2. However, to be clear, 
+#' the exact cutoff will vary depending on the size and variability of your data. You can see how 
+#' you might isolate these points visually in the example code below.
+#' 
+#' One small modification that this function does that \code{stats::mahalanobis} does not do is that 
+#' if there are fewer than 5 measurements in a group, \code{tidy_mahalanobis} returns them all 
+#' as having a distance of zero. I found that this prevents some fatal errors from crashing the script
+#' when running this function on smaller datasets.
+#' 
+#' Note that this function requires the \code{MASS} package to be installed to work, but you 
+#' don't need to load it.
 #' 
 #' @param ... Names of columns that should be included in the Mahalanobis distance. For vowel data, this is typically your F1 and F2 columns.
 #' @return A vector that contains the Mahalanobis distances for each observation.
 #' @examples
-#' require(dplyr)
+#' suppressPackageStartupMessages(library(tidyverse))
+#' df <- joeysvowels::midpoints
 #' 
-#' # Create some artificial vowel data
-#' tibble(F1 = rnorm(50, 0, 1),
-#'        F2 = rnorm(50, 0, 1)) %>%
-#'  # Calculate the Mahalanobis distance
-#'  mutate(mahal_dist = tidy_mahalanobis(F1, F2))
-#'
-#' # Same thing, but using base R: 
-#' vowel_data <- data.frame(F1 = rnorm(50, 0, 1),
-#'                          F2 = rnorm(50, 0, 1)) 
-#' vowel_data$mahal_dist <- tidy_mahalanobis(vowel_data$F1, vowel_data$F2)
-#' head(vowel_data)
+#' # Calculate the distances
+#' m_dists <- df %>%
+#'   group_by(vowel) %>%
+#'   mutate(mahal_dist = tidy_mahalanobis(F1, F2))
+#'   
+#' # Take a peek at the resulting dataset
+#' m_dists %>%
+#'   select(vowel, F1, F2, mahal_dist) %>%
+#'   head()
+#'   
+#' # Plot potential outliers
+#' ggplot(m_dists, aes(F2, F1, color = sqrt(mahal_dist) > 2)) + 
+#'    geom_point() + 
+#'    scale_x_reverse() +
+#'    scale_y_reverse()
+#'    
+#' # You can include whatever numeric variables you want, like duration
+#' df %>%
+#'   group_by(vowel) %>%
+#'   mutate(dur = end - start) %>%
+#'   mutate(mahal_dist = tidy_mahalanobis(F1, F2, dur)) %>%
+#'   ggplot(aes(F2, F1, color = sqrt(mahal_dist) > 2.5)) + 
+#'   geom_point() + 
+#'   scale_x_reverse() +
+#'   scale_y_reverse()
+#' 
+#' # Data cannot contain NAs. Remove them before running.
+#' df[1,]$F1 <- NA
+#' df %>%
+#'   group_by(vowel) %>%
+#'   mutate(mahal_dist = tidy_mahalanobis(F1, F2))
+#' df %>%
+#'   group_by(vowel) %>%
+#'   filter(!is.na(F1)) %>%
+#'   mutate(mahal_dist = tidy_mahalanobis(F1, F2)) %>%
+#'   select(vowel_id, vowel, mahal_dist, F1, F2) %>%
+#'   head()
 tidy_mahalanobis <- function(...) {
   variables <- cbind(...)
   
