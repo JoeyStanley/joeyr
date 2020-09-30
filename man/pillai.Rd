@@ -7,7 +7,7 @@
 pillai(...)
 }
 \arguments{
-\item{...}{Arguments that may also be passed to `manova()`. Typically a formula and a dataframe.}
+\item{...}{Arguments that may also be passed to \code{manova()}. Typically a formula and a dataframe.}
 }
 \value{
 The pillai score from the MANOVA test.

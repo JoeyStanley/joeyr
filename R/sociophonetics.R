@@ -43,7 +43,7 @@ eucl_dist <- function (x1, x2, y1, y2) {
 #' NAs won't crash the function, but observations with any NAs will be excluded 
 #' from analysis. 
 #' 
-#' @param ... Arguments that may also be passed to `manova()`. Typically a formula and a dataframe.
+#' @param ... Arguments that may also be passed to \code{manova()}. Typically a formula and a dataframe.
 #' @return The pillai score from the MANOVA test.
 #' @examples
 #' suppressPackageStartupMessages(library(tidyverse))
