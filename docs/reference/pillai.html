@@ -197,7 +197,7 @@ from analysis.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 08       0.310
 #&gt; </span><span style='color: #555555;'> 9</span><span> 09       0.173
 #&gt; </span><span style='color: #555555;'>10</span><span> 10       0.267</div><div class='input'>
-<span class='co'># Other variables can be included, but the pillai of only the first dependent variable is returned</span>
+<span class='co'># Other variables can be included, but the pillai of only the first independent variable is returned</span>
 <span class='no'>one_speaker</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>dur</span> <span class='kw'>=</span> <span class='no'>end</span> - <span class='no'>start</span>) <span class='kw'>%&gt;%</span>

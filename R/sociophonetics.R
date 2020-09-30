@@ -65,7 +65,7 @@ eucl_dist <- function (x1, x2, y1, y2) {
 #'   group_by(speaker) %>%
 #'   summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
 #'   
-#' # Other variables can be included, but the pillai of only the first dependent variable is returned
+#' # Other variables can be included, but the pillai of only the first independent variable is returned
 #' one_speaker %>%
 #'   filter(vowel %in% c("LOT", "THOUGHT")) %>%
 #'   mutate(dur = end - start) %>%
