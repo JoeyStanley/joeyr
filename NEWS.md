@@ -1,3 +1,7 @@
+# joeyr 0.6.1
+
+* `pillai()` and `tidy_mahalanobis()` get much clearer examples and much more documentation.
+
 # joeyr 0.6
 
 * `arpa_to_keywords()` and `arpa_to_wells()` added.
