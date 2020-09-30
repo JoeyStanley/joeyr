@@ -13,18 +13,58 @@ pillai(...)
 The pillai score from the MANOVA test.
 }
 \description{
-This is just a shortcut to run an MANOVA and return just the pillai score.
+A function that runs a MANOVA and returns just the pillai score. It works great 
+within a tidyverse pipeline, though to be clear, the function itself uses only
+base R.
+}
+\details{
+This function is best run when you've got your data properly subsetted so that 
+only two vowels' data are included. If you want to calculate the pillai score
+for multiple speakers, you can do so by grouping the data beforehand (using 
+\code{dplyr::group_by()}). 
+
+If you want to incorporate this function within a tidyverse pipeline, it's best
+to do so within `dplyr::summarize()` since we are boiling lot of data down to
+just one number. See the examples below.
+
+Note that because it's just a MANOVA under the hood, you can incorporate whatever
+variables you want within the model. However, currently, only the pillai score
+of the first independent variable will be returned. So if you want to include
+vowel and duration in the model, for example, but you're mostly interested in 
+the vowel, be sure to put it first in the formula immediately after the tilde.
+
+NAs won't crash the function, but observations with any NAs will be excluded 
+from analysis.
 }
 \examples{
-# Create some artificial vowel data
-vowel_A <- data.frame(F1 = rnorm(50,  0, 1),
-                      F2 = rnorm(50, -2, 1),
-                      vowel = "A")
-vowel_B <- data.frame(F1 = rnorm(50,  0, 1),
-                      F2 = rnorm(50,  2, 1),
-                      vowel = "B")
-vowels <- rbind(vowel_A, vowel_B)
+suppressPackageStartupMessages(library(tidyverse))
+options(dplyr.summarise.inform = FALSE)
 
-# Get the pillai score.
-pillai(cbind(F1, F2) ~ vowel, data = vowels)
+# Look at the low back merger in one speaker.
+one_speaker <- joeysvowels::midpoints
+one_speaker \%>\%
+  filter(vowel \%in\% c("LOT", "THOUGHT")) \%>\%
+  summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
+  
+# A non-tidyverse method
+pillai(cbind(F1, F2) ~ vowel, data = subset(one_speaker, vowel \%in\% c("LOT", "THOUGHT")))
+
+# Look at the low back merger in many speakers
+many_speakers <- joeysvowels::idahoans
+many_speakers \%>\%
+  filter(vowel \%in\% c("AA", "AO")) \%>\%
+  group_by(speaker) \%>\%
+  summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
+  
+# Other variables can be included, but the pillai of only the first dependent variable is returned
+one_speaker \%>\%
+  filter(vowel \%in\% c("LOT", "THOUGHT")) \%>\%
+  mutate(dur = end - start) \%>\%
+  summarize(pillai = pillai(cbind(F1, F2, F3, F4) ~ vowel + dur))
+
+# Observations with NAs are excluded from the analysis
+one_speaker[8,]$F1 <- NA
+one_speaker \%>\%
+  filter(vowel \%in\% c("LOT", "THOUGHT")) \%>\%
+  summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
 }

@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Calculate Pillai scores — pillai" />
-<meta property="og:description" content="This is just a shortcut to run an MANOVA and return just the pillai score." />
+<meta property="og:description" content="A function that runs a MANOVA and returns just the pillai score. It works great 
+within a tidyverse pipeline, though to be clear, the function itself uses only
+base R." />
 
 
 
@@ -127,7 +129,9 @@
     </div>
 
     <div class="ref-description">
-    <p>This is just a shortcut to run an MANOVA and return just the pillai score.</p>
+    <p>A function that runs a MANOVA and returns just the pillai score. It works great 
+within a tidyverse pipeline, though to be clear, the function itself uses only
+base R.</p>
     </div>
 
     <pre class="usage"><span class='fu'>pillai</span>(<span class='no'>...</span>)</pre>
@@ -144,19 +148,71 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The pillai score from the MANOVA test.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function is best run when you've got your data properly subsetted so that 
+only two vowels' data are included. If you want to calculate the pillai score
+for multiple speakers, you can do so by grouping the data beforehand (using 
+<code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>).</p>
+<p>If you want to incorporate this function within a tidyverse pipeline, it's best
+to do so within `dplyr::summarize()` since we are boiling lot of data down to
+just one number. See the examples below.</p>
+<p>Note that because it's just a MANOVA under the hood, you can incorporate whatever
+variables you want within the model. However, currently, only the pillai score
+of the first independent variable will be returned. So if you want to include
+vowel and duration in the model, for example, but you're mostly interested in 
+the vowel, be sure to put it first in the formula immediately after the tilde.</p>
+<p>NAs won't crash the function, but observations with any NAs will be excluded 
+from analysis.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Create some artificial vowel data</span>
-<span class='no'>vowel_A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>F1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>,  <span class='fl'>0</span>, <span class='fl'>1</span>),
-                      <span class='kw'>F2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, -<span class='fl'>2</span>, <span class='fl'>1</span>),
-                      <span class='kw'>vowel</span> <span class='kw'>=</span> <span class='st'>"A"</span>)
-<span class='no'>vowel_B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>F1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>,  <span class='fl'>0</span>, <span class='fl'>1</span>),
-                      <span class='kw'>F2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>,  <span class='fl'>2</span>, <span class='fl'>1</span>),
-                      <span class='kw'>vowel</span> <span class='kw'>=</span> <span class='st'>"B"</span>)
-<span class='no'>vowels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>vowel_A</span>, <span class='no'>vowel_B</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>dplyr.summarise.inform</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'># Get the pillai score.</span>
-<span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>) ~ <span class='no'>vowel</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>vowels</span>)</div><div class='output co'>#&gt; [1] 0.7971742</div></pre>
+<span class='co'># Look at the low back merger in one speaker.</span>
+<span class='no'>one_speaker</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/midpoints.html'>midpoints</a></span>
+<span class='no'>one_speaker</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>summarize</span>(<span class='kw'>pillai</span> <span class='kw'>=</span> <span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>) ~ <span class='no'>vowel</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt;   pillai
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.444</div><div class='input'>
+<span class='co'># A non-tidyverse method</span>
+<span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>) ~ <span class='no'>vowel</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>one_speaker</span>, <span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span>)))</div><div class='output co'>#&gt; [1] 0.4437837</div><div class='input'>
+<span class='co'># Look at the low back merger in many speakers</span>
+<span class='no'>many_speakers</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/idahoans.html'>idahoans</a></span>
+<span class='no'>many_speakers</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AA"</span>, <span class='st'>"AO"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>speaker</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>summarize</span>(<span class='kw'>pillai</span> <span class='kw'>=</span> <span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>) ~ <span class='no'>vowel</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
+#&gt;    speaker pillai
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 01       0.592
+#&gt; </span><span style='color: #555555;'> 2</span><span> 02       0.500
+#&gt; </span><span style='color: #555555;'> 3</span><span> 03       0.763
+#&gt; </span><span style='color: #555555;'> 4</span><span> 04       0.663
+#&gt; </span><span style='color: #555555;'> 5</span><span> 05       0.557
+#&gt; </span><span style='color: #555555;'> 6</span><span> 06       0.136
+#&gt; </span><span style='color: #555555;'> 7</span><span> 07       0.412
+#&gt; </span><span style='color: #555555;'> 8</span><span> 08       0.310
+#&gt; </span><span style='color: #555555;'> 9</span><span> 09       0.173
+#&gt; </span><span style='color: #555555;'>10</span><span> 10       0.267</div><div class='input'>
+<span class='co'># Other variables can be included, but the pillai of only the first dependent variable is returned</span>
+<span class='no'>one_speaker</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>dur</span> <span class='kw'>=</span> <span class='no'>end</span> - <span class='no'>start</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>summarize</span>(<span class='kw'>pillai</span> <span class='kw'>=</span> <span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>, <span class='no'>F3</span>, <span class='no'>F4</span>) ~ <span class='no'>vowel</span> + <span class='no'>dur</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt;   pillai
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.554</div><div class='input'>
+<span class='co'># Observations with NAs are excluded from the analysis</span>
+<span class='no'>one_speaker</span>[<span class='fl'>8</span>,]$<span class='no'>F1</span> <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='no'>one_speaker</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>summarize</span>(<span class='kw'>pillai</span> <span class='kw'>=</span> <span class='fu'>pillai</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>F1</span>, <span class='no'>F2</span>) ~ <span class='no'>vowel</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt;   pillai
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.441</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
