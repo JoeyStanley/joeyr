@@ -243,7 +243,16 @@ and only exports to the Wells lexical sets.</p>
 #&gt; 13   BOUT  93
 #&gt; 14    BOY  13
 #&gt; 15    BUT 283</div><div class='input'>
-<span class='co'># Here's a non-tidyverse version (though `stringr` is still used under the hood)</span>
+<span class='co'># Works even if not all vowel levels are present</span>
+<span class='no'>darla</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>vowel</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"IY"</span>, <span class='st'>"AE"</span>, <span class='st'>"AY"</span>, <span class='st'>"UW"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>mutate</span>(<span class='kw'>vowel</span> <span class='kw'>=</span> <span class='fu'>arpa_to_keywords</span>(<span class='no'>vowel</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>count</span>(<span class='no'>vowel</span>)</div><div class='output co'>#&gt;    vowel   n
+#&gt; 1 FLEECE 485
+#&gt; 2   TRAP 175
+#&gt; 3  GOOSE 267
+#&gt; 4  PRICE 214</div><div class='input'>
+<span class='co'># Here's a non-tidyverse version (though `tidyverse` is still used under the hood)</span>
 <span class='no'>darla</span>$<span class='no'>vowel</span> <span class='kw'>&lt;-</span> <span class='fu'>arpa_to_keywords</span>(<span class='no'>darla</span>$<span class='no'>vowel</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

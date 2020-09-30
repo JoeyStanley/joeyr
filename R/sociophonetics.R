@@ -464,54 +464,44 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 #'   mutate(vowel = arpa_to_keywords(vowel, style = "b_t", as_character = TRUE)) %>%
 #'   count(vowel)
 #'   
-#' # Here's a non-tidyverse version (though `stringr` is still used under the hood)
+#' # Works even if not all vowel levels are present
+#' darla %>%
+#'   filter(vowel %in% c("IY", "AE", "AY", "UW")) %>%
+#'   mutate(vowel = arpa_to_keywords(vowel)) %>%
+#'   count(vowel)
+#'   
+#' # Here's a non-tidyverse version (though tidyverse is still used under the hood)
 #' darla$vowel <- arpa_to_keywords(darla$vowel)
-#' 
 arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = FALSE) {
   style <- tolower(style)
   
-  if (ordered) {
-    x <- fct_relevel(x, "IY", "IH", "EY", "EH", "AE", "AA", "AO", 
-                     "AH", "OW", "UH", "UW", "AY", "AW", "OY", "ER")
-  }
+  levels_df <- tibble(
+    wells = c("FLEECE", "KIT", "FACE", "DRESS", "TRAP",
+              "LOT", "THOUGHT", "STRUT", "GOAT", "FOOT", 
+              "GOOSE", "PRICE", "MOUTH", "CHOICE", "NURSE"),
+    b_t   = c("BEET", "BIT", "BAIT", "BET", "BAT",
+              "BOT", "BOUGHT", "BUT", "BOAT", "BOOK", 
+              "BOOT", "BITE", "BOUT", "BOY", "BIRD"),
+    arpa  = c("IY", "IH", "EY", "EH", "AE", 
+              "AA", "AO", "AH", "OW", "UH", 
+              "UW", "AY", "AW", "OY", "ER")
+  ) %>%
+    # Only keep the ones present in this dataset
+    filter(arpa %in% x)
   
+  # Used a named vector and then do fct_recode with splice
+  levels <- levels_df$arpa
   if (style == "wells") {
-    x <- fct_recode(x,
-               "FLEECE"  = "IY",
-               "KIT"     = "IH",
-               "FACE"    = "EY",
-               "DRESS"   = "EH",
-               "TRAP"    = "AE",
-               "LOT"     = "AA",
-               "THOUGHT" = "AO",
-               "STRUT"   = "AH",
-               "GOAT"    = "OW",
-               "FOOT"    = "UH",
-               "GOOSE"   = "UW",
-               "PRICE"   = "AY",
-               "MOUTH"   = "AW",
-               "CHOICE"  = "OY",
-               "NURSE"   = "ER")
-    
+    names(levels) <- levels_df$wells
   } else if (style == "b_t") {
-    x <- fct_recode(x,
-               "BEET"   = "IY",
-               "BIT"    = "IH",
-               "BAIT"   = "EY",
-               "BET"    = "EH",
-               "BAT"    = "AE",
-               "BOT"    = "AA",
-               "BOUGHT" = "AO",
-               "BUT"    = "AH",
-               "BOAT"   = "OW",
-               "BOOK"   = "UH",
-               "BOOT"   = "UW",
-               "BITE"   = "AY",
-               "BOUT"   = "AW",
-               "BOY"    = "OY",
-               "BIRD"   = "ER")
+    names(levels) <- levels_df$b_t
   } else {
     message("Unknown style. Returning original strings.")
+  }
+  x <- fct_recode(x, !!!levels)
+  
+  if (ordered) {
+    x <- fct_relevel(x, names(levels))
   }
   
   if (as_character) {

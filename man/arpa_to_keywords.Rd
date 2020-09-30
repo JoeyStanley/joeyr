@@ -69,7 +69,12 @@ darla \%>\%
   mutate(vowel = arpa_to_keywords(vowel, style = "b_t", as_character = TRUE)) \%>\%
   count(vowel)
   
-# Here's a non-tidyverse version (though `stringr` is still used under the hood)
+# Works even if not all vowel levels are present
+darla \%>\%
+  filter(vowel \%in\% c("IY", "AE", "AY", "UW")) \%>\%
+  mutate(vowel = arpa_to_keywords(vowel)) \%>\%
+  count(vowel)
+  
+# Here's a non-tidyverse version (though `tidyverse` is still used under the hood)
 darla$vowel <- arpa_to_keywords(darla$vowel)
-
 }

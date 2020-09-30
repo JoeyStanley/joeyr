@@ -1,6 +1,7 @@
 # joeyr 0.6.1
 
 * `pillai()` and `tidy_mahalanobis()` get much clearer examples and much more documentation.
+* `arpa_to_keywords()` no longer crashes if a dataset didn't have all vowels present.
 
 # joeyr 0.6
 
