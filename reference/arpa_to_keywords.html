@@ -201,10 +201,15 @@ and only exports to the Wells lexical sets.</p>
   <span class='fu'>mutate</span>(vowel = <span class='fu'>arpa_to_keywords</span>(<span class='kw'>vowel</span>, style = <span class='st'>"b_t"</span>, as_character = <span class='fl'>TRUE</span>)) <span class='op'>%&gt;%</span>
   <span class='fu'>count</span>(<span class='kw'>vowel</span>)
 </div><div class='output co'>#&gt; <span class='error'>Error in darla %&gt;% mutate(vowel = arpa_to_keywords(vowel, style = "b_t",     as_character = TRUE)) %&gt;% count(vowel): could not find function "%&gt;%"</span></div><div class='input'>  
-<span class='co'># Here's a non-tidyverse version (though `stringr` is still used under the hood)</span>
+<span class='co'># Works even if not all vowel levels are present</span>
+<span class='kw'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='kw'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"IY"</span>, <span class='st'>"AE"</span>, <span class='st'>"AY"</span>, <span class='st'>"UW"</span>)) <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span>(vowel = <span class='fu'>arpa_to_keywords</span>(<span class='kw'>vowel</span>)) <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span>(<span class='kw'>vowel</span>)
+</div><div class='output co'>#&gt; <span class='error'>Error in darla %&gt;% filter(vowel %in% c("IY", "AE", "AY", "UW")) %&gt;% mutate(vowel = arpa_to_keywords(vowel)) %&gt;%     count(vowel): could not find function "%&gt;%"</span></div><div class='input'>  
+<span class='co'># Here's a non-tidyverse version (though `tidyverse` is still used under the hood)</span>
 <span class='kw'>darla</span><span class='op'>$</span><span class='kw'>vowel</span> <span class='op'>&lt;-</span> <span class='fu'>arpa_to_keywords</span>(<span class='kw'>darla</span><span class='op'>$</span><span class='kw'>vowel</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in fct_relevel(x, "IY", "IH", "EY", "EH", "AE", "AA", "AO", "AH",     "OW", "UH", "UW", "AY", "AW", "OY", "ER"): could not find function "fct_relevel"</span></div><div class='input'>
-</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in tibble(wells = c("FLEECE", "KIT", "FACE", "DRESS", "TRAP", "LOT",     "THOUGHT", "STRUT", "GOAT", "FOOT", "GOOSE", "PRICE", "MOUTH",     "CHOICE", "NURSE"), b_t = c("BEET", "BIT", "BAIT", "BET",     "BAT", "BOT", "BOUGHT", "BUT", "BOAT", "BOOK", "BOOT", "BITE",     "BOUT", "BOY", "BIRD"), arpa = c("IY", "IH", "EY", "EH",     "AE", "AA", "AO", "AH", "OW", "UH", "UW", "AY", "AW", "OY",     "ER")) %&gt;% filter(arpa %in% x): could not find function "%&gt;%"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
