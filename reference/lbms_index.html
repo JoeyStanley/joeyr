@@ -56,13 +56,13 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-86802921-2');
+  gtag('config', 'UA-86802921-3');
 </script>
 
 
@@ -130,7 +130,7 @@
     <p>A function to quickly calculate the Low-Back-Merger Shift Index, per Becker (2019).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lbms_index</span>(<span class='kw'>df</span>, <span class='kw'>vowel_col</span>, <span class='kw'>F1_col</span>, <span class='kw'>F2_col</span>, <span class='kw'>beet</span>, <span class='kw'>bit</span>, <span class='kw'>bet</span>, <span class='kw'>bat</span>)</pre>
+    <pre class="usage"><span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>vowel_col</span>, <span class='va'>F1_col</span>, <span class='va'>F2_col</span>, <span class='va'>beet</span>, <span class='va'>bit</span>, <span class='va'>bet</span>, <span class='va'>bat</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,20 +188,20 @@ Publication of the American Dialect Society 104. Durham, NC: Duke University
 Press, 2019.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>))
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tidyverse</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='co'># This dataset has following segment and normalized data already</span>
-<span class='kw'>darla</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>darla</span> 
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='kw'>darla</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='op'>!</span><span class='kw'>fol_seg</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'>lbms_index</span>(<span class='kw'>vowel</span>, <span class='kw'>F1_LobanovNormed_unscaled</span>, <span class='kw'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)
+<span class='va'>darla</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>darla</span> 
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>fol_seg</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_LobanovNormed_unscaled</span>, <span class='va'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'darla' not found</span></div><div class='input'>
 <span class='co'># This dataset has multiple speakers and needs to be normalized</span>
-<span class='kw'>idahoans</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>idahoans</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='kw'>idahoans</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>speaker</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(F1_lob = <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='kw'>F1</span>), 
-         F2_lob = <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='kw'>F2</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'>lbms_index</span>(<span class='kw'>vowel</span>, <span class='kw'>F1_lob</span>, <span class='kw'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)
+<span class='va'>idahoans</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>idahoans</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>idahoans</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>F1_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span>, 
+         F2_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_lob</span>, <span class='va'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'idahoans' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

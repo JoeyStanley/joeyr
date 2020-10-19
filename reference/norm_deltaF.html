@@ -57,13 +57,13 @@ function is intended to be used within a tidyverse pipeline." />
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-86802921-2');
+  gtag('config', 'UA-86802921-3');
 </script>
 
 
@@ -132,7 +132,7 @@ function is intended to be used within a tidyverse pipeline." />
 function is intended to be used within a tidyverse pipeline.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_deltaF</span>(<span class='kw'>df</span>, <span class='kw'>.F1</span>, <span class='kw'>.F2</span>, <span class='kw'>.F3</span>, <span class='kw'>.F4</span>)</pre>
+    <pre class="usage"><span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>.F1</span>, <span class='va'>.F2</span>, <span class='va'>.F3</span>, <span class='va'>.F4</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,13 +168,13 @@ Laboratory Phonology: Journal of the Association for Laboratory Phonology 11,
 no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>tidyverse</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>joeysvowels</span>::<span class='kw'>idahoans</span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tidyverse</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>idahoans</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>   
  <span class='co'># Run the function</span>
- <span class='kw'>df</span> <span class='op'>%&gt;%</span>  
-   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>speaker</span>) <span class='op'>%&gt;%</span>
-   <span class='fu'>norm_deltaF</span>(<span class='kw'>F1</span>, <span class='kw'>F2</span>, <span class='kw'>F3</span>)
+ <span class='va'>df</span> <span class='op'>%&gt;%</span>  
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>   
 </div></pre>
   </div>

@@ -59,13 +59,13 @@ specifying all monophthongs you want to keep." />
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86802921-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-86802921-2');
+  gtag('config', 'UA-86802921-3');
 </script>
 
 
@@ -136,7 +136,7 @@ to remove a few things (like diphthongs). You can remove those rather than
 specifying all monophthongs you want to keep.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>x</span> <span class='op'>%ni%</span> <span class='kw'>y</span></pre>
+    <pre class="usage"><span class='va'>x</span> <span class='op'>%ni%</span> <span class='va'>y</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,8 +165,8 @@ better to modify the formal definition there instead.</p>
 <p>Credit to <a href='https://stackoverflow.com/questions/24660864/declaring-special-infix-functions-in-r-packages'>this Stack Overflow question</a> for showing how to get this to work in an R package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>9</span>)
-</div><div class='output co'>#&gt;  [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE</div><div class='input'><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span> <span class='op'>%ni%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>9</span>)
+    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>9</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE</div><div class='input'><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span> <span class='op'>%ni%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>9</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
