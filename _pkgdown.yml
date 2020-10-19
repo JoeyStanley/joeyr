@@ -1,9 +1,16 @@
+home:
+  title: joeyr
+  description: A personal package for vowel data
+development:
+  mode: unreleased
 template:
   params:
     bootswatch: flatly
     ganalytics: UA-86802921-3
-development:
-  mode: unreleased
+  opengraph:
+    twitter:
+      creator: "@joeystsanley"
+      card: summary_large_image
 reference:
   - title: Outlier Detection
     desc:  Detect outliers using a modified mahalanobis distance method of my own design.
