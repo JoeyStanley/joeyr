@@ -306,6 +306,11 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
     rename(.vowel = {{vowel_col}}, 
            .F1 = {{F1_col}},
            .F2 = {{F2_col}}) %>%
+    mutate(.vowel = fct_recode(.vowel,
+                               "IY" = beet,
+                               "IH" = bit,
+                               "EH" = bet,
+                               "AE" = bat)) %>%
     group_by(.vowel, .add = TRUE) %>%
     summarize(across(c(.F1, .F2), mean), .groups = "keep") %>%
     pivot_wider(names_from = .vowel, values_from = c(.F1, .F2)) %>%
