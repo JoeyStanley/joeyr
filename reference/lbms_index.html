@@ -93,7 +93,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +107,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/JoeyStanley/joeyr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -197,7 +197,7 @@ Press, 2019.</p>
 </div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>darla</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>fol_seg</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_LobanovNormed_unscaled</span>, <span class='va'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'darla' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in pivot_wider(., names_from = .vowel, values_from = c(.F1, .F2)): could not find function "pivot_wider"</span></div><div class='input'>
 <span class='co'># This dataset has multiple speakers and needs to be normalized</span>
 <span class='va'>idahoans</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>idahoans</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>idahoans</span> <span class='op'>%&gt;%</span>
@@ -205,7 +205,7 @@ Press, 2019.</p>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>F1_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span>, 
          F2_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_lob</span>, <span class='va'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'idahoans' not found</span></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in pivot_wider(., names_from = .vowel, values_from = c(.F1, .F2)): could not find function "pivot_wider"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
