@@ -133,7 +133,7 @@
     <p>A function to quickly calculate the Low-Back-Merger Shift Index, per Becker (2019).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lbms_index</span>(<span class='no'>df</span>, <span class='no'>vowel_col</span>, <span class='no'>F1_col</span>, <span class='no'>F2_col</span>, <span class='no'>beet</span>, <span class='no'>bit</span>, <span class='no'>bet</span>, <span class='no'>bat</span>)</pre>
+    <pre class="usage"><span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>vowel_col</span>, <span class='va'>F1_col</span>, <span class='va'>F2_col</span>, <span class='va'>beet</span>, <span class='va'>bit</span>, <span class='va'>bet</span>, <span class='va'>bat</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,7 +178,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If you would like to calculate the LBMS Index for each speaker, be sure to 
-the data beforehand with <code>group_by()</code> (see the examples). Also, per Becker's
+the data beforehand with <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by()</a></code> (see the examples). Also, per Becker's
 (2019) recommendation, it is recommended that you exclude tokens before nasals, 
 laterals, rhotics, and /g/ before the calculation. It is also recommended to
 run the function on Lobanov-normalized data.</p>
@@ -191,23 +191,25 @@ Publication of the American Dialect Society 104. Durham, NC: Duke University
 Press, 2019.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>))
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressPackageStartupMessages</a></span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># This dataset has following segment and normalized data already</span>
-<span class='no'>darla</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/darla.html'>darla</a></span>
-<span class='no'>darla</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(!<span class='no'>fol_seg</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>lbms_index</span>(<span class='no'>vowel</span>, <span class='no'>F1_LobanovNormed_unscaled</span>, <span class='no'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 1</span><span>
+<span class='va'>darla</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'><a href='https://joeystanley.github.io/joeysvowels/reference/darla.html'>darla</a></span> 
+<span class='va'>darla</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>fol_seg</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_LobanovNormed_unscaled</span>, <span class='va'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 1</span><span>
 #&gt; </span><span style='color: #555555;'># Rowwise: </span><span>
 #&gt;   lbms_index
 #&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>       1.50</div><div class='input'>
 <span class='co'># This dataset has multiple speakers and needs to be normalized</span>
-<span class='no'>idahoans</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>joeysvowels</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/joeysvowels/man/idahoans.html'>idahoans</a></span>
-<span class='no'>idahoans</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>group_by</span>(<span class='no'>speaker</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='kw'>F1_lob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>F1</span>),
-         <span class='kw'>F2_lob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>F2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>lbms_index</span>(<span class='no'>vowel</span>, <span class='no'>F1_lob</span>, <span class='no'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
+<span class='va'>idahoans</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'><a href='https://joeystanley.github.io/joeysvowels/reference/idahoans.html'>idahoans</a></span>
+<span class='va'>idahoans</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>F1_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span>, 
+         F2_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_lob</span>, <span class='va'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 2</span><span>
 #&gt; </span><span style='color: #555555;'># Rowwise:  speaker</span><span>
 #&gt;    speaker lbms_index
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -236,7 +238,7 @@ Press, 2019.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
