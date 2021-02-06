@@ -3,6 +3,7 @@
 * `norm_anae()` now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying `use_telsur_g = FALSE`.
 * `norm_anae()` now requires the data to be grouped by speaker prior to running. This makes it more consistent with the other normalization procedures in this package.
 * `wells_to_arpa()` was created, as an inverse function to `arpa_to_wells()` because I needed it one time.
+* `norm_deltaF()` has been fixed so that including F4 now works. Additional arguments have been added as well.  
 
 # joeyr 0.6.1
 

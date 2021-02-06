@@ -4,41 +4,69 @@
 \alias{norm_deltaF}
 \title{∆F Normalization}
 \usage{
-norm_deltaF(df, .F1, .F2, .F3, .F4)
+norm_deltaF(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "formants")
 }
 \arguments{
 \item{df}{The data frame containing the formant measurements you want to 
 normalize}
 
 \item{.F1, .F2, .F3, .F4}{The (unquoted) name of the column containing the F1 
-measurements. The first three are required, but you may leave off F4.}
+measurements. The first three are required, but you may leave off F4. It is 
+recommended that you include F4 if the data is available and reliable since 
+it produces more accurate results.}
+
+\item{suffix}{A string. The suffix you'd like to append to column names in 
+new normalized columns. By default, it's \code{"_deltaF"} so if your original F1 
+column was called \code{F1} then the normalized one will be \code{F1_deltaF}.}
+
+\item{return}{A string. By default, it's \code{"formants"} so it'll return the 
+normalized values for you. If you'd like to see the actual ΔF values, you 
+can do so by putting \code{"deltaF"} instead.}
 }
 \value{
-The original dataframe with new columns (suffixed with 
-\code{_deltaF}) containing the normalized measurements.
+The original dataframe with new columns containing the normalized measurements.
 }
 \description{
 Normalize vowel formant measurements with ∆F (see Johnson 2020). This 
 function is intended to be used within a tidyverse pipeline.
 }
 \details{
+The ∆F is a normalization technique that is based on a single, interpretable
+parameter for each speaker. The parameter is called ∆F and is "an estimate of 
+formant spacing in a vocal tract with no constrictions" (Johnson 2020:10). 
+
 You will need to group the data by speaker with \code{group_by()} before 
 applying this function if you want to normalize the data by speaker.
 
-The data must be numeric, and there cannot be any NAs. So, if you're using 
+The data must be numeric, and there cannot be any \code{NA}s. So, if you're using 
 data extracted from Praat, you may have to filter out bad F3 and F4 data
-and then convert the column to numeric. See the example.
+and then convert the column to numeric.
 
-Note that this is a new function and has not been tested robustly yet.
+Note that this is a new function and has not been tested very robustly yet.
 }
 \examples{
 library(tidyverse)
 df <- joeysvowels::idahoans
+ 
+# Basic usage
+df \%>\%  
+   group_by(speaker) \%>\%
+   norm_deltaF(F1, F2, F3, F4)
    
- # Run the function
- df \%>\%  
+# F4 is not required
+df \%>\%  
    group_by(speaker) \%>\%
    norm_deltaF(F1, F2, F3)
+ 
+# Change the new columns' suffix
+df \%>\%  
+   group_by(speaker) \%>\%
+   norm_deltaF(F1, F2, F3, suffix = "_norm")
+   
+# Return ∆F instead
+df \%>\%  
+   group_by(speaker) \%>\%
+   norm_deltaF(F1, F2, F3, F4, return = "deltaF")
    
 }
 \references{
