@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.2</span>
       </span>
     </div>
 
@@ -127,6 +127,18 @@
       <small>Source: <a href='https://github.com/JoeyStanley/joeyr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="joeyr-062" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.2">
+<a href="#joeyr-062" class="anchor"></a>joeyr 0.6.2</h1>
+<ul>
+<li>
+<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying <code>use_telsur_g = FALSE</code>.</li>
+<li>
+<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now requires the data to be grouped by speaker prior to running. This makes it more consistent with the other normalization procedures in this package.</li>
+<li>
+<code><a href="../reference/arpa_to_keywords.html">wells_to_arpa()</a></code> was created, as an inverse function to <code><a href="../reference/arpa_to_keywords.html">arpa_to_wells()</a></code> because I needed it one time.</li>
+</ul>
+</div>
     <div id="joeyr-061" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.1">
 <a href="#joeyr-061" class="anchor"></a>joeyr 0.6.1</h1>
