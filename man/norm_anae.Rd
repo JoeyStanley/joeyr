@@ -26,11 +26,21 @@ your data using the method described in the Atlas of North American English.
 NOTE: This is brand new and has not been tested robustly.
 }
 \details{
-Note that the data must be grouped by speaker prior to running the function.
+The data must be grouped by speaker prior to running the function.
+
+The function works best when only F1 and F2 data are included. F3 can be included
+but the results may not be comparable with other studies. 
+
+By default, the function will use the Telsur G value listed in the ANAE (6.896874).
+This is recommended to make results most compatible with the ANAE and other
+studies that use the same normalization procedure. The function can calculate
+a G value based on the dataset provided when \code{use_telsur_g} is set to 
+\code{FALSE}. 
 
 It is unclear how the ANAE function should work with trajectory data.
 This function pools all data together and normalizes it together, which means
-one small modification was required to calculate the G value: I had to add
+one small modification was required to calculate the G value if the Telsur G 
+is not used: I had to add
 the average number of time points per vowel token in the denominator. Not sure
 if that's how it should be done, but it makes sense to me and returns sensible
 results.
