@@ -209,7 +209,9 @@ tidy_mahalanobis <- function(...) {
 #' 
 #' @param df The dataframe containing the formant measurements you want to normalize.
 #' @param hz_cols A list of columns (unquoted) containing the formant measurements themselves.
-#' @param vowel_id The name of the column containing unique identifiers per vowel.
+#' @param vowel_id The name of the column containing unique identifiers per vowel token. 
+#' If your data is set up so that there is one row per token, you can put \code{row.names(.)}
+#' here instead.
 #' @param speaker_id The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).
 #' @param use_telsur_g By default, this will use the Telsur G value (6.896874) listed in the ANAE. If set to \code{FALSE}, it will calculate the G value based on the dataset.
 #' 
@@ -220,9 +222,8 @@ tidy_mahalanobis <- function(...) {
 #' 
 #' # Run the function. Since this data doesn't have a column for token ids, I'll create one here.
 #' df %>%
-#'    rowid_to_column("token_id") %>%
 #'    group_by(speaker) %>%
-#'    norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker_id = speaker) %>%
+#'    norm_anae(hz_cols = c(F1, F2), vowel_id = row.names(.), speaker_id = speaker) %>%
 #'    ungroup() %>%
 #'    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 norm_anae <- function(df, hz_cols, vowel_id, speaker_id, use_telsur_g = TRUE) {

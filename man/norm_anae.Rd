@@ -11,7 +11,9 @@ norm_anae(df, hz_cols, vowel_id, speaker_id, use_telsur_g = TRUE)
 
 \item{hz_cols}{A list of columns (unquoted) containing the formant measurements themselves.}
 
-\item{vowel_id}{The name of the column containing unique identifiers per vowel.}
+\item{vowel_id}{The name of the column containing unique identifiers per vowel token. 
+If your data is set up so that there is one row per token, you can put \code{row.names(.)}
+here instead.}
 
 \item{speaker_id}{The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).}
 
@@ -51,9 +53,8 @@ df <- joeysvowels::idahoans
 
 # Run the function. Since this data doesn't have a column for token ids, I'll create one here.
 df \%>\%
-   rowid_to_column("token_id") \%>\%
    group_by(speaker) \%>\%
-   norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker_id = speaker) \%>\%
+   norm_anae(hz_cols = c(F1, F2), vowel_id = row.names(.), speaker_id = speaker) \%>\%
    ungroup() \%>\%
    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 }
