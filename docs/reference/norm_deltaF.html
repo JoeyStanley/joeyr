@@ -135,7 +135,7 @@ function is intended to be used within a tidyverse pipeline." />
 function is intended to be used within a tidyverse pipeline.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>.F1</span>, <span class='va'>.F2</span>, <span class='va'>.F3</span>, <span class='va'>.F4</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>.F1</span>, <span class='va'>.F2</span>, <span class='va'>.F3</span>, <span class='va'>.F4</span>, suffix <span class='op'>=</span> <span class='st'>"_deltaF"</span>, return <span class='op'>=</span> <span class='st'>"formants"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,22 +148,38 @@ normalize</p></td>
     <tr>
       <th>.F1, .F2, .F3, .F4</th>
       <td><p>The (unquoted) name of the column containing the F1 
-measurements. The first three are required, but you may leave off F4.</p></td>
+measurements. The first three are required, but you may leave off F4. It is 
+recommended that you include F4 if the data is available and reliable since 
+it produces more accurate results.</p></td>
+    </tr>
+    <tr>
+      <th>suffix</th>
+      <td><p>A string. The suffix you'd like to append to column names in 
+new normalized columns. By default, it's <code>"_deltaF"</code> so if your original F1 
+column was called <code>F1</code> then the normalized one will be <code>F1_deltaF</code>.</p></td>
+    </tr>
+    <tr>
+      <th>return</th>
+      <td><p>A string. By default, it's <code>"formants"</code> so it'll return the 
+normalized values for you. If you'd like to see the actual ΔF values, you 
+can do so by putting <code>"deltaF"</code> instead.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The original dataframe with new columns (suffixed with 
-<code>_deltaF</code>) containing the normalized measurements.</p>
+    <p>The original dataframe with new columns containing the normalized measurements.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You will need to group the data by speaker with <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by()</a></code> before 
+    <p>The ∆F is a normalization technique that is based on a single, interpretable
+parameter for each speaker. The parameter is called ∆F and is "an estimate of 
+formant spacing in a vocal tract with no constrictions" (Johnson 2020:10).</p>
+<p>You will need to group the data by speaker with <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by()</a></code> before 
 applying this function if you want to normalize the data by speaker.</p>
-<p>The data must be numeric, and there cannot be any NAs. So, if you're using 
+<p>The data must be numeric, and there cannot be any <code>NA</code>s. So, if you're using 
 data extracted from Praat, you may have to filter out bad F3 and F4 data
-and then convert the column to numeric. See the example.</p>
-<p>Note that this is a new function and has not been tested robustly yet.</p>
+and then convert the column to numeric.</p>
+<p>Note that this is a new function and has not been tested very robustly yet.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Johnson, Keith. The ΔF Method of Vocal Tract Length Normalization for Vowels. 
@@ -173,26 +189,82 @@ no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'><a href='https://joeystanley.github.io/joeysvowels/reference/idahoans.html'>idahoans</a></span>
-   
- <span class='co'># Run the function</span>
- <span class='va'>df</span> <span class='op'>%&gt;%</span>  
+ 
+<span class='co'># Basic usage</span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span>  
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span>, <span class='va'>F4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,100 x 11</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   speaker [10]</span><span>
+#&gt;    speaker sex   vowel    F1    F2    F3    F4 F1_deltaF F2_deltaF F3_deltaF
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01      fema… AA     699. </span><span style='text-decoration: underline;'>1</span><span>655. </span><span style='text-decoration: underline;'>2</span><span>019. </span><span style='text-decoration: underline;'>3</span><span>801.     0.637      1.51      1.84
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 01      fema… AA     685. </span><span style='text-decoration: underline;'>1</span><span>360. </span><span style='text-decoration: underline;'>1</span><span>914. </span><span style='text-decoration: underline;'>4</span><span>257.     0.624      1.24      1.74
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 01      fema… AA     713. </span><span style='text-decoration: underline;'>1</span><span>507. </span><span style='text-decoration: underline;'>2</span><span>460. </span><span style='text-decoration: underline;'>3</span><span>617.     0.650      1.37      2.24
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 01      fema… AA     801. </span><span style='text-decoration: underline;'>1</span><span>143. </span><span style='text-decoration: underline;'>1</span><span>868. </span><span style='text-decoration: underline;'>2</span><span>908.     0.730      1.04      1.70
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 01      fema… AA     757. </span><span style='text-decoration: underline;'>1</span><span>258. </span><span style='text-decoration: underline;'>1</span><span>772. </span><span style='text-decoration: underline;'>2</span><span>778.     0.689      1.15      1.61
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 01      fema… AA     804. </span><span style='text-decoration: underline;'>1</span><span>403. </span><span style='text-decoration: underline;'>2</span><span>339. </span><span style='text-decoration: underline;'>4</span><span>299.     0.733      1.28      2.13
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 01      fema… AA     664. </span><span style='text-decoration: underline;'>1</span><span>279. </span><span style='text-decoration: underline;'>1</span><span>714. </span><span style='text-decoration: underline;'>2</span><span>103.     0.605      1.17      1.56
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 01      fema… AA     757. </span><span style='text-decoration: underline;'>1</span><span>325. </span><span style='text-decoration: underline;'>1</span><span>929. </span><span style='text-decoration: underline;'>2</span><span>660.     0.690      1.21      1.76
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 01      fema… AA     730. </span><span style='text-decoration: underline;'>1</span><span>578. </span><span style='text-decoration: underline;'>2</span><span>297. </span><span style='text-decoration: underline;'>2</span><span>963.     0.665      1.44      2.09
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 01      fema… AA     700. </span><span style='text-decoration: underline;'>1</span><span>546. </span><span style='text-decoration: underline;'>2</span><span>109. </span><span style='text-decoration: underline;'>3</span><span>432.     0.638      1.41      1.92
+#&gt; </span><span style='color: #949494;'># … with 1,090 more rows, and 1 more variable: F4_deltaF </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>   
+<span class='co'># F4 is not required</span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span>  
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,100 x 10</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   speaker [10]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1,100 x 10</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   speaker [10]</span><span>
+#&gt;    speaker sex    vowel    F1    F2    F3 F1_deltaF F2_deltaF F3_deltaF    F4
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01      female AA     699. </span><span style='text-decoration: underline;'>1</span><span>655. </span><span style='text-decoration: underline;'>2</span><span>019.     0.626      1.48      1.81 </span><span style='text-decoration: underline;'>3</span><span>801.
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 01      female AA     685. </span><span style='text-decoration: underline;'>1</span><span>360. </span><span style='text-decoration: underline;'>1</span><span>914.     0.614      1.22      1.71 </span><span style='text-decoration: underline;'>4</span><span>257.
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 01      female AA     713. </span><span style='text-decoration: underline;'>1</span><span>507. </span><span style='text-decoration: underline;'>2</span><span>460.     0.639      1.35      2.20 </span><span style='text-decoration: underline;'>3</span><span>617.
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 01      female AA     801. </span><span style='text-decoration: underline;'>1</span><span>143. </span><span style='text-decoration: underline;'>1</span><span>868.     0.718      1.02      1.67 </span><span style='text-decoration: underline;'>2</span><span>908.
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>258. </span><span style='text-decoration: underline;'>1</span><span>772.     0.677      1.13      1.59 </span><span style='text-decoration: underline;'>2</span><span>778.
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 01      female AA     804. </span><span style='text-decoration: underline;'>1</span><span>403. </span><span style='text-decoration: underline;'>2</span><span>339.     0.720      1.26      2.09 </span><span style='text-decoration: underline;'>4</span><span>299.
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 01      female AA     664. </span><span style='text-decoration: underline;'>1</span><span>279. </span><span style='text-decoration: underline;'>1</span><span>714.     0.595      1.15      1.53 </span><span style='text-decoration: underline;'>2</span><span>103.
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>325. </span><span style='text-decoration: underline;'>1</span><span>929.     0.678      1.19      1.73 </span><span style='text-decoration: underline;'>2</span><span>660.
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 01      female AA     730. </span><span style='text-decoration: underline;'>1</span><span>578. </span><span style='text-decoration: underline;'>2</span><span>297.     0.654      1.41      2.06 </span><span style='text-decoration: underline;'>2</span><span>963.
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 01      female AA     700. </span><span style='text-decoration: underline;'>1</span><span>546. </span><span style='text-decoration: underline;'>2</span><span>109.     0.627      1.38      1.89 </span><span style='text-decoration: underline;'>3</span><span>432.
+#&gt; </span><span style='color: #949494;'># … with 1,090 more rows</span><span></div><div class='input'> 
+<span class='co'># Change the new columns' suffix</span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span>  
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span>, suffix <span class='op'>=</span> <span class='st'>"_norm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1,100 x 10</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   speaker [10]</span><span>
 #&gt;    speaker sex    vowel    F1    F2    F3 F1_norm F2_norm F3_norm    F4
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 01      female AA     699. </span><span style='text-decoration: underline;'>1</span><span>655. </span><span style='text-decoration: underline;'>2</span><span>019.   0.626    1.48    1.81 </span><span style='text-decoration: underline;'>3</span><span>801.
-#&gt; </span><span style='color: #555555;'> 2</span><span> 01      female AA     685. </span><span style='text-decoration: underline;'>1</span><span>360. </span><span style='text-decoration: underline;'>1</span><span>914.   0.614    1.22    1.71 </span><span style='text-decoration: underline;'>4</span><span>257.
-#&gt; </span><span style='color: #555555;'> 3</span><span> 01      female AA     713. </span><span style='text-decoration: underline;'>1</span><span>507. </span><span style='text-decoration: underline;'>2</span><span>460.   0.639    1.35    2.20 </span><span style='text-decoration: underline;'>3</span><span>617.
-#&gt; </span><span style='color: #555555;'> 4</span><span> 01      female AA     801. </span><span style='text-decoration: underline;'>1</span><span>143. </span><span style='text-decoration: underline;'>1</span><span>868.   0.718    1.02    1.67 </span><span style='text-decoration: underline;'>2</span><span>908.
-#&gt; </span><span style='color: #555555;'> 5</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>258. </span><span style='text-decoration: underline;'>1</span><span>772.   0.677    1.13    1.59 </span><span style='text-decoration: underline;'>2</span><span>778.
-#&gt; </span><span style='color: #555555;'> 6</span><span> 01      female AA     804. </span><span style='text-decoration: underline;'>1</span><span>403. </span><span style='text-decoration: underline;'>2</span><span>339.   0.720    1.26    2.09 </span><span style='text-decoration: underline;'>4</span><span>299.
-#&gt; </span><span style='color: #555555;'> 7</span><span> 01      female AA     664. </span><span style='text-decoration: underline;'>1</span><span>279. </span><span style='text-decoration: underline;'>1</span><span>714.   0.595    1.15    1.53 </span><span style='text-decoration: underline;'>2</span><span>103.
-#&gt; </span><span style='color: #555555;'> 8</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>325. </span><span style='text-decoration: underline;'>1</span><span>929.   0.678    1.19    1.73 </span><span style='text-decoration: underline;'>2</span><span>660.
-#&gt; </span><span style='color: #555555;'> 9</span><span> 01      female AA     730. </span><span style='text-decoration: underline;'>1</span><span>578. </span><span style='text-decoration: underline;'>2</span><span>297.   0.654    1.41    2.06 </span><span style='text-decoration: underline;'>2</span><span>963.
-#&gt; </span><span style='color: #555555;'>10</span><span> 01      female AA     700. </span><span style='text-decoration: underline;'>1</span><span>546. </span><span style='text-decoration: underline;'>2</span><span>109.   0.627    1.38    1.89 </span><span style='text-decoration: underline;'>3</span><span>432.
-#&gt; </span><span style='color: #555555;'># … with 1,090 more rows</span><span></div><div class='input'>   
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01      female AA     699. </span><span style='text-decoration: underline;'>1</span><span>655. </span><span style='text-decoration: underline;'>2</span><span>019.   0.626    1.48    1.81 </span><span style='text-decoration: underline;'>3</span><span>801.
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 01      female AA     685. </span><span style='text-decoration: underline;'>1</span><span>360. </span><span style='text-decoration: underline;'>1</span><span>914.   0.614    1.22    1.71 </span><span style='text-decoration: underline;'>4</span><span>257.
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 01      female AA     713. </span><span style='text-decoration: underline;'>1</span><span>507. </span><span style='text-decoration: underline;'>2</span><span>460.   0.639    1.35    2.20 </span><span style='text-decoration: underline;'>3</span><span>617.
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 01      female AA     801. </span><span style='text-decoration: underline;'>1</span><span>143. </span><span style='text-decoration: underline;'>1</span><span>868.   0.718    1.02    1.67 </span><span style='text-decoration: underline;'>2</span><span>908.
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>258. </span><span style='text-decoration: underline;'>1</span><span>772.   0.677    1.13    1.59 </span><span style='text-decoration: underline;'>2</span><span>778.
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 01      female AA     804. </span><span style='text-decoration: underline;'>1</span><span>403. </span><span style='text-decoration: underline;'>2</span><span>339.   0.720    1.26    2.09 </span><span style='text-decoration: underline;'>4</span><span>299.
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 01      female AA     664. </span><span style='text-decoration: underline;'>1</span><span>279. </span><span style='text-decoration: underline;'>1</span><span>714.   0.595    1.15    1.53 </span><span style='text-decoration: underline;'>2</span><span>103.
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 01      female AA     757. </span><span style='text-decoration: underline;'>1</span><span>325. </span><span style='text-decoration: underline;'>1</span><span>929.   0.678    1.19    1.73 </span><span style='text-decoration: underline;'>2</span><span>660.
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 01      female AA     730. </span><span style='text-decoration: underline;'>1</span><span>578. </span><span style='text-decoration: underline;'>2</span><span>297.   0.654    1.41    2.06 </span><span style='text-decoration: underline;'>2</span><span>963.
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 01      female AA     700. </span><span style='text-decoration: underline;'>1</span><span>546. </span><span style='text-decoration: underline;'>2</span><span>109.   0.627    1.38    1.89 </span><span style='text-decoration: underline;'>3</span><span>432.
+#&gt; </span><span style='color: #949494;'># … with 1,090 more rows</span><span></div><div class='input'>   
+<span class='co'># Return ∆F instead</span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span>  
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_deltaF</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span>, <span class='va'>F4</span>, return <span class='op'>=</span> <span class='st'>"deltaF"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 2</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   speaker [10]</span><span>
+#&gt;    speaker deltaF
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01       </span><span style='text-decoration: underline;'>1</span><span>098.
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 02        940.
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 03       </span><span style='text-decoration: underline;'>1</span><span>156.
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 04       </span><span style='text-decoration: underline;'>1</span><span>115.
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 05       </span><span style='text-decoration: underline;'>1</span><span>067.
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 06        935.
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 07       </span><span style='text-decoration: underline;'>1</span><span>058.
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 08       </span><span style='text-decoration: underline;'>1</span><span>151.
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 09       </span><span style='text-decoration: underline;'>1</span><span>135.
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 10       </span><span style='text-decoration: underline;'>1</span><span>045.</div><div class='input'>   
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

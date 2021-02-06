@@ -177,16 +177,16 @@ don't need to load it.</p>
 <span class='va'>m_dists</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>mahal_dist</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 4</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   vowel [4]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 4</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   vowel [4]</span><span>
 #&gt;   vowel    F1    F2 mahal_dist
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> GOAT   368. </span><span style='text-decoration: underline;'>1</span><span>018.      5.66 
-#&gt; </span><span style='color: #555555;'>2</span><span> FACE   377. </span><span style='text-decoration: underline;'>2</span><span>032.      6.52 
-#&gt; </span><span style='color: #555555;'>3</span><span> FACE   314. </span><span style='text-decoration: underline;'>2</span><span>179.      2.16 
-#&gt; </span><span style='color: #555555;'>4</span><span> GOOSE  274. </span><span style='text-decoration: underline;'>1</span><span>378.      0.755
-#&gt; </span><span style='color: #555555;'>5</span><span> FOOT   350. </span><span style='text-decoration: underline;'>1</span><span>624.      4.95 
-#&gt; </span><span style='color: #555555;'>6</span><span> FACE   313. </span><span style='text-decoration: underline;'>2</span><span>181.      2.28 </div><div class='input'>  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> GOAT   368. </span><span style='text-decoration: underline;'>1</span><span>018.      5.66 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> FACE   377. </span><span style='text-decoration: underline;'>2</span><span>032.      6.52 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> FACE   314. </span><span style='text-decoration: underline;'>2</span><span>179.      2.16 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> GOOSE  274. </span><span style='text-decoration: underline;'>1</span><span>378.      0.755
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> FOOT   350. </span><span style='text-decoration: underline;'>1</span><span>624.      4.95 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> FACE   313. </span><span style='text-decoration: underline;'>2</span><span>181.      2.28 </div><div class='input'>  
 <span class='co'># Plot potential outliers</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>m_dists</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>F2</span>, <span class='va'>F1</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>mahal_dist</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
@@ -217,16 +217,16 @@ don't need to load it.</p>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel_id</span>, <span class='va'>vowel</span>, <span class='va'>mahal_dist</span>, <span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   vowel [3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 5</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   vowel [3]</span><span>
 #&gt;   vowel_id vowel mahal_dist    F1    F2
-#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>        2 FACE       6.52   377. </span><span style='text-decoration: underline;'>2</span><span>032.
-#&gt; </span><span style='color: #555555;'>2</span><span>        4 FACE       2.16   314. </span><span style='text-decoration: underline;'>2</span><span>179.
-#&gt; </span><span style='color: #555555;'>3</span><span>        5 GOOSE      0.755  274. </span><span style='text-decoration: underline;'>1</span><span>378.
-#&gt; </span><span style='color: #555555;'>4</span><span>        7 FOOT       4.95   350. </span><span style='text-decoration: underline;'>1</span><span>624.
-#&gt; </span><span style='color: #555555;'>5</span><span>        8 FACE       2.28   313. </span><span style='text-decoration: underline;'>2</span><span>181.
-#&gt; </span><span style='color: #555555;'>6</span><span>        9 GOOSE      1.63   255. </span><span style='text-decoration: underline;'>1</span><span>333.</div></span></pre>
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        2 FACE       6.52   377. </span><span style='text-decoration: underline;'>2</span><span>032.
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        4 FACE       2.16   314. </span><span style='text-decoration: underline;'>2</span><span>179.
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        5 GOOSE      0.755  274. </span><span style='text-decoration: underline;'>1</span><span>378.
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>        7 FOOT       4.95   350. </span><span style='text-decoration: underline;'>1</span><span>624.
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>        8 FACE       2.28   313. </span><span style='text-decoration: underline;'>2</span><span>181.
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>        9 GOOSE      1.63   255. </span><span style='text-decoration: underline;'>1</span><span>333.</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
