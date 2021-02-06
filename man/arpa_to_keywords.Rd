@@ -3,11 +3,14 @@
 \name{arpa_to_keywords}
 \alias{arpa_to_keywords}
 \alias{arpa_to_wells}
+\alias{wells_to_arpa}
 \title{Convert ARPABET to Lexical Sets}
 \usage{
 arpa_to_keywords(x, style = "wells", ordered = TRUE, as_character = FALSE)
 
 arpa_to_wells(x, ...)
+
+wells_to_arpa(x, ordered = TRUE, as_character = FALSE)
 }
 \arguments{
 \item{x}{The vector containing the vowel labels you want to convert.}
@@ -51,7 +54,8 @@ The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
 BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
 
 Note that \code{arpa_to_wells} is shorthand for \code{arpa_to_keywords(style="wells")}, 
-and only exports to the Wells lexical sets.
+and only exports to the Wells lexical sets. \code{wells_to_arpa} is the reverse function
+and converts Wells lexical sets back into ARPABET.
 }
 \examples{
 suppressPackageStartupMessages(library(tidyverse))
@@ -75,6 +79,6 @@ darla \%>\%
   mutate(vowel = arpa_to_keywords(vowel)) \%>\%
   count(vowel)
   
-# Here's a non-tidyverse version (though `tidyverse` is still used under the hood)
+# Here's a non-tidyverse version (though tidyverse is still used under the hood)
 darla$vowel <- arpa_to_keywords(darla$vowel)
 }
