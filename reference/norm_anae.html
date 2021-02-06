@@ -152,7 +152,9 @@ NOTE: This is brand new and has not been tested robustly.</p>
     </tr>
     <tr>
       <th>vowel_id</th>
-      <td><p>The name of the column containing unique identifiers per vowel.</p></td>
+      <td><p>The name of the column containing unique identifiers per vowel token. 
+If your data is set up so that there is one row per token, you can put <code><a href='https://rdrr.io/r/base/row.names.html'>row.names(.)</a></code>
+here instead.</p></td>
     </tr>
     <tr>
       <th>speaker_id</th>
@@ -191,12 +193,11 @@ results.</p>
 </div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>
 <span class='co'># Run the function. Since this data doesn't have a column for token ids, I'll create one here.</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span>
-   <span class='fu'>rowid_to_column</span><span class='op'>(</span><span class='st'>"token_id"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-   <span class='fu'>norm_anae</span><span class='op'>(</span>hz_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span>, vowel_id <span class='op'>=</span> <span class='va'>token_id</span>, speaker_id <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>norm_anae</span><span class='op'>(</span>hz_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span>, vowel_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>, speaker_id <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F1_anae</span>, <span class='va'>F2_anae</span><span class='op'>)</span> <span class='co'># &lt;- just the relevant columns</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in rowid_to_column(., "token_id"): could not find function "rowid_to_column"</span></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
