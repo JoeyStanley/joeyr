@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.2</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
 <li><p><code><a href="reference/eucl_dist.html">eucl_dist()</a></code> calculates the Euclidean Distance, given a pair of <em>x</em> and <em>y</em> (or, more commonly, F1 and F2) coordinates.</p></li>
 <li><p><code><a href="reference/pillai.html">pillai()</a></code> calculates the Pillai score. It’s not a complicated process in general, but this function simplifies it down quite a bit so it doesn’t interrupt your workflow.</p></li>
 <li><p><code><a href="reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> is probably my favorite. It’s an implementation of the <code><a href="https://rdrr.io/r/stats/mahalanobis.html">mahalanobis()</a></code> function, which calculates the Mahalanobis distance, only it’s meant to work within a <code>tidyverse</code> pipeline of commands. Like the <code><a href="reference/pillai.html">pillai()</a></code> function, it’s designed so that you can get the values you want without interrupting your flow.</p></li>
-<li><p><code><a href="reference/norm_anae.html">norm_anae()</a></code> makes it easy to do vowel formant normalization using the method described in the <em>Atlas of North American English</em> using just one line of code within a tidyverse pipeline. This is my current favorite normalization procedure and I was sick of writing large blocks of code in all my scripts, so I wrapped it up as a package.</p></li>
+<li><p><code><a href="reference/norm_anae.html">norm_anae()</a></code> makes it easy to do vowel formant normalization using the method described in the <em>Atlas of North American English</em> using just one line of code within a tidyverse pipeline. This is my current favorite normalization procedure and I was sick of writing large blocks of code in all my scripts, so I wrapped it up as a function.</p></li>
 <li><p><code><a href="reference/norm_deltaF.html">norm_deltaF()</a></code> is qanother way to normalize your data, based on Keith Johnson’s (2020) paper.</p></li>
 <li><p><code><a href="reference/lbms_index.html">lbms_index()</a></code> allows you to quickly calculate the Low-Back-Merger Shift Index in your data (see Becker 2019; Boberg 2019).</p></li>
 <li><p><code><a href="reference/arpa_to_keywords.html">arpa_to_keywords()</a></code> (and its shortcut, <code><a href="reference/arpa_to_keywords.html">arpa_to_wells()</a></code>), quickly converts ARPABET labels to Wells (or Wells-inspired) keywords.</p></li>

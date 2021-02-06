@@ -86,7 +86,7 @@ makes it easier to include it as part of a dplyr::mutate." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.2</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ don't need to load it.</p>
 <span class='va'>m_dists</span> <span class='op'>&lt;-</span> <span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>  
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div><div class='input'>  
 <span class='co'># Take a peek at the resulting dataset</span>
 <span class='va'>m_dists</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>mahal_dist</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -193,19 +193,19 @@ don't need to load it.</p>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_reverse</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_reverse</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div><div class='input'>
 <span class='co'># Data cannot contain NAs. Remove them before running.</span>
 <span class='va'>df</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>$</span><span class='va'>F1</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in `*tmp*`[1, ]: object of type 'closure' is not subsettable</span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel_id</span>, <span class='va'>vowel</span>, <span class='va'>mahal_dist</span>, <span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

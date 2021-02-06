@@ -88,7 +88,7 @@ removed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.2</span>
       </span>
     </div>
 
@@ -210,33 +210,25 @@ has been removed.</p>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>is_outlier <span class='op'>=</span> <span class='fu'>find_outliers</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, keep <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>is_outlier</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: `group_by_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `group_by()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div><div class='input'>
 <span class='co'># Alternatively, you can skip a step and just keep the data that are not </span>
 <span class='co'># outliers.</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'>find_outliers</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by_"): no applicable method for 'group_by_' applied to an object of class "function"</span></div><div class='input'>   
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("group_by"): no applicable method for 'group_by' applied to an object of class "function"</span></div><div class='input'>   
 <span class='co'># In some cases, you might not have enough data. In this case, a warning </span>
 <span class='co'># message will appear.</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> 
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>percent</span> <span class='op'>==</span> <span class='fl'>50</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>is_outlier <span class='op'>=</span> <span class='fu'>find_outliers</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, keep <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: `filter_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `filter()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): no applicable method for 'filter_' applied to an object of class "function"</span></div><div class='input'><span class='co'># You can find out which groups have less than 20 tokens with `dplyr::count()`:</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter"): no applicable method for 'filter' applied to an object of class "function"</span></div><div class='input'><span class='co'># You can find out which groups have less than 20 tokens with `dplyr::count()`:</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> 
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>percent</span> <span class='op'>==</span> <span class='fl'>50</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): no applicable method for 'filter_' applied to an object of class "function"</span></div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter"): no applicable method for 'filter' applied to an object of class "function"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
