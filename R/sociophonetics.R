@@ -445,7 +445,8 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4) {
 #' BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
 #' 
 #' Note that \code{arpa_to_wells} is shorthand for \code{arpa_to_keywords(style="wells")}, 
-#' and only exports to the Wells lexical sets.
+#' and only exports to the Wells lexical sets. \code{wells_to_arpa} is the reverse function
+#' and converts Wells lexical sets back into ARPABET.
 #'  
 #' @param x The vector containing the vowel labels you want to convert.
 #' @param style a string. By default, \code{"Wells"}, which will produce the original 
@@ -530,4 +531,37 @@ arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = 
 #' @export
 arpa_to_wells <- function(x, ...) {
   joeyr::arpa_to_keywords(x, style = "wells", ...)
+}
+
+#' @rdname arpa_to_keywords
+#' @export
+wells_to_arpa <- function(x, ordered = TRUE, as_character = FALSE) {
+  
+  levels_df <- tibble(
+    wells = c("FLEECE", "KIT", "FACE", "DRESS", "TRAP",
+              "LOT", "THOUGHT", "STRUT", "GOAT", "FOOT", 
+              "GOOSE", "PRICE", "MOUTH", "CHOICE", "NURSE"),
+    b_t   = c("BEET", "BIT", "BAIT", "BET", "BAT",
+              "BOT", "BOUGHT", "BUT", "BOAT", "BOOK", 
+              "BOOT", "BITE", "BOUT", "BOY", "BIRD"),
+    arpa  = c("IY", "IH", "EY", "EH", "AE", 
+              "AA", "AO", "AH", "OW", "UH", 
+              "UW", "AY", "AW", "OY", "ER")
+  ) %>%
+    # Only keep the ones present in this dataset
+    filter(wells %in% x)
+  
+  # Used a named vector and then do fct_recode with splice
+  levels <- levels_df$wells
+  names(levels) <- levels_df$arpa
+  x <- fct_recode(x, !!!levels)
+  
+  if (ordered) {
+    x <- fct_relevel(x, names(levels))
+  }
+  
+  if (as_character) {
+    x <- as.character(x)
+  }
+  x
 }
