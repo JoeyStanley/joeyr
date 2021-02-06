@@ -93,7 +93,7 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     method described in the *Atlas of North American English* using just 
     one line of code within a tidyverse pipeline. This is my current favorite
     normalization procedure and I was sick of writing large blocks of code in
-    all my scripts, so I wrapped it up as a package.
+    all my scripts, so I wrapped it up as a function.
     
   - `norm_deltaF()` is qanother way to normalize your data, based on Keith 
     Johnson's (2020) paper.
