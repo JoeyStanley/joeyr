@@ -4,7 +4,7 @@
 \alias{norm_anae}
 \title{ANAE Vowel Normalization}
 \usage{
-norm_anae(df, hz_cols, vowel_id, speaker_id)
+norm_anae(df, hz_cols, vowel_id, speaker_id, use_telsur_g = TRUE)
 }
 \arguments{
 \item{df}{The dataframe containing the formant measurements you want to normalize.}
@@ -13,7 +13,9 @@ norm_anae(df, hz_cols, vowel_id, speaker_id)
 
 \item{vowel_id}{The name of the column containing unique identifiers per vowel.}
 
-\item{speaker}{The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).}
+\item{speaker_id}{The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).}
+
+\item{use_telsur_g}{By default, this will use the Telsur G value (6.896874) listed in the ANAE. If set to \code{FALSE}, it will calculate the G value based on the dataset.}
 }
 \value{
 The same dataframe, but with new column(s), suffixed with "_anae" that have the normalized data.
@@ -24,6 +26,8 @@ your data using the method described in the Atlas of North American English.
 NOTE: This is brand new and has not been tested robustly.
 }
 \details{
+Note that the data must be grouped by speaker prior to running the function.
+
 It is unclear how the ANAE function should work with trajectory data.
 This function pools all data together and normalizes it together, which means
 one small modification was required to calculate the G value: I had to add
@@ -38,6 +42,8 @@ df <- joeysvowels::idahoans
 # Run the function. Since this data doesn't have a column for token ids, I'll create one here.
 df \%>\%
    rowid_to_column("token_id") \%>\%
-   norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker = speaker) \%>\%
+   group_by(speaker) \%>\%
+   norm_anae(hz_cols = c(F1, F2), vowel_id = token_id, speaker_id = speaker) \%>\%
+   ungroup() \%>\%
    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 }
