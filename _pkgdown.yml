@@ -9,7 +9,7 @@ template:
     ganalytics: UA-86802921-3
   opengraph:
     twitter:
-      creator: "@joeystsanley"
+      creator: "@joey_stan"
       card: summary_large_image
 reference:
   - title: Outlier Detection
