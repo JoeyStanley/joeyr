@@ -21,7 +21,8 @@ eucl_dist <- function (x1, x2, y1, y2) {
 
 #' Calculate Pillai scores
 #'
-#' A function that runs a MANOVA and returns just the pillai score. It works great 
+#' A function that runs a MANOVA and returns a summary statistics. For \code{pillai} you get
+#' just the pillai score and for \code{manova_p} you get the p-value. It works great 
 #' within a tidyverse pipeline, though to be clear, the function itself uses only
 #' base R. 
 #' 
@@ -88,6 +89,15 @@ pillai <- function(...) {
     
     # The pillai score itself is the first row of the Pillai column
     stats[1,"Pillai"]
+}
+
+#' @rdname pillai
+#' @export
+manova_p <- function(...) {
+  manova_test <- manova(...)
+  manova_summary <- summary(manova_test)
+  stats <- summary(manova_test)$stats
+  stats[1, "Pr(>F)"]
 }
 
 

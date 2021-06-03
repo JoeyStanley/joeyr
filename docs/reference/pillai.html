@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Calculate Pillai scores — pillai" />
-<meta property="og:description" content="A function that runs a MANOVA and returns just the pillai score. It works great 
+<meta property="og:description" content="A function that runs a MANOVA and returns a summary statistics. For pillai you get
+just the pillai score and for manova_p you get the p-value. It works great 
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R." />
 <meta name="twitter:card" content="summary_large_image" />
@@ -132,12 +133,15 @@ base R." />
     </div>
 
     <div class="ref-description">
-    <p>A function that runs a MANOVA and returns just the pillai score. It works great 
+    <p>A function that runs a MANOVA and returns a summary statistics. For <code>pillai</code> you get
+just the pillai score and for <code>manova_p</code> you get the p-value. It works great 
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pillai</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>pillai</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>manova_p</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

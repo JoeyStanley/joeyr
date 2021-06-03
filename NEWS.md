@@ -1,3 +1,7 @@
+# joeyr 0.6.3
+
+* `manova_p()` now added.
+
 # joeyr 0.6.2
 
 * `norm_anae()` now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying `use_telsur_g = FALSE`.

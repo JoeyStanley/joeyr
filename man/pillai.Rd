@@ -2,9 +2,12 @@
 % Please edit documentation in R/sociophonetics.R
 \name{pillai}
 \alias{pillai}
+\alias{manova_p}
 \title{Calculate Pillai scores}
 \usage{
 pillai(...)
+
+manova_p(...)
 }
 \arguments{
 \item{...}{Arguments that may also be passed to \code{manova()}. Typically a formula and a dataframe.}
@@ -13,7 +16,8 @@ pillai(...)
 The pillai score from the MANOVA test.
 }
 \description{
-A function that runs a MANOVA and returns just the pillai score. It works great 
+A function that runs a MANOVA and returns a summary statistics. For \code{pillai} you get
+just the pillai score and for \code{manova_p} you get the p-value. It works great 
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R.
 }
