@@ -42,13 +42,8 @@
 <meta property="og:title" content="Low-Back-Merger Shift Index — lbms_index" />
 <meta property="og:description" content="A function to quickly calculate the Low-Back-Merger Shift Index, per Becker (2019)." />
 <meta name="twitter:card" content="summary_large_image" />
-<<<<<<< HEAD
 <meta name="twitter:creator" content="@joey_stan" />
 <meta name="twitter:site" content="@joey_stan" />
-=======
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
->>>>>>> a860ed73d154cfc16fd6c4b404696d1139058524
 
 
 
@@ -202,11 +197,11 @@ Press, 2019.</p>
 <span class='va'>darla</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>fol_seg</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"L"</span>, <span class='st'>"R"</span>, <span class='st'>"M"</span>, <span class='st'>"N"</span>, <span class='st'>"NG"</span>, <span class='st'>"G"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_LobanovNormed_unscaled</span>, <span class='va'>F2_LobanovNormed_unscaled</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span><span>
-#&gt; </span><span style='color: #949494;'># Rowwise: </span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span>
+#&gt; <span style='color: #949494;'># Rowwise: </span>
 #&gt;   lbms_index
-#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>       1.50</div><div class='input'>
+#&gt;        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>       1.50</div><div class='input'>
 <span class='co'># This dataset has multiple speakers and needs to be normalized</span>
 <span class='va'>idahoans</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'><a href='https://joeystanley.github.io/joeysvowels/reference/idahoans.html'>idahoans</a></span>
 <span class='va'>idahoans</span> <span class='op'>%&gt;%</span>
@@ -214,20 +209,20 @@ Press, 2019.</p>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>F1_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span>, 
          F2_lob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lbms_index</span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1_lob</span>, <span class='va'>F2_lob</span>, <span class='st'>"IY"</span>, <span class='st'>"IH"</span>, <span class='st'>"EH"</span>, <span class='st'>"AE"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 2</span><span>
-#&gt; </span><span style='color: #949494;'># Rowwise:  speaker</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 2</span>
+#&gt; <span style='color: #949494;'># Rowwise:  speaker</span>
 #&gt;    speaker lbms_index
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01            2.33
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 02            1.92
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 03            1.85
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 04            2.04
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 05            2.05
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 06            1.64
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 07            2.17
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 08            2.21
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 09            2.07
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 10            2.00</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> 01            2.33
+#&gt; <span style='color: #BCBCBC;'> 2</span> 02            1.92
+#&gt; <span style='color: #BCBCBC;'> 3</span> 03            1.85
+#&gt; <span style='color: #BCBCBC;'> 4</span> 04            2.04
+#&gt; <span style='color: #BCBCBC;'> 5</span> 05            2.05
+#&gt; <span style='color: #BCBCBC;'> 6</span> 06            1.64
+#&gt; <span style='color: #BCBCBC;'> 7</span> 07            2.17
+#&gt; <span style='color: #BCBCBC;'> 8</span> 08            2.21
+#&gt; <span style='color: #BCBCBC;'> 9</span> 09            2.07
+#&gt; <span style='color: #BCBCBC;'>10</span> 10            2.00</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

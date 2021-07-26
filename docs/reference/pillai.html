@@ -45,13 +45,8 @@ just the pillai score and for manova_p you get the p-value. It works great
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R." />
 <meta name="twitter:card" content="summary_large_image" />
-<<<<<<< HEAD
 <meta name="twitter:creator" content="@joey_stan" />
 <meta name="twitter:site" content="@joey_stan" />
-=======
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
->>>>>>> a860ed73d154cfc16fd6c4b404696d1139058524
 
 
 
@@ -186,10 +181,10 @@ from analysis.</p>
 <span class='va'>one_speaker</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span>
 #&gt;   pillai
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.444</div><div class='input'>  
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.444</div><div class='input'>  
 <span class='co'># A non-tidyverse method</span>
 <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>one_speaker</span>, <span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 0.4437837</div><div class='input'>
@@ -199,37 +194,37 @@ from analysis.</p>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AA"</span>, <span class='st'>"AO"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 2</span>
 #&gt;    speaker pillai
-#&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 01       0.592
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 02       0.500
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 03       0.763
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 04       0.663
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 05       0.557
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 06       0.136
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 07       0.412
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 08       0.310
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 09       0.173
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 10       0.267</div><div class='input'>  
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> 01       0.592
+#&gt; <span style='color: #BCBCBC;'> 2</span> 02       0.500
+#&gt; <span style='color: #BCBCBC;'> 3</span> 03       0.763
+#&gt; <span style='color: #BCBCBC;'> 4</span> 04       0.663
+#&gt; <span style='color: #BCBCBC;'> 5</span> 05       0.557
+#&gt; <span style='color: #BCBCBC;'> 6</span> 06       0.136
+#&gt; <span style='color: #BCBCBC;'> 7</span> 07       0.412
+#&gt; <span style='color: #BCBCBC;'> 8</span> 08       0.310
+#&gt; <span style='color: #BCBCBC;'> 9</span> 09       0.173
+#&gt; <span style='color: #BCBCBC;'>10</span> 10       0.267</div><div class='input'>  
 <span class='co'># Other variables can be included, but the pillai of only the first independent variable is returned</span>
 <span class='va'>one_speaker</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>dur <span class='op'>=</span> <span class='va'>end</span> <span class='op'>-</span> <span class='va'>start</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F3</span>, <span class='va'>F4</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span> <span class='op'>+</span> <span class='va'>dur</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 1</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span>
 #&gt;   pillai
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.554</div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.554</div><div class='input'>
 <span class='co'># Observations with NAs are excluded from the analysis</span>
 <span class='va'>one_speaker</span><span class='op'>[</span><span class='fl'>8</span>,<span class='op'>]</span><span class='op'>$</span><span class='va'>F1</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
 <span class='va'>one_speaker</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 1</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 1</span>
 #&gt;   pillai
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.441</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.441</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

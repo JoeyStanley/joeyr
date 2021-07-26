@@ -43,13 +43,8 @@
 <meta property="og:description" content="This is a tidyverse-tidyverse-compatible version of the stats::mahalanobis function. It just 
 makes it easier to include it as part of a dplyr::mutate." />
 <meta name="twitter:card" content="summary_large_image" />
-<<<<<<< HEAD
 <meta name="twitter:creator" content="@joey_stan" />
 <meta name="twitter:site" content="@joey_stan" />
-=======
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
->>>>>>> a860ed73d154cfc16fd6c4b404696d1139058524
 
 
 
@@ -182,16 +177,16 @@ don't need to load it.</p>
 <span class='va'>m_dists</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel</span>, <span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>mahal_dist</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 4</span><span>
-#&gt; </span><span style='color: #949494;'># Groups:   vowel [4]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 4</span>
+#&gt; <span style='color: #949494;'># Groups:   vowel [4]</span>
 #&gt;   vowel    F1    F2 mahal_dist
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> GOAT   368. </span><span style='text-decoration: underline;'>1</span><span>018.      5.66 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> FACE   377. </span><span style='text-decoration: underline;'>2</span><span>032.      6.52 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> FACE   314. </span><span style='text-decoration: underline;'>2</span><span>179.      2.16 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> GOOSE  274. </span><span style='text-decoration: underline;'>1</span><span>378.      0.755
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> FOOT   350. </span><span style='text-decoration: underline;'>1</span><span>624.      4.95 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> FACE   313. </span><span style='text-decoration: underline;'>2</span><span>181.      2.28 </div><div class='input'>  
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> GOAT   368. <span style='text-decoration: underline;'>1</span>018.      5.66 
+#&gt; <span style='color: #BCBCBC;'>2</span> FACE   377. <span style='text-decoration: underline;'>2</span>032.      6.52 
+#&gt; <span style='color: #BCBCBC;'>3</span> FACE   314. <span style='text-decoration: underline;'>2</span>179.      2.16 
+#&gt; <span style='color: #BCBCBC;'>4</span> GOOSE  274. <span style='text-decoration: underline;'>1</span>378.      0.755
+#&gt; <span style='color: #BCBCBC;'>5</span> FOOT   350. <span style='text-decoration: underline;'>1</span>624.      4.95 
+#&gt; <span style='color: #BCBCBC;'>6</span> FACE   313. <span style='text-decoration: underline;'>2</span>181.      2.28 </div><div class='input'>  
 <span class='co'># Plot potential outliers</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>m_dists</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>F2</span>, <span class='va'>F1</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>mahal_dist</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
@@ -213,25 +208,25 @@ don't need to load it.</p>
 <span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` input `mahal_dist`.</span>
-#&gt; <span class='error'></span><span style='color: #BB0000;'>x</span><span> Your data has some NAs, which will cause `tidy_mahalnobis` to crash. Try removing NAs before running `tidy_mahalanobis`.</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> Input `mahal_dist` is `tidy_mahalanobis(F1, F2)`.</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> The error occurred in group 7: vowel = "GOAT".</span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` column `mahal_dist`.</span>
+#&gt; <span class='error'><span style='color: #0000BB;'>ℹ</span> `mahal_dist = tidy_mahalanobis(F1, F2)`.</span>
+#&gt; <span class='error'><span style='color: #BB0000;'>x</span> Your data has some NAs, which will cause `tidy_mahalnobis` to crash. Try removing NAs before running `tidy_mahalanobis`.</span>
+#&gt; <span class='error'><span style='color: #0000BB;'>ℹ</span> The error occurred in group 7: vowel = GOAT.</span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>vowel</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>F1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mahal_dist <span class='op'>=</span> <span class='fu'>tidy_mahalanobis</span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>vowel_id</span>, <span class='va'>vowel</span>, <span class='va'>mahal_dist</span>, <span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 5</span><span>
-#&gt; </span><span style='color: #949494;'># Groups:   vowel [3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 5</span>
+#&gt; <span style='color: #949494;'># Groups:   vowel [3]</span>
 #&gt;   vowel_id vowel mahal_dist    F1    F2
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        2 FACE       6.52   377. </span><span style='text-decoration: underline;'>2</span><span>032.
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        4 FACE       2.16   314. </span><span style='text-decoration: underline;'>2</span><span>179.
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        5 GOOSE      0.755  274. </span><span style='text-decoration: underline;'>1</span><span>378.
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>        7 FOOT       4.95   350. </span><span style='text-decoration: underline;'>1</span><span>624.
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>        8 FACE       2.28   313. </span><span style='text-decoration: underline;'>2</span><span>181.
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>        9 GOOSE      1.63   255. </span><span style='text-decoration: underline;'>1</span><span>333.</div></span></pre>
+#&gt;      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>        2 FACE       6.52   377. <span style='text-decoration: underline;'>2</span>032.
+#&gt; <span style='color: #BCBCBC;'>2</span>        4 FACE       2.16   314. <span style='text-decoration: underline;'>2</span>179.
+#&gt; <span style='color: #BCBCBC;'>3</span>        5 GOOSE      0.755  274. <span style='text-decoration: underline;'>1</span>378.
+#&gt; <span style='color: #BCBCBC;'>4</span>        7 FOOT       4.95   350. <span style='text-decoration: underline;'>1</span>624.
+#&gt; <span style='color: #BCBCBC;'>5</span>        8 FACE       2.28   313. <span style='text-decoration: underline;'>2</span>181.
+#&gt; <span style='color: #BCBCBC;'>6</span>        9 GOOSE      1.63   255. <span style='text-decoration: underline;'>1</span>333.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -44,13 +44,8 @@
 your data using the method described in the Atlas of North American English. 
 NOTE: This is brand new and has not been tested robustly." />
 <meta name="twitter:card" content="summary_large_image" />
-<<<<<<< HEAD
 <meta name="twitter:creator" content="@joey_stan" />
 <meta name="twitter:site" content="@joey_stan" />
-=======
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
->>>>>>> a860ed73d154cfc16fd6c4b404696d1139058524
 
 
 
@@ -202,20 +197,20 @@ results.</p>
    <span class='fu'>norm_anae</span><span class='op'>(</span>hz_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span>, vowel_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>, speaker_id <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span>, <span class='va'>F1_anae</span>, <span class='va'>F2_anae</span><span class='op'>)</span> <span class='co'># &lt;- just the relevant columns</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,100 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,100 x 4</span>
 #&gt;       F1    F2 F1_anae F2_anae
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  699. </span><span style='text-decoration: underline;'>1</span><span>655.    714.   </span><span style='text-decoration: underline;'>1</span><span>690.
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  685. </span><span style='text-decoration: underline;'>1</span><span>360.    700.   </span><span style='text-decoration: underline;'>1</span><span>388.
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  713. </span><span style='text-decoration: underline;'>1</span><span>507.    728.   </span><span style='text-decoration: underline;'>1</span><span>539.
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  801. </span><span style='text-decoration: underline;'>1</span><span>143.    818.   </span><span style='text-decoration: underline;'>1</span><span>167.
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  757. </span><span style='text-decoration: underline;'>1</span><span>258.    772.   </span><span style='text-decoration: underline;'>1</span><span>284.
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  804. </span><span style='text-decoration: underline;'>1</span><span>403.    821.   </span><span style='text-decoration: underline;'>1</span><span>432.
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  664. </span><span style='text-decoration: underline;'>1</span><span>279.    678.   </span><span style='text-decoration: underline;'>1</span><span>306.
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  757. </span><span style='text-decoration: underline;'>1</span><span>325.    773.   </span><span style='text-decoration: underline;'>1</span><span>353.
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  730. </span><span style='text-decoration: underline;'>1</span><span>578.    746.   </span><span style='text-decoration: underline;'>1</span><span>611.
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  700. </span><span style='text-decoration: underline;'>1</span><span>546.    715.   </span><span style='text-decoration: underline;'>1</span><span>578.
-#&gt; </span><span style='color: #949494;'># … with 1,090 more rows</span><span></div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>  699. <span style='text-decoration: underline;'>1</span>655.    714.   <span style='text-decoration: underline;'>1</span>690.
+#&gt; <span style='color: #BCBCBC;'> 2</span>  685. <span style='text-decoration: underline;'>1</span>360.    700.   <span style='text-decoration: underline;'>1</span>388.
+#&gt; <span style='color: #BCBCBC;'> 3</span>  713. <span style='text-decoration: underline;'>1</span>507.    728.   <span style='text-decoration: underline;'>1</span>539.
+#&gt; <span style='color: #BCBCBC;'> 4</span>  801. <span style='text-decoration: underline;'>1</span>143.    818.   <span style='text-decoration: underline;'>1</span>167.
+#&gt; <span style='color: #BCBCBC;'> 5</span>  757. <span style='text-decoration: underline;'>1</span>258.    772.   <span style='text-decoration: underline;'>1</span>284.
+#&gt; <span style='color: #BCBCBC;'> 6</span>  804. <span style='text-decoration: underline;'>1</span>403.    821.   <span style='text-decoration: underline;'>1</span>432.
+#&gt; <span style='color: #BCBCBC;'> 7</span>  664. <span style='text-decoration: underline;'>1</span>279.    678.   <span style='text-decoration: underline;'>1</span>306.
+#&gt; <span style='color: #BCBCBC;'> 8</span>  757. <span style='text-decoration: underline;'>1</span>325.    773.   <span style='text-decoration: underline;'>1</span>353.
+#&gt; <span style='color: #BCBCBC;'> 9</span>  730. <span style='text-decoration: underline;'>1</span>578.    746.   <span style='text-decoration: underline;'>1</span>611.
+#&gt; <span style='color: #BCBCBC;'>10</span>  700. <span style='text-decoration: underline;'>1</span>546.    715.   <span style='text-decoration: underline;'>1</span>578.
+#&gt; <span style='color: #949494;'># … with 1,090 more rows</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
