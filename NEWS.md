@@ -1,3 +1,7 @@
+# joeyr 0.7
+
+* `arpa_to_keywords()` has been replaced with the more robust and flexible `switch_transcriptions`. 
+
 # joeyr 0.6.3
 
 * `manova_p()` now added.

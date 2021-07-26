@@ -101,8 +101,8 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
   - `lbms_index()` allows you to quickly calculate the Low-Back-Merger Shift 
     Index in your data (see Becker 2019; Boberg 2019).
     
-  - `arpa_to_keywords()` (and its shortcut, `arpa_to_wells()`), quickly converts 
-    ARPABET labels to Wells (or Wells-inspired) keywords. 
+  - `switch_transcriptions()` (and its shortcuts including, `arpa_to_wells()`), quickly converts 
+    between ARPABET labels and Wells (or Wells-inspired) keywords. 
 
 ## Group 3: `ggplot2` themes
 
