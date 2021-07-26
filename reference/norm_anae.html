@@ -44,8 +44,8 @@
 your data using the method described in the Atlas of North American English. 
 NOTE: This is brand new and has not been tested robustly." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
+<meta name="twitter:creator" content="@joey_stan" />
+<meta name="twitter:site" content="@joey_stan" />
 
 
 
@@ -190,7 +190,7 @@ results.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tidyverse</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in library(tidyverse): there is no package called ‘tidyverse’</span></div><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>idahoans</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(x): there is no package called ‘joeysvowels’</span></div><div class='input'>
 <span class='co'># Run the function. Since this data doesn't have a column for token ids, I'll create one here.</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

@@ -40,12 +40,13 @@
 
 
 <meta property="og:title" content="Calculate Pillai scores — pillai" />
-<meta property="og:description" content="A function that runs a MANOVA and returns just the pillai score. It works great 
+<meta property="og:description" content="A function that runs a MANOVA and returns a summary statistics. For pillai you get
+just the pillai score and for manova_p you get the p-value. It works great 
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:creator" content="@joeystanley" />
-<meta name="twitter:site" content="@joeystanley" />
+<meta name="twitter:creator" content="@joey_stan" />
+<meta name="twitter:site" content="@joey_stan" />
 
 
 
@@ -132,12 +133,15 @@ base R." />
     </div>
 
     <div class="ref-description">
-    <p>A function that runs a MANOVA and returns just the pillai score. It works great 
+    <p>A function that runs a MANOVA and returns a summary statistics. For <code>pillai</code> you get
+just the pillai score and for <code>manova_p</code> you get the p-value. It works great 
 within a tidyverse pipeline, though to be clear, the function itself uses only
 base R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pillai</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>pillai</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>manova_p</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +178,7 @@ from analysis.</p>
 
 <span class='co'># Look at the low back merger in one speaker.</span>
 <span class='va'>one_speaker</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>midpoints</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>one_speaker</span> <span class='op'>%&gt;%</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(x): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>one_speaker</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LOT"</span>, <span class='st'>"THOUGHT"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in filter(., vowel %in% c("LOT", "THOUGHT")): object 'one_speaker' not found</span></div><div class='input'>  
@@ -183,7 +187,7 @@ from analysis.</p>
 </div><div class='output co'>#&gt; <span class='error'>Error in subset(one_speaker, vowel %in% c("LOT", "THOUGHT")): object 'one_speaker' not found</span></div><div class='input'>
 <span class='co'># Look at the low back merger in many speakers</span>
 <span class='va'>many_speakers</span> <span class='op'>&lt;-</span> <span class='fu'>joeysvowels</span><span class='fu'>::</span><span class='va'>idahoans</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>many_speakers</span> <span class='op'>%&gt;%</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(x): there is no package called ‘joeysvowels’</span></div><div class='input'><span class='va'>many_speakers</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>vowel</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AA"</span>, <span class='st'>"AO"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>pillai <span class='op'>=</span> <span class='fu'>pillai</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>F1</span>, <span class='va'>F2</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>vowel</span><span class='op'>)</span><span class='op'>)</span>
