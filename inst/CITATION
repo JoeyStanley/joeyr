@@ -1,0 +1,27 @@
+citHeader("To cite package ‘joeyr’ in publications use:")
+
+citEntry(
+    entry = {"manual"},
+    title = {"joeyr: Functions for Vowel Data"},
+    author = {"Joseph A. Stanley"},
+    year = {2021},
+    note = {"https://joeystanley.github.io/joeyr/, https://github.com/JoeyStanley/joeyr/"},
+    textVersion = {"Stanley, Joseph A. Joeyr: Functions for Vowel Data (version R package version 0.6.2), 2021. https://joeystanley.github.io/joeyr/."},
+)
+
+citHeader("If you use the `find_outliers` function, you may refer to it as 'the Modified Mahalanobis Distance algorthm implemented in Stanley (2020).")
+
+citEntry(
+  entry = "incollection",
+  author = {"Joseph A. Stanley"},
+  title = {"The Absence of a Religiolect among Latter-day Saints in Southwest Washington"},
+  year = {"2020"},
+  pages = "95-122",
+  editor = {"Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, Tyler Kendall"},
+  booktitle = {"Speech in the Western States: Volume 3, Understudied Varieties"},
+  series = {"Publication of the American Dialect Society"},
+  address = {"Durham, NC"},
+  publisher = {"Duke University Press"},
+  note = {"https://doi.org/10.1215/00031283-8820642"},
+  textVersion = {"Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in Southwest Washington.” In Speech in the Western States: Volume 3, Understudied Varieties, by Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, and Tyler Kendall, 95–122. Publication of the American Dialect Society 105. Durham, NC: Duke University Press, 2020. https://doi.org/10.1215/00031283-8820642."}
+)

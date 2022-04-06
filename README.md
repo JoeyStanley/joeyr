@@ -182,6 +182,22 @@ no longer part of `{joeyr}`, though you can find the code on GitHub in the
     these functions will be phased out since the new
     [`dplyr::relocate`](https://dplyr.tidyverse.org/dev/reference/relocate.html)
     function does what I intended these do to.
+    
+## Citation
+
+If you use this package, I would appreciate a citation. You can cite it as:
+
+> Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. https://joeystanley.github.io/joeyr/ 
+
+Specifically, if you use the `find_outliers()` function, you can refer to it as 
+something like "the Modified Mahalanobis Distance implemented in Stanley (2020).
+
+> Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in 
+Southwest Washington.” In Speech in the Western States: Volume 3, Understudied 
+Varieties, by Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, and 
+Tyler Kendall, 95–122. Publication of the American Dialect Society 105. Durham, 
+NC: Duke University Press, 2020. [https://doi.org/10.1215/00031283-8820642](https://doi.org/10.1215/00031283-8820642).
+
 
 ## Conclusion
 
