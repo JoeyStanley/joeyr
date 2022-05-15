@@ -23,8 +23,7 @@ eucl_dist <- function (x1, x2, y1, y2) {
 #'
 #' A function that runs a MANOVA and returns a summary statistics. For \code{pillai} you get
 #' just the pillai score and for \code{manova_p} you get the p-value. It works great 
-#' within a tidyverse pipeline, though to be clear, the function itself uses only
-#' base R. 
+#' within a tidyverse pipeline, though the function itself uses only base R. 
 #' 
 #' This function is best run when you've got your data properly subsetted so that 
 #' only two vowels' data are included. If you want to calculate the pillai score
@@ -192,100 +191,7 @@ tidy_mahalanobis <- function(...) {
 
 
 
-#' ANAE Vowel Normalization
-#' 
-#' This is a a tidyverse-compatible function that makes it easy to normalize 
-#' your data using the method described in the Atlas of North American English. 
-#' NOTE: This is brand new and has not been tested robustly.
-#' 
-#' The data must be grouped by speaker prior to running the function.
-#' 
-#' The function works best when only F1 and F2 data are included. F3 can be included
-#' but the results may not be comparable with other studies. 
-#' 
-#' By default, the function will use the Telsur G value listed in the ANAE (6.896874).
-#' This is recommended to make results most compatible with the ANAE and other
-#' studies that use the same normalization procedure. The function can calculate
-#' a G value based on the dataset provided when \code{use_telsur_g} is set to 
-#' \code{FALSE}. 
-#' 
-#' It is unclear how the ANAE function should work with trajectory data.
-#' This function pools all data together and normalizes it together, which means
-#' one small modification was required to calculate the G value if the Telsur G 
-#' is not used: I had to add
-#' the average number of time points per vowel token in the denominator. Not sure
-#' if that's how it should be done, but it makes sense to me and returns sensible
-#' results. 
-#' 
-#' @param df The dataframe containing the formant measurements you want to normalize.
-#' @param hz_cols A list of columns (unquoted) containing the formant measurements themselves.
-#' @param vowel_id The name of the column containing unique identifiers per vowel token. 
-#' If your data is set up so that there is one row per token, you can put \code{row.names(.)}
-#' here instead.
-#' @param speaker_id The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).
-#' @param use_telsur_g By default, this will use the Telsur G value (6.896874) listed in the ANAE. If set to \code{FALSE}, it will calculate the G value based on the dataset.
-#' 
-#' @return The same dataframe, but with new column(s), suffixed with "_anae" that have the normalized data.
-#' @examples 
-#' library(tidyverse)
-#' df <- joeysvowels::idahoans
-#' 
-#' # Run the function. Since this data doesn't have a column for token ids, I'll create one here.
-#' df %>%
-#'    group_by(speaker) %>%
-#'    norm_anae(hz_cols = c(F1, F2), vowel_id = row.names(.), speaker_id = speaker) %>%
-#'    ungroup() %>%
-#'    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
-norm_anae <- function(df, hz_cols, vowel_id, speaker_id, use_telsur_g = TRUE) {
-  
-  # Get the number of formants (may be 1 if in a tall format)
-  n_formants <- df %>%
-    ungroup() %>%
-    select({{hz_cols}}) %>%
-    length()
-  
-  if (use_telsur_g) {
-    g <- 6.896874
-  } else {
-    # Get the sum of log of the hz
-    sum_log_hz <- df %>%
-      ungroup() %>%
-      select({{hz_cols}}) %>%
-      log() %>%
-      sum(na.rm = TRUE)
-    
-    # Get the number of tokens
-    n_tokens <- df %>%
-      ungroup() %>%
-      select({{vowel_id}}) %>%
-      distinct() %>%
-      nrow()
-    
-    # Trajectory info is not in the ANAE formula, but I need to add it to the denominator.
-    # I can calculate it by dividing the number of measurements by the number of tokens.
-    n_timepoints <- nrow(df)/n_tokens
-    
-    # Now use those to get G
-    g <- sum_log_hz / (n_tokens * n_formants * n_timepoints)
-  }
-  
-  # Now use G to get the scaling factors for each speaker
-  scaling_factors <- df %>%
-    summarize(individual_sum_log_hz = sum(log({{hz_cols}}), na.rm = TRUE),
-              individual_n_tokens = n(),
-              .groups = "keep") %>% # <- suppresses a warning
-    mutate(s = individual_sum_log_hz / (individual_n_tokens * n_formants), # <- I guess I don't need to add n_timepoints here?
-           expansion = exp(g - s)) %>%
-    arrange(expansion) %>%
-    select({{speaker_id}}, expansion)
-  
-  # Now join the expansions to the df, multiply the hz values, and clean up (remove the expansion and rearrange columns)
-  df %>%
-    left_join(scaling_factors, by = as_label(enquo(speaker_id))) %>%
-    mutate(across(c({{hz_cols}}), ~.*expansion, .names = "{col}_anae")) %>%
-    select(-expansion) %>%
-    relocate(ends_with("anae"), .after = c({{hz_cols}}))
-}
+
 
 
 
@@ -359,311 +265,321 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
 
 
 
-#' ∆F Normalization
+
+
+
+
+
+
+#' Code allophones
 #' 
-#' Normalize vowel formant measurements with ∆F (see Johnson 2020). This 
-#' function is intended to be used within a tidyverse pipeline. 
-#' 
-#' The ∆F is a normalization technique that is based on a single, interpretable
-#' parameter for each speaker. The parameter is called ∆F and is "an estimate of 
-#' formant spacing in a vocal tract with no constrictions" (Johnson 2020:10). 
-#' 
-#' You will need to group the data by speaker with \code{group_by()} before 
-#' applying this function if you want to normalize the data by speaker.
-#' 
-#' The data must be numeric, and there cannot be any \code{NA}s. So, if you're using 
-#' data extracted from Praat, you may have to filter out bad F3 and F4 data
-#' and then convert the column to numeric.
-#' 
-#' Note that this is a new function and has not been tested very robustly yet.
-#' 
-#' 
-#' @param df The data frame containing the formant measurements you want to 
-#' normalize
-#' @param .F1,.F2,.F3,.F4 The (unquoted) name of the column containing the F1 
-#' measurements. The first three are required, but you may leave off F4. It is 
-#' recommended that you include F4 if the data is available and reliable since 
-#' it produces more accurate results.
-#' @param suffix A string. The suffix you'd like to append to column names in 
-#' new normalized columns. By default, it's \code{"_deltaF"} so if your original F1 
-#' column was called \code{F1} then the normalized one will be \code{F1_deltaF}.
-#' @param return A string. By default, it's \code{"formants"} so it'll return the 
-#' normalized values for you. If you'd like to see the actual ΔF values, you 
-#' can do so by putting \code{"deltaF"} instead.
-#' 
-#' @references 
-#' Johnson, Keith. The ΔF Method of Vocal Tract Length Normalization for Vowels. 
-#' Laboratory Phonology: Journal of the Association for Laboratory Phonology 11, 
-#' no. 1 (July 22, 2020): 10. https://doi.org/10.5334/labphon.196.
-#' 
-#' @return The original dataframe with new columns containing the normalized measurements.
-#' @examples 
-#' library(tidyverse)
-#' df <- joeysvowels::idahoans
+#' A function to classify vowel data into contextual allophones. 
 #'  
-#' # Basic usage
-#' df %>%  
-#'    group_by(speaker) %>%
-#'    norm_deltaF(F1, F2, F3, F4)
-#'    
-#' # F4 is not required
-#' df %>%  
-#'    group_by(speaker) %>%
-#'    norm_deltaF(F1, F2, F3)
-#'  
-#' # Change the new columns' suffix
-#' df %>%  
-#'    group_by(speaker) %>%
-#'    norm_deltaF(F1, F2, F3, suffix = "_norm")
-#'    
-#' # Return ∆F instead
-#' df %>%  
-#'    group_by(speaker) %>%
-#'    norm_deltaF(F1, F2, F3, F4, return = "deltaF")
-#'    
-norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "formants") {
-  
-  # If only three formants are supplied...
-  if (missing(.F4)) {
-    
-    deltaFs <- df %>%
-      mutate(.F1_sum = {{.F1}} / 0.5,
-             .F2_sum = {{.F2}} / 1.5,
-             .F3_sum = {{.F3}} / 2.5) %>%
-      mutate(sum_formants = .F1_sum + .F2_sum + .F3_sum) %>%
-      summarize(deltaF = sum(sum_formants)/(3 * n()), .groups = "keep")
-    
-    formants <- df %>%
-      left_join(deltaFs, by = group_vars(df)) %>%
-      mutate(across(c({{.F1}}, {{.F2}}, {{.F3}}), ~./deltaF, .names = paste0("{col}", suffix))) %>%
-      relocate(ends_with(suffix), .after = {{.F3}}) %>%
-      select(-deltaF)
-    
-    # If F4 is also supplied...
-  } else {
-    
-    deltaFs <- df %>%
-      mutate(.F1_sum = {{.F1}} / 0.5,
-             .F2_sum = {{.F2}} / 1.5,
-             .F3_sum = {{.F3}} / 2.5,
-             .F4_sum = {{.F4}} / 3.5) %>%
-      mutate(sum_formants = .F1_sum + .F2_sum + .F3_sum + .F4_sum) %>%
-      summarize(deltaF = sum(sum_formants)/(4 * n()), .groups = "keep")
-    
-    
-    formants <- df %>%
-      left_join(deltaFs, by = group_vars(df)) %>%
-      mutate(across(c({{.F1}}, {{.F2}}, {{.F3}}, {{.F4}}), ~./deltaF, .names = paste0("{col}", suffix))) %>%
-      relocate(ends_with(suffix), .after = {{.F4}}) %>%
-      select(-deltaF)
-  }
-  
-  if (return == "deltaF") { 
-    return(deltaFs)
-  } else {
-    return(formants)
-  }
-}
-
-
-
-
-#' Switch between transcription systems.
+#' @param .df The dataset containing vowel data.
+#' @param .old_col The unquoted name of the column containing the vowel labels. 
+#' Often called "vowel" or "phoneme" in many datasets. Note that the function 
+#' assumes Wells lexical sets (FLEECE, TRAP, etc.) rather than ARPABET (IY, AE, etc.) 
+#' or IPA (i, æ, etc.). If your vowels are not already coded using Wells' labels
+#' you can quickly do so with \code{switch_transcriptions} or one of the 
+#' shortcuts like \code{arpa_to_wells}
+#' @param .new_cols A vector of two strings containing the names of the columns
+#' you would like to use. By default \code{c("allophone", "allophone_environment")}.
+#' The first name becomes the name of the column containing the new allophone
+#' labels. The second column becomes the name of the column describing those
+#' labels.
+#' @param .pre_seg The unquoted name of the column that contains the labels for 
+#' the previous segement. In DARLA-generated spreadsheets, this is `pre_seg` and 
+#' in FastTrack-generated spreadsheets, it's `previous_sound`. Assumes ARPABET 
+#' labels.
+#' @param .fol_seg The unquoted name of the column that contains the labels for 
+#' the following segement. In DARLA-generated spreadsheets, this is `fol_seg` and 
+#' in FastTrack-generated spreadsheets, it's `next_sound`. Assumes ARPABET labels.
+#' @param .coronals A vector of strings containing ARPABET labels for coronal consonants.
+#' By default, \code{c("T", "D", "S", "Z", "SH", "ZH", "JH", "N")}. This is used
+#' to create the `TOOT` allophone of `GOOSE`. 
+#' @param .voiceless  A vector of strings containing ARPABET labels for voiceless
+#' consonants. By default, \code{c("P", "T", "K", "CH", "F", "TH", "S", "SH")}. 
+#' This is used to create the `PRICE` allophone of `PRIZE`. 
 #' 
-#' A function to switch between ARPABET, Wells' Lexical Sets, the B_T set, and the IPA.
+#' @note Here are the list of the contextual allophones that are created. Note 
+#' that I largely follow my own advice about what to call \href{https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap}{elsewhere allophones},
+#' what to call \href{https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels}{prelateral allophones}, 
+#' and \href{https://joeystanley.com/blog/thoughts-on-allophonic-extensions-to-wells-lexical-sets}{other allophones}. 
+#' Obviously, this list is pretty subjective and largely based on what my own 
+#' research has needed, so it may not work completely for you and your research. 
+#' Please contact me at \email{joey_stanley@byu.edu} if you want to see an allophone 
+#' get added or if you spot an error in the coding.
 #' 
-#' Linguists use different ways to code English vowels in a computer-friendly
-#' way. FAVE-Align and MFA use ARPABET, which assigns a two-letter code to each
-#' vowel phoneme (IY, IH, EY, EH, etc.). An alternative approach is to use a 
-#' keyword denoting a lexical set, whether it be the original Wells keywords 
-#' or an alternative using the "B_T" frame. See 
-#' \href{https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap}{this blog post} 
-#' for more background.
+#' \itemize{
+#'   \item FLEECE becomes 
+#'     \itemize{
+#'       \item ZEAL before laterals
+#'       \item BEET elsewhere
+#'     }
+#'   \item KIT becomes \itemize{
+#'     \item GUILT before laterals
+#'     \item NEAR before rhotics
+#'     \item BIG before G
+#'     \item BIN before M and N
+#'     \item BING before NG
+#'     \item BIT elsewhere
+#'     }
+#'   \item FACE becomes \itemize{
+#'     \item FLAIL before laterals
+#'     \item VAGUE before G
+#'     \item X elsewhere
+#'     }
+#'   \item DRESS becomes \itemize{
+#'     \item SHELF before laterals
+#'     \item SQUARE before rhotics
+#'     \item BEG before G
+#'     \item BEN before M and N
+#'     \item BENG before NG
+#'     \item BET elsewhere
+#'     }
+#'   \item TRAP becomes \itemize{
+#'     \item TALC before laterals
+#'     \item BAG before G
+#'     \item BAN before M and N
+#'     \item BANG before NG
+#'     \item BAT elsewhere
+#'     }
+#'   \item LOT becomes \itemize{
+#'     \item GOLF before laterals
+#'     \item START before rhotics
+#'     \item BOT elsewhere
+#'     }
+#'   \item THOUGHT becomes \itemize{
+#'     \item FAULT before laterals
+#'     \item FORCE befpre rhotics
+#'     \item BOUGHT elsewhere
+#'     }
+#'   \item STRUT becomes \itemize{
+#'     \item MULCH before laterals
+#'     \item BUT elsewhere
+#'     }
+#'   \item GOAT becomes \itemize{
+#'     \item JOLT before laterals
+#'     \item BOAT elsewhere
+#'     }
+#'   \item FOOT becomes \itemize{
+#'     \item WOLF before laterals
+#'     \item CURE before rhotics
+#'     \item PUT elsewhere
+#'     }
+#'   \item GOOSE becomes \itemize{
+#'     \item MULE before Y
+#'     \item TOOT before coronals
+#'     \item SPOOL before laterals
+#'     \item BOOT elsewhere
+#'     }
+#'   \item PRICE becomes \itemize{
+#'     \item PRICE before voiceless segments
+#'     \item PRIZE elsewhere
+#'     }
+#'   }
+#'   
+#' Unfortunately, it is not straightforward to customize this list but you can 
+#' always copy the source code and modify the list yourself. 
 #' 
-#' The ARPABET symbols in this function are IY, IH, EY, EH, AE, AA, AO, AH, OW, UH, 
-#' UW, AY, AW, OY, ER.
+#' Alternatively, you can use \code{forcats::fct_collapse()} to collapse 
+#' distinctions that you don't need. See example code below. 
 #' 
-#' The original Wells' lexical keywords in this function are FLEECE, KIT, FACE,
-#' DRESS, TRAP, LOT, THOUGHT, STRUT, GOAT, FOOT, GOOSE, PRICE, MOUTH, CHOICE,
-#' and NURSE.
+#' You can also of course create your own allophones if desired. Note that some
+#' allophones depend on other environmental information like syllable structure and  
+#' morpheme/word boundaries, or they may be entirely lexical (FORCE vs. NORTH). 
+#' They may be more complicated than what ARPABET can code for (MARY, MERRY, and
+#' MARRY) or just inconsistently coded. For the sake of simplicity, these 
+#' allophones are not included in this function.
 #' 
-#' The lexical set using the B_T frame include BEET, BIT, BAIT, BET, BAT, BOT,
-#' BOUGHT, BUT, BOAT, BOOK, BOOT, BITE, BOUT, BOY, and BIRD. 
+#' The environments therefore are the following 
+#' \itemize{
+#'   \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL
+#'   \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE
+#'   \item "prevelar" includes BIG, VAGUE, BEG, BAG, 
+#'   \item "prenasal" includes BIN, BEN, BAN
+#'   \item "prevelarnasal" includes BING, BENG, BANG
+#'   \item "prevoiceless" includes PRICE
+#'   \item "post-Y" includes MULE
+#'   \item "postcoronal" includes TOOT
+#'   \item "elsewhere" includes BEET, BIT, BAIT, BET, BAT, BOT, BOUGHT, BUT, BOAT, PUT, BOOT, PRIZE
+#' }
 #' 
-#' The IPA symbols include i, ɪ, e, ɛ, æ, ɑ, ɔ, ʌ, o, ʊ, u, ɑɪ, ɑʊ, ɔɪ, and ɚ.
 #' 
-#' Note that \code{arpa_to_wells} is shorthand for \code{switch_transcriptions(..., .from=arpa, .to=wells)}, 
-#' and only exports to the Wells lexical sets. All other pairs of transcription systems have
-#' their own shortcut function as well (i.e. \code{wells_to_b_t}, \code{b_t_to_ipa}, \code{ipa_to_wells}, etc.).
-#'  
-#' @param x The vector containing the vowel labels you want to convert.
-#' @param .from an unquoted expression. By default, \code{arpa}, meaning the function
-#' will convert ARPABET symbols into another system.
-#' @param .to an unquoted expression. By default, \code{wells}, which will produce 
-#' the original Wells labels. If set to \code{"b_t"}, it will use the "B_T" frame. 
-#' @param ordered a logical. by default, \code{TRUE}, which will return the factor in an 
-#' order that goes approximately counter clockwise in the vowel space, with 
-#' diphthongs last. If \code{FALSE}, it will retain the original order (which, 
-#' unless already specified, will be alphabetical or the order in which R sees
-#' the individial levels).
-#' @param as_character a logical. \code{FALSE} by default, meaning it will return
-#' the vector as a factor in the order specified by \code{ordered}. If \code{TRUE}, 
-#' it will return the vector as a character vector (and will silently ignore
-#' the \code{ordered} argument).
 #' 
-#' @return A vector with the factors recoded. Any string that is not in one of the 
-#' preset lists of symbols will be silently ignored.
+#' @return A dataframe with two additional columns. One column contains labels 
+#' for the allophones and the other contains category labels for those 
+#' allophones' contexts. The second column can be useful for quickly excluding 
+#' certain allophones like prelaterals or prerhotics or coloring families of 
+#' allophones in visualizations (such as turning all prelateral allophones gray). 
+#' These two new columns are positioned immediately after the original vowel 
+#' column indicated in \code{.old_col},
 #' 
 #' @examples
 #' suppressPackageStartupMessages(library(tidyverse))
 #' 
-#' darla <- joeysvowels::darla 
-#' darla %>%
-#'   mutate(vowel = switch_transcriptions(vowel, .from = arpa, .to = wells)) %>%
-#'   count(vowel)
-#'   
-#' darla %>%
-#'   mutate(vowel = switch_transcriptions(vowel, .from = arpa, .to = wells, ordered = FALSE)) %>%
-#'   count(vowel)
-#'
-#' darla %>%
-#'   mutate(vowel = switch_transcriptions(vowel, .from = arpa, .to = b_t, as_character = TRUE)) %>%
-#'   count(vowel)
-#'   
-#' # Works even if not all vowel levels are present
-#' darla %>%
-#'   filter(vowel %in% c("IY", "AE", "AY", "UW")) %>%
-#'   mutate(vowel = switch_transcriptions(vowel, .from = arpa, .to = b_t)) %>%
-#'   count(vowel)
-#'   
-#' # Here's a non-tidyverse version (though tidyverse is still used under the hood)
-#' darla$vowel <- switch_transcriptions(darla$vowel, .from = arpa, .to = b_t)
+#' # Get some sample DARLA data to play with
+#' darla <- joeysvowels::darla %>%
+#'   select(word, vowel, pre_seg, fol_seg) %>%
+#'   mutate(phoneme = joeyr:::arpa_to_wells(vowel), .after = vowel)
 #' 
-#' # Note that shortcut functions also exist:
+#' # Basic usage
 #' darla %>%
-#'   mutate(vowel = arpa_to_wells(vowel)) %>%
-#'   count(vowel)
+#'   code_allophones(.old_col = phoneme, .fol_seg = fol_seg, .pre_seg = pre_seg) %>%
+#'   slice_sample(n = 20)
+#' 
+#' # Specify the names of the new columns with the `.new_cols` argument
 #' darla %>%
-#'   mutate(vowel = arpa_to_b_t(vowel)) %>%
-#'   count(vowel)
-switch_transcriptions <- function(x, .from, .to, ordered = TRUE, as_character = FALSE) {
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"), 
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg) %>%
+#'   slice_sample(n = 20)
+#' 
+#' # Filtering by environment is straightforward
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"), 
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg) %>%
+#'   filter(environment == "elsewhere") %>%
+#'   slice_sample(n = 20)
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"), 
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg) %>%
+#'   filter(!environment %in% c("prerhotic", "prevelarnasal", "prevelar")) %>%
+#'   slice_sample(n = 20)
+#' 
+#' # Some users may want to supply their own list of coronal consonants.
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"),
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg,
+#'                   .coronals = c("T", "D", "S", "Z", "SH", "ZH", "JH", "N", "Y")) %>%
+#'   filter(phoneme == "GOOSE") %>%
+#'   slice_sample(n = 20)
+#' 
+#' # Other users may want to specify their own list of voiceless consonants. 
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"),
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg,
+#'                   .voiceless = c("P", "T", "K", "CH", "F", "TH", "S", "SH", "X")) %>%
+#'   filter(phoneme == "PRICE") %>%
+#'   slice_sample(n = 20)
+#' 
+#' # Collapsing distinctions can be done post hoc (though it may take extra work to get the environment column to match.)
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"), 
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg) %>%
+#'   # Get a subset for demonstration purposes
+#'   filter(allophone %in% c("BIT", "BIG")) %>%
+#'   group_by(allophone) %>%
+#'   slice_sample(n = 5) %>%
+#'   ungroup() %>%
+#'   # Now collapse distinctions
+#'   mutate(allophone = fct_collapse(allophone, "BIT" = c("BIT", "BIG")),
+#'          environment = ifelse(allophone == "BIT", "elsewhere", allophone))
+#' 
+#' # Creating new allophones depends on the complexity of the allophone         
+#' darla %>%
+#'   code_allophones(.old_col = phoneme, 
+#'                   .new_cols = c("allophone", "environment"), 
+#'                   .fol_seg = fol_seg, 
+#'                   .pre_seg = pre_seg) %>%
+#'   # Create voice and voiceless distinctions for MOUTH
+#'   mutate(allophone = case_when(phoneme == "MOUTH" & fol_seg %in% c("P", "T", "K", "CH", "F", "TH", "S", "SH") ~ "BOUT",
+#'                                phoneme == "MOUTH" ~ "LOUD",
+#'                                TRUE ~ allophone),
+#'          environment = if_else(allophone == "BOUT",  "prevoiceless", environment)) %>%
+#'   # Get a subset for demonstration purposes
+#'   filter(phoneme == "MOUTH") %>%
+#'   group_by(allophone) %>%
+#'   slice_sample(n = 5) %>%
+#'   ungroup()
+code_allophones <- function(.df, .old_col, .new_cols = c("allophone", "allophone_environment"), 
+                            .pre_seg, .fol_seg,
+                            .coronals = c("T", "D", "S", "Z", "SH", "ZH", "JH", "N"),
+                            .voiceless = c("P", "T", "K", "CH", "F", "TH", "S", "SH")) {
   
-  .from_str <- ensyms(.from)
-  .to_str   <- ensym(.to)
-  if (length(setdiff(c(.from_str, .to_str), c("arpa", "b_t", "ipa", "wells"))) > 0) {
-    stop("The only transcriptions currently supported are 'arpa', 'b_t', 'ipa', and 'wells'.")
-  }
+  new_allophone_colname = .new_cols[[1]]
+  new_environment_colname = .new_cols[[2]]
   
-  levels_df <- tibble(
-    wells = c("FLEECE", "KIT", "FACE", "DRESS", "TRAP",
-              "LOT", "THOUGHT", "STRUT", "GOAT", "FOOT",
-              "GOOSE", "PRICE", "MOUTH", "CHOICE", "NURSE"),
-    b_t   = c("BEET", "BIT", "BAIT", "BET", "BAT",
-              "BOT", "BOUGHT", "BUT", "BOAT", "BOOK",
-              "BOOT", "BITE", "BOUT", "BOY", "BIRD"),
-    arpa  = c("IY", "IH", "EY", "EH", "AE",
-              "AA", "AO", "AH", "OW", "UH",
-              "UW", "AY", "AW", "OY", "ER"),
-    ipa   = c("i", "ɪ", "e", "ɛ", "æ",
-              "ɑ", "ɔ", "ʌ", "o", "ʊ",
-              "u", "ɑɪ", "ɑʊ", "ɔɪ", "ɚ")
-  ) %>%
-    # Only keep the ones present in this dataset
-    filter({{.from}} %in% x)
-  
-  levels <- levels_df %>%
-    pull({{.from}})
-  
-  names(levels) <- levels_df %>%
-    pull({{.to}})
-  
-  x <- fct_recode(x, !!!levels)
-  
-  if (ordered) {
-    x <- fct_relevel(x, names(levels))
-  }
-  
-  if (as_character) {
-    x <- as.character(x)
-  }
-  x
-}
-
-
-#' @rdname switch_transcriptions
-#' @export
-arpa_to_b_t <- function(...) {
-  joeyr::switch_transcriptions(.from = arpa, .to = b_t, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-arpa_to_ipa <- function(...) {
-  joeyr::switch_transcriptions(.from = arpa, .to = ipa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-arpa_to_wells <- function(...) {
-  joeyr::switch_transcriptions(.from = arpa, .to = wells, ...)
-}
-
-
-#' @rdname switch_transcriptions
-#' @export
-b_t_to_arpa <- function(...) {
-  joeyr::switch_transcriptions(.from = b_t, .to = arpa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-b_t_to_ipa <- function(...) {
-  joeyr::switch_transcriptions(.from = b_t, .to = ipa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-b_t_to_wells <- function(...) {
-  joeyr::switch_transcriptions(.from = b_t, .to = wells, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-ipa_to_arpa <- function(...) {
-  joeyr::switch_transcriptions(.from = ipa, .to = arpa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-ipa_to_b_t <- function(...) {
-  joeyr::switch_transcriptions(.from = ipa, .to = b_t, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-ipa_to_wells <- function(...) {
-  joeyr::switch_transcriptions(.from = ipa, .to = wells, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-wells_to_arpa <- function(...) {
-  joeyr::switch_transcriptions(.from = wells, .to = arpa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-wells_to_ipa <- function(...) {
-  joeyr::switch_transcriptions(.from = wells, .to = ipa, ...)
-}
-
-#' @rdname switch_transcriptions
-#' @export
-wells_to_b_t <- function(...) {
-  joeyr::switch_transcriptions(.from = wells, .to = b_t, ...)
-}
-
-#' @export
-arpa_to_keywords <- function(x, style = "wells", ordered = TRUE, as_character = FALSE) {
-  stop("This function has been replaced by the slightly more robust `switch_transcriptions()`. Please switch to that function instead.")
+  .df %>%
+    mutate({{new_allophone_colname}} := case_when(
+      {{.old_col}} == "FLEECE" ~ 
+        case_when({{.fol_seg}} == "L" ~ "ZEAL",
+                  TRUE ~ "BEET"),
+      {{.old_col}} == "KIT" ~
+        case_when({{.fol_seg}} == "L" ~ "GUILT",
+                  {{.fol_seg}} == "R" ~ "NEAR",
+                  {{.fol_seg}} == "G" ~ "BIG",
+                  {{.fol_seg}} %in% c("M", "N") ~ "BIN",
+                  {{.fol_seg}} == "NG" ~ "BING",
+                  TRUE ~ "BIT"),
+      {{.old_col}} == "FACE" ~ 
+        case_when({{.fol_seg}} == "L" ~ "FLAIL",
+                  {{.fol_seg}} == "G" ~ "VAGUE",
+                  TRUE ~ "BAIT"),
+      {{.old_col}} == "DRESS" ~
+        case_when({{.fol_seg}} == "L" ~ "SHELF",
+                  {{.fol_seg}} == "R" ~ "SQUARE",
+                  {{.fol_seg}} == "G" ~ "BEG",
+                  {{.fol_seg}} %in% c("M", "N") ~ "BEN",
+                  {{.fol_seg}} == "NG" ~ "BENG",
+                  TRUE ~ "BET"),
+      {{.old_col}} == "TRAP" ~
+        case_when({{.fol_seg}} == "L" ~ "TALC",
+                  {{.fol_seg}} == "G" ~ "BAG",
+                  {{.fol_seg}} %in% c("M", "N") ~ "BAN",
+                  {{.fol_seg}} == "NG" ~ "BANG",
+                  TRUE ~ "BAT"),
+      {{.old_col}} == "LOT" ~ 
+        case_when({{.fol_seg}} == "L" ~ "GOLF",
+                  {{.fol_seg}} == "R" ~ "START",
+                  TRUE ~ "BOT"),
+      {{.old_col}} == "THOUGHT" ~ 
+        case_when({{.fol_seg}} == "L" ~ "FAULT",
+                  {{.fol_seg}} == "R" ~ "FORCE",
+                  TRUE ~ "BOUGHT"),
+      {{.old_col}} == "STRUT" ~
+        case_when({{.fol_seg}} == "L" ~ "MULCH",
+                  TRUE ~ "BUT"),
+      {{.old_col}} == "GOAT" ~
+        case_when({{.fol_seg}} == "L" ~ "JOLT",
+                  TRUE ~ "BOAT"),
+      {{.old_col}} == "FOOT" ~
+        case_when({{.fol_seg}} == "L" ~ "WOLF",
+                  {{.fol_seg}} == "R" ~ "CURE",
+                  TRUE ~ "PUT"),
+      {{.old_col}} == "GOOSE" ~
+        case_when({{.pre_seg}} == "Y" ~ "MULE",
+                  {{.pre_seg}} %in% .coronals ~ "TOOT",
+                  {{.fol_seg}} == "L" ~ "SPOOL",
+                  TRUE ~ "BOOT"),
+      {{.old_col}} == "PRICE" ~ 
+        case_when({{.fol_seg}} %in% .voiceless ~ "PRICE",
+                  TRUE ~ "PRIZE"),
+      TRUE ~ as.character({{.old_col}})),
+      .after = {{.old_col}}) %>%
+    
+    # Use the .data object since {{}} doesn't work in case_when: https://rlang.r-lib.org/reference/topic-data-mask-programming.html#names-patterns
+    mutate({{new_environment_colname}} := case_when(
+      .data[[new_allophone_colname]] %in% c("ZEAL", "GUILT", "FLAIL", "SHELF", "TALC", "GOLF", "FAULT", "MULCH", "JOLT", "WOLF", "SPOOL") ~ "prelateral",
+      .data[[new_allophone_colname]] %in% c("NEAR", "SQUARE", "START", "FORCE", "CURE") ~ "prerhotic",
+      .data[[new_allophone_colname]] %in% c("BIG", "VAGUE", "BEG", "BAG") ~ "prevelar",
+      .data[[new_allophone_colname]] %in% c("BIN", "BEN", "BAN") ~ "prenasal",
+      .data[[new_allophone_colname]] %in% c("BING", "BENG", "BANG") ~ "prevelarnasal",
+      .data[[new_allophone_colname]] %in% c("PRICE") ~ "prevoiceless",
+      .data[[new_allophone_colname]] %in% c("MULE") ~ "post-Y",
+      .data[[new_allophone_colname]] %in% c("TOOT") ~ "postcoronal",
+      .data[[new_allophone_colname]] %in% c("BEET", "BIT", "BAIT", "BET", "BAT", "BOT", "BOUGHT", "BUT", "BOAT", "PUT", "BOOT", "PRIZE", "MOUTH", "CHOICE", "NURSE") ~ "elsewhere",
+      TRUE ~ "other"),
+      .after = {{new_allophone_colname}})
 }

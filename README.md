@@ -58,23 +58,10 @@ For more details, see `?find_outliers`. In the future I’ll write a
 vignette, blog post, or (perhaps some day) an article about it. For now,
 look at the help page or email me.
 
-Note that there used to be some  functions related to outliers in
-the package: `joey_filter()` and its helper functions, `joey_do_pca()`,
-`joey_adjust_cutoff()`, and `joey_rm_outliers()`. Those did outlier
-detection using Cook’s D but I’ve since discovered that the method was
-inherently flawed. I also tried to algorithmically determine a 
-cutoff for how much data should be filtered, but I could never get it to work
-and it always removed too much data. Besides, the functions were buggy,
-slow, and more complicated than probably needed (they were my first
-attempt at R functions). Be aware that I've removed them in version 0.4 of 
-`{joeyr}`. You should switch to `find_outliers()` instead. If you need to use them
-you can still find them in the `R_depreciated` folder on GitHub, but they are 
-no longer a part of the package.
-
 ## Group 2: Sociophonetics functions
 
-Some functions in `joeyr` are essentially mathmatical functions in that
-they crunch some numbers. They’re all relevant to sociophonetic data.
+Some functions in `joeyr` are useful for sociophonetic analysis. This first set 
+includes what are essentially mathmatical functions in that they crunch some numbers.
 
   - `eucl_dist()` calculates the Euclidean Distance, given a pair of *x*
     and *y* (or, more commonly, F1 and F2) coordinates.
@@ -89,27 +76,39 @@ they crunch some numbers. They’re all relevant to sociophonetic data.
     commands. Like the `pillai()` function, it’s designed so that you can
     get the values you want without interrupting your flow.
     
+  - `lbms_index()` allows you to quickly calculate the Low-Back-Merger Shift 
+    Index in your data (see Becker 2019; Boberg 2019).
+    
+There are three normalization procedures.
+    
   - `norm_anae()` makes it easy to do vowel formant normalization using the
     method described in the *Atlas of North American English* using just 
     one line of code within a tidyverse pipeline. This is my current favorite
     normalization procedure and I was sick of writing large blocks of code in
     all my scripts, so I wrapped it up as a function.
     
-  - `norm_deltaF()` is qanother way to normalize your data, based on Keith 
+  - `norm_deltaF()` is another way to normalize your data, based on Keith 
     Johnson's (2020) paper.
+    
+  - `norm_logmeans()` is a straightforward log-means normalization procedure based
+     on Barreda & Nearey (2018).
 
-  - `lbms_index()` allows you to quickly calculate the Low-Back-Merger Shift 
-    Index in your data (see Becker 2019; Boberg 2019).
+Finally, there are two functions are more about changing labels for phonemes and 
+allophones.
     
   - `switch_transcriptions()` (and its shortcuts including, `arpa_to_wells()`), quickly converts 
     between ARPABET labels and Wells (or Wells-inspired) keywords. 
+    
+  - `code_allophones()` is a one-liner that adds contexual allophones ("BAN", 
+  "BAG", "SPOOL", "TOOT", etc.) to your vowel data.
 
 ## Group 3: `ggplot2` themes
 
 These are currently not documented. The main one is `theme_joey()` which will
 produce plots using my own flavor of `theme_bw()`. There are some variants
 as well. The other helpful function is `joey_arrow()` which is just a
-shortcut for a type of arrow I like when I draw lines on a plot.
+shortcut for a type of arrow I like when I draw lines on a plot. I'll admit I
+don't really use these anymore.
 
 ## Group 4: The grapes
 
@@ -190,7 +189,8 @@ If you use this package, I would appreciate a citation. You can cite it as:
 > Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. https://joeystanley.github.io/joeyr/ 
 
 Specifically, if you use the `find_outliers()` function, you can refer to it as 
-something like "the Modified Mahalanobis Distance implemented in Stanley (2020).
+something like "the Modified Mahalanobis Distance method implemented in Stanley 
+(2020)."
 
 > Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in 
 Southwest Washington.” In Speech in the Western States: Volume 3, Understudied 

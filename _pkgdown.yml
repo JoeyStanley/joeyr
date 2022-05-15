@@ -22,10 +22,12 @@ reference:
   - contents: 
     - eucl_dist
     - pillai
+    - lbms_index
     - norm_anae
     - norm_deltaF
-    - lbms_index
+    - norm_logmeans
     - switch_transcriptions
+    - code_allophones
   - title: The Grapes
   - contents:
     - "`%ni%`"

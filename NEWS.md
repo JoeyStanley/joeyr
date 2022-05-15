@@ -1,3 +1,10 @@
+# joeyr 0.8
+
+* `code_allophones()` now added.
+* `norm_logmeans()` now added, which does a log-means normalization based on Barreda & Nearey (2018).
+* `norm_anae()` updated. The `use_telser_g` argument has been changed to simply `g`. Previously, if you wnated to calculate g internally, you'd do `use_telsur_g = FALSE` and that code didn't work. Now, you'd say `g = "calculate"`, and that does work this time. Additionally, some new functionality is that `g` can be set to any arbitrary value, such as zero: `g = 0`. 
+
+
 # joeyr 0.7
 
 * `arpa_to_keywords()` has been replaced with the more robust and flexible `switch_transcriptions`. 

@@ -1,7 +1,7 @@
 Package: joeyr
 Type: Package
 Title: Functions for Vowel Data
-Version: 0.6.2
+Version: 0.8
 Date: 2021-02-06
 Authors@R: 
     person(given = "Joseph A.",
@@ -15,7 +15,7 @@ URL: https://joeystanley.github.io/joeyr/, https://github.com/JoeyStanley/joeyr/
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports:
     dplyr (>= 1.0.0),
     tidyr (>= 1.0.0),
