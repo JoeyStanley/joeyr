@@ -1,15 +1,6 @@
-citHeader("To cite package ‘joeyr’ in publications use:")
+citHeader("Please use the following citation when using ‘joeyr’ in publications. Specifically, if you use the `find_outliers` function, you may refer to it as 'the Modified Mahalanobis Distance algorthm implemented in Stanley (2020).")
 
-citEntry(
-    entry = {"manual"},
-    title = {"joeyr: Functions for Vowel Data"},
-    author = {"Joseph A. Stanley"},
-    year = {2021},
-    note = {"https://joeystanley.github.io/joeyr/, https://github.com/JoeyStanley/joeyr/"},
-    textVersion = {"Stanley, Joseph A. Joeyr: Functions for Vowel Data (version R package version 0.6.2), 2021. https://joeystanley.github.io/joeyr/."},
-)
-
-citHeader("If you use the `find_outliers` function, you may refer to it as 'the Modified Mahalanobis Distance algorthm implemented in Stanley (2020).")
+citation(auto = meta)
 
 citEntry(
   entry = "incollection",
