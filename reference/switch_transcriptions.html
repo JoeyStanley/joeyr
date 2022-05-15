@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.6.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Switch between transcription systems.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/JoeyStanley/joeyr/blob/HEAD/R/sociophonetics.R" class="external-link"><code>R/sociophonetics.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/JoeyStanley/joeyr/blob/HEAD/R/switch_transcriptions.R" class="external-link"><code>R/switch_transcriptions.R</code></a></small>
     <div class="hidden name"><code>switch_transcriptions.Rd</code></div>
     </div>
 
@@ -59,7 +59,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">x</span>, <span class="va">.from</span>, <span class="va">.to</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span>, as_character <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">switch_transcriptions</span><span class="op">(</span>
+  <span class="va">x</span>,
+  <span class="va">.from</span>,
+  <span class="va">.to</span>,
+  ordered <span class="op">=</span> <span class="cn">TRUE</span>,
+  as_character <span class="op">=</span> <span class="cn">FALSE</span>,
+  warn <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
 
 <span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
 
@@ -107,11 +114,18 @@ the individial levels).</p></dd>
 the vector as a factor in the order specified by <code>ordered</code>. If <code>TRUE</code>, 
 it will return the vector as a character vector (and will silently ignore
 the <code>ordered</code> argument).</p></dd>
+<dt>warn</dt>
+<dd><p>a logical, <code>TRUE</code> by default. If there are levels in the vector that
+are not part of the predefined list above, a warning message will appear alerting 
+you of that fact. The function will still work, but it's good to be alerted if
+there is unexpected input. If the <code>ordered</code> is set to <code>TRUE</code> then
+these extra levels will put at the end. This warning can be suppressed by setting
+this argument to <code>FALSE</code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A vector with the factors recoded. Any string that is not in one of the 
-preset lists of symbols will be silently ignored.</p>
+preset lists of symbols will remain unchanged.</p>
     </div>
     <div id="details">
     <h2>Details</h2>

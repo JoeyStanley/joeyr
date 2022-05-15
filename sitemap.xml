@@ -16,6 +16,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/code_allophones.html</loc>
+  </url>
+  <url>
     <loc>/reference/color_gradienter.html</loc>
   </url>
   <url>
@@ -44,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/norm_deltaF.html</loc>
+  </url>
+  <url>
+    <loc>/reference/norm_logmeans.html</loc>
   </url>
   <url>
     <loc>/reference/pillai.html</loc>
