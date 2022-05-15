@@ -18,8 +18,7 @@ The pillai score from the MANOVA test.
 \description{
 A function that runs a MANOVA and returns a summary statistics. For \code{pillai} you get
 just the pillai score and for \code{manova_p} you get the p-value. It works great 
-within a tidyverse pipeline, though to be clear, the function itself uses only
-base R.
+within a tidyverse pipeline, though the function itself uses only base R.
 }
 \details{
 This function is best run when you've got your data properly subsetted so that 

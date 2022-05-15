@@ -22,9 +22,9 @@ A vector of TRUE/FALSE values. They are in the same order as the original
 }
 \description{
 This is an implementation of the Mahalanobis Distance that is less sensitive
-to outliers. Instead of a blanket filter applying all at once, it iteratively 
-removes points one at a time until a predetermined proportion of data has been
-removed.
+to outliers, first implemented in Stanley (2020). Instead of a blanket filter 
+applying all at once, it iteratively removes points one at a time until a 
+predetermined proportion of data has been removed.
 }
 \details{
 The Mahalanobis distance function is somewhat sensitive to outliers, so if
@@ -50,12 +50,14 @@ While not required, you should typically "group" your data before applying
   Note also that in American English, allophonic variation of some vowels is so 
   great that grouping by vowel may not be enough. If you're working with /u/ for
   example, it's a good idea to split it into three groups: post-coronal, pre-lateral,
-  and elsewhere. For /æ/, it's a good idea to group prenasal tokens separatly. 
+  and elsewhere. For /æ/, it's a good idea to group prenasal tokens separately. 
   If you're using FAVE/DARLA/MFA output, the NORTH and FORCE classes of words
   are transcribed with AO, so it's a good idea to treat those separately. The point 
   is to be mindful of allophonic variation in your data and that it's a good 
   idea to group the data by vowel \emph{class} rather than by vowel. You may have to 
-  do some processing before the filter happens to get this to happen.
+  do some processing before the filter happens to get this to happen. As of 
+  version 0.8 of joeyr, you can now use the \code{code_allophones} function
+  to automatically classify your data into allophones.
   
   Finally, be aware that no tokens will be marked as outliers if the are not 
   a sufficient number of tokens. So if you want to remove 5% of the tokens, 
@@ -93,4 +95,15 @@ df \%>\%
     filter(percent == 50) \%>\%
     group_by(vowel) \%>\%
     count()
+}
+\references{
+If you use this function, you can refer to it as something like "the Modified 
+Mahalanobis Distance method implemented in Stanley (2020)." 
+
+Stanley, Joseph A. "The Absence of a Religiolect among Latter-Day Saints in 
+Southwest Washington." In \emph{Speech in the Western States: Volume 3, 
+Understudied Varieties}, by Valerie Fridland, Alicia Beckford Wassink, Lauren 
+Hall-Lew, and Tyler Kendall, 95–122. Publication of the American Dialect 
+Society 105. Durham, NC: Duke University Press, 2020. 
+\href{https://doi.org/10.1215/00031283-8820642}{https://doi.org/10.1215/00031283-8820642}.
 }
