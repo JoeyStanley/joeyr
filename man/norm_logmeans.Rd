@@ -14,7 +14,7 @@ norm_logmeans(
 )
 }
 \arguments{
-\item{.df}{The data frame containing the formant measurements you want to 
+\item{.df}{The data frame containing the formant measurements you want to
 normalize. \strong{Formant data must be log transformed!} See example code below.}
 
 \item{.formant_cols}{The (unquoted) name(s) of the column containing the formant
@@ -26,26 +26,26 @@ identifiers per speaker.}
 \item{.vowel_col}{The (unquoted) name of the column containing the unique
 identifiers per vowel}
 
-\item{.return}{A string. By default, \code{"data"}, which will returned the 
-your original data with the normalized data appended. If you set this to 
-\code{"params"}, you'll get a data frame with the normalization paramters 
+\item{.return}{A string. By default, \code{"data"}, which will returned the
+your original data with the normalized data appended. If you set this to
+\code{"params"}, you'll get a data frame with the normalization paramters
 for each speakers.}
 
 \item{i_know_more_than_you}{Logical. The function won't work if you've got
-data that doesn't look like log10-transformed formant data. If you want to 
+data that doesn't look like log10-transformed formant data. If you want to
 force the function to run anyway, set this to `TRUE`.}
 }
 \value{
-The original dataframe with new columns containing the normalized 
+The original dataframe with new columns containing the normalized
 measurements. These new columns have "_norm" appended to the column names.
 }
 \description{
 Normalize vowel formant measurements a log-means normalization procedure as
-described in Barreda & Nearey (2018). This function is intended to be used 
+described in Barreda & Nearey (2018). This function is intended to be used
 within a tidyverse pipeline.
 }
 \details{
-The data should \emph{not} be grouped beforehand (e.g. with \code{group_by}). 
+The data should \emph{not} be grouped beforehand (e.g. with \code{group_by}).
 The data must be numeric, and there cannot be any \code{NA}s.
 }
 \note{
@@ -55,40 +55,40 @@ Thanks to Santiago Barreda for providing most of the code for this function.
 library(tidyverse)
 idaho <- joeysvowels::idahoans
 
-# Basic usage. Note that the data has to be log10-transformed. 
+# Basic usage. Note that the data has to be log10-transformed.
 idaho \%>\%
     mutate(F1_log = log10(F1), F2_log = log10(F2)) \%>\%
-    norm_logmeans(.formant_cols = c(F1_log, F2_log), 
-                  .speaker_col = speaker, 
+    norm_logmeans(.formant_cols = c(F1_log, F2_log),
+                  .speaker_col = speaker,
                   .vowel_col = vowel) \%>\%
     head()
-              
+
 # Return the speaker paramters instead.
 idaho \%>\%
     mutate(F1_log = log10(F1), F2_log = log10(F2)) \%>\%
-    norm_logmeans(.formant_cols = c(F1_log, F2_log), 
-                  .speaker_col = speaker, 
+    norm_logmeans(.formant_cols = c(F1_log, F2_log),
+                  .speaker_col = speaker,
                   .vowel_col = vowel,
                   .return = "params") \%>\%
     head()
-              
+
 # If you forget to log-transform the data, it'll throw an error.
 idaho \%>\%
-    norm_logmeans(.formant_cols = c(F1, F2), 
-                  .speaker_col = speaker, 
+    norm_logmeans(.formant_cols = c(F1, F2),
+                  .speaker_col = speaker,
                   .vowel_col = vowel)
-             
+
 # But you can force the function to run on non-transformed data if you're sure you know what you're doing.
 idaho \%>\%
-    norm_logmeans(.formant_cols = c(F1, F2), 
-                  .speaker_col = speaker, 
+    norm_logmeans(.formant_cols = c(F1, F2),
+                  .speaker_col = speaker,
                   .vowel_col = vowel,
                   i_know_more_than_you = TRUE) \%>\%
     head()
 }
 \references{
-Barreda, Santiago, and Terrance M. Nearey. 2018. "A Regression Approach to Vowel 
-Normalization for Missing and Unbalanced Data." \emph{The Journal of the Acoustical 
-Society of America} 144(1): 500–520. 
+Barreda, Santiago, and Terrance M. Nearey. 2018. "A Regression Approach to Vowel
+Normalization for Missing and Unbalanced Data." \emph{The Journal of the Acoustical
+Society of America} 144(1): 500–520.
 \href{https://doi.org/10.1121/1.5047742}{https://doi.org/10.1121/1.5047742}.
 }
