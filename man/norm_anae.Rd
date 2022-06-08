@@ -11,42 +11,42 @@ norm_anae(df, hz_cols, token_id, speaker_id, g = "telsur")
 
 \item{hz_cols}{A list of columns (unquoted) containing the formant measurements themselves.}
 
-\item{token_id}{The name of the column containing unique identifiers per vowel token. 
+\item{token_id}{The name of the column containing unique identifiers per vowel token.
 If your data is set up so that there is one row per token, you can put \code{row.names(.)}
 here instead.}
 
 \item{speaker_id}{The name of the column containing unique identifiers per speaker (usually the column containing the speaker name).}
 
-\item{g}{By default, \code{"telsur"}, whichwill use the Telsur G value (6.896874) 
-listed in the ANAE. If set to \code{"calculate"}, it will calculate the G 
-value based on the dataset. This can be set to any arbitrary number, such as 
+\item{g}{By default, \code{"telsur"}, whichwill use the Telsur G value (6.896874)
+listed in the ANAE. If set to \code{"calculate"}, it will calculate the G
+value based on the dataset. This can be set to any arbitrary number, such as
 \code{0} as well.}
 }
 \value{
 The same dataframe, but with new column(s), suffixed with "_anae" that have the normalized data.
 }
 \description{
-This is a a tidyverse-compatible function that makes it easy to normalize 
-your data using the method described in the Atlas of North American English 
+This is a a tidyverse-compatible function that makes it easy to normalize
+your data using the method described in the Atlas of North American English
 (Labov, Ash, & Boberg 2006).
 }
 \details{
 The data must be grouped by speaker prior to running the function.
 
 The function works best when only F1 and F2 data are included. F3 can be included
-but the results may not be comparable with other studies. 
+but the results may not be comparable with other studies.
 
-By default, the function will use the Telsur G value listed in the ANAE (6.896874) 
+By default, the function will use the Telsur G value listed in the ANAE (6.896874)
 which will make the results most compatible with the ANAE and other
 studies that use the same normalization procedure. The function can calculate
-a G value based on the dataset provided when \code{g} is set to \code{"calculate"}. 
+a G value based on the dataset provided when \code{g} is set to \code{"calculate"}.
 Alternatively, \code{g} can be set to an arbitrary number, such as zero.
 
 It is unclear how the ANAE function should work with trajectory data.
 This function pools all data together and normalizes it together, which means
-one small modification was required to calculate the G value if the Telsur G 
-is not used: I had to add the average number of time points per vowel token 
-in the denominator. Not sure if that's how it should be done, but it makes 
+one small modification was required to calculate the G value if the Telsur G
+is not used: I had to add the average number of time points per vowel token
+in the denominator. Not sure if that's how it should be done, but it makes
 sense to me and returns sensible results.
 }
 \examples{
@@ -58,14 +58,14 @@ df \%>\%
    norm_anae(hz_cols = c(F1, F2), speaker_id = speaker) \%>\%
    ungroup() \%>\%
    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
-   
+
 # Slightly different if G is calculated internally.
 df \%>\%
    group_by(speaker) \%>\%
    norm_anae(hz_cols = c(F1, F2), speaker_id = speaker, g = "calculate") \%>\%
    ungroup() \%>\%
    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
-   
+
 # G can be set to an arbitrary value.
 df \%>\%
    group_by(speaker) \%>\%
@@ -74,6 +74,6 @@ df \%>\%
    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
 }
 \references{
-Labov, William, Sharon Ash, and Charles Boberg. \emph{The Atlas of North American 
+Labov, William, Sharon Ash, and Charles Boberg. \emph{The Atlas of North American
 English: Phonetics, Phonology and Sound Change.} Berlin: Walter de Gruyter, 2006.
 }

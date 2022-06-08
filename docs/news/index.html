@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
       </span>
     </div>
 
@@ -54,18 +54,36 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.1" id="joeyr-081">joeyr 0.8.1<a class="anchor" aria-label="anchor" href="#joeyr-081"></a></h2>
+<ul><li>
+<code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> has a raised cap before triggering a
+warning message.</li>
+<li>
+<code><a href="../reference/find_outliers.html">find_outliers()</a></code> now as the <code>verbose</code>
+argument which, by default, supresses the warning message triggered when
+there is not enough data.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8" id="joeyr-08">joeyr 0.8<a class="anchor" aria-label="anchor" href="#joeyr-08"></a></h2>
 <ul><li>
 <code><a href="../reference/code_allophones.html">code_allophones()</a></code> now added.</li>
 <li>
-<code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> now added, which does a log-means normalization based on Barreda &amp; Nearey (2018).</li>
+<code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> now added, which does a log-means
+normalization based on Barreda &amp; Nearey (2018).</li>
 <li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> updated. The <code>use_telser_g</code> argument has been changed to simply <code>g</code>. Previously, if you wnated to calculate g internally, you’d do <code>use_telsur_g = FALSE</code> and that code didn’t work. Now, you’d say <code>g = "calculate"</code>, and that does work this time. Additionally, some new functionality is that <code>g</code> can be set to any arbitrary value, such as zero: <code>g = 0</code>.</li>
+<code><a href="../reference/norm_anae.html">norm_anae()</a></code> updated. The <code>use_telser_g</code>
+argument has been changed to simply <code>g</code>. Previously, if you
+wnated to calculate g internally, you’d do
+<code>use_telsur_g = FALSE</code> and that code didn’t work. Now, you’d
+say <code>g = "calculate"</code>, and that does work this time.
+Additionally, some new functionality is that <code>g</code> can be set
+to any arbitrary value, such as zero: <code>g = 0</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7" id="joeyr-07">joeyr 0.7<a class="anchor" aria-label="anchor" href="#joeyr-07"></a></h2>
 <ul><li>
-<code>arpa_to_keywords()</code> has been replaced with the more robust and flexible <code>switch_transcriptions</code>.</li>
+<code>arpa_to_keywords()</code> has been replaced with the more
+robust and flexible <code>switch_transcriptions</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.3" id="joeyr-063">joeyr 0.6.3<a class="anchor" aria-label="anchor" href="#joeyr-063"></a></h2>
@@ -75,40 +93,60 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.2" id="joeyr-062">joeyr 0.6.2<a class="anchor" aria-label="anchor" href="#joeyr-062"></a></h2>
 <ul><li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying <code>use_telsur_g = FALSE</code>.</li>
+<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can
+be suppressed and a new G value can be calculated using the data (the
+old default behavior), by specifying
+<code>use_telsur_g = FALSE</code>.</li>
 <li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now requires the data to be grouped by speaker prior to running. This makes it more consistent with the other normalization procedures in this package.</li>
+<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now requires the data to be grouped by
+speaker prior to running. This makes it more consistent with the other
+normalization procedures in this package.</li>
 <li>
-<code><a href="../reference/switch_transcriptions.html">wells_to_arpa()</a></code> was created, as an inverse function to <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> because I needed it one time.</li>
+<code><a href="../reference/switch_transcriptions.html">wells_to_arpa()</a></code> was created, as an inverse function to
+<code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> because I needed it one time.</li>
 <li>
-<code><a href="../reference/norm_deltaF.html">norm_deltaF()</a></code> has been fixed so that including F4 now works. Additional arguments have been added as well.</li>
+<code><a href="../reference/norm_deltaF.html">norm_deltaF()</a></code> has been fixed so that including F4 now
+works. Additional arguments have been added as well.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="joeyr-061">joeyr 0.6.1<a class="anchor" aria-label="anchor" href="#joeyr-061"></a></h2>
 <ul><li>
-<code><a href="../reference/pillai.html">pillai()</a></code> and <code><a href="../reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> get much clearer examples and much more documentation.</li>
+<code><a href="../reference/pillai.html">pillai()</a></code> and <code><a href="../reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> get much
+clearer examples and much more documentation.</li>
 <li>
-<code>arpa_to_keywords()</code> no longer crashes if a dataset didn’t have all vowels present.</li>
+<code>arpa_to_keywords()</code> no longer crashes if a dataset
+didn’t have all vowels present.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6" id="joeyr-06">joeyr 0.6<a class="anchor" aria-label="anchor" href="#joeyr-06"></a></h2>
 <ul><li>
-<code>arpa_to_keywords()</code> and <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> added.</li>
+<code>arpa_to_keywords()</code> and <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code>
+added.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5" id="joeyr-05">joeyr 0.5<a class="anchor" aria-label="anchor" href="#joeyr-05"></a></h2>
-<ul><li>Example code now uses the the <code>joeysvowels</code> package, a remote dependency.</li>
+<ul><li>Example code now uses the the <code>joeysvowels</code> package, a
+remote dependency.</li>
 <li>
 <code><a href="../reference/norm_anae.html">norm_anae()</a></code> is now more robust (thanks, Thomas!)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4" id="joeyr-04">joeyr 0.4<a class="anchor" aria-label="anchor" href="#joeyr-04"></a></h2>
-<ul><li>Switching to pkgdown, which involved some overdue tidying of the package
-<ul><li>Removed depreciated functions, including <code>hz</code>, <code>bark</code>, <code>spread_n</code>, <code>move_x_before_y</code>, <code>move_x_after_y</code>, and all the functions related to the old outlier detection procedure (<code>joey_filter</code>, <code>joey_do_pca</code>, <code>joey_adjust_cutoff</code>, <code>joey_rm_outliers</code>).</li>
-<li>Removed the datasets. They were just added like a week ago, but I decided to move them to a separate package <a href="https://joeystanley.github.io/joeysvowels/" class="external-link">joeysvowels</a>.</li>
+<ul><li>Switching to pkgdown, which involved some overdue tidying of the
+package
+<ul><li>Removed depreciated functions, including <code>hz</code>,
+<code>bark</code>, <code>spread_n</code>, <code>move_x_before_y</code>,
+<code>move_x_after_y</code>, and all the functions related to the old
+outlier detection procedure (<code>joey_filter</code>,
+<code>joey_do_pca</code>, <code>joey_adjust_cutoff</code>,
+<code>joey_rm_outliers</code>).</li>
+<li>Removed the datasets. They were just added like a week ago, but I
+decided to move them to a separate package
+<a href="https://joeystanley.github.io/joeysvowels/" class="external-link">joeysvowels</a>.</li>
 <li>Renamed the .R filenames</li>
 </ul></li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Added a <code>NEWS.md</code> file to track changes to the
+package.</li>
 </ul></div>
   </div>
 
@@ -124,7 +162,8 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>

@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
       </span>
     </div>
 
@@ -81,15 +81,26 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This is essentially my sandbox R Package. It has a hodge-podge of functions that I’ve used over the past several years. As I work with my sociophonetic data, I find myself running the same sorts of procedures over and over, so I often decide to write a generalized function to take care of that stuff in one line within a tidyverse pipeline.</p>
-<p>The functions in <code>joeyr</code> can be grouped into about five different categories: the outlier detecters, sociophonetics functions, <code>ggplot2</code> themes, the “grapes”, and other helpful functions. This README briefly explains them all.</p>
-<p>Some of these functions I’ve generalized into something that others may find useful. Others are very specific to my own code and workflow so I’m not sure if they’ll be useful to you. Some functions are documented well but lots are not.</p>
+<p>This is essentially my sandbox R Package. It has a hodge-podge of
+functions that I’ve used over the past several years. As I work with my
+sociophonetic data, I find myself running the same sorts of procedures
+over and over, so I often decide to write a generalized function to take
+care of that stuff in one line within a tidyverse pipeline.</p>
+<p>The functions in <code>joeyr</code> can be grouped into about five
+different categories: the outlier detecters, sociophonetics functions,
+<code>ggplot2</code> themes, the “grapes”, and other helpful functions.
+This README briefly explains them all.</p>
+<p>Some of these functions I’ve generalized into something that others
+may find useful. Others are very specific to my own code and workflow so
+I’m not sure if they’ll be useful to you. Some functions are documented
+well but lots are not.</p>
 <p>For questions, feel free to contact me at <a href="mailto:joey_stanley@byu.edu" class="email">joey_stanley@byu.edu</a> or on Twitter at <a href="https://twitter.com/joey_stan" class="external-link">@joey_stan</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>This package can be downloaded to your computer by downloading it from Github.</p>
+<p>This package can be downloaded to your computer by downloading it
+from Github.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#install.packages("devtools") # &lt;- if not already installed</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"JoeyStanley/joeyr"</span><span class="op">)</span></code></pre></div>
@@ -97,79 +108,173 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the "joeyr" package.</span></span></code></pre></div>
-<p>You’ll know you’ve got it installed properly when you see a little message saying <code>This is the "joeyr" package.</code>.</p>
+<p>You’ll know you’ve got it installed properly when you see a little
+message saying <code>This is the "joeyr" package.</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="group-1-the-filter">Group 1: The Filter<a class="anchor" aria-label="anchor" href="#group-1-the-filter"></a>
 </h2>
-<p>The main function, and the reason I created the package in the first place, is <code><a href="reference/find_outliers.html">find_outliers()</a></code>. It implements a version of the Mahalanobis Distance, except it does so iteratively. After finding the distances for each point, it marks the furthest token as an outlier, and then recalculates the distance based on the remaining points. It continues this one-at-a-time procedure until a proportion of your data (that you’ve specified) has been removed.</p>
-<p>For more details, see <code><a href="reference/find_outliers.html">?find_outliers</a></code>. In the future I’ll write a vignette, blog post, or (perhaps some day) an article about it. For now, look at the help page or email me.</p>
+<p>The main function, and the reason I created the package in the first
+place, is <code><a href="reference/find_outliers.html">find_outliers()</a></code>. It implements a version of the
+Mahalanobis Distance, except it does so iteratively. After finding the
+distances for each point, it marks the furthest token as an outlier, and
+then recalculates the distance based on the remaining points. It
+continues this one-at-a-time procedure until a proportion of your data
+(that you’ve specified) has been removed.</p>
+<p>For more details, see <code><a href="reference/find_outliers.html">?find_outliers</a></code>. In the future I’ll
+write a vignette, blog post, or (perhaps some day) an article about it.
+For now, look at the help page or email me.</p>
 </div>
 <div class="section level2">
 <h2 id="group-2-sociophonetics-functions">Group 2: Sociophonetics functions<a class="anchor" aria-label="anchor" href="#group-2-sociophonetics-functions"></a>
 </h2>
-<p>Some functions in <code>joeyr</code> are useful for sociophonetic analysis. This first set includes what are essentially mathmatical functions in that they crunch some numbers.</p>
+<p>Some functions in <code>joeyr</code> are useful for sociophonetic
+analysis. This first set includes what are essentially mathmatical
+functions in that they crunch some numbers.</p>
 <ul>
-<li><p><code><a href="reference/eucl_dist.html">eucl_dist()</a></code> calculates the Euclidean Distance, given a pair of <em>x</em> and <em>y</em> (or, more commonly, F1 and F2) coordinates.</p></li>
-<li><p><code><a href="reference/pillai.html">pillai()</a></code> calculates the Pillai score. It’s not a complicated process in general, but this function simplifies it down quite a bit so it doesn’t interrupt your workflow.</p></li>
-<li><p><code><a href="reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> is probably my favorite. It’s an implementation of the <code><a href="https://rdrr.io/r/stats/mahalanobis.html" class="external-link">mahalanobis()</a></code> function, which calculates the Mahalanobis distance, only it’s meant to work within a <code>tidyverse</code> pipeline of commands. Like the <code><a href="reference/pillai.html">pillai()</a></code> function, it’s designed so that you can get the values you want without interrupting your flow.</p></li>
-<li><p><code><a href="reference/lbms_index.html">lbms_index()</a></code> allows you to quickly calculate the Low-Back-Merger Shift Index in your data (see Becker 2019; Boberg 2019).</p></li>
+<li><p><code><a href="reference/eucl_dist.html">eucl_dist()</a></code> calculates the Euclidean Distance, given
+a pair of <em>x</em> and <em>y</em> (or, more commonly, F1 and F2)
+coordinates.</p></li>
+<li><p><code><a href="reference/pillai.html">pillai()</a></code> calculates the Pillai score. It’s not a
+complicated process in general, but this function simplifies it down
+quite a bit so it doesn’t interrupt your workflow.</p></li>
+<li><p><code><a href="reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> is probably my favorite. It’s an
+implementation of the <code><a href="https://rdrr.io/r/stats/mahalanobis.html" class="external-link">mahalanobis()</a></code> function, which
+calculates the Mahalanobis distance, only it’s meant to work within a
+<code>tidyverse</code> pipeline of commands. Like the
+<code><a href="reference/pillai.html">pillai()</a></code> function, it’s designed so that you can get the
+values you want without interrupting your flow.</p></li>
+<li><p><code><a href="reference/lbms_index.html">lbms_index()</a></code> allows you to quickly calculate the
+Low-Back-Merger Shift Index in your data (see Becker 2019; Boberg
+2019).</p></li>
 </ul>
 <p>There are three normalization procedures.</p>
 <ul>
-<li><p><code><a href="reference/norm_anae.html">norm_anae()</a></code> makes it easy to do vowel formant normalization using the method described in the <em>Atlas of North American English</em> using just one line of code within a tidyverse pipeline. This is my current favorite normalization procedure and I was sick of writing large blocks of code in all my scripts, so I wrapped it up as a function.</p></li>
-<li><p><code><a href="reference/norm_deltaF.html">norm_deltaF()</a></code> is another way to normalize your data, based on Keith Johnson’s (2020) paper.</p></li>
-<li><p><code><a href="reference/norm_logmeans.html">norm_logmeans()</a></code> is a straightforward log-means normalization procedure based on Barreda &amp; Nearey (2018).</p></li>
+<li><p><code><a href="reference/norm_anae.html">norm_anae()</a></code> makes it easy to do vowel formant
+normalization using the method described in the <em>Atlas of North
+American English</em> using just one line of code within a tidyverse
+pipeline. This is my current favorite normalization procedure and I was
+sick of writing large blocks of code in all my scripts, so I wrapped it
+up as a function.</p></li>
+<li><p><code><a href="reference/norm_deltaF.html">norm_deltaF()</a></code> is another way to normalize your data,
+based on Keith Johnson’s (2020) paper.</p></li>
+<li><p><code><a href="reference/norm_logmeans.html">norm_logmeans()</a></code> is a straightforward log-means
+normalization procedure based on Barreda &amp; Nearey (2018).</p></li>
 </ul>
-<p>Finally, there are two functions are more about changing labels for phonemes and allophones.</p>
+<p>Finally, there are two functions are more about changing labels for
+phonemes and allophones.</p>
 <ul>
-<li><p><code><a href="reference/switch_transcriptions.html">switch_transcriptions()</a></code> (and its shortcuts including, <code><a href="reference/switch_transcriptions.html">arpa_to_wells()</a></code>), quickly converts between ARPABET labels and Wells (or Wells-inspired) keywords.</p></li>
-<li><p><code><a href="reference/code_allophones.html">code_allophones()</a></code> is a one-liner that adds contexual allophones (“BAN”, “BAG”, “SPOOL”, “TOOT”, etc.) to your vowel data.</p></li>
+<li><p><code><a href="reference/switch_transcriptions.html">switch_transcriptions()</a></code> (and its shortcuts
+including, <code><a href="reference/switch_transcriptions.html">arpa_to_wells()</a></code>), quickly converts between
+ARPABET labels and Wells (or Wells-inspired) keywords.</p></li>
+<li><p><code><a href="reference/code_allophones.html">code_allophones()</a></code> is a one-liner that adds contexual
+allophones (“BAN”, “BAG”, “SPOOL”, “TOOT”, etc.) to your vowel
+data.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="group-3-ggplot2-themes">Group 3: <code>ggplot2</code> themes<a class="anchor" aria-label="anchor" href="#group-3-ggplot2-themes"></a>
 </h2>
-<p>These are currently not documented. The main one is <code>theme_joey()</code> which will produce plots using my own flavor of <code>theme_bw()</code>. There are some variants as well. The other helpful function is <code>joey_arrow()</code> which is just a shortcut for a type of arrow I like when I draw lines on a plot. I’ll admit I don’t really use these anymore.</p>
+<p>These are currently not documented. The main one is
+<code>theme_joey()</code> which will produce plots using my own flavor
+of <code>theme_bw()</code>. There are some variants as well. The other
+helpful function is <code>joey_arrow()</code> which is just a shortcut
+for a type of arrow I like when I draw lines on a plot. I’ll admit I
+don’t really use these anymore.</p>
 </div>
 <div class="section level2">
 <h2 id="group-4-the-grapes">Group 4: The grapes<a class="anchor" aria-label="anchor" href="#group-4-the-grapes"></a>
 </h2>
-<p>“Grapes” refer to the type of R functions that are flanked on either side by <code>%</code>, like <code>%in%</code>. The ones here came about while writing my dissertation (or rather, the code used to analze the data for my dissertation) and were super helpful for that project.</p>
+<p>“Grapes” refer to the type of R functions that are flanked on either
+side by <code>%</code>, like <code>%in%</code>. The ones here came about
+while writing my dissertation (or rather, the code used to analze the
+data for my dissertation) and were super helpful for that project.</p>
 <ul>
-<li><p><code>%ni%</code> (“not in”") is super handy and is the opposite if <code>%in%</code>. I don’t use it so much anymore because I’ve figured out how to use <code>!</code> properly, but I still love it.</p></li>
-<li><p><code>%wi%</code> (“within”) was one I wrote to see whether a number is within a range. I think tidyverse has <code>%within%</code> somewhere in its suite of packages, but I wrote this before I knew about it. Plus, it’s a little shorter.</p></li>
-<li><p><code>%expanded_by%</code> takes a number and a range and expands the range by that much (applied to both sides). So <code>c(1, 3) %expanded_by% 3</code> produces <code>c(-2, 6)</code>. It was helpul when I was automating the plots in my dissertation.</p></li>
+<li><p><code>%ni%</code> (“not in”“) is super handy and is the opposite
+if <code>%in%</code>. I don’t use it so much anymore because I’ve
+figured out how to use <code>!</code> properly, but I still love
+it.</p></li>
+<li><p><code>%wi%</code> (“within”) was one I wrote to see whether a
+number is within a range. I think tidyverse has <code>%within%</code>
+somewhere in its suite of packages, but I wrote this before I knew about
+it. Plus, it’s a little shorter.</p></li>
+<li><p><code>%expanded_by%</code> takes a number and a range and expands
+the range by that much (applied to both sides). So
+<code>c(1, 3) %expanded_by% 3</code> produces <code>c(-2, 6)</code>. It
+was helpul when I was automating the plots in my dissertation.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="group-5-other-helpful-functions">Group 5: Other helpful functions<a class="anchor" aria-label="anchor" href="#group-5-other-helpful-functions"></a>
 </h2>
-<p>While writing my dissertation, I found myself doing the same sort of pipeline over and over so I just made a couple little shortcut functions to save myself some typing.</p>
+<p>While writing my dissertation, I found myself doing the same sort of
+pipeline over and over so I just made a couple little shortcut functions
+to save myself some typing.</p>
 <ul>
-<li><p><code><a href="reference/color_gradienter.html">color_gradienter()</a></code> was needed in my Shiny app, <a href="http://lap3.libs.uga.edu/u/jstanley/vowelcharts/" class="external-link"><em>The Gazetteer of Southern Vowels</em></a>. I needed a way to take two arbitrary colors and produce an arbitrary number of colors at fixed intervals between them. This is helpful for plots: do you want to use your favorite color of green and your favorite color of blue, but also get three more colors in between them for a continuous scale? <code><a href="reference/color_gradienter.html">color_gradienter()</a></code> can do that. I don’t know everything about how color is encoded, but it seems to work well enough for me, though there may be some weird bugs.</p></li>
-<li><p><code><a href="reference/ucfirst.html">ucfirst()</a></code> was a function I copied over from Perl code. It just capitalizes the first character of a string. Unlike some other functions that are more sophisticaed and transform the text into title case, sometimes I just need the very first character only, rather than the first character of each word.</p></li>
+<li><p><code><a href="reference/color_gradienter.html">color_gradienter()</a></code> was needed in my Shiny app, <a href="http://lap3.libs.uga.edu/u/jstanley/vowelcharts/" class="external-link"><em>The
+Gazetteer of Southern Vowels</em></a>. I needed a way to take two
+arbitrary colors and produce an arbitrary number of colors at fixed
+intervals between them. This is helpful for plots: do you want to use
+your favorite color of green and your favorite color of blue, but also
+get three more colors in between them for a continuous scale?
+<code><a href="reference/color_gradienter.html">color_gradienter()</a></code> can do that. I don’t know everything
+about how color is encoded, but it seems to work well enough for me,
+though there may be some weird bugs.</p></li>
+<li><p><code><a href="reference/ucfirst.html">ucfirst()</a></code> was a function I copied over from Perl
+code. It just capitalizes the first character of a string. Unlike some
+other functions that are more sophisticaed and transform the text into
+title case, sometimes I just need the very first character only, rather
+than the first character of each word.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="depreciated-functions">Depreciated functions<a class="anchor" aria-label="anchor" href="#depreciated-functions"></a>
 </h2>
-<p>Previous versions of <a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a> had a couple other tools, but recent versions of <a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a> and <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> have rendered them unnecessary. The following are no longer part of <a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a>, though you can find the code on GitHub in the <code>R_depreciated</code> folder.</p>
+<p>Previous versions of <a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a> had a couple other tools,
+but recent versions of <a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a> and <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>
+have rendered them unnecessary. The following are no longer part of
+<a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a>, though you can find the code on GitHub in the
+<code>R_depreciated</code> folder.</p>
 <ul>
-<li><p><code>spread_n()</code> was perhaps my favorite function. I had a need for using the (old) <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">tidyr::spread()</a></code> with multiple <code>value</code> columns while reshaping formant data. I went to the RStudio forums and someone wrote a slick little function for me that I dubbed <code>spread_n()</code>. (Kieran Healey saw that post and wrote a <a href="https://kieranhealy.org/blog/archives/2018/11/06/spreading-multiple-values/" class="external-link">blog post</a> on it!). The function has since been rendered obsolete with the new <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code> (Kieran Healey <a href="https://kieranhealy.org/blog/archives/2019/10/21/widening-multiple-columns-redux/" class="external-link">wrote</a> about that too), so I don’t use <code>spread_n()</code> anymore. Perhaps it’ll eventually be removed from the package. But I can’t help but think that my asking that question had some role in the <code>pivot_wider()</code> function.</p></li>
-<li><p><code>move_x_after_y()</code> and <code>move_x_before_y()</code> are helpful for when you want to take a column that you’ve just created and move it before or after some existing column. It’s a little buggy when you work with columns on the edges of your dataframe, but it worked well for me and my dissertation code. Note that once <code>dplyr</code> 1.0.0 is released, these functions will be phased out since the new <a href="https://dplyr.tidyverse.org/dev/reference/relocate.html" class="external-link"><code>dplyr::relocate</code></a> function does what I intended these do to.</p></li>
+<li><p><code>spread_n()</code> was perhaps my favorite function. I had a
+need for using the (old) <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">tidyr::spread()</a></code> with multiple
+<code>value</code> columns while reshaping formant data. I went to the
+RStudio forums and someone wrote a slick little function for me that I
+dubbed <code>spread_n()</code>. (Kieran Healey saw that post and wrote a
+<a href="https://kieranhealy.org/blog/archives/2018/11/06/spreading-multiple-values/" class="external-link">blog
+post</a> on it!). The function has since been rendered obsolete with the
+new <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code> (Kieran Healey <a href="https://kieranhealy.org/blog/archives/2019/10/21/widening-multiple-columns-redux/" class="external-link">wrote</a>
+about that too), so I don’t use <code>spread_n()</code> anymore. Perhaps
+it’ll eventually be removed from the package. But I can’t help but think
+that my asking that question had some role in the
+<code>pivot_wider()</code> function.</p></li>
+<li><p><code>move_x_after_y()</code> and <code>move_x_before_y()</code>
+are helpful for when you want to take a column that you’ve just created
+and move it before or after some existing column. It’s a little buggy
+when you work with columns on the edges of your dataframe, but it worked
+well for me and my dissertation code. Note that once <code>dplyr</code>
+1.0.0 is released, these functions will be phased out since the new <a href="https://dplyr.tidyverse.org/dev/reference/relocate.html" class="external-link"><code>dplyr::relocate</code></a>
+function does what I intended these do to.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>If you use this package, I would appreciate a citation. You can cite it as:</p>
+<p>If you use this package, I would appreciate a citation. You can cite
+it as:</p>
 <blockquote>
-<p>Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. <a href="https://joeystanley.github.io/joeyr/" class="external-link uri">https://joeystanley.github.io/joeyr/</a></p>
+<p>Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version
+0.6.2), 2021. <a href="https://joeystanley.github.io/joeyr/" class="external-link uri">https://joeystanley.github.io/joeyr/</a></p>
 </blockquote>
-<p>Specifically, if you use the <code><a href="reference/find_outliers.html">find_outliers()</a></code> function, you can refer to it as something like “the Modified Mahalanobis Distance method implemented in Stanley (2020).”</p>
+<p>Specifically, if you use the <code><a href="reference/find_outliers.html">find_outliers()</a></code> function,
+you can refer to it as something like “the Modified Mahalanobis Distance
+method implemented in Stanley (2020).”</p>
 <blockquote>
-<p>Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in Southwest Washington.” In Speech in the Western States: Volume 3, Understudied Varieties, by Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, and Tyler Kendall, 95–122. Publication of the American Dialect Society 105. Durham, NC: Duke University Press, 2020. <a href="https://doi.org/10.1215/00031283-8820642" class="external-link">https://doi.org/10.1215/00031283-8820642</a>.</p>
+<p>Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day
+Saints in Southwest Washington.” In Speech in the Western States: Volume
+3, Understudied Varieties, by Valerie Fridland, Alicia Beckford Wassink,
+Lauren Hall-Lew, and Tyler Kendall, 95–122. Publication of the American
+Dialect Society 105. Durham, NC: Duke University Press, 2020. <a href="https://doi.org/10.1215/00031283-8820642" class="external-link">https://doi.org/10.1215/00031283-8820642</a>.</p>
 </blockquote>
 </div>
 <div class="section level2">
@@ -225,7 +330,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
