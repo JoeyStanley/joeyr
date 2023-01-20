@@ -17,11 +17,11 @@ code_allophones(
 \arguments{
 \item{.df}{The dataset containing vowel data.}
 
-\item{.old_col}{The unquoted name of the column containing the vowel labels. 
-Often called "vowel" or "phoneme" in many datasets. Note that the function 
-assumes Wells lexical sets (FLEECE, TRAP, etc.) rather than ARPABET (IY, AE, etc.) 
+\item{.old_col}{The unquoted name of the column containing the vowel labels.
+Often called "vowel" or "phoneme" in many datasets. Note that the function
+assumes Wells lexical sets (FLEECE, TRAP, etc.) rather than ARPABET (IY, AE, etc.)
 or IPA (i, æ, etc.). If your vowels are not already coded using Wells' labels
-you can quickly do so with \code{switch_transcriptions} or one of the 
+you can quickly do so with \code{switch_transcriptions} or one of the
 shortcuts like \code{arpa_to_wells}}
 
 \item{.new_cols}{A vector of two strings containing the names of the columns
@@ -30,13 +30,13 @@ The first name becomes the name of the column containing the new allophone
 labels. The second column becomes the name of the column describing those
 labels.}
 
-\item{.pre_seg}{The unquoted name of the column that contains the labels for 
-the previous segement. In DARLA-generated spreadsheets, this is `pre_seg` and 
-in FastTrack-generated spreadsheets, it's `previous_sound`. Assumes ARPABET 
+\item{.pre_seg}{The unquoted name of the column that contains the labels for
+the previous segement. In DARLA-generated spreadsheets, this is `pre_seg` and
+in FastTrack-generated spreadsheets, it's `previous_sound`. Assumes ARPABET
 labels.}
 
-\item{.fol_seg}{The unquoted name of the column that contains the labels for 
-the following segement. In DARLA-generated spreadsheets, this is `fol_seg` and 
+\item{.fol_seg}{The unquoted name of the column that contains the labels for
+the following segement. In DARLA-generated spreadsheets, this is `fol_seg` and
 in FastTrack-generated spreadsheets, it's `next_sound`. Assumes ARPABET labels.}
 
 \item{.coronals}{A vector of strings containing ARPABET labels for coronal consonants.
@@ -44,33 +44,33 @@ By default, \code{c("T", "D", "S", "Z", "SH", "ZH", "JH", "N")}. This is used
 to create the `TOOT` allophone of `GOOSE`.}
 
 \item{.voiceless}{A vector of strings containing ARPABET labels for voiceless
-consonants. By default, \code{c("P", "T", "K", "CH", "F", "TH", "S", "SH")}. 
+consonants. By default, \code{c("P", "T", "K", "CH", "F", "TH", "S", "SH")}.
 This is used to create the `PRICE` allophone of `PRIZE`.}
 }
 \value{
-A dataframe with two additional columns. One column contains labels 
-for the allophones and the other contains category labels for those 
-allophones' contexts. The second column can be useful for quickly excluding 
-certain allophones like prelaterals or prerhotics or coloring families of 
-allophones in visualizations (such as turning all prelateral allophones gray). 
-These two new columns are positioned immediately after the original vowel 
+A dataframe with two additional columns. One column contains labels
+for the allophones and the other contains category labels for those
+allophones' contexts. The second column can be useful for quickly excluding
+certain allophones like prelaterals or prerhotics or coloring families of
+allophones in visualizations (such as turning all prelateral allophones gray).
+These two new columns are positioned immediately after the original vowel
 column indicated in \code{.old_col},
 }
 \description{
 A function to classify vowel data into contextual allophones.
 }
 \note{
-Here are the list of the contextual allophones that are created. Note 
+Here are the list of the contextual allophones that are created. Note
 that I largely follow my own advice about what to call \href{https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap}{elsewhere allophones},
-what to call \href{https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels}{prelateral allophones}, 
-and \href{https://joeystanley.com/blog/thoughts-on-allophonic-extensions-to-wells-lexical-sets}{other allophones}. 
-Obviously, this list is pretty subjective and largely based on what my own 
-research has needed, so it may not work completely for you and your research. 
-Please contact me at \email{joey_stanley@byu.edu} if you want to see an allophone 
+what to call \href{https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels}{prelateral allophones},
+and \href{https://joeystanley.com/blog/thoughts-on-allophonic-extensions-to-wells-lexical-sets}{other allophones}.
+Obviously, this list is pretty subjective and largely based on what my own
+research has needed, so it may not work completely for you and your research.
+Please contact me at \email{joey_stanley@byu.edu} if you want to see an allophone
 get added or if you spot an error in the coding.
 
 \itemize{
-  \item FLEECE becomes 
+  \item FLEECE becomes
     \itemize{
       \item ZEAL before laterals
       \item BEET elsewhere
@@ -86,7 +86,7 @@ get added or if you spot an error in the coding.
   \item FACE becomes \itemize{
     \item FLAIL before laterals
     \item VAGUE before G
-    \item X elsewhere
+    \item BAIT elsewhere
     }
   \item DRESS becomes \itemize{
     \item SHELF before laterals
@@ -137,25 +137,25 @@ get added or if you spot an error in the coding.
     \item PRIZE elsewhere
     }
   }
-  
-Unfortunately, it is not straightforward to customize this list but you can 
-always copy the source code and modify the list yourself. 
 
-Alternatively, you can use \code{forcats::fct_collapse()} to collapse 
-distinctions that you don't need. See example code below. 
+Unfortunately, it is not straightforward to customize this list but you can
+always copy the source code and modify the list yourself.
+
+Alternatively, you can use \code{forcats::fct_collapse()} to collapse
+distinctions that you don't need. See example code below.
 
 You can also of course create your own allophones if desired. Note that some
-allophones depend on other environmental information like syllable structure and  
-morpheme/word boundaries, or they may be entirely lexical (FORCE vs. NORTH). 
+allophones depend on other environmental information like syllable structure and
+morpheme/word boundaries, or they may be entirely lexical (FORCE vs. NORTH).
 They may be more complicated than what ARPABET can code for (MARY, MERRY, and
-MARRY) or just inconsistently coded. For the sake of simplicity, these 
+MARRY) or just inconsistently coded. For the sake of simplicity, these
 allophones are not included in this function.
 
-The environments therefore are the following 
+The environments therefore are the following
 \itemize{
   \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL
   \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE
-  \item "prevelar" includes BIG, VAGUE, BEG, BAG, 
+  \item "prevelar" includes BIG, VAGUE, BEG, BAG,
   \item "prenasal" includes BIN, BEN, BAN
   \item "prevelarnasal" includes BING, BENG, BANG
   \item "prevoiceless" includes PRICE
@@ -179,43 +179,43 @@ darla \%>\%
 
 # Specify the names of the new columns with the `.new_cols` argument
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
-                  .new_cols = c("allophone", "environment"), 
-                  .fol_seg = fol_seg, 
+  code_allophones(.old_col = phoneme,
+                  .new_cols = c("allophone", "environment"),
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg) \%>\%
   slice_sample(n = 20)
 
 # Filtering by environment is straightforward
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
-                  .new_cols = c("allophone", "environment"), 
-                  .fol_seg = fol_seg, 
+  code_allophones(.old_col = phoneme,
+                  .new_cols = c("allophone", "environment"),
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg) \%>\%
   filter(environment == "elsewhere") \%>\%
   slice_sample(n = 20)
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
-                  .new_cols = c("allophone", "environment"), 
-                  .fol_seg = fol_seg, 
+  code_allophones(.old_col = phoneme,
+                  .new_cols = c("allophone", "environment"),
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg) \%>\%
   filter(!environment \%in\% c("prerhotic", "prevelarnasal", "prevelar")) \%>\%
   slice_sample(n = 20)
 
 # Some users may want to supply their own list of coronal consonants.
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
+  code_allophones(.old_col = phoneme,
                   .new_cols = c("allophone", "environment"),
-                  .fol_seg = fol_seg, 
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg,
                   .coronals = c("T", "D", "S", "Z", "SH", "ZH", "JH", "N", "Y")) \%>\%
   filter(phoneme == "GOOSE") \%>\%
   slice_sample(n = 20)
 
-# Other users may want to specify their own list of voiceless consonants. 
+# Other users may want to specify their own list of voiceless consonants.
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
+  code_allophones(.old_col = phoneme,
                   .new_cols = c("allophone", "environment"),
-                  .fol_seg = fol_seg, 
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg,
                   .voiceless = c("P", "T", "K", "CH", "F", "TH", "S", "SH", "X")) \%>\%
   filter(phoneme == "PRICE") \%>\%
@@ -223,9 +223,9 @@ darla \%>\%
 
 # Collapsing distinctions can be done post hoc (though it may take extra work to get the environment column to match.)
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
-                  .new_cols = c("allophone", "environment"), 
-                  .fol_seg = fol_seg, 
+  code_allophones(.old_col = phoneme,
+                  .new_cols = c("allophone", "environment"),
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg) \%>\%
   # Get a subset for demonstration purposes
   filter(allophone \%in\% c("BIT", "BIG")) \%>\%
@@ -236,11 +236,11 @@ darla \%>\%
   mutate(allophone = fct_collapse(allophone, "BIT" = c("BIT", "BIG")),
          environment = ifelse(allophone == "BIT", "elsewhere", allophone))
 
-# Creating new allophones depends on the complexity of the allophone         
+# Creating new allophones depends on the complexity of the allophone
 darla \%>\%
-  code_allophones(.old_col = phoneme, 
-                  .new_cols = c("allophone", "environment"), 
-                  .fol_seg = fol_seg, 
+  code_allophones(.old_col = phoneme,
+                  .new_cols = c("allophone", "environment"),
+                  .fol_seg = fol_seg,
                   .pre_seg = pre_seg) \%>\%
   # Create voice and voiceless distinctions for MOUTH
   mutate(allophone = case_when(phoneme == "MOUTH" & fol_seg \%in\% c("P", "T", "K", "CH", "F", "TH", "S", "SH") ~ "BOUT",

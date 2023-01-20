@@ -17,14 +17,14 @@ The pillai score from the MANOVA test.
 }
 \description{
 A function that runs a MANOVA and returns a summary statistics. For \code{pillai} you get
-just the pillai score and for \code{manova_p} you get the p-value. It works great 
+just the pillai score and for \code{manova_p} you get the p-value. It works great
 within a tidyverse pipeline, though the function itself uses only base R.
 }
 \details{
-This function is best run when you've got your data properly subsetted so that 
+This function is best run when you've got your data properly subsetted so that
 only two vowels' data are included. If you want to calculate the pillai score
-for multiple speakers, you can do so by grouping the data beforehand (using 
-\code{dplyr::group_by()}). 
+for multiple speakers, you can do so by grouping the data beforehand (using
+\code{dplyr::group_by()}).
 
 If you want to incorporate this function within a tidyverse pipeline, it's best
 to do so within `dplyr::summarize()` since we are boiling lot of data down to
@@ -33,10 +33,10 @@ just one number. See the examples below.
 Note that because it's just a MANOVA under the hood, you can incorporate whatever
 variables you want within the model. However, currently, only the pillai score
 of the first independent variable will be returned. So if you want to include
-vowel and duration in the model, for example, but you're mostly interested in 
+vowel and duration in the model, for example, but you're mostly interested in
 the vowel, be sure to put it first in the formula immediately after the tilde.
 
-NAs won't crash the function, but observations with any NAs will be excluded 
+NAs won't crash the function, but observations with any NAs will be excluded
 from analysis.
 }
 \examples{
@@ -48,7 +48,7 @@ one_speaker <- joeysvowels::midpoints
 one_speaker \%>\%
   filter(vowel \%in\% c("LOT", "THOUGHT")) \%>\%
   summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
-  
+
 # A non-tidyverse method
 pillai(cbind(F1, F2) ~ vowel, data = subset(one_speaker, vowel \%in\% c("LOT", "THOUGHT")))
 
@@ -58,7 +58,7 @@ many_speakers \%>\%
   filter(vowel \%in\% c("AA", "AO")) \%>\%
   group_by(speaker) \%>\%
   summarize(pillai = pillai(cbind(F1, F2) ~ vowel))
-  
+
 # Other variables can be included, but the pillai of only the first independent variable is returned
 one_speaker \%>\%
   filter(vowel \%in\% c("LOT", "THOUGHT")) \%>\%

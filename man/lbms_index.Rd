@@ -30,9 +30,9 @@ A \code{summarize}d dataframe with the LBMS Index.
 A function to quickly calculate the Low-Back-Merger Shift Index, per Becker (2019).
 }
 \details{
-If you would like to calculate the LBMS Index for each speaker, be sure to 
+If you would like to calculate the LBMS Index for each speaker, be sure to
 the data beforehand with \code{group_by()} (see the examples). Also, per Becker's
-(2019) recommendation, it is recommended that you exclude tokens before nasals, 
+(2019) recommendation, it is recommended that you exclude tokens before nasals,
 laterals, rhotics, and /g/ before the calculation. It is also recommended to
 run the function on Lobanov-normalized data.
 
@@ -41,7 +41,7 @@ Note that this is a new function and has not been tested robustly yet.
 \examples{
 suppressPackageStartupMessages(library(tidyverse))
 # This dataset has following segment and normalized data already
-darla <- joeysvowels::darla 
+darla <- joeysvowels::darla
 darla \%>\%
   filter(!fol_seg \%in\% c("L", "R", "M", "N", "NG", "G")) \%>\%
   lbms_index(vowel, F1_LobanovNormed_unscaled, F2_LobanovNormed_unscaled, "IY", "IH", "EH", "AE")
@@ -50,13 +50,13 @@ darla \%>\%
 idahoans <- joeysvowels::idahoans
 idahoans \%>\%
   group_by(speaker) \%>\%
-  mutate(F1_lob = scale(F1), 
+  mutate(F1_lob = scale(F1),
          F2_lob = scale(F2)) \%>\%
   lbms_index(vowel, F1_lob, F2_lob, "IY", "IH", "EH", "AE")
 }
 \references{
-Becker, Kara, ed. The Low-Back-Merger Shift: Uniting the Canadian Vowel Shift, 
-the California Vowel Shift, and Short Front Vowel Shifts across North America. 
-Publication of the American Dialect Society 104. Durham, NC: Duke University 
+Becker, Kara, ed. The Low-Back-Merger Shift: Uniting the Canadian Vowel Shift,
+the California Vowel Shift, and Short Front Vowel Shifts across North America.
+Publication of the American Dialect Society 104. Durham, NC: Duke University
 Press, 2019.
 }

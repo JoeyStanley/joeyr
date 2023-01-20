@@ -87,18 +87,18 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>If you would like to calculate the LBMS Index for each speaker, be sure to 
+    <p>If you would like to calculate the LBMS Index for each speaker, be sure to
 the data beforehand with <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> (see the examples). Also, per Becker's
-(2019) recommendation, it is recommended that you exclude tokens before nasals, 
+(2019) recommendation, it is recommended that you exclude tokens before nasals,
 laterals, rhotics, and /g/ before the calculation. It is also recommended to
 run the function on Lobanov-normalized data.</p>
 <p>Note that this is a new function and has not been tested robustly yet.</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>Becker, Kara, ed. The Low-Back-Merger Shift: Uniting the Canadian Vowel Shift, 
-the California Vowel Shift, and Short Front Vowel Shifts across North America. 
-Publication of the American Dialect Society 104. Durham, NC: Duke University 
+    <p>Becker, Kara, ed. The Low-Back-Merger Shift: Uniting the Canadian Vowel Shift,
+the California Vowel Shift, and Short Front Vowel Shifts across North America.
+Publication of the American Dialect Society 104. Durham, NC: Duke University
 Press, 2019.</p>
     </div>
 
@@ -106,7 +106,7 @@ Press, 2019.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># This dataset has following segment and normalized data already</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/darla.html" class="external-link">darla</a></span> </span>
+<span class="r-in"><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/darla.html" class="external-link">darla</a></span></span>
 <span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"R"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"NG"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_LobanovNormed_unscaled</span>, <span class="va">F2_LobanovNormed_unscaled</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span>
@@ -120,7 +120,7 @@ Press, 2019.</p>
 <span class="r-in"><span class="va">idahoans</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/idahoans.html" class="external-link">idahoans</a></span></span>
 <span class="r-in"><span class="va">idahoans</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>F1_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F1</span><span class="op">)</span>, </span>
+<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>F1_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F1</span><span class="op">)</span>,</span>
 <span class="r-in">         F2_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_lob</span>, <span class="va">F2_lob</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>

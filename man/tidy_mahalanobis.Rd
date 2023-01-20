@@ -13,24 +13,24 @@ tidy_mahalanobis(...)
 A vector that contains the Mahalanobis distances for each observation.
 }
 \description{
-This is a tidyverse-tidyverse-compatible version of the \code{stats::mahalanobis} function. It just 
+This is a tidyverse-tidyverse-compatible version of the \code{stats::mahalanobis} function. It just
 makes it easier to include it as part of a \code{dplyr::mutate}.
 }
 \details{
-Typically you'll want to group your data (using \code{dplyr::group_by}) by speaker and vowel 
+Typically you'll want to group your data (using \code{dplyr::group_by}) by speaker and vowel
 class so that you get the distance from vowel centroids.
 
 I won't tell you what to do with those distances, but if you might consider looking at tokens
-where the square root of the Mahalanobis distance is greater than around 2. However, to be clear, 
-the exact cutoff will vary depending on the size and variability of your data. You can see how 
+where the square root of the Mahalanobis distance is greater than around 2. However, to be clear,
+the exact cutoff will vary depending on the size and variability of your data. You can see how
 you might isolate these points visually in the example code below.
 
-One small modification that this function does that \code{stats::mahalanobis} does not do is that 
-if there are fewer than 5 measurements in a group, \code{tidy_mahalanobis} returns them all 
+One small modification that this function does that \code{stats::mahalanobis} does not do is that
+if there are fewer than 5 measurements in a group, \code{tidy_mahalanobis} returns them all
 as having a distance of zero. I found that this prevents some fatal errors from crashing the script
 when running this function on smaller datasets.
 
-Note that this function requires the \code{MASS} package to be installed to work, but you 
+Note that this function requires the \code{MASS} package to be installed to work, but you
 don't need to load it.
 }
 \examples{
@@ -41,25 +41,25 @@ df <- joeysvowels::midpoints
 m_dists <- df \%>\%
   group_by(vowel) \%>\%
   mutate(mahal_dist = tidy_mahalanobis(F1, F2))
-  
+
 # Take a peek at the resulting dataset
 m_dists \%>\%
   select(vowel, F1, F2, mahal_dist) \%>\%
   head()
-  
+
 # Plot potential outliers
-ggplot(m_dists, aes(F2, F1, color = sqrt(mahal_dist) > 2)) + 
-   geom_point() + 
+ggplot(m_dists, aes(F2, F1, color = sqrt(mahal_dist) > 2)) +
+   geom_point() +
    scale_x_reverse() +
    scale_y_reverse()
-   
+
 # You can include whatever numeric variables you want, like duration
 df \%>\%
   group_by(vowel) \%>\%
   mutate(dur = end - start) \%>\%
   mutate(mahal_dist = tidy_mahalanobis(F1, F2, dur)) \%>\%
-  ggplot(aes(F2, F1, color = sqrt(mahal_dist) > 2.5)) + 
-  geom_point() + 
+  ggplot(aes(F2, F1, color = sqrt(mahal_dist) > 2.5)) +
+  geom_point() +
   scale_x_reverse() +
   scale_y_reverse()
 
