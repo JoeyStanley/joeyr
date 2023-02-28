@@ -65,7 +65,7 @@ predetermined proportion of data has been removed.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">find_outliers</span><span class="op">(</span><span class="va">...</span>, keep <span class="op">=</span> <span class="fl">0.95</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_outliers</span><span class="op">(</span><span class="va">...</span>, keep <span class="op">=</span> <span class="fl">0.95</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,18 +75,25 @@ predetermined proportion of data has been removed.</p>
 calculating the Mahalanobis distance. The column names should not be in
 quotes. For vowel data, you typically include F1 and F2. You may also
 want to include F3, duration, and any other continuous variable.</p></dd>
+
+
 <dt>keep</dt>
 <dd><p>A number indicating the proportion of data (per group) to keep.
 By default, it's 0.95 so it keeps 95% of the data and filters out 5%.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical, <code>FALSE</code> by default. If <code>TRUE</code>, you'll get
 a message for every group with less than 20 tokens saying that there
 weren't enough tokens to remove outliers. Can be quite verbose if there are
 many speakers/vowels.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of TRUE/FALSE values. They are in the same order as the original
+    
+
+<p>A vector of TRUE/FALSE values. They are in the same order as the original
   dataset. Observations that are considered outliers have the value TRUE. It is
   easiest to work with this by appending this vector to your dataframe.</p>
     </div>
@@ -144,95 +151,38 @@ Society 105. Durham, NC: Duke University Press, 2020.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/coronals.html" class="external-link">coronals</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># You can output the data to a column called something like "is_outlier" and</span></span>
-<span class="r-in"><span class="co"># then filter out values that are TRUE.</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>is_outlier <span class="op">=</span> <span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, keep <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_outlier</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13,731 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   vowel [13]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vowel_id start   end     t percent    F1    F2    F3    F4 word  pre   vowel</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        1  2.06  2.41  2.06       0  387. <span style="text-decoration: underline;">1</span>701. <span style="text-decoration: underline;">2</span>629. <span style="text-decoration: underline;">3</span>164. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        1  2.06  2.41  2.07       5  483. <span style="text-decoration: underline;">1</span>591. <span style="text-decoration: underline;">2</span>454. <span style="text-decoration: underline;">3</span>310. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        1  2.06  2.41  2.09      10  525. <span style="text-decoration: underline;">1</span>466. <span style="text-decoration: underline;">2</span>526. <span style="text-decoration: underline;">3</span>343. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        1  2.06  2.41  2.13      20  530. <span style="text-decoration: underline;">1</span>297  <span style="text-decoration: underline;">2</span>616. <span style="text-decoration: underline;">3</span>330  snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        1  2.06  2.41  2.14      25  497. <span style="text-decoration: underline;">1</span>223. <span style="text-decoration: underline;">2</span>562. <span style="text-decoration: underline;">3</span>280. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        1  2.06  2.41  2.16      30  461. <span style="text-decoration: underline;">1</span>172. <span style="text-decoration: underline;">2</span>559. <span style="text-decoration: underline;">3</span>252  snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        1  2.06  2.41  2.18      35  414. <span style="text-decoration: underline;">1</span>120  <span style="text-decoration: underline;">2</span>625. <span style="text-decoration: underline;">3</span>247. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        1  2.06  2.41  2.20      40  423  <span style="text-decoration: underline;">1</span>072. <span style="text-decoration: underline;">2</span>655. <span style="text-decoration: underline;">3</span>175. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        1  2.06  2.41  2.22      45  396. <span style="text-decoration: underline;">1</span>074  <span style="text-decoration: underline;">2</span>623. <span style="text-decoration: underline;">3</span>248. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        1  2.06  2.41  2.23      50  368. <span style="text-decoration: underline;">1</span>018. <span style="text-decoration: underline;">2</span>602. <span style="text-decoration: underline;">3</span>168. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13,721 more rows, and 2 more variables: fol &lt;chr&gt;, is_outlier &lt;lgl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Alternatively, you can skip a step and just keep the data that are not</span></span>
-<span class="r-in"><span class="co"># outliers.</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13,731 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   vowel [13]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vowel_id start   end     t percent    F1    F2    F3    F4 word  pre   vowel</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        1  2.06  2.41  2.06       0  387. <span style="text-decoration: underline;">1</span>701. <span style="text-decoration: underline;">2</span>629. <span style="text-decoration: underline;">3</span>164. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        1  2.06  2.41  2.07       5  483. <span style="text-decoration: underline;">1</span>591. <span style="text-decoration: underline;">2</span>454. <span style="text-decoration: underline;">3</span>310. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        1  2.06  2.41  2.09      10  525. <span style="text-decoration: underline;">1</span>466. <span style="text-decoration: underline;">2</span>526. <span style="text-decoration: underline;">3</span>343. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        1  2.06  2.41  2.13      20  530. <span style="text-decoration: underline;">1</span>297  <span style="text-decoration: underline;">2</span>616. <span style="text-decoration: underline;">3</span>330  snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        1  2.06  2.41  2.14      25  497. <span style="text-decoration: underline;">1</span>223. <span style="text-decoration: underline;">2</span>562. <span style="text-decoration: underline;">3</span>280. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        1  2.06  2.41  2.16      30  461. <span style="text-decoration: underline;">1</span>172. <span style="text-decoration: underline;">2</span>559. <span style="text-decoration: underline;">3</span>252  snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        1  2.06  2.41  2.18      35  414. <span style="text-decoration: underline;">1</span>120  <span style="text-decoration: underline;">2</span>625. <span style="text-decoration: underline;">3</span>247. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        1  2.06  2.41  2.20      40  423  <span style="text-decoration: underline;">1</span>072. <span style="text-decoration: underline;">2</span>655. <span style="text-decoration: underline;">3</span>175. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        1  2.06  2.41  2.22      45  396. <span style="text-decoration: underline;">1</span>074  <span style="text-decoration: underline;">2</span>623. <span style="text-decoration: underline;">3</span>248. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        1  2.06  2.41  2.23      50  368. <span style="text-decoration: underline;">1</span>018. <span style="text-decoration: underline;">2</span>602. <span style="text-decoration: underline;">3</span>168. snoʊz sn    GOAT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13,721 more rows, and 1 more variable: fol &lt;chr&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># In some cases, you might not have enough data. In this case, a warning</span></span>
-<span class="r-in"><span class="co"># message will appear.</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">percent</span> <span class="op">==</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>is_outlier <span class="op">=</span> <span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, keep <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 779 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   vowel [13]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vowel_id start   end     t percent    F1    F2    F3    F4 word  pre   vowel </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        1  2.06  2.41  2.23      50  368. <span style="text-decoration: underline;">1</span>018. <span style="text-decoration: underline;">2</span>602. <span style="text-decoration: underline;">3</span>168. snoʊz sn    GOAT  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        2  3     3.36  3.18      50  377. <span style="text-decoration: underline;">2</span>032. <span style="text-decoration: underline;">2</span>761. <span style="text-decoration: underline;">3</span>408. deɪz  d     FACE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        3  3.99  4.35  4.17      50  429. <span style="text-decoration: underline;">1</span>004. <span style="text-decoration: underline;">2</span>625. <span style="text-decoration: underline;">3</span>226. zɔɪd  z     CHOICE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        4  4.94  5.19  5.07      50  314. <span style="text-decoration: underline;">2</span>179. <span style="text-decoration: underline;">2</span>915. <span style="text-decoration: underline;">3</span>380. teɪd  t     FACE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        5  5.91  6.17  6.04      50  274. <span style="text-decoration: underline;">1</span>378. <span style="text-decoration: underline;">2</span>235. <span style="text-decoration: underline;">3</span>270. zudz  z     GOOSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        7  8.13  8.4   8.26      50  350. <span style="text-decoration: underline;">1</span>624. <span style="text-decoration: underline;">2</span>485. <span style="text-decoration: underline;">3</span>384. stʊz  st    FOOT  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        8  9.16  9.41  9.28      50  313. <span style="text-decoration: underline;">2</span>181. <span style="text-decoration: underline;">2</span>863. <span style="text-decoration: underline;">3</span>205. heɪdz h     FACE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        9 10.5  10.8  10.6       50  255. <span style="text-decoration: underline;">1</span>333. <span style="text-decoration: underline;">2</span>313. <span style="text-decoration: underline;">3</span>212. zuz   z     GOOSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       10 11.6  11.9  11.8       50  585   969. <span style="text-decoration: underline;">2</span>813. <span style="text-decoration: underline;">3</span>405  zɔd   z     THOUG…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       11 12.6  13.1  12.8       50  527. <span style="text-decoration: underline;">1</span>201. <span style="text-decoration: underline;">2</span>733. <span style="text-decoration: underline;">3</span>434. sɔz   s     THOUG…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 769 more rows, and 2 more variables: fol &lt;chr&gt;, is_outlier &lt;lgl&gt;</span></span>
-<span class="r-in"><span class="co"># You can find out which groups have less than 20 tokens with `dplyr::count()`:</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">percent</span> <span class="op">==</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   vowel [13]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vowel       n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> LOT        55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> TRAP       59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> PRICE      61</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MOUTH      76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FACE       44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> DRESS      37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FLEECE     19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> KIT        57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> GOAT       76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> THOUGHT    72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> CHOICE     76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> GOOSE      71</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> FOOT       76</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">coronals</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># You can output the data to a column called something like "is_outlier" and</span></span></span>
+<span class="r-in"><span><span class="co"># then filter out values that are TRUE.</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>is_outlier <span class="op">=</span> <span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, keep <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_outlier</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Alternatively, you can skip a step and just keep the data that are not</span></span></span>
+<span class="r-in"><span><span class="co"># outliers.</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># In some cases, you might not have enough data. In this case, a warning</span></span></span>
+<span class="r-in"><span><span class="co"># message will appear.</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">percent</span> <span class="op">==</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>is_outlier <span class="op">=</span> <span class="fu">find_outliers</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, keep <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("filter"):</span> no applicable method for 'filter' applied to an object of class "function"</span>
+<span class="r-in"><span><span class="co"># You can find out which groups have less than 20 tokens with `dplyr::count()`:</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">percent</span> <span class="op">==</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("filter"):</span> no applicable method for 'filter' applied to an object of class "function"</span>
 </code></pre></div>
     </div>
   </div>
@@ -247,8 +197,7 @@ Society 105. Durham, NC: Duke University Press, 2020.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

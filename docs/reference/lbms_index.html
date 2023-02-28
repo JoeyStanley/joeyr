@@ -59,31 +59,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">lbms_index</span><span class="op">(</span><span class="va">df</span>, <span class="va">vowel_col</span>, <span class="va">F1_col</span>, <span class="va">F2_col</span>, <span class="va">beet</span>, <span class="va">bit</span>, <span class="va">bet</span>, <span class="va">bat</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lbms_index</span><span class="op">(</span><span class="va">df</span>, <span class="va">vowel_col</span>, <span class="va">F1_col</span>, <span class="va">F2_col</span>, <span class="va">beet</span>, <span class="va">bit</span>, <span class="va">bet</span>, <span class="va">bat</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>The dataframe containing the formant measurements you want to base the calculation off of.</p></dd>
+
+
 <dt>vowel_col</dt>
 <dd><p>The name of the column containing the name of the vowel (e.g. <code>vowel</code>)</p></dd>
+
+
 <dt>F1_col</dt>
 <dd><p>The name of the column containing the F1 measurements (e.g. <code>F1_norm</code>)</p></dd>
+
+
 <dt>F2_col</dt>
 <dd><p>The name of the column containing the F2 measurements (e.g. <code>F2_norm</code>)</p></dd>
+
+
 <dt>beet</dt>
 <dd><p>A string that indicates which vowels belong to the BEET class of words (e.g. <code>"IY"</code>)</p></dd>
+
+
 <dt>bit</dt>
 <dd><p>A string that indicates which vowels belong to the BIT class of words (e.g. <code>"IH"</code>)</p></dd>
+
+
 <dt>bet</dt>
 <dd><p>A string that indicates which vowels belong to the BET class of words (e.g. <code>"EH"</code>)</p></dd>
+
+
 <dt>bat</dt>
 <dd><p>A string that indicates which vowels belong to the BAT class of words (e.g. <code>"AE"</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>summarize</code>d dataframe with the LBMS Index.</p>
+    
+
+<p>A <code>summarize</code>d dataframe with the LBMS Index.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -104,39 +121,24 @@ Press, 2019.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># This dataset has following segment and normalized data already</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/darla.html" class="external-link">darla</a></span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"R"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"NG"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_LobanovNormed_unscaled</span>, <span class="va">F2_LobanovNormed_unscaled</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rowwise: </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   lbms_index</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       1.50</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># This dataset has multiple speakers and needs to be normalized</span></span>
-<span class="r-in"><span class="va">idahoans</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/idahoans.html" class="external-link">idahoans</a></span></span>
-<span class="r-in"><span class="va">idahoans</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>F1_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F1</span><span class="op">)</span>,</span>
-<span class="r-in">         F2_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_lob</span>, <span class="va">F2_lob</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rowwise:  speaker</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    speaker lbms_index</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01            2.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 02            1.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 03            1.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 04            2.04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 05            2.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 06            1.64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 07            2.17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 08            2.21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 09            2.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 10            2.00</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># This dataset has following segment and normalized data already</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"R"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"NG"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_LobanovNormed_unscaled</span>, <span class="va">F2_LobanovNormed_unscaled</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., !fol_seg %in% c("L", "R", "M", "N", "NG", "G")):</span> object 'darla' not found</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This dataset has multiple speakers and needs to be normalized</span></span></span>
+<span class="r-in"><span><span class="va">idahoans</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">idahoans</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span><span class="va">idahoans</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>F1_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>         F2_lob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">F2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">lbms_index</span><span class="op">(</span><span class="va">vowel</span>, <span class="va">F1_lob</span>, <span class="va">F2_lob</span>, <span class="st">"IY"</span>, <span class="st">"IH"</span>, <span class="st">"EH"</span>, <span class="st">"AE"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in group_by(., speaker):</span> object 'idahoans' not found</span>
 </code></pre></div>
     </div>
   </div>
@@ -151,8 +153,7 @@ Press, 2019.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

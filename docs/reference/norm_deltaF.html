@@ -61,7 +61,7 @@ function is intended to be used within a tidyverse pipeline.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">df</span>, <span class="va">.F1</span>, <span class="va">.F2</span>, <span class="va">.F3</span>, <span class="va">.F4</span>, suffix <span class="op">=</span> <span class="st">"_deltaF"</span>, return <span class="op">=</span> <span class="st">"formants"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">df</span>, <span class="va">.F1</span>, <span class="va">.F2</span>, <span class="va">.F3</span>, <span class="va">.F4</span>, suffix <span class="op">=</span> <span class="st">"_deltaF"</span>, return <span class="op">=</span> <span class="st">"formants"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -69,23 +69,32 @@ function is intended to be used within a tidyverse pipeline.</p>
     <dl><dt>df</dt>
 <dd><p>The data frame containing the formant measurements you want to
 normalize</p></dd>
+
+
 <dt>.F1, .F2, .F3, .F4</dt>
 <dd><p>The (unquoted) name of the column containing the F1
 measurements. The first three are required, but you may leave off F4. It is
 recommended that you include F4 if the data is available and reliable since
 it produces more accurate results.</p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>A string. The suffix you'd like to append to column names in
 new normalized columns. By default, it's <code>"_deltaF"</code> so if your original F1
 column was called <code>F1</code> then the normalized one will be <code>F1_deltaF</code>.</p></dd>
+
+
 <dt>return</dt>
 <dd><p>A string. By default, it's <code>"formants"</code> so it'll return the
 normalized values for you. If you'd like to see the actual ΔF values, you
 can do so by putting <code>"deltaF"</code> instead.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The original dataframe with new columns containing the normalized measurements.</p>
+    
+
+<p>The original dataframe with new columns containing the normalized measurements.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -109,89 +118,34 @@ Phonology</em> 11(1).
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/idahoans.html" class="external-link">idahoans</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Basic usage</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, <span class="va">F4</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   speaker [10]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    speaker sex    vowel    F1    F2    F3    F4 F1_del…¹ F2_de…² F3_de…³ F4_de…⁴</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01      female AA     699. <span style="text-decoration: underline;">1</span>655. <span style="text-decoration: underline;">2</span>019. <span style="text-decoration: underline;">3</span>801.    0.637    1.51    1.84    3.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 01      female AA     685. <span style="text-decoration: underline;">1</span>360. <span style="text-decoration: underline;">1</span>914. <span style="text-decoration: underline;">4</span>257.    0.624    1.24    1.74    3.88</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 01      female AA     713. <span style="text-decoration: underline;">1</span>507. <span style="text-decoration: underline;">2</span>460. <span style="text-decoration: underline;">3</span>617.    0.650    1.37    2.24    3.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 01      female AA     801. <span style="text-decoration: underline;">1</span>143. <span style="text-decoration: underline;">1</span>868. <span style="text-decoration: underline;">2</span>908.    0.730    1.04    1.70    2.65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>258. <span style="text-decoration: underline;">1</span>772. <span style="text-decoration: underline;">2</span>778.    0.689    1.15    1.61    2.53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 01      female AA     804. <span style="text-decoration: underline;">1</span>403. <span style="text-decoration: underline;">2</span>339. <span style="text-decoration: underline;">4</span>299.    0.733    1.28    2.13    3.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 01      female AA     664. <span style="text-decoration: underline;">1</span>279. <span style="text-decoration: underline;">1</span>714. <span style="text-decoration: underline;">2</span>103.    0.605    1.17    1.56    1.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>325. <span style="text-decoration: underline;">1</span>929. <span style="text-decoration: underline;">2</span>660.    0.690    1.21    1.76    2.42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 01      female AA     730. <span style="text-decoration: underline;">1</span>578. <span style="text-decoration: underline;">2</span>297. <span style="text-decoration: underline;">2</span>963.    0.665    1.44    2.09    2.70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 01      female AA     700. <span style="text-decoration: underline;">1</span>546. <span style="text-decoration: underline;">2</span>109. <span style="text-decoration: underline;">3</span>432.    0.638    1.41    1.92    3.13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows, and abbreviated variable names ¹​F1_deltaF,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​F2_deltaF, ³​F3_deltaF, ⁴​F4_deltaF</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># F4 is not required</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   speaker [10]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    speaker sex    vowel    F1    F2    F3 F1_deltaF F2_deltaF F3_deltaF    F4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01      female AA     699. <span style="text-decoration: underline;">1</span>655. <span style="text-decoration: underline;">2</span>019.     0.626      1.48      1.81 <span style="text-decoration: underline;">3</span>801.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 01      female AA     685. <span style="text-decoration: underline;">1</span>360. <span style="text-decoration: underline;">1</span>914.     0.614      1.22      1.71 <span style="text-decoration: underline;">4</span>257.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 01      female AA     713. <span style="text-decoration: underline;">1</span>507. <span style="text-decoration: underline;">2</span>460.     0.639      1.35      2.20 <span style="text-decoration: underline;">3</span>617.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 01      female AA     801. <span style="text-decoration: underline;">1</span>143. <span style="text-decoration: underline;">1</span>868.     0.718      1.02      1.67 <span style="text-decoration: underline;">2</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>258. <span style="text-decoration: underline;">1</span>772.     0.677      1.13      1.59 <span style="text-decoration: underline;">2</span>778.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 01      female AA     804. <span style="text-decoration: underline;">1</span>403. <span style="text-decoration: underline;">2</span>339.     0.720      1.26      2.09 <span style="text-decoration: underline;">4</span>299.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 01      female AA     664. <span style="text-decoration: underline;">1</span>279. <span style="text-decoration: underline;">1</span>714.     0.595      1.15      1.53 <span style="text-decoration: underline;">2</span>103.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>325. <span style="text-decoration: underline;">1</span>929.     0.678      1.19      1.73 <span style="text-decoration: underline;">2</span>660.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 01      female AA     730. <span style="text-decoration: underline;">1</span>578. <span style="text-decoration: underline;">2</span>297.     0.654      1.41      2.06 <span style="text-decoration: underline;">2</span>963.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 01      female AA     700. <span style="text-decoration: underline;">1</span>546. <span style="text-decoration: underline;">2</span>109.     0.627      1.38      1.89 <span style="text-decoration: underline;">3</span>432.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Change the new columns' suffix</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, suffix <span class="op">=</span> <span class="st">"_norm"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   speaker [10]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    speaker sex    vowel    F1    F2    F3 F1_norm F2_norm F3_norm    F4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01      female AA     699. <span style="text-decoration: underline;">1</span>655. <span style="text-decoration: underline;">2</span>019.   0.626    1.48    1.81 <span style="text-decoration: underline;">3</span>801.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 01      female AA     685. <span style="text-decoration: underline;">1</span>360. <span style="text-decoration: underline;">1</span>914.   0.614    1.22    1.71 <span style="text-decoration: underline;">4</span>257.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 01      female AA     713. <span style="text-decoration: underline;">1</span>507. <span style="text-decoration: underline;">2</span>460.   0.639    1.35    2.20 <span style="text-decoration: underline;">3</span>617.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 01      female AA     801. <span style="text-decoration: underline;">1</span>143. <span style="text-decoration: underline;">1</span>868.   0.718    1.02    1.67 <span style="text-decoration: underline;">2</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>258. <span style="text-decoration: underline;">1</span>772.   0.677    1.13    1.59 <span style="text-decoration: underline;">2</span>778.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 01      female AA     804. <span style="text-decoration: underline;">1</span>403. <span style="text-decoration: underline;">2</span>339.   0.720    1.26    2.09 <span style="text-decoration: underline;">4</span>299.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 01      female AA     664. <span style="text-decoration: underline;">1</span>279. <span style="text-decoration: underline;">1</span>714.   0.595    1.15    1.53 <span style="text-decoration: underline;">2</span>103.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 01      female AA     757. <span style="text-decoration: underline;">1</span>325. <span style="text-decoration: underline;">1</span>929.   0.678    1.19    1.73 <span style="text-decoration: underline;">2</span>660.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 01      female AA     730. <span style="text-decoration: underline;">1</span>578. <span style="text-decoration: underline;">2</span>297.   0.654    1.41    2.06 <span style="text-decoration: underline;">2</span>963.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 01      female AA     700. <span style="text-decoration: underline;">1</span>546. <span style="text-decoration: underline;">2</span>109.   0.627    1.38    1.89 <span style="text-decoration: underline;">3</span>432.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Return ∆F instead</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, <span class="va">F4</span>, return <span class="op">=</span> <span class="st">"deltaF"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   speaker [10]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    speaker deltaF</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01       <span style="text-decoration: underline;">1</span>098.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 02        940.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 03       <span style="text-decoration: underline;">1</span>156.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 04       <span style="text-decoration: underline;">1</span>115.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 05       <span style="text-decoration: underline;">1</span>067.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 06        935.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 07       <span style="text-decoration: underline;">1</span>058.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 08       <span style="text-decoration: underline;">1</span>151.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 09       <span style="text-decoration: underline;">1</span>135.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 10       <span style="text-decoration: underline;">1</span>045.</span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">idahoans</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Basic usage</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, <span class="va">F4</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># F4 is not required</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Change the new columns' suffix</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, suffix <span class="op">=</span> <span class="st">"_norm"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Return ∆F instead</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">norm_deltaF</span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F3</span>, <span class="va">F4</span>, return <span class="op">=</span> <span class="st">"deltaF"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -206,8 +160,7 @@ Phonology</em> 11(1).
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
