@@ -560,8 +560,8 @@ code_allophones <- function(.df, .old_col, .new_cols = c("allophone", "allophone
                   TRUE ~ "PUT"),
       {{.old_col}} == "GOOSE" ~
         case_when({{.pre_seg}} == "Y" ~ "MULE",
-                  {{.pre_seg}} %in% .coronals ~ "TOOT",
                   {{.fol_seg}} == "L" ~ "SPOOL",
+                  {{.pre_seg}} %in% .coronals ~ "TOOT",
                   TRUE ~ "BOOT"),
       {{.old_col}} == "PRICE" ~
         case_when({{.fol_seg}} %in% .voiceless ~ "PRICE",
