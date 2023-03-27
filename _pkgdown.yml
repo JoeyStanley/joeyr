@@ -19,7 +19,7 @@ reference:
     - tidy_mahalanobis
   - title: Sociophonetics Functions
     desc: Miscelleneous functions useful when working in sociophonetics.
-  - contents: 
+  - contents:
     - eucl_dist
     - pillai
     - lbms_index
@@ -37,5 +37,6 @@ reference:
   - contents:
     - color_gradienter
     - ucfirst
+    - get_centroids
 
 

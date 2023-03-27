@@ -20,11 +20,11 @@ A list of strings, in RGB format, the length of `shades` and that are equidistan
 Get some number of equidistant colors between two colors.
 }
 \details{
-This function takes two colors and a number and returns an n-length list of 
-colors that are all equidistant from one another. This is handy for plotting 
+This function takes two colors and a number and returns an n-length list of
+colors that are all equidistant from one another. This is handy for plotting
 categorical, ordinal, or binned data but you want to use continuous colors.
 
-Note, this is a little buggy and may not work as expected. I don't know 
+Note, this is a little buggy and may not work as expected. I don't know
 enough about how colors are handled to fix bugs. Please ese with caution.
 }
 \examples{

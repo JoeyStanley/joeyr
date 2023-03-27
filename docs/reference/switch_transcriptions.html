@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -166,45 +166,128 @@ their own shortcut function as well (i.e. <code>wells_to_b_t</code>, <code>b_t_t
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span> </span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/darla.html" class="external-link">darla</a></span> </span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = wells)):</span> object 'darla' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   FLEECE 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      KIT 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     FACE 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    DRESS 231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     TRAP 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      LOT 141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  THOUGHT 244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    STRUT 283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     GOAT 285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    FOOT  55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   GOOSE 267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   PRICE 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   MOUTH  93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  CHOICE  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   NURSE 378</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = wells, ordered = FALSE)):</span> object 'darla' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      LOT 141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     TRAP 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    STRUT 283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  THOUGHT 244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    MOUTH  93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    PRICE 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    DRESS 231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    NURSE 378</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     FACE 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     KIT 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  FLEECE 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12    GOAT 285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  CHOICE  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    FOOT  55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   GOOSE 267</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span>, as_character <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = b_t, as_character = TRUE)):</span> object 'darla' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    BAIT 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     BAT 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    BEET 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     BET 231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    BIRD 378</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     BIT 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    BITE 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    BOAT 285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    BOOK  55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   BOOT 267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    BOT 141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 BOUGHT 244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   BOUT  93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    BOY  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15    BUT 283</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span><span class="co"># Works even if not all vowel levels are present</span></span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">vowel</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IY"</span>, <span class="st">"AE"</span>, <span class="st">"AY"</span>, <span class="st">"UW"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., vowel %in% c("IY", "AE", "AY", "UW")):</span> object 'darla' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  BEET 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   BAT 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  BOOT 267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  BITE 214</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span><span class="co"># Here's a non-tidyverse version (though tidyverse is still used under the hood)</span></span></span>
 <span class="r-in"><span><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span> <span class="op">&lt;-</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., {    {        .from    }} %in% x):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `arpa %in% x`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `arpa %in% x`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'darla' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Note that shortcut functions also exist:</span></span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_wells</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = arpa_to_wells(vowel)):</span> object 'darla' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `mutate()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `vowel = arpa_to_wells(vowel)`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `joeyr::switch_transcriptions()`:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> The following will be ignored since they are not part of the predefined set: BITE BIRD BEET BOT BIT BAIT BOAT BOUGHT BOUT BAT BUT BET BOOT BOOK BOY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    BEET 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     BIT 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    BAIT 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     BET 231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     BAT 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     BOT 141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  BOUGHT 244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     BUT 283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    BOAT 285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   BOOK  55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   BOOT 267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   BITE 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   BOUT  93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    BOY  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   BIRD 378</span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = arpa_to_b_t(vowel)):</span> object 'darla' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `mutate()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `vowel = arpa_to_b_t(vowel)`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `joeyr::switch_transcriptions()`:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> The following will be ignored since they are not part of the predefined set: BITE BIRD BEET BOT BIT BAIT BOAT BOUGHT BOUT BAT BUT BET BOOT BOOK BOY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vowel   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    BEET 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     BIT 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    BAIT 250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     BET 231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     BAT 175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     BOT 141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  BOUGHT 244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     BUT 283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    BOAT 285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   BOOK  55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   BOOT 267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   BITE 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   BOUT  93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    BOY  13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   BIRD 378</span>
 </code></pre></div>
     </div>
   </div>

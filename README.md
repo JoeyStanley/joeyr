@@ -153,6 +153,9 @@ to save myself some typing.
     title case, sometimes I just need the very first character only,
     rather than the first character of each word.
     
+  - `get_centroids()` is a little shortcut that summarizes data quickly
+    and is helpful when plotting medians within ellipses in ggplot2. 
+    
 ## Depreciated functions
 Previous versions of `{joeyr}` had a couple other tools, but recent versions
 of `{tidyr}` and `{dplyr}` have rendered them unnecessary. The following are

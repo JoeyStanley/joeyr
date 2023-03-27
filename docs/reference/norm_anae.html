@@ -25,7 +25,7 @@ your data using the method described in the Atlas of North American English
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -125,15 +125,27 @@ English: Phonetics, Phonology and Sound Change.</em> Berlin: Walter de Gruyter, 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">idahoans</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va"><a href="https://joeystanley.github.io/joeysvowels/reference/idahoans.html" class="external-link">idahoans</a></span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">norm_anae</span><span class="op">(</span>hz_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span><span class="op">)</span>, speaker_id <span class="op">=</span> <span class="va">speaker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F1_anae</span>, <span class="va">F2_anae</span><span class="op">)</span> <span class="co"># &lt;- just the relevant columns</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       F1    F2 F1_anae F2_anae</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  699. <span style="text-decoration: underline;">1</span>655.    714.   <span style="text-decoration: underline;">1</span>690.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  685. <span style="text-decoration: underline;">1</span>360.    700.   <span style="text-decoration: underline;">1</span>388.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  713. <span style="text-decoration: underline;">1</span>507.    728.   <span style="text-decoration: underline;">1</span>539.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  801. <span style="text-decoration: underline;">1</span>143.    818.   <span style="text-decoration: underline;">1</span>167.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  757. <span style="text-decoration: underline;">1</span>258.    772.   <span style="text-decoration: underline;">1</span>284.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  804. <span style="text-decoration: underline;">1</span>403.    821.   <span style="text-decoration: underline;">1</span>432.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  664. <span style="text-decoration: underline;">1</span>279.    678.   <span style="text-decoration: underline;">1</span>306.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  757. <span style="text-decoration: underline;">1</span>325.    773.   <span style="text-decoration: underline;">1</span>353.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  730. <span style="text-decoration: underline;">1</span>578.    746.   <span style="text-decoration: underline;">1</span>611.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  700. <span style="text-decoration: underline;">1</span>546.    715.   <span style="text-decoration: underline;">1</span>578.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Slightly different if G is calculated internally.</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -141,7 +153,20 @@ English: Phonetics, Phonology and Sound Change.</em> Berlin: Walter de Gruyter, 
 <span class="r-in"><span>   <span class="fu">norm_anae</span><span class="op">(</span>hz_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span><span class="op">)</span>, speaker_id <span class="op">=</span> <span class="va">speaker</span>, g <span class="op">=</span> <span class="st">"calculate"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F1_anae</span>, <span class="va">F2_anae</span><span class="op">)</span> <span class="co"># &lt;- just the relevant columns</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       F1    F2 F1_anae F2_anae</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  699. <span style="text-decoration: underline;">1</span>655.    660.   <span style="text-decoration: underline;">1</span>562.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  685. <span style="text-decoration: underline;">1</span>360.    646.   <span style="text-decoration: underline;">1</span>283.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  713. <span style="text-decoration: underline;">1</span>507.    673.   <span style="text-decoration: underline;">1</span>422.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  801. <span style="text-decoration: underline;">1</span>143.    756.   <span style="text-decoration: underline;">1</span>078.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  757. <span style="text-decoration: underline;">1</span>258.    714.   <span style="text-decoration: underline;">1</span>187.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  804. <span style="text-decoration: underline;">1</span>403.    759.   <span style="text-decoration: underline;">1</span>323.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  664. <span style="text-decoration: underline;">1</span>279.    626.   <span style="text-decoration: underline;">1</span>207.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  757. <span style="text-decoration: underline;">1</span>325.    715.   <span style="text-decoration: underline;">1</span>250.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  730. <span style="text-decoration: underline;">1</span>578.    689.   <span style="text-decoration: underline;">1</span>489.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  700. <span style="text-decoration: underline;">1</span>546.    660.   <span style="text-decoration: underline;">1</span>459.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># G can be set to an arbitrary value.</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -149,7 +174,20 @@ English: Phonetics, Phonology and Sound Change.</em> Berlin: Walter de Gruyter, 
 <span class="r-in"><span>   <span class="fu">norm_anae</span><span class="op">(</span>hz_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span><span class="op">)</span>, speaker_id <span class="op">=</span> <span class="va">speaker</span>, g <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">F1</span>, <span class="va">F2</span>, <span class="va">F1_anae</span>, <span class="va">F2_anae</span><span class="op">)</span> <span class="co"># &lt;- just the relevant columns</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "function"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,100 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       F1    F2 F1_anae F2_anae</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  699. <span style="text-decoration: underline;">1</span>655.   0.722    1.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  685. <span style="text-decoration: underline;">1</span>360.   0.707    1.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  713. <span style="text-decoration: underline;">1</span>507.   0.736    1.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  801. <span style="text-decoration: underline;">1</span>143.   0.827    1.18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  757. <span style="text-decoration: underline;">1</span>258.   0.781    1.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  804. <span style="text-decoration: underline;">1</span>403.   0.830    1.45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  664. <span style="text-decoration: underline;">1</span>279.   0.685    1.32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  757. <span style="text-decoration: underline;">1</span>325.   0.782    1.37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  730. <span style="text-decoration: underline;">1</span>578.   0.754    1.63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  700. <span style="text-decoration: underline;">1</span>546.   0.722    1.60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,090 more rows</span></span>
 </code></pre></div>
     </div>
   </div>
