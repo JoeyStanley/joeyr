@@ -188,7 +188,7 @@ no longer part of `{joeyr}`, though you can find the code on GitHub in the
 
 If you use this package, I would appreciate a citation. You can cite it as:
 
-> Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. https://joeystanley.github.io/joeyr/ 
+> Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version ###), 2023. https://joeystanley.github.io/joeyr/ 
 
 Specifically, if you use the `find_outliers()` function, you can refer to it as 
 something like "the Modified Mahalanobis Distance method implemented in Stanley 
