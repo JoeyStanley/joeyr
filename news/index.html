@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -54,14 +54,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8.1" id="joeyr-081">joeyr 0.8.1<a class="anchor" aria-label="anchor" href="#joeyr-081"></a></h2>
+<h2 class="page-header" data-toc-text="0.9" id="joeyr-09-march-27-2023">joeyr 0.9 (March 27, 2023)<a class="anchor" aria-label="anchor" href="#joeyr-09-march-27-2023"></a></h2>
+<ul><li>
+<code>get_centroids</code> added.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.1" id="joeyr-081-june-8-2022">joeyr 0.8.1 (June 8, 2022)<a class="anchor" aria-label="anchor" href="#joeyr-081-june-8-2022"></a></h2>
 <ul><li>
 <code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> has a raised cap before triggering a warning message.</li>
 <li>
-<code><a href="../reference/find_outliers.html">find_outliers()</a></code> now as the <code>verbose</code> argument which, by default, supresses the warning message triggered when there is not enough data.</li>
+<code><a href="../reference/find_outliers.html">find_outliers()</a></code> now as the <code>verbose</code> argument which, by default, suppresses the warning message triggered when there is not enough data.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8" id="joeyr-08">joeyr 0.8<a class="anchor" aria-label="anchor" href="#joeyr-08"></a></h2>
+<h2 class="page-header" data-toc-text="0.8" id="joeyr-08-may-15-2022">joeyr 0.8 (May 15, 2022)<a class="anchor" aria-label="anchor" href="#joeyr-08-may-15-2022"></a></h2>
 <ul><li>
 <code><a href="../reference/code_allophones.html">code_allophones()</a></code> now added.</li>
 <li>
@@ -70,15 +75,17 @@
 <code><a href="../reference/norm_anae.html">norm_anae()</a></code> updated. The <code>use_telser_g</code> argument has been changed to simply <code>g</code>. Previously, if you wnated to calculate g internally, you’d do <code>use_telsur_g = FALSE</code> and that code didn’t work. Now, you’d say <code>g = "calculate"</code>, and that does work this time. Additionally, some new functionality is that <code>g</code> can be set to any arbitrary value, such as zero: <code>g = 0</code>.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7" id="joeyr-07">joeyr 0.7<a class="anchor" aria-label="anchor" href="#joeyr-07"></a></h2>
+<h2 class="page-header" data-toc-text="0.7" id="joeyr-07-july-26-2021">joeyr 0.7 (July 26, 2021)<a class="anchor" aria-label="anchor" href="#joeyr-07-july-26-2021"></a></h2>
 <ul><li>
-<code>arpa_to_keywords()</code> has been replaced with the more robust and flexible <code>switch_transcriptions</code>.</li></ul></div>
+<code>arpa_to_keywords()</code> has been replaced with the more robust and flexible <code>switch_transcriptions</code>.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.3" id="joeyr-063">joeyr 0.6.3<a class="anchor" aria-label="anchor" href="#joeyr-063"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.3" id="joeyr-063-june-3-2021">joeyr 0.6.3 (June 3, 2021)<a class="anchor" aria-label="anchor" href="#joeyr-063-june-3-2021"></a></h2>
 <ul><li>
-<code><a href="../reference/pillai.html">manova_p()</a></code> now added.</li></ul></div>
+<code><a href="../reference/pillai.html">manova_p()</a></code> now added.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.2" id="joeyr-062">joeyr 0.6.2<a class="anchor" aria-label="anchor" href="#joeyr-062"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.2" id="joeyr-062-february-6-2021">joeyr 0.6.2 (February 6, 2021)<a class="anchor" aria-label="anchor" href="#joeyr-062-february-6-2021"></a></h2>
 <ul><li>
 <code><a href="../reference/norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying <code>use_telsur_g = FALSE</code>.</li>
 <li>
@@ -89,25 +96,27 @@
 <code><a href="../reference/norm_deltaF.html">norm_deltaF()</a></code> has been fixed so that including F4 now works. Additional arguments have been added as well.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.1" id="joeyr-061">joeyr 0.6.1<a class="anchor" aria-label="anchor" href="#joeyr-061"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.1" id="joeyr-061-september-30-2020">joeyr 0.6.1 (September 30, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-061-september-30-2020"></a></h2>
 <ul><li>
 <code><a href="../reference/pillai.html">pillai()</a></code> and <code><a href="../reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> get much clearer examples and much more documentation.</li>
 <li>
 <code>arpa_to_keywords()</code> no longer crashes if a dataset didn’t have all vowels present.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6" id="joeyr-06">joeyr 0.6<a class="anchor" aria-label="anchor" href="#joeyr-06"></a></h2>
+<h2 class="page-header" data-toc-text="0.6" id="joeyr-06-september-27-2020">joeyr 0.6 (September 27, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-06-september-27-2020"></a></h2>
 <ul><li>
-<code>arpa_to_keywords()</code> and <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> added.</li></ul></div>
+<code>arpa_to_keywords()</code> and <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> added.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.5" id="joeyr-05">joeyr 0.5<a class="anchor" aria-label="anchor" href="#joeyr-05"></a></h2>
+<h2 class="page-header" data-toc-text="0.5" id="joeyr-05-september-24-2020">joeyr 0.5 (September 24, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-05-september-24-2020"></a></h2>
 <ul><li>Example code now uses the the <code>joeysvowels</code> package, a remote dependency.</li>
 <li>
 <code><a href="../reference/norm_anae.html">norm_anae()</a></code> is now more robust (thanks, Thomas!)</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4" id="joeyr-04">joeyr 0.4<a class="anchor" aria-label="anchor" href="#joeyr-04"></a></h2>
-<ul><li>Switching to pkgdown, which involved some overdue tidying of the package<ul><li>Removed depreciated functions, including <code>hz</code>, <code>bark</code>, <code>spread_n</code>, <code>move_x_before_y</code>, <code>move_x_after_y</code>, and all the functions related to the old outlier detection procedure (<code>joey_filter</code>, <code>joey_do_pca</code>, <code>joey_adjust_cutoff</code>, <code>joey_rm_outliers</code>).</li>
+<h2 class="page-header" data-toc-text="0.4" id="joeyr-04-august-5-2020">joeyr 0.4 (August 5, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-04-august-5-2020"></a></h2>
+<ul><li>Switching to pkgdown, which involved some overdue tidying of the package
+<ul><li>Removed depreciated functions, including <code>hz</code>, <code>bark</code>, <code>spread_n</code>, <code>move_x_before_y</code>, <code>move_x_after_y</code>, and all the functions related to the old outlier detection procedure (<code>joey_filter</code>, <code>joey_do_pca</code>, <code>joey_adjust_cutoff</code>, <code>joey_rm_outliers</code>).</li>
 <li>Removed the datasets. They were just added like a week ago, but I decided to move them to a separate package <code>{joeysvowels}</code>.</li>
 <li>Renamed the .R filenames</li>
 </ul></li>
@@ -127,7 +136,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

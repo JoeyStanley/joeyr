@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -59,71 +59,86 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">code_allophones</span><span class="op">(</span>
-  <span class="va">.df</span>,
-  <span class="va">.old_col</span>,
-  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"allophone_environment"</span><span class="op">)</span>,
-  <span class="va">.pre_seg</span>,
-  <span class="va">.fol_seg</span>,
-  .coronals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"D"</span>, <span class="st">"S"</span>, <span class="st">"Z"</span>, <span class="st">"SH"</span>, <span class="st">"ZH"</span>, <span class="st">"JH"</span>, <span class="st">"N"</span><span class="op">)</span>,
-  .voiceless <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">code_allophones</span><span class="op">(</span></span>
+<span>  <span class="va">.df</span>,</span>
+<span>  <span class="va">.old_col</span>,</span>
+<span>  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"allophone_environment"</span><span class="op">)</span>,</span>
+<span>  <span class="va">.pre_seg</span>,</span>
+<span>  <span class="va">.fol_seg</span>,</span>
+<span>  .coronals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"D"</span>, <span class="st">"S"</span>, <span class="st">"Z"</span>, <span class="st">"SH"</span>, <span class="st">"ZH"</span>, <span class="st">"JH"</span>, <span class="st">"N"</span><span class="op">)</span>,</span>
+<span>  .voiceless <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.df</dt>
 <dd><p>The dataset containing vowel data.</p></dd>
+
+
 <dt>.old_col</dt>
-<dd><p>The unquoted name of the column containing the vowel labels. 
-Often called "vowel" or "phoneme" in many datasets. Note that the function 
-assumes Wells lexical sets (FLEECE, TRAP, etc.) rather than ARPABET (IY, AE, etc.) 
+<dd><p>The unquoted name of the column containing the vowel labels.
+Often called "vowel" or "phoneme" in many datasets. Note that the function
+assumes Wells lexical sets (FLEECE, TRAP, etc.) rather than ARPABET (IY, AE, etc.)
 or IPA (i, æ, etc.). If your vowels are not already coded using Wells' labels
-you can quickly do so with <code>switch_transcriptions</code> or one of the 
+you can quickly do so with <code>switch_transcriptions</code> or one of the
 shortcuts like <code>arpa_to_wells</code></p></dd>
+
+
 <dt>.new_cols</dt>
 <dd><p>A vector of two strings containing the names of the columns
 you would like to use. By default <code>c("allophone", "allophone_environment")</code>.
 The first name becomes the name of the column containing the new allophone
 labels. The second column becomes the name of the column describing those
 labels.</p></dd>
+
+
 <dt>.pre_seg</dt>
-<dd><p>The unquoted name of the column that contains the labels for 
-the previous segement. In DARLA-generated spreadsheets, this is `pre_seg` and 
-in FastTrack-generated spreadsheets, it's `previous_sound`. Assumes ARPABET 
+<dd><p>The unquoted name of the column that contains the labels for
+the previous segement. In DARLA-generated spreadsheets, this is `pre_seg` and
+in FastTrack-generated spreadsheets, it's `previous_sound`. Assumes ARPABET
 labels.</p></dd>
+
+
 <dt>.fol_seg</dt>
-<dd><p>The unquoted name of the column that contains the labels for 
-the following segement. In DARLA-generated spreadsheets, this is `fol_seg` and 
+<dd><p>The unquoted name of the column that contains the labels for
+the following segement. In DARLA-generated spreadsheets, this is `fol_seg` and
 in FastTrack-generated spreadsheets, it's `next_sound`. Assumes ARPABET labels.</p></dd>
+
+
 <dt>.coronals</dt>
 <dd><p>A vector of strings containing ARPABET labels for coronal consonants.
 By default, <code>c("T", "D", "S", "Z", "SH", "ZH", "JH", "N")</code>. This is used
 to create the `TOOT` allophone of `GOOSE`.</p></dd>
+
+
 <dt>.voiceless</dt>
 <dd><p>A vector of strings containing ARPABET labels for voiceless
-consonants. By default, <code>c("P", "T", "K", "CH", "F", "TH", "S", "SH")</code>. 
+consonants. By default, <code>c("P", "T", "K", "CH", "F", "TH", "S", "SH")</code>.
 This is used to create the `PRICE` allophone of `PRIZE`.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A dataframe with two additional columns. One column contains labels 
-for the allophones and the other contains category labels for those 
-allophones' contexts. The second column can be useful for quickly excluding 
-certain allophones like prelaterals or prerhotics or coloring families of 
-allophones in visualizations (such as turning all prelateral allophones gray). 
-These two new columns are positioned immediately after the original vowel 
+    
+
+<p>A dataframe with two additional columns. One column contains labels
+for the allophones and the other contains category labels for those
+allophones' contexts. The second column can be useful for quickly excluding
+certain allophones like prelaterals or prerhotics or coloring families of
+allophones in visualizations (such as turning all prelateral allophones gray).
+These two new columns are positioned immediately after the original vowel
 column indicated in <code>.old_col</code>,</p>
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>Here are the list of the contextual allophones that are created. Note 
+    <p>Here are the list of the contextual allophones that are created. Note
 that I largely follow my own advice about what to call <a href="https://joeystanley.com/blog/why-do-people-use-bat-instead-of-trap" class="external-link">elsewhere allophones</a>,
-what to call <a href="https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels" class="external-link">prelateral allophones</a>, 
-and <a href="https://joeystanley.com/blog/thoughts-on-allophonic-extensions-to-wells-lexical-sets" class="external-link">other allophones</a>. 
-Obviously, this list is pretty subjective and largely based on what my own 
-research has needed, so it may not work completely for you and your research. 
-Please contact me at <a href="mailto:joey_stanley@byu.edu">joey_stanley@byu.edu</a> if you want to see an allophone 
+what to call <a href="https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels" class="external-link">prelateral allophones</a>,
+and <a href="https://joeystanley.com/blog/thoughts-on-allophonic-extensions-to-wells-lexical-sets" class="external-link">other allophones</a>.
+Obviously, this list is pretty subjective and largely based on what my own
+research has needed, so it may not work completely for you and your research.
+Please contact me at <a href="mailto:joey_stanley@byu.edu">joey_stanley@byu.edu</a> if you want to see an allophone
 get added or if you spot an error in the coding.</p>
 <ul><li><p>FLEECE becomes</p><ul><li><p>ZEAL before laterals</p></li>
 <li><p>BEET elsewhere</p></li>
@@ -137,7 +152,7 @@ get added or if you spot an error in the coding.</p>
 </ul></li>
 <li><p>FACE becomes</p><ul><li><p>FLAIL before laterals</p></li>
 <li><p>VAGUE before G</p></li>
-<li><p>X elsewhere</p></li>
+<li><p>BAIT elsewhere</p></li>
 </ul></li>
 <li><p>DRESS becomes</p><ul><li><p>SHELF before laterals</p></li>
 <li><p>SQUARE before rhotics</p></li>
@@ -178,15 +193,15 @@ get added or if you spot an error in the coding.</p>
 <li><p>PRICE becomes</p><ul><li><p>PRICE before voiceless segments</p></li>
 <li><p>PRIZE elsewhere</p></li>
 </ul></li>
-</ul><p>Unfortunately, it is not straightforward to customize this list but you can 
+</ul><p>Unfortunately, it is not straightforward to customize this list but you can
 always copy the source code and modify the list yourself.</p>
-<p>Alternatively, you can use <code>forcats::fct_collapse()</code> to collapse 
+<p>Alternatively, you can use <code>forcats::fct_collapse()</code> to collapse
 distinctions that you don't need. See example code below.</p>
 <p>You can also of course create your own allophones if desired. Note that some
-allophones depend on other environmental information like syllable structure and  
-morpheme/word boundaries, or they may be entirely lexical (FORCE vs. NORTH). 
+allophones depend on other environmental information like syllable structure and
+morpheme/word boundaries, or they may be entirely lexical (FORCE vs. NORTH).
 They may be more complicated than what ARPABET can code for (MARY, MERRY, and
-MARRY) or just inconsistently coded. For the sake of simplicity, these 
+MARRY) or just inconsistently coded. For the sake of simplicity, these
 allophones are not included in this function.</p>
 <p>The environments therefore are the following</p><ul><li><p>"prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL</p></li>
 <li><p>"prerhotic" includes NEAR, SQUARE, START, FORCE, CURE</p></li>
@@ -201,102 +216,102 @@ allophones are not included in this function.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in library(tidyverse):</span> there is no package called ‘tidyverse’</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get some sample DARLA data to play with</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">select</span><span class="op">(</span><span class="va">word</span>, <span class="va">vowel</span>, <span class="va">pre_seg</span>, <span class="va">fol_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>phoneme <span class="op">=</span> <span class="fu">joeyr</span><span class="fu">:::</span><span class="fu"><a href="switch_transcriptions.html">arpa_to_wells</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span>, .after <span class="op">=</span> <span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get some sample DARLA data to play with</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">select</span><span class="op">(</span><span class="va">word</span>, <span class="va">vowel</span>, <span class="va">pre_seg</span>, <span class="va">fol_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate</span><span class="op">(</span>phoneme <span class="op">=</span> <span class="fu">joeyr</span><span class="fu">:::</span><span class="fu"><a href="switch_transcriptions.html">arpa_to_wells</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span>, .after <span class="op">=</span> <span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in joeysvowels::darla %&gt;% select(word, vowel, pre_seg, fol_seg) %&gt;%     mutate(phoneme = joeyr:::arpa_to_wells(vowel), .after = vowel):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Basic usage</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Basic usage</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .fol_seg = fol_seg,     .pre_seg = pre_seg) %&gt;% slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Specify the names of the new columns with the `.new_cols` argument</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>, </span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify the names of the new columns with the `.new_cols` argument</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg) %&gt;%     slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Filtering by environment is straightforward</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>, </span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">environment</span> <span class="op">==</span> <span class="st">"elsewhere"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Filtering by environment is straightforward</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">environment</span> <span class="op">==</span> <span class="st">"elsewhere"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg) %&gt;%     filter(environment == "elsewhere") %&gt;% slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>, </span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">environment</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"prerhotic"</span>, <span class="st">"prevelarnasal"</span>, <span class="st">"prevelar"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">environment</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"prerhotic"</span>, <span class="st">"prevelarnasal"</span>, <span class="st">"prevelar"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg) %&gt;%     filter(!environment %in% c("prerhotic", "prevelarnasal",         "prevelar")) %&gt;% slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Some users may want to supply their own list of coronal consonants.</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span>,</span>
-<span class="r-in">                  .coronals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"D"</span>, <span class="st">"S"</span>, <span class="st">"Z"</span>, <span class="st">"SH"</span>, <span class="st">"ZH"</span>, <span class="st">"JH"</span>, <span class="st">"N"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"GOOSE"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Some users may want to supply their own list of coronal consonants.</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span>,</span></span>
+<span class="r-in"><span>                  .coronals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"D"</span>, <span class="st">"S"</span>, <span class="st">"Z"</span>, <span class="st">"SH"</span>, <span class="st">"ZH"</span>, <span class="st">"JH"</span>, <span class="st">"N"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"GOOSE"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg, .coronals = c("T",     "D", "S", "Z", "SH", "ZH", "JH", "N", "Y")) %&gt;% filter(phoneme ==     "GOOSE") %&gt;% slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Other users may want to specify their own list of voiceless consonants. </span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span>,</span>
-<span class="r-in">                  .voiceless <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span>, <span class="st">"X"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"PRICE"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Other users may want to specify their own list of voiceless consonants.</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span>,</span></span>
+<span class="r-in"><span>                  .voiceless <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span>, <span class="st">"X"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"PRICE"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg, .voiceless = c("P",     "T", "K", "CH", "F", "TH", "S", "SH", "X")) %&gt;% filter(phoneme ==     "PRICE") %&gt;% slice_sample(n = 20):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Collapsing distinctions can be done post hoc (though it may take extra work to get the environment column to match.)</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>, </span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="co"># Get a subset for demonstration purposes</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">allophone</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BIT"</span>, <span class="st">"BIG"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">allophone</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="co"># Now collapse distinctions</span></span>
-<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu">fct_collapse</span><span class="op">(</span><span class="va">allophone</span>, <span class="st">"BIT"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BIT"</span>, <span class="st">"BIG"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">         environment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">allophone</span> <span class="op">==</span> <span class="st">"BIT"</span>, <span class="st">"elsewhere"</span>, <span class="va">allophone</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Collapsing distinctions can be done post hoc (though it may take extra work to get the environment column to match.)</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="co"># Get a subset for demonstration purposes</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">allophone</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BIT"</span>, <span class="st">"BIG"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">allophone</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="co"># Now collapse distinctions</span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate</span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu">fct_collapse</span><span class="op">(</span><span class="va">allophone</span>, <span class="st">"BIT"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BIT"</span>, <span class="st">"BIG"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>         environment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">allophone</span> <span class="op">==</span> <span class="st">"BIT"</span>, <span class="st">"elsewhere"</span>, <span class="va">allophone</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg) %&gt;%     filter(allophone %in% c("BIT", "BIG")) %&gt;% group_by(allophone) %&gt;%     slice_sample(n = 5) %&gt;% ungroup() %&gt;% mutate(allophone = fct_collapse(allophone,     BIT = c("BIT", "BIG")), environment = ifelse(allophone ==     "BIT", "elsewhere", allophone)):</span> could not find function "%&gt;%"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Creating new allophones depends on the complexity of the allophone         </span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, </span>
-<span class="r-in">                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>, </span>
-<span class="r-in">                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, </span>
-<span class="r-in">                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="co"># Create voice and voiceless distinctions for MOUTH</span></span>
-<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">&amp;</span> <span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"BOUT"</span>,</span>
-<span class="r-in">                               <span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">~</span> <span class="st">"LOUD"</span>,</span>
-<span class="r-in">                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">allophone</span><span class="op">)</span>,</span>
-<span class="r-in">         environment <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">allophone</span> <span class="op">==</span> <span class="st">"BOUT"</span>,  <span class="st">"prevoiceless"</span>, <span class="va">environment</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="co"># Get a subset for demonstration purposes</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">allophone</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Creating new allophones depends on the complexity of the allophone</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
+<span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
+<span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="co"># Create voice and voiceless distinctions for MOUTH</span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate</span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">&amp;</span> <span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"BOUT"</span>,</span></span>
+<span class="r-in"><span>                               <span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">~</span> <span class="st">"LOUD"</span>,</span></span>
+<span class="r-in"><span>                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">allophone</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>         environment <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">allophone</span> <span class="op">==</span> <span class="st">"BOUT"</span>,  <span class="st">"prevoiceless"</span>, <span class="va">environment</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="co"># Get a subset for demonstration purposes</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">allophone</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in darla %&gt;% code_allophones(.old_col = phoneme, .new_cols = c("allophone",     "environment"), .fol_seg = fol_seg, .pre_seg = pre_seg) %&gt;%     mutate(allophone = case_when(phoneme == "MOUTH" &amp; fol_seg %in%         c("P", "T", "K", "CH", "F", "TH", "S", "SH") ~ "BOUT",         phoneme == "MOUTH" ~ "LOUD", TRUE ~ allophone), environment = if_else(allophone ==         "BOUT", "prevoiceless", environment)) %&gt;% filter(phoneme ==     "MOUTH") %&gt;% group_by(allophone) %&gt;% slice_sample(n = 5) %&gt;%     ungroup():</span> could not find function "%&gt;%"</span>
 </code></pre></div>
     </div>
@@ -312,7 +327,7 @@ allophones are not included in this function.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

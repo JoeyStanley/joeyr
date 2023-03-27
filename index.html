@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -91,12 +91,12 @@
 </h2>
 <p>This package can be downloaded to your computer by downloading it from Github.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#install.packages("devtools") # &lt;- if not already installed</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"JoeyStanley/joeyr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#install.packages("devtools") # &lt;- if not already installed</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"JoeyStanley/joeyr"</span><span class="op">)</span></span></code></pre></div>
 <p>You can then load it like any other package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## This is the "joeyr" package.</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the "joeyr" package.</span></span></code></pre></div>
 <p>You’ll know you’ve got it installed properly when you see a little message saying <code>This is the "joeyr" package.</code>.</p>
 </div>
 <div class="section level2">
@@ -137,7 +137,7 @@
 </h2>
 <p>“Grapes” refer to the type of R functions that are flanked on either side by <code>%</code>, like <code>%in%</code>. The ones here came about while writing my dissertation (or rather, the code used to analze the data for my dissertation) and were super helpful for that project.</p>
 <ul>
-<li><p><code>%ni%</code> (“not in”") is super handy and is the opposite if <code>%in%</code>. I don’t use it so much anymore because I’ve figured out how to use <code>!</code> properly, but I still love it.</p></li>
+<li><p><code>%ni%</code> (“not in”“) is super handy and is the opposite if <code>%in%</code>. I don’t use it so much anymore because I’ve figured out how to use <code>!</code> properly, but I still love it.</p></li>
 <li><p><code>%wi%</code> (“within”) was one I wrote to see whether a number is within a range. I think tidyverse has <code>%within%</code> somewhere in its suite of packages, but I wrote this before I knew about it. Plus, it’s a little shorter.</p></li>
 <li><p><code>%expanded_by%</code> takes a number and a range and expands the range by that much (applied to both sides). So <code>c(1, 3) %expanded_by% 3</code> produces <code>c(-2, 6)</code>. It was helpul when I was automating the plots in my dissertation.</p></li>
 </ul>
@@ -149,6 +149,7 @@
 <ul>
 <li><p><code><a href="reference/color_gradienter.html">color_gradienter()</a></code> was needed in my Shiny app, <a href="http://lap3.libs.uga.edu/u/jstanley/vowelcharts/" class="external-link"><em>The Gazetteer of Southern Vowels</em></a>. I needed a way to take two arbitrary colors and produce an arbitrary number of colors at fixed intervals between them. This is helpful for plots: do you want to use your favorite color of green and your favorite color of blue, but also get three more colors in between them for a continuous scale? <code><a href="reference/color_gradienter.html">color_gradienter()</a></code> can do that. I don’t know everything about how color is encoded, but it seems to work well enough for me, though there may be some weird bugs.</p></li>
 <li><p><code><a href="reference/ucfirst.html">ucfirst()</a></code> was a function I copied over from Perl code. It just capitalizes the first character of a string. Unlike some other functions that are more sophisticaed and transform the text into title case, sometimes I just need the very first character only, rather than the first character of each word.</p></li>
+<li><p><code><a href="reference/get_centroids.html">get_centroids()</a></code> is a little shortcut that summarizes data quickly and is helpful when plotting medians within ellipses in ggplot2.</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -164,9 +165,13 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use this package, I would appreciate a citation. You can cite it as:</p>
-<blockquote><p>Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. <a href="https://joeystanley.github.io/joeyr/" class="external-link uri">https://joeystanley.github.io/joeyr/</a></p></blockquote>
+<blockquote>
+<p>Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version 0.6.2), 2021. <a href="https://joeystanley.github.io/joeyr/" class="external-link uri">https://joeystanley.github.io/joeyr/</a></p>
+</blockquote>
 <p>Specifically, if you use the <code><a href="reference/find_outliers.html">find_outliers()</a></code> function, you can refer to it as something like “the Modified Mahalanobis Distance method implemented in Stanley (2020).”</p>
-<blockquote><p>Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in Southwest Washington.” In Speech in the Western States: Volume 3, Understudied Varieties, by Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, and Tyler Kendall, 95–122. Publication of the American Dialect Society 105. Durham, NC: Duke University Press, 2020. <a href="https://doi.org/10.1215/00031283-8820642" class="external-link">https://doi.org/10.1215/00031283-8820642</a>.</p></blockquote>
+<blockquote>
+<p>Stanley, Joseph A. “The Absence of a Religiolect among Latter-Day Saints in Southwest Washington.” In Speech in the Western States: Volume 3, Understudied Varieties, by Valerie Fridland, Alicia Beckford Wassink, Lauren Hall-Lew, and Tyler Kendall, 95–122. Publication of the American Dialect Society 105. Durham, NC: Duke University Press, 2020. <a href="https://doi.org/10.1215/00031283-8820642" class="external-link">https://doi.org/10.1215/00031283-8820642</a>.</p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
@@ -221,7 +226,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

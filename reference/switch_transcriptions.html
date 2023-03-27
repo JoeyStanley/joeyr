@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.8.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9</span>
       </span>
     </div>
 
@@ -59,61 +59,71 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">switch_transcriptions</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">.from</span>,
-  <span class="va">.to</span>,
-  ordered <span class="op">=</span> <span class="cn">TRUE</span>,
-  as_character <span class="op">=</span> <span class="cn">FALSE</span>,
-  warn <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">arpa_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">arpa_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">b_t_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">b_t_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">b_t_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">ipa_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">ipa_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">ipa_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">wells_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">wells_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">wells_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">switch_transcriptions</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">.from</span>,</span>
+<span>  <span class="va">.to</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  as_character <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  warn <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">arpa_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">arpa_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">b_t_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">b_t_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">b_t_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ipa_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ipa_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ipa_to_wells</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">wells_to_arpa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">wells_to_ipa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">wells_to_b_t</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>The vector containing the vowel labels you want to convert.</p></dd>
+
+
 <dt>.from</dt>
 <dd><p>an unquoted expression. By default, <code>arpa</code>, meaning the function
 will convert ARPABET symbols into another system.</p></dd>
+
+
 <dt>.to</dt>
 <dd><p>an unquoted expression. By default, <code>wells</code>, which will produce 
 the original Wells labels. If set to <code>"b_t"</code>, it will use the "B_T" frame.</p></dd>
+
+
 <dt>ordered</dt>
 <dd><p>a logical. by default, <code>TRUE</code>, which will return the factor in an 
 order that goes approximately counter clockwise in the vowel space, with 
 diphthongs last. If <code>FALSE</code>, it will retain the original order (which, 
 unless already specified, will be alphabetical or the order in which R sees
 the individial levels).</p></dd>
+
+
 <dt>as_character</dt>
 <dd><p>a logical. <code>FALSE</code> by default, meaning it will return
 the vector as a factor in the order specified by <code>ordered</code>. If <code>TRUE</code>, 
 it will return the vector as a character vector (and will silently ignore
 the <code>ordered</code> argument).</p></dd>
+
+
 <dt>warn</dt>
 <dd><p>a logical, <code>TRUE</code> by default. If there are levels in the vector that
 are not part of the predefined list above, a warning message will appear alerting 
@@ -121,10 +131,13 @@ you of that fact. The function will still work, but it's good to be alerted if
 there is unexpected input. If the <code>ordered</code> is set to <code>TRUE</code> then
 these extra levels will put at the end. This warning can be suppressed by setting
 this argument to <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector with the factors recoded. Any string that is not in one of the 
+    
+
+<p>A vector with the factors recoded. Any string that is not in one of the 
 preset lists of symbols will remain unchanged.</p>
     </div>
     <div id="details">
@@ -151,47 +164,47 @@ their own shortcut function as well (i.e. <code>wells_to_b_t</code>, <code>b_t_t
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in library(tidyverse):</span> there is no package called ‘tidyverse’</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op">&lt;-</span> <span class="fu">joeysvowels</span><span class="fu">::</span><span class="va">darla</span> </span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘joeysvowels’</span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = wells)):</span> object 'darla' not found</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">wells</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = wells, ordered = FALSE)):</span> object 'darla' not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span>, as_character <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span>, as_character <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = switch_transcriptions(vowel, .from = arpa,     .to = b_t, as_character = TRUE)):</span> object 'darla' not found</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># Works even if not all vowel levels are present</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">vowel</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IY"</span>, <span class="st">"AE"</span>, <span class="st">"AY"</span>, <span class="st">"UW"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># Works even if not all vowel levels are present</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">vowel</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IY"</span>, <span class="st">"AE"</span>, <span class="st">"AY"</span>, <span class="st">"UW"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., vowel %in% c("IY", "AE", "AY", "UW")):</span> object 'darla' not found</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># Here's a non-tidyverse version (though tidyverse is still used under the hood)</span></span>
-<span class="r-in"><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span> <span class="op">&lt;-</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., {    {        .from    }} %in% x):</span> Problem while computing `..1 = arpa %in% x`.</span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># Here's a non-tidyverse version (though tidyverse is still used under the hood)</span></span></span>
+<span class="r-in"><span><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span> <span class="op">&lt;-</span> <span class="fu">switch_transcriptions</span><span class="op">(</span><span class="va">darla</span><span class="op">$</span><span class="va">vowel</span>, .from <span class="op">=</span> <span class="va">arpa</span>, .to <span class="op">=</span> <span class="va">b_t</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., {    {        .from    }} %in% x):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `arpa %in% x`.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `arpa %in% x`:</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'darla' not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note that shortcut functions also exist:</span></span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_wells</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note that shortcut functions also exist:</span></span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_wells</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = arpa_to_wells(vowel)):</span> object 'darla' not found</span>
-<span class="r-in"><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vowel <span class="op">=</span> <span class="fu">arpa_to_b_t</span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">vowel</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(., vowel = arpa_to_b_t(vowel)):</span> object 'darla' not found</span>
 </code></pre></div>
     </div>
@@ -207,7 +220,7 @@ their own shortcut function as well (i.e. <code>wells_to_b_t</code>, <code>b_t_t
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
