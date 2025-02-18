@@ -49,3 +49,13 @@
   - Removed the datasets. They were just added like a week ago, but I decided to move them to a separate package `{joeysvowels}`. 
   - Renamed the .R filenames
 * Added a `NEWS.md` file to track changes to the package. 
+
+# joeyr 0.5--0.8
+
+* Apparently I didn't take careful enough notes. My bad.
+
+# joeyr 0.9 (February 18, 2025)
+ 
+* Fixed two issues with GOOSE allophones in `code_allophones`. 
+  - Words like *tool* which are both post-coronal and prelateral, were previously coded as post-coronal. That has been fixed so that they're not prelateral.
+  - There wasn't a prerhotic allophone of GOOSE, which caused words like *demure* to be erroneously classified as TOOT. Now, prerhotic GOOSE is CURE. Note that prerhotic FOOT is also CURE.

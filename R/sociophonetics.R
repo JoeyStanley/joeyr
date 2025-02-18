@@ -369,8 +369,9 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
 #'     }
 #'   \item GOOSE becomes \itemize{
 #'     \item MULE before Y
-#'     \item TOOT before coronals
 #'     \item SPOOL before laterals
+#'     \item TOOT before coronals
+#'     \item CURE before rhotics
 #'     \item BOOT elsewhere
 #'     }
 #'   \item PRICE becomes \itemize{
@@ -561,6 +562,7 @@ code_allophones <- function(.df, .old_col, .new_cols = c("allophone", "allophone
       {{.old_col}} == "GOOSE" ~
         case_when({{.pre_seg}} == "Y" ~ "MULE",
                   {{.fol_seg}} == "L" ~ "SPOOL",
+                  {{.fol_seg}} == "R" ~ "CURE",
                   {{.pre_seg}} %in% .coronals ~ "TOOT",
                   TRUE ~ "BOOT"),
       {{.old_col}} == "PRICE" ~
