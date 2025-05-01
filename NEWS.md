@@ -1,3 +1,16 @@
+# joeyr 0.9.2 (May 1, 2025)
+
+* Updated `code_allophones`
+  - MOUTH gets a prelateral allophone now: PROWL. This means the elsewhere allophone is now called BOUT.
+  - PRICE gets a prelateral and a prerhotic allophone: CHILD and PRIOR. 
+  - Prevoiceless PRICE has been changed from PRICE to BITE. Prevoiced PRICE has been changed from PRIZE to BIDE.
+
+# joeyr 0.9.1 (February 18, 2025)
+ 
+* Fixed two issues with GOOSE allophones in `code_allophones`. 
+  - Words like *tool* which are both post-coronal and prelateral, were previously coded as post-coronal. That has been fixed so that they're not prelateral.
+  - There wasn't a prerhotic allophone of GOOSE, which caused words like *demure* to be erroneously classified as TOOT. Now, prerhotic GOOSE is CURE. Note that prerhotic FOOT is also CURE.
+
 # joeyr 0.9 (March 27, 2023)
 
 * `get_centroids` added.
@@ -53,9 +66,3 @@
 # joeyr 0.5--0.8
 
 * Apparently I didn't take careful enough notes. My bad.
-
-# joeyr 0.9 (February 18, 2025)
- 
-* Fixed two issues with GOOSE allophones in `code_allophones`. 
-  - Words like *tool* which are both post-coronal and prelateral, were previously coded as post-coronal. That has been fixed so that they're not prelateral.
-  - There wasn't a prerhotic allophone of GOOSE, which caused words like *demure* to be erroneously classified as TOOT. Now, prerhotic GOOSE is CURE. Note that prerhotic FOOT is also CURE.

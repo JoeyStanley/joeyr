@@ -370,8 +370,8 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
 #'   \item GOOSE becomes \itemize{
 #'     \item MULE before Y
 #'     \item SPOOL before laterals
-#'     \item TOOT before coronals
 #'     \item CURE before rhotics
+#'     \item TOOT before coronals
 #'     \item BOOT elsewhere
 #'     }
 #'   \item PRICE becomes \itemize{
@@ -395,15 +395,15 @@ lbms_index <- function(df, vowel_col, F1_col, F2_col, beet, bit, bet, bat) {
 #'
 #' The environments therefore are the following
 #' \itemize{
-#'   \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL
-#'   \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE
+#'   \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL, CHILD, PROWL
+#'   \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE, PRIOR
 #'   \item "prevelar" includes BIG, VAGUE, BEG, BAG,
 #'   \item "prenasal" includes BIN, BEN, BAN
 #'   \item "prevelarnasal" includes BING, BENG, BANG
-#'   \item "prevoiceless" includes PRICE
+#'   \item "prevoiceless" includes BITE
 #'   \item "post-Y" includes MULE
 #'   \item "postcoronal" includes TOOT
-#'   \item "elsewhere" includes BEET, BIT, BAIT, BET, BAT, BOT, BOUGHT, BUT, BOAT, PUT, BOOT, PRIZE
+#'   \item "elsewhere" includes BEET, BIT, BAIT, BET, BAT, BOT, BOUGHT, BUT, BOAT, PUT, BOOT, BIDE, BOUT
 #' }
 #'
 #'
@@ -566,22 +566,27 @@ code_allophones <- function(.df, .old_col, .new_cols = c("allophone", "allophone
                   {{.pre_seg}} %in% .coronals ~ "TOOT",
                   TRUE ~ "BOOT"),
       {{.old_col}} == "PRICE" ~
-        case_when({{.fol_seg}} %in% .voiceless ~ "PRICE",
-                  TRUE ~ "PRIZE"),
+        case_when({{.fol_seg}} == "L" ~ "CHILD",
+                  {{.fol_seg}} == "R" ~ "PRIOR",
+                  {{.fol_seg}} %in% .voiceless ~ "BITE",
+                  TRUE ~ "BIDE"),
+      {{.old_col}} == "MOUTH" ~
+        case_when({{.fol_seg}} == "L" ~ "PROWL",
+                  TRUE ~ "BOUT"),
       TRUE ~ as.character({{.old_col}})),
       .after = {{.old_col}}) %>%
 
     # Use the .data object since {{}} doesn't work in case_when: https://rlang.r-lib.org/reference/topic-data-mask-programming.html#names-patterns
     mutate({{new_environment_colname}} := case_when(
-      .data[[new_allophone_colname]] %in% c("ZEAL", "GUILT", "FLAIL", "SHELF", "TALC", "GOLF", "FAULT", "MULCH", "JOLT", "WOLF", "SPOOL") ~ "prelateral",
-      .data[[new_allophone_colname]] %in% c("NEAR", "SQUARE", "START", "FORCE", "CURE") ~ "prerhotic",
+      .data[[new_allophone_colname]] %in% c("ZEAL", "GUILT", "FLAIL", "SHELF", "TALC", "GOLF", "FAULT", "MULCH", "JOLT", "WOLF", "SPOOL", "CHILD", "PROWL") ~ "prelateral",
+      .data[[new_allophone_colname]] %in% c("NEAR", "SQUARE", "START", "FORCE", "CURE", "PRIOR") ~ "prerhotic",
       .data[[new_allophone_colname]] %in% c("BIG", "VAGUE", "BEG", "BAG") ~ "prevelar",
       .data[[new_allophone_colname]] %in% c("BIN", "BEN", "BAN") ~ "prenasal",
       .data[[new_allophone_colname]] %in% c("BING", "BENG", "BANG") ~ "prevelarnasal",
-      .data[[new_allophone_colname]] %in% c("PRICE") ~ "prevoiceless",
+      .data[[new_allophone_colname]] %in% c("BITE") ~ "prevoiceless",
       .data[[new_allophone_colname]] %in% c("MULE") ~ "post-Y",
       .data[[new_allophone_colname]] %in% c("TOOT") ~ "postcoronal",
-      .data[[new_allophone_colname]] %in% c("BEET", "BIT", "BAIT", "BET", "BAT", "BOT", "BOUGHT", "BUT", "BOAT", "PUT", "BOOT", "PRIZE", "MOUTH", "CHOICE", "NURSE") ~ "elsewhere",
+      .data[[new_allophone_colname]] %in% c("BEET", "BIT", "BAIT", "BET", "BAT", "BOT", "BOUGHT", "BUT", "BOAT", "PUT", "BOOT", "BIDE", "BOUT", "CHOICE", "NURSE") ~ "elsewhere",
       TRUE ~ "other"),
       .after = {{new_allophone_colname}})
 }
