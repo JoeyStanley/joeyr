@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9.2</span>
       </span>
     </div>
 
@@ -228,13 +228,13 @@ allophones are not included in this function.</p>
 <span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>, .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>, .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            word vowel phoneme allophone allophone_environment pre_seg fol_seg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         BRIAN    AY   PRICE     PRIZE             elsewhere       R     AH0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         BRIAN    AY   PRICE      BIDE             elsewhere       R     AH0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2           PUT    UH    FOOT       PUT             elsewhere       P       T</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3        REAGAN    IY  FLEECE      BEET             elsewhere       R       G</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4       BALANCE    AE    TRAP      TALC            prelateral       B       L</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       HIGHEST    AY   PRICE     PRIZE             elsewhere      HH     AH0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       HIGHEST    AY   PRICE      BIDE             elsewhere      HH     AH0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6          KIDS    IH     KIT       BIT             elsewhere       K       D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7         CROWN    AW   MOUTH     MOUTH             elsewhere       R       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7         CROWN    AW   MOUTH      BOUT             elsewhere       R       N</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8        LOADED    OW    GOAT      BOAT             elsewhere       L       D</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9      INVOLVED    AA     LOT      GOLF            prelateral       V       L</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10     NORTHERN    AO THOUGHT     FORCE             prerhotic       N       R</span>
@@ -243,7 +243,7 @@ allophones are not included in this function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13         GAME    EY    FACE      BAIT             elsewhere       G       M</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14       COTTON    AO THOUGHT    BOUGHT             elsewhere       K       T</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15      EXISTED    AH   STRUT       BUT             elsewhere       T       D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16         WIRE    AY   PRICE     PRIZE             elsewhere       W       R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16         WIRE    AY   PRICE     PRIOR             prerhotic       W       R</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17            A    EY    FACE      BAIT             elsewhere     IY1      CH</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18         MORE    AO THOUGHT     FORCE             prerhotic       M       R</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19      RAINBOW    EY    FACE      BAIT             elsewhere       R       N</span>
@@ -263,7 +263,7 @@ allophones are not included in this function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4           HALF    AE    TRAP       BAT   elsewhere      HH       F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5         AROUND    ER   NURSE     NURSE   elsewhere       S     AW1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6             GO    OW    GOAT      BOAT   elsewhere       G     AH0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7          ABOUT    AW   MOUTH     MOUTH   elsewhere       B       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7          ABOUT    AW   MOUTH      BOUT   elsewhere       B       T</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8         THIRTY    ER   NURSE     NURSE   elsewhere      TH       T</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9       OVERLAND    ER   NURSE     NURSE   elsewhere       V       L</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10      ELEPHANT    AH   STRUT       BUT   elsewhere       F       N</span>
@@ -272,7 +272,7 @@ allophones are not included in this function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13            ON    AO THOUGHT    BOUGHT   elsewhere       T       N</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14      ACTUALLY    AE    TRAP       BAT   elsewhere       T       K</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15         LEAST    IY  FLEECE      BEET   elsewhere       L       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16       SOUNDED    AW   MOUTH     MOUTH   elsewhere       S       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16       SOUNDED    AW   MOUTH      BOUT   elsewhere       S       N</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17    DISRUPTION    AH   STRUT       BUT   elsewhere       R       P</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18      LEARNING    ER   NURSE     NURSE   elsewhere       L       N</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19       COUNTRY    AH   STRUT       BUT   elsewhere       K       N</span>
@@ -286,27 +286,27 @@ allophones are not included in this function.</p>
 <span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">environment</span> <span class="op">==</span> <span class="st">"elsewhere"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                word vowel phoneme allophone environment pre_seg fol_seg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1           READING    IY  FLEECE      BEET   elsewhere       R       D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2               MIA    IY  FLEECE      BEET   elsewhere       M     AH0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3             ABOUT    AW   MOUTH     MOUTH   elsewhere       B       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4              DOWN    AW   MOUTH     MOUTH   elsewhere       D       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RESPONSIBILITIES    AA     LOT       BOT   elsewhere       P       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6             SOLAR    ER   NURSE     NURSE   elsewhere       L     IY0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7              OPEN    OW    GOAT      BOAT   elsewhere       T       P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                AT    AE    TRAP       BAT   elsewhere       N       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       INTERRUPTED    AH   STRUT       BUT   elsewhere     ER0       P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10            SILLY    IY  FLEECE      BEET   elsewhere       L       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11               US    EH   DRESS       BET   elsewhere     UW1       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12            BOXES    AA     LOT       BOT   elsewhere       B       K</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13        COMMUNITY    IY  FLEECE      BEET   elsewhere       T       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14         MAGAZINE    IY  FLEECE      BEET   elsewhere       Z       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15          ENTRIES    IY  FLEECE      BEET   elsewhere       R       Z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16      INFORMATION    ER   NURSE     NURSE   elsewhere       F       M</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17          DIGITAL    IH     KIT       BIT   elsewhere       D      JH</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18            SLATE    EY    FACE      BAIT   elsewhere       L       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19             GAME    EY    FACE      BAIT   elsewhere       G       M</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20             COST    AO THOUGHT    BOUGHT   elsewhere       K       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           word vowel phoneme allophone environment pre_seg fol_seg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         FISH    IH     KIT       BIT   elsewhere       F      SH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    NECESSARY    IY  FLEECE      BEET   elsewhere       R       F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        FIFTY    IY  FLEECE      BEET   elsewhere       T       F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      CASSIDY    AE    TRAP       BAT   elsewhere       K       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        THOSE    OW    GOAT      BOAT   elsewhere      DH       Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         PALM    AA     LOT       BOT   elsewhere       P       M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7        FOUND    AW   MOUTH      BOUT   elsewhere       F       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8        ABOUT    AW   MOUTH      BOUT   elsewhere       B       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       SHOULD    UH    FOOT       PUT   elsewhere      SH       D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10          T.    IY  FLEECE      BEET   elsewhere       T       K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 COMMUNICATE    EY    FACE      BAIT   elsewhere       K       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12        VAST    AE    TRAP       BAT   elsewhere       V       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13      SETTLE    EH   DRESS       BET   elsewhere       S       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14        TURN    ER   NURSE     NURSE   elsewhere       T       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15     LESSONS    AH   STRUT       BUT   elsewhere       S       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16     REGULAR    ER   NURSE     NURSE   elsewhere       L       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17        TEXT    EH   DRESS       BET   elsewhere       T       K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18    SILENCED    AH   STRUT       BUT   elsewhere       L       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19     GALLERY    ER   NURSE     NURSE   elsewhere       L     IY0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20         PUT    UH    FOOT       PUT   elsewhere       P       T</span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">code_allophones</span><span class="op">(</span>.old_col <span class="op">=</span> <span class="va">phoneme</span>,</span></span>
 <span class="r-in"><span>                  .new_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"allophone"</span>, <span class="st">"environment"</span><span class="op">)</span>,</span></span>
@@ -314,27 +314,27 @@ allophones are not included in this function.</p>
 <span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">environment</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"prerhotic"</span>, <span class="st">"prevelarnasal"</span>, <span class="st">"prevelar"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              word vowel phoneme allophone environment pre_seg fol_seg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        PATIENTS    AH   STRUT       BUT   elsewhere      SH       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2             WHY    AY   PRICE     PRIZE   elsewhere       W      HH</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         ANYBODY    IY  FLEECE      BEET   elsewhere       D        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4           DOING    UW   GOOSE      TOOT postcoronal       D     IH0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5           KNOWN    OW    GOAT      BOAT   elsewhere       N       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6             HER    ER   NURSE     NURSE   elsewhere      HH      CH</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  IMPLEMENTATION    EY    FACE      BAIT   elsewhere       T      SH</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8           MAPLE    EY    FACE      BAIT   elsewhere       M       P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       AVAILABLE    EY    FACE     FLAIL  prelateral       V       L</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10         THAT'S    AE    TRAP       BAT   elsewhere      DH       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11          YOUNG    AH   STRUT       BUT   elsewhere       Y      NG</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12             ON    AO THOUGHT    BOUGHT   elsewhere       V       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13       OVERLAND    OW    GOAT      BOAT   elsewhere       V       V</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14            NOT    AA     LOT       BOT   elsewhere       N       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15           TEST    EH   DRESS       BET   elsewhere       T       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16            OWN    OW    GOAT      BOAT   elsewhere       R       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17           VAST    AE    TRAP       BAT   elsewhere       V       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18        CHOOSES    UW   GOOSE      BOOT   elsewhere      CH       Z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19           OVER    ER   NURSE     NURSE   elsewhere       V       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20           PUCK    AH   STRUT       BUT   elsewhere       P       K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           word vowel phoneme allophone  environment pre_seg fol_seg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       FLIGHT    AY   PRICE      BITE prevoiceless       L       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       LOOKED    UH    FOOT       PUT    elsewhere       L       K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     GUESSING    EH   DRESS       BET    elsewhere       G       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4           IN    IH     KIT       BIN     prenasal               N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           TO    UW   GOOSE      TOOT  postcoronal       T       B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           TO    UW   GOOSE      TOOT  postcoronal       T       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       ARCHIE    IY  FLEECE      BEET    elsewhere      CH     AY1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8         ALSO    OW    GOAT      BOAT    elsewhere       S       W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      COUNTER    ER   NURSE     NURSE    elsewhere       T     AH0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10        PASS    AE    TRAP       BAT    elsewhere       P       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   COMPOSING    OW    GOAT      BOAT    elsewhere       P       Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12       GIRLS    ER   NURSE     NURSE    elsewhere       G       L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13          ON    AO THOUGHT    BOUGHT    elsewhere     IY1       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14       CROSS    AO THOUGHT    BOUGHT    elsewhere       R       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15         LEE    IY  FLEECE      BEET    elsewhere       L       R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16        WAYS    EY    FACE      BAIT    elsewhere       W       Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17          MR    ER   NURSE     NURSE    elsewhere       T       M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18 DISCOVERING    AH   STRUT       BUT    elsewhere       K       V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19    RECENTLY    IY  FLEECE      BEET    elsewhere       L       P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20        SKIN    IH     KIT       BIN     prenasal       K       N</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Some users may want to supply their own list of coronal consonants.</span></span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -377,26 +377,26 @@ allophones are not included in this function.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"PRICE"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          word vowel phoneme allophone  environment pre_seg fol_seg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     ANXIETY    AY   PRICE     PRIZE    elsewhere       Z     AH0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       PRICE    AY   PRICE     PRICE prevoiceless       R       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    POLITELY    AY   PRICE     PRICE prevoiceless       L       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       WHITE    AY   PRICE     PRICE prevoiceless       W       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        FIND    AY   PRICE     PRIZE    elsewhere       F       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        I'VE    AY   PRICE     PRIZE    elsewhere       K       V</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  IDENTIFIED    AY   PRICE     PRIZE    elsewhere     IY0       D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8        I'VE    AY   PRICE     PRIZE    elsewhere       T       V</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       WHILE    AY   PRICE     PRIZE    elsewhere       W       L</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10       TIME    AY   PRICE     PRIZE    elsewhere       T       M</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11     HYBRID    AY   PRICE     PRIZE    elsewhere      HH       B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12       LINE    AY   PRICE     PRIZE    elsewhere       L       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13      BLIND    AY   PRICE     PRIZE    elsewhere       L       N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14       SIDE    AY   PRICE     PRIZE    elsewhere       S       D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15      BRYCE    AY   PRICE     PRICE prevoiceless       R       S</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16         BY    AY   PRICE     PRIZE    elsewhere       B        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17       FIVE    AY   PRICE     PRIZE    elsewhere       F       V</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   BRIGHTLY    AY   PRICE     PRICE prevoiceless       R       T</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19    MICHAEL    AY   PRICE     PRICE prevoiceless       M       K</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20       FIND    AY   PRICE     PRIZE    elsewhere       F       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     ANXIETY    AY   PRICE      BIDE    elsewhere       Z     AH0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       PRICE    AY   PRICE      BITE prevoiceless       R       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    POLITELY    AY   PRICE      BITE prevoiceless       L       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       WHITE    AY   PRICE      BITE prevoiceless       W       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        FIND    AY   PRICE      BIDE    elsewhere       F       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        I'VE    AY   PRICE      BIDE    elsewhere       K       V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  IDENTIFIED    AY   PRICE      BIDE    elsewhere     IY0       D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8        I'VE    AY   PRICE      BIDE    elsewhere       T       V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       WHILE    AY   PRICE     CHILD   prelateral       W       L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10       TIME    AY   PRICE      BIDE    elsewhere       T       M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11     HYBRID    AY   PRICE      BIDE    elsewhere      HH       B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12       LINE    AY   PRICE      BIDE    elsewhere       L       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13      BLIND    AY   PRICE      BIDE    elsewhere       L       N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14       SIDE    AY   PRICE      BIDE    elsewhere       S       D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15      BRYCE    AY   PRICE      BITE prevoiceless       R       S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16         BY    AY   PRICE      BIDE    elsewhere       B        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17       FIVE    AY   PRICE      BIDE    elsewhere       F       V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   BRIGHTLY    AY   PRICE      BITE prevoiceless       R       T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19    MICHAEL    AY   PRICE      BITE prevoiceless       M       K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20       FIND    AY   PRICE      BIDE    elsewhere       F       N</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Collapsing distinctions can be done post hoc (though it may take extra work to get the environment column to match.)</span></span></span>
 <span class="r-in"><span><span class="va">darla</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
