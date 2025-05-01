@@ -60,7 +60,7 @@ look at the help page or email me.
 ## Group 2: Sociophonetics functions
 
 Some functions in `joeyr` are useful for sociophonetic analysis. This first set 
-includes what are essentially mathmatical functions in that they crunch some numbers.
+includes what are essentially mathematical functions in that they crunch some numbers.
 
   - `eucl_dist()` calculates the Euclidean Distance, given a pair of *x*
     and *y* (or, more commonly, F1 and F2) coordinates.
