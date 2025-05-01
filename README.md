@@ -64,6 +64,9 @@ includes what are essentially mathmatical functions in that they crunch some num
 
   - `eucl_dist()` calculates the Euclidean Distance, given a pair of *x*
     and *y* (or, more commonly, F1 and F2) coordinates.
+    
+  - `get_centroids()` is a little shortcut that summarizes data quickly
+    and is helpful when plotting medians within ellipses in ggplot2. 
 
   - `pillai()` calculates the Pillai score. It’s not a complicated process
     in general, but this function simplifies it down quite a bit so it
@@ -151,9 +154,7 @@ to save myself some typing.
     functions that are more sophisticaed and transform the text into
     title case, sometimes I just need the very first character only,
     rather than the first character of each word.
-    
-  - `get_centroids()` is a little shortcut that summarizes data quickly
-    and is helpful when plotting medians within ellipses in ggplot2. 
+
     
 ## Depreciated functions
 Previous versions of `{joeyr}` had a couple other tools, but recent versions
@@ -188,7 +189,7 @@ no longer part of `{joeyr}`, though you can find the code on GitHub in the
 
 If you use this package, I would appreciate a citation. You can cite it as:
 
-> Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version ###), 2023. https://joeystanley.github.io/joeyr/ 
+> Stanley, Joseph A. joeyr: Functions for Vowel Data (R package version ###), 2021. https://joeystanley.github.io/joeyr/ 
 
 Specifically, if you use the `find_outliers()` function, you can refer to it as 
 something like "the Modified Mahalanobis Distance method implemented in Stanley 
