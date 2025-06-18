@@ -1,3 +1,13 @@
+# joeyr 0.10 (June 18, 2025)
+
+* The normalization functions (`norm_logmeans`, `norm_anae`, and `norm_deltaF`) have been depreciated for several reasons. The [tidynorm](https://jofrhwld.github.io/tidynorm/) package handles these much more effectively
+and efficiently than what I was able to do (see introduction [here](https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/)). The three functions now do nothing except give a message to the user recommending that they switch to tidynorm instead. For those who don't want to make the switch, the three 
+functions will still exist in this package but have been renamed `joeyr_norm_logmeans`, `joeyr_norm_anae` and `joeyr_norm_deltaF`. This prevents conflicts as well.
+
+* I've added a very simple `OoO` function that reminds me what my recommended order of operations is. 
+
+* I've also removed the `This is the "joeyr" package` message when loading.
+
 # joeyr 0.9.2 (May 1, 2025)
 
 * Updated `code_allophones`

@@ -5,22 +5,22 @@ A hodge-podge of useful functions.
 ## Introduction
 
 This is essentially my sandbox R Package. It has a hodge-podge of
-functions that I’ve used over the past several years. As I work with 
+functions that I've used over the past several years. As I work with 
 my sociophonetic data, I find myself running the same sorts of procedures
 over and over, so I often decide to write a generalized function to take 
 care of that stuff in one line within a tidyverse pipeline. 
 
 The functions in `joeyr` can be grouped into about five different
 categories: the outlier detecters, sociophonetics functions, `ggplot2` themes, 
-the “grapes”, and other helpful functions. This README briefly explains them all.
+the "grapes", and other helpful functions. This README briefly explains them all.
 
-Some of these functions I’ve generalized into something that others may
+Some of these functions I've generalized into something that others may
 find useful. Others are very specific to my own code and workflow so I’m
 not sure if they’ll be useful to you. Some functions are documented well
 but lots are not. 
 
 For questions, feel free to contact me at <joey_stanley@byu.edu> or on
-Twitter at [@joey\_stan](https://twitter.com/joey_stan).
+Bluesky at [@joeystanley.com](https://bsky.app/profile/joeystanley.com).
 
 ## Installation
 
@@ -37,11 +37,6 @@ You can then load it like any other package.
 ``` r
 library(joeyr)
 ```
-
-    ## This is the "joeyr" package.
-
-You’ll know you’ve got it installed properly when you see a little
-message saying `This is the "joeyr" package.`.
 
 ## Group 1: The Filter
 
@@ -81,28 +76,21 @@ includes what are essentially mathematical functions in that they crunch some nu
   - `lbms_index()` allows you to quickly calculate the Low-Back-Merger Shift 
     Index in your data (see Becker 2019; Boberg 2019).
     
-There are three normalization procedures.
-    
-  - `norm_anae()` makes it easy to do vowel formant normalization using the
-    method described in the *Atlas of North American English* using just 
-    one line of code within a tidyverse pipeline. This is my current favorite
-    normalization procedure and I was sick of writing large blocks of code in
-    all my scripts, so I wrapped it up as a function.
-    
-  - `norm_deltaF()` is another way to normalize your data, based on Keith 
-    Johnson's (2020) paper.
-    
-  - `norm_logmeans()` is a straightforward log-means normalization procedure based
-     on Barreda & Nearey (2018).
-
-Finally, there are two functions are more about changing labels for phonemes and 
+There are two functions are more about changing labels for phonemes and 
 allophones.
     
   - `switch_transcriptions()` (and its shortcuts including, `arpa_to_wells()`), quickly converts 
     between ARPABET labels and Wells (or Wells-inspired) keywords. 
     
-  - `code_allophones()` is a one-liner that adds contexual allophones ("BAN", 
+  - `code_allophones()` is a one-liner that adds contextual allophones ("BAN", 
   "BAG", "SPOOL", "TOOT", etc.) to your vowel data.
+  
+Finally, there is one purely informational function, `OoO()` that serves as reminder
+(mostly for myself) for what my recommended Order of Operations is. 
+  
+There *were* three normalization procedures in this package, but as of June 18, 
+2025 with the release of Fruehwald's [tidynorm](https://jofrhwld.github.io/tidynorm/) 
+package, I'm recommending people switch to those instead.
 
 ## Group 3: `ggplot2` themes
 
@@ -110,7 +98,7 @@ These are currently not documented. The main one is `theme_joey()` which will
 produce plots using my own flavor of `theme_bw()`. There are some variants
 as well. The other helpful function is `joey_arrow()` which is just a
 shortcut for a type of arrow I like when I draw lines on a plot. I'll admit I
-don't really use these anymore.
+don't really use these anymore other than the arrow.
 
 ## Group 4: The grapes
 

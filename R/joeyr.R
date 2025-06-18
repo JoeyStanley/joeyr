@@ -5,7 +5,7 @@
 #   Test Package:              'Cmd + Shift + T'
 
 .onAttach <- function(libname, pkgname) {
-    packageStartupMessage("This is the \"joeyr\" package.")
+    #packageStartupMessage("This is the \"joeyr\" package.")
 }
 
 

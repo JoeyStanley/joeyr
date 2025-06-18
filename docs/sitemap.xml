@@ -1,108 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/arpa_to_keywords.html</loc>
-  </url>
-  <url>
-    <loc>/reference/code_allophones.html</loc>
-  </url>
-  <url>
-    <loc>/reference/color_gradienter.html</loc>
-  </url>
-  <url>
-    <loc>/reference/eucl_dist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_outliers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_centroids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grapes-expanded_by-grapes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grapes-ni-grapes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grapes-wi-grapes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hello.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_adjust_cutoff.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_coronals.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_do_pca.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_filter.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_formants.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joey_rm_outliers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lbms_index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/midpoints.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mouth.html</loc>
-  </url>
-  <url>
-    <loc>/reference/move_x_after_y.html</loc>
-  </url>
-  <url>
-    <loc>/reference/norm_anae.html</loc>
-  </url>
-  <url>
-    <loc>/reference/norm_deltaF.html</loc>
-  </url>
-  <url>
-    <loc>/reference/norm_logmeans.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pillai.html</loc>
-  </url>
-  <url>
-    <loc>/reference/spread_n.html</loc>
-  </url>
-  <url>
-    <loc>/reference/switch_transcriptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tidy_mahalanobis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tidy_norm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ucfirst.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/OoO.html</loc></url>
+<url><loc>/reference/arpa_to_keywords.html</loc></url>
+<url><loc>/reference/code_allophones.html</loc></url>
+<url><loc>/reference/color_gradienter.html</loc></url>
+<url><loc>/reference/eucl_dist.html</loc></url>
+<url><loc>/reference/find_outliers.html</loc></url>
+<url><loc>/reference/get_centroids.html</loc></url>
+<url><loc>/reference/grapes-expanded_by-grapes.html</loc></url>
+<url><loc>/reference/grapes-ni-grapes.html</loc></url>
+<url><loc>/reference/grapes-wi-grapes.html</loc></url>
+<url><loc>/reference/hello.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/joey_adjust_cutoff.html</loc></url>
+<url><loc>/reference/joey_coronals.html</loc></url>
+<url><loc>/reference/joey_do_pca.html</loc></url>
+<url><loc>/reference/joey_filter.html</loc></url>
+<url><loc>/reference/joey_formants.html</loc></url>
+<url><loc>/reference/joey_rm_outliers.html</loc></url>
+<url><loc>/reference/joeyr_norm_anae.html</loc></url>
+<url><loc>/reference/joeyr_norm_deltaF.html</loc></url>
+<url><loc>/reference/joeyr_norm_logmeans.html</loc></url>
+<url><loc>/reference/lbms_index.html</loc></url>
+<url><loc>/reference/midpoints.html</loc></url>
+<url><loc>/reference/mouth.html</loc></url>
+<url><loc>/reference/move_x_after_y.html</loc></url>
+<url><loc>/reference/pillai.html</loc></url>
+<url><loc>/reference/spread_n.html</loc></url>
+<url><loc>/reference/switch_transcriptions.html</loc></url>
+<url><loc>/reference/tidy_mahalanobis.html</loc></url>
+<url><loc>/reference/tidy_norm.html</loc></url>
+<url><loc>/reference/ucfirst.html</loc></url>
 </urlset>
+

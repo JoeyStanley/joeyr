@@ -128,8 +128,9 @@ get added or if you spot an error in the coding.
     }
   \item GOOSE becomes \itemize{
     \item MULE before Y
-    \item TOOT before coronals
     \item SPOOL before laterals
+    \item CURE before rhotics
+    \item TOOT before coronals
     \item BOOT elsewhere
     }
   \item PRICE becomes \itemize{
@@ -153,15 +154,15 @@ allophones are not included in this function.
 
 The environments therefore are the following
 \itemize{
-  \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL
-  \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE
+  \item "prelateral" includes ZEAL, GUILT, FLAIL, SHELF, TALC, GOLF, FAULT, MULCH, JOLT, WOLF, SPOOL, CHILD, PROWL
+  \item "prerhotic" includes NEAR, SQUARE, START, FORCE, CURE, PRIOR
   \item "prevelar" includes BIG, VAGUE, BEG, BAG,
   \item "prenasal" includes BIN, BEN, BAN
   \item "prevelarnasal" includes BING, BENG, BANG
-  \item "prevoiceless" includes PRICE
+  \item "prevoiceless" includes BITE
   \item "post-Y" includes MULE
   \item "postcoronal" includes TOOT
-  \item "elsewhere" includes BEET, BIT, BAIT, BET, BAT, BOT, BOUGHT, BUT, BOAT, PUT, BOOT, PRIZE
+  \item "elsewhere" includes BEET, BIT, BAIT, BET, BAT, BOT, BOUGHT, BUT, BOAT, PUT, BOOT, BIDE, BOUT
 }
 }
 \examples{

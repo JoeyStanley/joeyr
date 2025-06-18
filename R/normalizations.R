@@ -22,6 +22,11 @@
 #' in the denominator. Not sure if that's how it should be done, but it makes
 #' sense to me and returns sensible results.
 #'
+#' @note As of June 18, 2025, the `norm_anae` function is depreciated in favor of
+#' the various functions in the tidynorm package. I recommend you switch to
+#' that for future code. If you want to retain the current functionality, you can
+#' call `joeyr_norm_anae` instead.
+#'
 #' @param df The dataframe containing the formant measurements you want to normalize.
 #' @param hz_cols A list of columns (unquoted) containing the formant measurements themselves.
 #' @param token_id The name of the column containing unique identifiers per vowel token.
@@ -62,7 +67,7 @@
 #'    norm_anae(hz_cols = c(F1, F2), speaker_id = speaker, g = 0) %>%
 #'    ungroup() %>%
 #'    select(F1, F2, F1_anae, F2_anae) # <- just the relevant columns
-norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
+joeyr_norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
 
   # Get the number of formants (may be 1 if in a tall format)
   n_formants <- df %>%
@@ -120,6 +125,13 @@ norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
     relocate(ends_with("anae"), .after = c({{hz_cols}}))
 }
 
+#' @rdname joeyr_norm_anae
+#' @export
+norm_anae <- function(.df) {
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_anae` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_anae()` instead.")
+  return(.df)
+}
+
 
 
 
@@ -140,6 +152,11 @@ norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
 #' and then convert the column to numeric.
 #'
 #' Note that this is a new function and has not been tested very robustly yet.
+#'
+#' @note As of June 18, 2025, the `norm_deltaF` function is depreciated in favor of
+#' the function of the same name in the tidynorm package. I recommend you switch to
+#' that for future code. If you want to retain the current functionality, you can
+#' call `joeyr_norm_deltaF` instead.
 #'
 #'
 #' @param df The data frame containing the formant measurements you want to
@@ -186,7 +203,7 @@ norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
 #'    group_by(speaker) %>%
 #'    norm_deltaF(F1, F2, F3, F4, return = "deltaF")
 #'
-norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "formants") {
+joeyr_norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "formants") {
 
   # If only three formants are supplied...
   if (missing(.F4)) {
@@ -229,6 +246,12 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "fo
     return(formants)
   }
 }
+#' @rdname joeyr_norm_deltaF
+#' @export
+norm_deltaF <- function(.df) {
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_deltaF` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_deltaF()` instead.")
+  return(.df)
+}
 
 
 
@@ -256,6 +279,11 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "fo
 #' @param i_know_more_than_you Logical. The function won't work if you've got
 #' data that doesn't look like log10-transformed formant data. If you want to
 #' force the function to run anyway, set this to `TRUE`.
+#'
+#' @note As of June 18, 2025, the `norm_logmeans` function is depreciated in favor of
+#' the `norm_nearey` function in the tidynorm package. I recommend you switch to
+#' that for future code. If you want to retain the current functionality, you can
+#' call `joeyr_norm_logmeans` instead.
 #'
 #' @note
 #' Thanks to Santiago Barreda for providing most of the code for this function.
@@ -303,7 +331,7 @@ norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return = "fo
 #'                   .vowel_col = vowel,
 #'                   i_know_more_than_you = TRUE) %>%
 #'     head()
-norm_logmeans <- function(.df, .formant_cols, .speaker_col, .vowel_col, .return = "data", i_know_more_than_you = FALSE) {
+joeyr_norm_logmeans <- function(.df, .formant_cols, .speaker_col, .vowel_col, .return = "data", i_know_more_than_you = FALSE) {
 
   new_df <- .df %>%
     select({{.formant_cols}}, {{.speaker_col}}, {{.vowel_col}})
@@ -376,4 +404,11 @@ norm_logmeans <- function(.df, .formant_cols, .speaker_col, .vowel_col, .return 
       cbind(output_to_bind)
   }
 
+}
+
+#' @rdname joeyr_norm_logmeans
+#' @export
+norm_logmeans <- function(.df) {
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_logmeans` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_logmeans()` instead.")
+  return(.df)
 }

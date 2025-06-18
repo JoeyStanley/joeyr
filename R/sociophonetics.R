@@ -590,3 +590,40 @@ code_allophones <- function(.df, .old_col, .new_cols = c("allophone", "allophone
       TRUE ~ "other"),
       .after = {{new_allophone_colname}})
 }
+
+
+#' Order of Operations Reminder
+#'
+#' A function that serves as a reminder to what the order of operations is according to my 2022 paper.
+#'
+#' @return When you run the function, you'll see the following string:
+#'
+#' Stanley (2022) recommends the following order of operations:
+#'
+#' 1. Classify allophones. (Note: You can do this with `joeyr::code_allophones()`.)
+#'
+#' 2. Remove outliers. (Note: You can do this with `joeyr::find_outliers()`.)
+#'
+#' 3. Normalize. (Note: You can do this with the {{tidynorm}} package.)
+#'
+#' 4. Remove all good but otherwise unwanted data like allophones, stopwords, trajectories, and unstressed vowels.
+#'
+#' @details See
+#'
+#' Joseph A. Stanley (2022). “Order of Operations in Sociophonetic Analysis,” University of Pennsylvania Working Papers in Linguistics: Vol. 28: Iss. 2, Article 17. Available at: https://repository.upenn.edu/pwpl/vol28/iss2/17.
+#'
+#' and
+#'
+#' Joseph A. Stanley (2022). “Interpreting the Order of Operations in a Sociophonetic Analysis.” Linguistics Vanguard 8(1). 279–289. DOI 10.1515/lingvan-2022-0065.
+#'
+OoO <- function() {
+  cat("Stanley (2022) recommends the following order of operations:
+
+  1. Classify allophones. (Note: You can do this with `joeyr::code_allophones()`.)
+
+  2. Remove outliers. (Note: You can do this with `joeyr::find_outliers()`.)
+
+  3. Normalize. (Note: You can do this with the {{tidynorm}} package.)
+
+  4. Remove all good but otherwise unwanted data like allophones, stopwords, trajectories, and unstressed vowels.")
+}
