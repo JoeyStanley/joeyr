@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.10</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
 <p>This is essentially my sandbox R Package. It has a hodge-podge of functions that I’ve used over the past several years. As I work with my sociophonetic data, I find myself running the same sorts of procedures over and over, so I often decide to write a generalized function to take care of that stuff in one line within a tidyverse pipeline.</p>
 <p>The functions in <code>joeyr</code> can be grouped into about five different categories: the outlier detecters, sociophonetics functions, <code>ggplot2</code> themes, the “grapes”, and other helpful functions. This README briefly explains them all.</p>
 <p>Some of these functions I’ve generalized into something that others may find useful. Others are very specific to my own code and workflow so I’m not sure if they’ll be useful to you. Some functions are documented well but lots are not.</p>
-<p>For questions, feel free to contact me at <a href="mailto:joey_stanley@byu.edu" class="email">joey_stanley@byu.edu</a> or on Twitter at <a href="https://twitter.com/joey_stan" class="external-link">@joey_stan</a>.</p>
+<p>For questions, feel free to contact me at <a href="mailto:joey_stanley@byu.edu" class="email">joey_stanley@byu.edu</a> or on Bluesky at <a href="https://bsky.app/profile/joeystanley.com" class="external-link">@joeystanley.com</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -96,8 +96,6 @@
 <p>You can then load it like any other package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joeystanley.github.io/joeyr/" class="external-link">joeyr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## This is the "joeyr" package.</span></span></code></pre></div>
-<p>You’ll know you’ve got it installed properly when you see a little message saying <code>This is the "joeyr" package.</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="group-1-the-filter">Group 1: The Filter<a class="anchor" aria-label="anchor" href="#group-1-the-filter"></a>
@@ -116,22 +114,18 @@
 <li><p><code><a href="reference/tidy_mahalanobis.html">tidy_mahalanobis()</a></code> is probably my favorite. It’s an implementation of the <code><a href="https://rdrr.io/r/stats/mahalanobis.html" class="external-link">mahalanobis()</a></code> function, which calculates the Mahalanobis distance, only it’s meant to work within a <code>tidyverse</code> pipeline of commands. Like the <code><a href="reference/pillai.html">pillai()</a></code> function, it’s designed so that you can get the values you want without interrupting your flow.</p></li>
 <li><p><code><a href="reference/lbms_index.html">lbms_index()</a></code> allows you to quickly calculate the Low-Back-Merger Shift Index in your data (see Becker 2019; Boberg 2019).</p></li>
 </ul>
-<p>There are three normalization procedures.</p>
-<ul>
-<li><p><code><a href="reference/norm_anae.html">norm_anae()</a></code> makes it easy to do vowel formant normalization using the method described in the <em>Atlas of North American English</em> using just one line of code within a tidyverse pipeline. This is my current favorite normalization procedure and I was sick of writing large blocks of code in all my scripts, so I wrapped it up as a function.</p></li>
-<li><p><code><a href="reference/norm_deltaF.html">norm_deltaF()</a></code> is another way to normalize your data, based on Keith Johnson’s (2020) paper.</p></li>
-<li><p><code><a href="reference/norm_logmeans.html">norm_logmeans()</a></code> is a straightforward log-means normalization procedure based on Barreda &amp; Nearey (2018).</p></li>
-</ul>
-<p>Finally, there are two functions are more about changing labels for phonemes and allophones.</p>
+<p>There are two functions are more about changing labels for phonemes and allophones.</p>
 <ul>
 <li><p><code><a href="reference/switch_transcriptions.html">switch_transcriptions()</a></code> (and its shortcuts including, <code><a href="reference/switch_transcriptions.html">arpa_to_wells()</a></code>), quickly converts between ARPABET labels and Wells (or Wells-inspired) keywords.</p></li>
-<li><p><code><a href="reference/code_allophones.html">code_allophones()</a></code> is a one-liner that adds contexual allophones (“BAN”, “BAG”, “SPOOL”, “TOOT”, etc.) to your vowel data.</p></li>
+<li><p><code><a href="reference/code_allophones.html">code_allophones()</a></code> is a one-liner that adds contextual allophones (“BAN”, “BAG”, “SPOOL”, “TOOT”, etc.) to your vowel data.</p></li>
 </ul>
+<p>Finally, there is one purely informational function, <code><a href="reference/OoO.html">OoO()</a></code> that serves as reminder (mostly for myself) for what my recommended Order of Operations is.</p>
+<p>There <em>were</em> three normalization procedures in this package, but as of June 18, 2025 with the release of Fruehwald’s <a href="https://jofrhwld.github.io/tidynorm/" class="external-link">tidynorm</a> package, I’m recommending people switch to those instead.</p>
 </div>
 <div class="section level2">
 <h2 id="group-3-ggplot2-themes">Group 3: <code>ggplot2</code> themes<a class="anchor" aria-label="anchor" href="#group-3-ggplot2-themes"></a>
 </h2>
-<p>These are currently not documented. The main one is <code>theme_joey()</code> which will produce plots using my own flavor of <code>theme_bw()</code>. There are some variants as well. The other helpful function is <code>joey_arrow()</code> which is just a shortcut for a type of arrow I like when I draw lines on a plot. I’ll admit I don’t really use these anymore.</p>
+<p>These are currently not documented. The main one is <code>theme_joey()</code> which will produce plots using my own flavor of <code>theme_bw()</code>. There are some variants as well. The other helpful function is <code>joey_arrow()</code> which is just a shortcut for a type of arrow I like when I draw lines on a plot. I’ll admit I don’t really use these anymore other than the arrow.</p>
 </div>
 <div class="section level2">
 <h2 id="group-4-the-grapes">Group 4: The grapes<a class="anchor" aria-label="anchor" href="#group-4-the-grapes"></a>
@@ -226,7 +220,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

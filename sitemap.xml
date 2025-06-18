@@ -4,6 +4,7 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/news/index.html</loc></url>
+<url><loc>/reference/OoO.html</loc></url>
 <url><loc>/reference/code_allophones.html</loc></url>
 <url><loc>/reference/color_gradienter.html</loc></url>
 <url><loc>/reference/eucl_dist.html</loc></url>
@@ -13,10 +14,10 @@
 <url><loc>/reference/grapes-ni-grapes.html</loc></url>
 <url><loc>/reference/grapes-wi-grapes.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/joeyr_norm_anae.html</loc></url>
+<url><loc>/reference/joeyr_norm_deltaF.html</loc></url>
+<url><loc>/reference/joeyr_norm_logmeans.html</loc></url>
 <url><loc>/reference/lbms_index.html</loc></url>
-<url><loc>/reference/norm_anae.html</loc></url>
-<url><loc>/reference/norm_deltaF.html</loc></url>
-<url><loc>/reference/norm_logmeans.html</loc></url>
 <url><loc>/reference/pillai.html</loc></url>
 <url><loc>/reference/switch_transcriptions.html</loc></url>
 <url><loc>/reference/tidy_mahalanobis.html</loc></url>

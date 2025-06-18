@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">joeyr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.9.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.10</span>
       </span>
     </div>
 
@@ -54,6 +54,12 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.10" id="joeyr-010-june-18-2025">joeyr 0.10 (June 18, 2025)<a class="anchor" aria-label="anchor" href="#joeyr-010-june-18-2025"></a></h2>
+<ul><li><p>The normalization functions (<code>norm_logmeans</code>, <code>norm_anae</code>, and <code>norm_deltaF</code>) have been depreciated for several reasons. The <a href="https://jofrhwld.github.io/tidynorm/" class="external-link">tidynorm</a> package handles these much more effectively and efficiently than what I was able to do (see introduction <a href="https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/" class="external-link">here</a>). The three functions now do nothing except give a message to the user recommending that they switch to tidynorm instead. For those who don’t want to make the switch, the three functions will still exist in this package but have been renamed <code>joeyr_norm_logmeans</code>, <code>joeyr_norm_anae</code> and <code>joeyr_norm_deltaF</code>. This prevents conflicts as well.</p></li>
+<li><p>I’ve added a very simple <code>OoO</code> function that reminds me what my recommended order of operations is.</p></li>
+<li><p>I’ve also removed the <code>This is the "joeyr" package</code> message when loading.</p></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.2" id="joeyr-092-may-1-2025">joeyr 0.9.2 (May 1, 2025)<a class="anchor" aria-label="anchor" href="#joeyr-092-may-1-2025"></a></h2>
 <ul><li>Updated <code>code_allophones</code>
 <ul><li>MOUTH gets a prelateral allophone now: PROWL. This means the elsewhere allophone is now called BOUT.</li>
@@ -76,7 +82,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.1" id="joeyr-081-june-8-2022">joeyr 0.8.1 (June 8, 2022)<a class="anchor" aria-label="anchor" href="#joeyr-081-june-8-2022"></a></h2>
 <ul><li>
-<code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> has a raised cap before triggering a warning message.</li>
+<code><a href="../reference/joeyr_norm_logmeans.html">norm_logmeans()</a></code> has a raised cap before triggering a warning message.</li>
 <li>
 <code><a href="../reference/find_outliers.html">find_outliers()</a></code> now as the <code>verbose</code> argument which, by default, suppresses the warning message triggered when there is not enough data.</li>
 </ul></div>
@@ -85,9 +91,9 @@
 <ul><li>
 <code><a href="../reference/code_allophones.html">code_allophones()</a></code> now added.</li>
 <li>
-<code><a href="../reference/norm_logmeans.html">norm_logmeans()</a></code> now added, which does a log-means normalization based on Barreda &amp; Nearey (2018).</li>
+<code><a href="../reference/joeyr_norm_logmeans.html">norm_logmeans()</a></code> now added, which does a log-means normalization based on Barreda &amp; Nearey (2018).</li>
 <li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> updated. The <code>use_telser_g</code> argument has been changed to simply <code>g</code>. Previously, if you wnated to calculate g internally, you’d do <code>use_telsur_g = FALSE</code> and that code didn’t work. Now, you’d say <code>g = "calculate"</code>, and that does work this time. Additionally, some new functionality is that <code>g</code> can be set to any arbitrary value, such as zero: <code>g = 0</code>.</li>
+<code><a href="../reference/joeyr_norm_anae.html">norm_anae()</a></code> updated. The <code>use_telser_g</code> argument has been changed to simply <code>g</code>. Previously, if you wnated to calculate g internally, you’d do <code>use_telsur_g = FALSE</code> and that code didn’t work. Now, you’d say <code>g = "calculate"</code>, and that does work this time. Additionally, some new functionality is that <code>g</code> can be set to any arbitrary value, such as zero: <code>g = 0</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7" id="joeyr-07-july-26-2021">joeyr 0.7 (July 26, 2021)<a class="anchor" aria-label="anchor" href="#joeyr-07-july-26-2021"></a></h2>
@@ -102,13 +108,13 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.2" id="joeyr-062-february-6-2021">joeyr 0.6.2 (February 6, 2021)<a class="anchor" aria-label="anchor" href="#joeyr-062-february-6-2021"></a></h2>
 <ul><li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying <code>use_telsur_g = FALSE</code>.</li>
+<code><a href="../reference/joeyr_norm_anae.html">norm_anae()</a></code> now uses the Telsur G by default. This can be suppressed and a new G value can be calculated using the data (the old default behavior), by specifying <code>use_telsur_g = FALSE</code>.</li>
 <li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> now requires the data to be grouped by speaker prior to running. This makes it more consistent with the other normalization procedures in this package.</li>
+<code><a href="../reference/joeyr_norm_anae.html">norm_anae()</a></code> now requires the data to be grouped by speaker prior to running. This makes it more consistent with the other normalization procedures in this package.</li>
 <li>
 <code><a href="../reference/switch_transcriptions.html">wells_to_arpa()</a></code> was created, as an inverse function to <code><a href="../reference/switch_transcriptions.html">arpa_to_wells()</a></code> because I needed it one time.</li>
 <li>
-<code><a href="../reference/norm_deltaF.html">norm_deltaF()</a></code> has been fixed so that including F4 now works. Additional arguments have been added as well.</li>
+<code><a href="../reference/joeyr_norm_deltaF.html">norm_deltaF()</a></code> has been fixed so that including F4 now works. Additional arguments have been added as well.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="joeyr-061-september-30-2020">joeyr 0.6.1 (September 30, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-061-september-30-2020"></a></h2>
@@ -126,7 +132,7 @@
 <h2 class="page-header" data-toc-text="0.5" id="joeyr-05-september-24-2020">joeyr 0.5 (September 24, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-05-september-24-2020"></a></h2>
 <ul><li>Example code now uses the the <code>joeysvowels</code> package, a remote dependency.</li>
 <li>
-<code><a href="../reference/norm_anae.html">norm_anae()</a></code> is now more robust (thanks, Thomas!)</li>
+<code><a href="../reference/joeyr_norm_anae.html">norm_anae()</a></code> is now more robust (thanks, Thomas!)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4" id="joeyr-04-august-5-2020">joeyr 0.4 (August 5, 2020)<a class="anchor" aria-label="anchor" href="#joeyr-04-august-5-2020"></a></h2>
@@ -155,7 +161,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
