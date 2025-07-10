@@ -35,7 +35,7 @@ your original data with the normalized data appended. If you set this to
 for each speakers.}
 
 \item{i_know_more_than_you}{Logical. The function won't work if you've got
-data that doesn't look like log10-transformed formant data. If you want to
+data that doesn't look like log-transformed formant data. If you want to
 force the function to run anyway, set this to `TRUE`.}
 }
 \value{

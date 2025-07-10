@@ -1,9 +1,11 @@
 home:
   title: joeyr
   description: A personal package for vowel data
+url: https://joeystanley.github.io/joeyr/
 development:
   mode: unreleased
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly
     ganalytics: UA-86802921-3
@@ -28,6 +30,7 @@ reference:
     - norm_logmeans
     - switch_transcriptions
     - code_allophones
+    - fave_to_wells
     - OoO
   - title: The Grapes
   - contents:

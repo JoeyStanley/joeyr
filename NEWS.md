@@ -1,3 +1,9 @@
+# joeyr 0.11 (July 10, 2025)
+
+* Added `fave_to_wells`. Not as robust as `switch_transcriptions` and its shortcut functions like `arpa_to_wells`, but I wanted to get something in since I find myself copying that code over and over now anytime I analyze FAVE data.
+
+* Also switched to Bootstrap 5 so there might be some visual differences in the website.
+
 # joeyr 0.10 (June 18, 2025)
 
 * The normalization functions (`norm_logmeans`, `norm_anae`, and `norm_deltaF`) have been depreciated for several reasons. The [tidynorm](https://jofrhwld.github.io/tidynorm/) package handles these much more effectively

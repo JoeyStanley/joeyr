@@ -128,7 +128,7 @@ joeyr_norm_anae <- function(df, hz_cols, token_id, speaker_id, g = "telsur") {
 #' @rdname joeyr_norm_anae
 #' @export
 norm_anae <- function(.df) {
-  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_anae` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_anae()` instead.")
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_anae` function has been depreciated in the {joeyr} package. I recommend you switch to the {tidynorm} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {joeyr} version instead, you still can by calling `joeyr_norm_anae()` instead.")
   return(.df)
 }
 
@@ -249,7 +249,7 @@ joeyr_norm_deltaF <- function(df, .F1, .F2, .F3, .F4, suffix = "_deltaF", return
 #' @rdname joeyr_norm_deltaF
 #' @export
 norm_deltaF <- function(.df) {
-  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_deltaF` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_deltaF()` instead.")
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_deltaF` function has been depreciated in the {joeyr} package. I recommend you switch to the {tidynorm} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {joeyr} version instead, you still can by calling `joeyr_norm_deltaF()` instead.")
   return(.df)
 }
 
@@ -277,7 +277,7 @@ norm_deltaF <- function(.df) {
 #' \code{"params"}, you'll get a data frame with the normalization paramters
 #' for each speakers.
 #' @param i_know_more_than_you Logical. The function won't work if you've got
-#' data that doesn't look like log10-transformed formant data. If you want to
+#' data that doesn't look like log-transformed formant data. If you want to
 #' force the function to run anyway, set this to `TRUE`.
 #'
 #' @note As of June 18, 2025, the `norm_logmeans` function is depreciated in favor of
@@ -348,7 +348,7 @@ joeyr_norm_logmeans <- function(.df, .formant_cols, .speaker_col, .vowel_col, .r
   # Quicky check to see if it's log data
   max_formants <- max(formants)
   min_formants <- min(formants)
-  if ((min_formants < 0 | max_formants > 10) & missing(i_know_more_than_you)) {
+  if ((min_formants < 0 | max_formants > 15) & missing(i_know_more_than_you)) {
     stop("Are you sure your formant data is log-transformed? If it's not, see ?tidy_norm for code on how to do that. If you are certain you're right, please add `i_know_more_than_you = TRUE` to this function.")
   }
 
@@ -409,6 +409,6 @@ joeyr_norm_logmeans <- function(.df, .formant_cols, .speaker_col, .vowel_col, .r
 #' @rdname joeyr_norm_logmeans
 #' @export
 norm_logmeans <- function(.df) {
-  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_logmeans` function has been depreciated in the {{joeyr}} package. I recommend you switch to the {{tidynorm}} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {{joeyr}} version instead, you still can by calling `joeyr_norm_logmeans()` instead.")
+  warning("As of June 18, 2025 (joeyr version 0.10), the `norm_logmeans` function has been depreciated in the {joeyr} package. I recommend you switch to the {tidynorm} package by Josef Fruehwald. See the package website here (https://jofrhwld.github.io/tidynorm/) and an introduction to the package here (https://jofrhwld.github.io/blog/posts/2025/06/2025-06-16_introducing-tidynorm/). If you do not want to make the switch and would like to use the {joeyr} version instead, you still can by calling `joeyr_norm_logmeans()` instead.")
   return(.df)
 }
