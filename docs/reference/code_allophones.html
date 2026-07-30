@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">joeyr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.11</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.11.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -420,7 +420,7 @@ allophones are not included in this function.</p>
 <span class="r-in"><span>                  .fol_seg <span class="op">=</span> <span class="va">fol_seg</span>,</span></span>
 <span class="r-in"><span>                  .pre_seg <span class="op">=</span> <span class="va">pre_seg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="co"># Create voice and voiceless distinctions for MOUTH</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">&amp;</span> <span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"BOUT"</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>allophone <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">&amp;</span> <span class="va">fol_seg</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"K"</span>, <span class="st">"CH"</span>, <span class="st">"F"</span>, <span class="st">"TH"</span>, <span class="st">"S"</span>, <span class="st">"SH"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"BOUT"</span>,</span></span>
 <span class="r-in"><span>                               <span class="va">phoneme</span> <span class="op">==</span> <span class="st">"MOUTH"</span> <span class="op">~</span> <span class="st">"LOUD"</span>,</span></span>
 <span class="r-in"><span>                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">allophone</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>         environment <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="va">allophone</span> <span class="op">==</span> <span class="st">"BOUT"</span>,  <span class="st">"prevoiceless"</span>, <span class="va">environment</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -453,7 +453,7 @@ allophones are not included in this function.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
