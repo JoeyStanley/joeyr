@@ -1,8 +1,8 @@
 Package: joeyr
 Type: Package
 Title: Functions for Vowel Data
-Version: 0.11
-Date: 2025-06-18
+Version: 0.11.1
+Date: 2026-07-30
 Authors@R: 
     person(given = "Joseph A.",
            family = "Stanley",
