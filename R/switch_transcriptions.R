@@ -229,7 +229,7 @@ fave_to_wells <- function(.df) {
                                   "GOAT"    = c("ow", "owF"),
                                   "FOOT"    = "u",
                                   "GOOSE"   = c("Tuw", "uw"),
-                                  "STRUT"   = "ʌ",
+                                  "STRUT"   = c("ʌ", "@"),
                                   "PRICE"   = c("ay", "ay0"),
                                   "MOUTH"   = "aw",
                                   "CHOICE"  = "oy",
@@ -240,3 +240,14 @@ fave_to_wells <- function(.df) {
                                   "CURE"    = "uwr"),
            .after = label)
 }
+
+
+
+# https://val-systems.blogspot.com/2018/07/why-does-labov-have-such-weird.html
+# https://joeystanley.com/blog/extending-wells-lexical-sets-to-prelateral-vowels/index.html
+# https://en.wikipedia.org/wiki/Lexical_set
+# https://joeystanley.com/blog/north-force-cloth-start/index.html
+
+# I'll still have to have it as "change_transcriptions" becuase I'll need to account for
+# the current transcription. I can't base it on context alone.
+

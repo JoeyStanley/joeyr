@@ -1,3 +1,7 @@
+# joeyr 0.11.1 (July 30, 2026)
+
+* `fave_to_wells` inadvertently left off "@" so that was added to STRUT. Stress still differentiates what was once "ʌ" and "@".
+
 # joeyr 0.11 (July 10, 2025)
 
 * Added `fave_to_wells`. Not as robust as `switch_transcriptions` and its shortcut functions like `arpa_to_wells`, but I wanted to get something in since I find myself copying that code over and over now anytime I analyze FAVE data.
