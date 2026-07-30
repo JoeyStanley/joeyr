@@ -5,6 +5,7 @@ todo.txt
 *.DS_Store
 R_depreciated*
 other_scripts*
+sandbox.Rmd
 
 # R stuff
 *.Rproj.user
