@@ -11,13 +11,13 @@ Source:
 [`inst/CITATION`](https://github.com/JoeyStanley/joeyr/blob/master/inst/CITATION)
 
 Stanley J (2025). *joeyr: Functions for Vowel Data*. R package version
-0.11, <https://joeystanley.github.io/joeyr/>.
+0.11.1, <https://joeystanley.github.io/joeyr/>.
 
     @Manual{,
       title = {joeyr: Functions for Vowel Data},
       author = {Joseph A. Stanley},
       year = {2025},
-      note = {R package version 0.11},
+      note = {R package version 0.11.1},
       url = {https://joeystanley.github.io/joeyr/},
     }
 
