@@ -229,7 +229,7 @@ fave_to_wells <- function(.df) {
                                   "GOAT"    = c("ow", "owF"),
                                   "FOOT"    = "u",
                                   "GOOSE"   = c("Tuw", "uw"),
-                                  "STRUT"   = "ʌ",
+                                  "STRUT"   = c("ʌ", "@"),
                                   "PRICE"   = c("ay", "ay0"),
                                   "MOUTH"   = "aw",
                                   "CHOICE"  = "oy",
