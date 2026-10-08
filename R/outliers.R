@@ -110,7 +110,8 @@ find_outliers <- function(..., keep = 0.95, verbose = FALSE) {
   # Get the length of the first (or any) of them
   total_n <- length(vars[[1]])
   # Figure out how many to remove
-  n_to_remove <- floor(total_n * (1-keep))
+  # Adding this 1e9 prevents floating point errors that would remove n-1 points than expected sometimes.
+  n_to_remove <- floor(total_n * (1 - keep - 1e-9))
 
   # Don't do anything for small groups
   if (n_to_remove == 0) {
